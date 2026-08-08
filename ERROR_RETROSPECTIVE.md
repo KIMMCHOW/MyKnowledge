@@ -27,6 +27,7 @@
 | E-001 | 批量关系图/双链替换时用一次性脚本直接写盘，映射错误导致部分 `[[双链]]` 与边标签被误改。 | 关系图、索引、双链必须以 Obsidian 实际文件（frontmatter、`[[wikilink]]`、`_索引_*.md`）为准；批量替换前必须先生成映射清单并核对，再执行写盘。 | 批量改动前先 `git status` / `git diff --stat` 并抽样核对；复杂替换用两段式脚本（先生成清单、再执行），完成后抽查双链完整性。 |
 | E-002 | 在 iCloud 同步目录（`iCloud~md~obsidian`，含 reparse point）下用 `os.walk` / `Copy-Item` 递归遍历或复制，导致遍历失败或嵌套目录被重复复制。 | 该目录由 iCloud 管理，文件可能带 reparse 属性；递归操作必须限定明确子目录白名单，写文件优先 `[System.IO.File]::WriteAllText`（UTF-8 无 BOM）。 | 批量文件操作只针对明确白名单目录；每次写盘后抽查数量与路径；禁止对整库递归移动/复制。 |
 
+| E-003 | 用 Windows PowerShell 5.1 的 `Get-Content` 查看含中文的 UTF-8 文件时，控制台按 ANSI/GBK 解码导致中文显示成乱码，曾因此误判 iCloud 同步产生的 `xxx 2.md` 副本为损坏文件并删除。 | iCloud 同步冲突会生成 `xxx 2.md` 重复副本，内容为有效 UTF-8 且与 git HEAD 逐字节一致；判断文件是否损坏必须先做字节级 UTF-8 校验（`[System.IO.File]::ReadAllText` 或严格 `UTF8Encoding`），不能依赖 PS 5.1 控制台显示。 | 查看中文文件用 `Get-Content -Encoding UTF8`；删除任何副本前先与 git 版本逐字节比对；发现 `xxx 2.md` 先比对 HEAD 再处理。 |
 ## 检索清单
 
 声称清理/整理完成前，对以下模式做定向检索：
@@ -49,6 +50,7 @@ rg -n --glob "*.md" "第[1-9][^0-9]|[^0-9][1-9]号|[^0-9][1-9]\.md" Knowledge
 - 关系图边标签只用 11 类规范标签（因果/影响/实例/对比/同义/包含/工具/背景/支撑/约束/相关），不发明自定义碎标签。
 - `Raw Materials/` 任何改动必须先获得用户明确确认。
 - 概念补全后手动执行与插件一致的一步：更新 frontmatter → 移动文件到 domain → 更新 `_索引_<domain>.md` 与总索引。
+- 查看/校验含中文的 markdown 一律用 `Get-Content -Encoding UTF8` 或 `[System.IO.File]::ReadAllText`；判断「乱码」必须先做字节级 UTF-8 校验，禁止仅凭控制台显示删除文件。
 - 提交前检查 `git status` / `git diff --stat`；`AGENTS.md`、`Raw Materials/`、`.obsidian` 状态文件绝不出现在提交中。
 
 ## 相关文档
