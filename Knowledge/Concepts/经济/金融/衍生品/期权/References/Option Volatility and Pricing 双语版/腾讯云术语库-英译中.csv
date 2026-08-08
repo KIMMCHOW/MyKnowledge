@@ -1,0 +1,62 @@
+American option,美式期权
+European option,欧式期权
+arbitrage,套利
+assignment,指派
+at the forward,远期平值
+at the money,平值
+ATM,ATM
+bid-ask spread,买卖价差
+bid–ask spread,买卖价差
+call option,看涨期权
+clearinghouse,清算所
+contract size,合约规模
+covered call,备兑看涨期权
+covered write,备兑卖出
+Delta,Delta
+delta neutral,Delta 中性
+derivative,衍生品
+dynamic hedging,动态对冲
+exercise,行权
+exercise price,行权价
+strike price,行权价
+expiration,到期
+expiration date,到期日
+forward contract,远期合约
+forward price,远期价格
+futures contract,期货合约
+Gamma,Gamma
+hedge,对冲
+hedging,对冲
+historical volatility,历史波动率
+implied volatility,隐含波动率
+IV,IV
+in the money,实值
+ITM,ITM
+intrinsic value,内在价值
+long position,多头头寸
+margin,保证金
+notional value,名义价值
+option premium,期权权利金
+out of the money,虚值
+OTM,OTM
+parity,平价
+put option,看跌期权
+realized volatility,已实现波动率
+RV,RV
+Rho,Rho
+risk measure,风险度量
+Greeks,Greeks
+settlement,结算
+short position,空头头寸
+spot price,现货价格
+theoretical edge,理论优势
+theoretical value,理论价值
+Theta,Theta
+time decay,时间衰减
+time value,时间价值
+underlying,标的
+underlying contract,标的合约
+Vega,Vega
+volatility,波动率
+volatility skew,波动率偏斜
+volatility smile,波动率微笑
