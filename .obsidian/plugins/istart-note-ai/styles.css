@@ -1,0 +1,533 @@
+/* IStart-Note-AI Plugin Styles */
+
+/* ── Settings Page Layout ────────────────────────── */
+
+.istart-settings-layout {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 20px;
+}
+
+.istart-settings-sidebar {
+  border-right: 1px solid var(--background-modifier-border);
+  padding-right: 12px;
+}
+
+.istart-settings-content {
+  min-width: 0;
+}
+
+.istart-settings-nav-item {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--text-normal);
+  cursor: pointer;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.istart-settings-nav-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.istart-settings-nav-item.is-active {
+  background: var(--background-modifier-hover);
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .istart-settings-layout {
+    display: block;
+  }
+  .istart-settings-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--background-modifier-border);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .istart-settings-nav-item {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+/* ── Baidu Sync View ─────────────────────────────── */
+
+.istart-sync-root {
+  padding: 12px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.istart-sync-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.istart-sync-header h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.istart-sync-hint {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.istart-sync-btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.istart-sync-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background: var(--background-modifier-border);
+  color: var(--text-normal);
+  border: none;
+}
+
+.istart-sync-btn-cta {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+}
+
+.istart-sync-scan-time {
+  font-size: 11px;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+
+.istart-sync-status-msg {
+  color: var(--text-muted);
+}
+
+.istart-sync-success {
+  color: var(--text-success);
+}
+
+.istart-sync-summary {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.istart-sync-badge {
+  font-weight: 500;
+}
+
+.istart-sync-badge-upload {
+  color: var(--text-success);
+}
+
+.istart-sync-badge-download {
+  color: var(--interactive-accent);
+}
+
+.istart-sync-badge-conflict {
+  color: var(--text-warning);
+}
+
+.istart-sync-badge-unchanged {
+  color: var(--text-faint);
+}
+
+.istart-sync-file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  font-size: 12px;
+  gap: 8px;
+}
+
+.istart-sync-file-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.istart-sync-file-icon {
+  flex-shrink: 0;
+}
+
+.istart-sync-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-normal);
+}
+
+.istart-sync-file-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.istart-sync-small-btn {
+  padding: 2px 6px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  background: var(--background-modifier-border);
+  border: none;
+  color: var(--text-normal);
+}
+
+/* ── Question Modal ───────────────────────────── */
+
+.istart-question-textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* ── Settings Tab ────────────────────────────────── */
+
+.istart-settings-config-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+/* ── Baidu Sync Modal ────────────────────────────── */
+
+.istart-sync-modal-remote-path {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 4px 0 12px;
+}
+
+
+/* ── Diagram Modal ───────────────────────────────── */
+
+.istart-diagram-hint {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.istart-diagram-explanation {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.istart-diagram-preview {
+  max-height: 50vh;
+  overflow-y: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: var(--background-secondary);
+}
+
+.istart-diagram-code-details {
+  margin-bottom: 12px;
+}
+
+.istart-diagram-code-details summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.istart-diagram-code-details pre {
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 4px;
+  background: var(--background-primary-alt);
+}
+
+.istart-diagram-refine {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.istart-diagram-refine-input {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  color: var(--text-normal);
+}
+
+
+/* ── Smart Complete ──────────────────────────────── */
+
+.istart-smart-suggestions {
+  max-height: 50vh;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.istart-smart-suggestion-row {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.istart-smart-suggestion-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.istart-smart-suggestion-reason {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.istart-smart-suggestion-preview {
+  font-size: 13px;
+  padding: 8px;
+  background: var(--background-secondary);
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+
+/* ── Command Panel ───────────────────────────────── */
+
+.istart-command-panel {
+  min-width: 360px;
+}
+
+.istart-panel-group {
+  margin-bottom: 12px;
+}
+
+.istart-panel-group-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  margin-bottom: 2px;
+}
+
+.istart-panel-action {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.istart-panel-action:hover {
+  background: var(--background-modifier-hover);
+}
+
+.istart-panel-action-icon {
+  font-size: 16px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.istart-panel-action-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.istart-panel-action-label {
+  font-size: 14px;
+  color: var(--text-normal);
+}
+
+.istart-panel-action-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.istart-panel-action-key {
+  font-size: 11px;
+  color: var(--text-faint);
+  background: var(--background-modifier-border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: monospace;
+  flex-shrink: 0;
+}
+
+
+/* ── Sync Modal Warning ──────────────────────────── */
+
+.istart-sync-modal-warning {
+  color: var(--text-error);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border: 1px solid var(--text-error);
+  border-radius: 6px;
+  margin: 8px 0 12px;
+  background: rgba(255, 0, 0, 0.05);
+}
+
+
+/* ── AI Assistant ────────────────────────────────── */
+
+.istart-assistant-context {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  padding: 4px 8px;
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+.istart-assistant-input {
+  width: 100%;
+  min-height: 60px;
+  resize: vertical;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  color: var(--text-normal);
+  margin-bottom: 8px;
+}
+
+.istart-assistant-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.istart-assistant-tag {
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary-alt);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.istart-assistant-tag:hover {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border-color: var(--interactive-accent);
+}
+
+/* ── Result Modal (mobile-safe flex layout) ──────── */
+
+.istart-result-modal {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+.istart-result-preview {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 80px;
+  max-height: 55vh;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: var(--background-secondary);
+}
+
+.istart-result-mode-hint {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+}
+
+.istart-result-actions {
+  flex-shrink: 0;
+  border-top: 1px solid var(--background-modifier-border);
+  padding-top: 8px;
+}
+
+.istart-result-actions .setting-item {
+  border: none;
+  padding: 4px 0;
+}
+
+@media (max-width: 600px) {
+  .istart-result-modal {
+    max-height: 85vh;
+  }
+
+  .istart-result-preview {
+    max-height: 40vh;
+  }
+
+  .istart-result-actions .setting-item {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .istart-result-actions .setting-item-control {
+    width: 100%;
+    display: flex;
+    gap: 6px;
+  }
+
+  .istart-result-actions .setting-item-control button {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.istart-assistant-preview {
+  max-height: 50vh;
+  overflow-y: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: var(--background-secondary);
+}
+
+.istart-assistant-mode-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}

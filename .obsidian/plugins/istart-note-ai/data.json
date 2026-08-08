@@ -1,0 +1,23 @@
+{
+  "apiKey": "sk-fd0a6d7f33be4aa19c1e3be85dcb27b0",
+  "baseUrl": "https://api.deepseek.com",
+  "model": "deepseek-v4-pro",
+  "outputStyle": "knowledge-base",
+  "savePath": "Knowledge/Q&A",
+  "autoOpenGraph": true,
+  "conceptsPath": "Knowledge/Concepts",
+  "questionsIndexPath": "Knowledge/Questions",
+  "baiduSync": {
+    "enabled": false,
+    "appId": "",
+    "appSecret": "",
+    "accessToken": "",
+    "refreshToken": "",
+    "tokenExpiresAt": "",
+    "remotePath": "/apps/istart-note-ai",
+    "autoBackup": false,
+    "backupPlugin": false,
+    "ignorePattern": "",
+    "fileSizeLimitMB": 100
+  }
+}

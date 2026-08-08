@@ -1,0 +1,8 @@
+.Trash/
+Raw Materials/
+.claudian/
+.obsidian/workspace*.json
+**/.obsidian/workspace*.json
+desktop.ini
+Thumbs.db
+.DS_Store
