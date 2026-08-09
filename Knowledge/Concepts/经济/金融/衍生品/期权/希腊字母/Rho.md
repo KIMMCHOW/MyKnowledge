@@ -81,4 +81,4 @@ $$
 ## 来源
 
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/07-风险度量（一） Risk Measurement I#Rho（利率敏感度） / The Rho|《Option Volatility and Pricing》第7章：Rho（利率敏感度）]]
-- [[C30-Rho|Natenberg 期权知识图谱：Rho]]
+- [[Rho（Natenberg）|Natenberg 期权知识图谱：Rho]]
