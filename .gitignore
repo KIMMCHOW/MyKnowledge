@@ -1,4 +1,4 @@
-﻿.Trash/
+.Trash/
 Raw Materials/
 .claudian/
 .obsidian/workspace*.json
@@ -11,3 +11,6 @@ desktop.ini
 Thumbs.db
 .DS_Store
 AGENTS.md
+
+.obsidian/appearance.json
+**/.obsidian/appearance.json
