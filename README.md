@@ -21,5 +21,6 @@
 - 已有资料库可在明确授权下维护，例如 `Knowledge/Concepts/**/References/` 中的双语教材。书籍文件须按原书书脊顺序编号：前置页使用 `00-00`、`00-01`…，正文沿用两位章节号，结语、附录、索引和作者简介顺序续编；阅读导航、术语表等辅助文件使用 `90–92`，自动审计使用 `93–99`，不得与正文混排。
 - 批量移动或重命名笔记时，必须同时迁移普通、带标题锚点、带别名（含 Markdown 表格中的转义管道）及跨目录路径 wikilink；PR 中应附旧目标残留、悬空链接和相关生成/审计脚本的验证结果。
 - 笔记类新内容按 `docs/SOP_笔记整理.md` 归入 `Knowledge/Notes/<专题>/`，不在根目录或 `Knowledge/Concepts/` 散落新文件夹。
+- 概念笔记与知识图谱禁止序号（文件名、frontmatter、H1、wikilink 别名、mermaid 标签）；序号仅用于教材正文与辅助/审计文件。规范见 `docs/SOP_概念与知识图谱.md`。
 - `Raw Materials/` 为只读原始素材，不纳入 git。`.obsidian/`（含 `graph.json`、主题、外观、工作区与插件状态）为本机配置，全部不入库。
 - 提交前请先阅读根目录 `AGENTS.md`、`docs/SOP_笔记整理.md` 与 `ERROR_RETROSPECTIVE.md`。

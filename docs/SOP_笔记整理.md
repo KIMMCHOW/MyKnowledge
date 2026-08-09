@@ -2,7 +2,7 @@
 
 > 本文件是 MyKnowledge 知识库**笔记整理的唯一标准**，适用于 AI 助手、手动整理与 PR 贡献。
 > 关联规则：根目录 `AGENTS.md`（任务执行规则）、`README.md`（PR / 贡献规则）、`ERROR_RETROSPECTIVE.md`（错误回溯）。
-> 概念笔记（`Knowledge/Concepts/`）另有插件约定（IStart-Note-AI v2.0.1），不适用本 SOP。
+> 概念笔记（`Knowledge/Concepts/`）另有插件约定（IStart-Note-AI v2.0.1）与 `docs/SOP_概念与知识图谱.md`，不适用本 SOP。
 
 ## 1. 目录结构
 
