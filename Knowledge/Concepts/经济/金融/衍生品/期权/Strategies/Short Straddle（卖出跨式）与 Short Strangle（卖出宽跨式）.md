@@ -39,13 +39,13 @@ tags:
 
 - 用[[动态Delta对冲]]控制局部方向暴露，但对冲无法消除跳空、交易成本和波动率曲面风险。
 - 控制仓位和保证金缓冲，不以“高胜率”代替最大损失分析。
-- 可用更远端期权构造有限风险结构，例如[[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/C36-蝶式与鹰式|铁鹰式]]，但保护成本会降低权利金收入。
+- 可用更远端期权构造有限风险结构，例如[[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/蝶式与鹰式|铁鹰式]]，但保护成本会降低权利金收入。
 
 ## 关联概念
 
 - [[跨式与宽跨式]]：策略结构的概念卡片。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/Notes/Volatility Trading|波动率交易]]：策略所处的分析框架。
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/C20-偏度峰度与隐含分布|偏度、峰度与肥尾]]：解释卖方收益分布的非正态特征。
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/偏度峰度与隐含分布|偏度、峰度与肥尾]]：解释卖方收益分布的非正态特征。
 
 ## 来源
 

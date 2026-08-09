@@ -35,6 +35,7 @@
 | E-008 | 直接修改 `.obsidian/graph.json` 后，只检查磁盘 JSON 就误以为颜色组已在关系图界面生效。 | 已打开的 Obsidian 全局关系图不会自动热加载外部配置，仍可能保留旧的内存状态，并在面板中只显示旧颜色组。 | 修改图谱配置后必须关闭并重新打开全局关系图，再在“颜色组”面板核对组数、查询和实际节点颜色；本次已验证 4 组均加载。 |
 | E-009 | 颜色组查询覆盖范围正确，但优先级顺序错误：期权 `Mathematics/` 同时命中衍生品与数学时，会先被染成期权色。 | Obsidian 对重叠查询采用靠前颜色组；路径存在包含关系时，宽泛的父领域会遮蔽更具体的功能领域。 | 颜色组固定按“交易 → 数学 → 衍生品 → 金融”排序；新增或修改重叠查询后必须用代表性路径逐项验证最终颜色。 |
 | E-010 | 在 iCloud 管理目录（含 reparse point）下用 `git mv` 批量移动文件：同步回滚了已移动的 29 个 Game Theory 笔记（移回原平铺位置），且 `.git/index` 丢失、残留 `index.lock`，git 一度显示整库未跟踪。 | 文件本身未丢失；`git reset --mixed HEAD` 可从 HEAD 重建索引；改用 PowerShell `Move-Item` 后磁盘状态稳定，`git add -A` 正确识别为 rename。 | 本仓库批量移动一律用 `Move-Item` 不用 `git mv`；每次批量操作后立即 `git status` 并核对源/目标文件数量；index 异常时先确认无 git 进程，清除残留 `index.lock`，再 `git reset --mixed HEAD` 重建。 |
+| E-011 | 远端 PR 为期权知识图谱/概念文件批量添加序号前缀（`C01-…C45-`、`01-…07-`、`00-`），违反 Concepts 命名规范。 | 序号属于 PR #2 引入的本地渲染排序；pre-PR（9bd1780）即为无序号命名，且部分概念直接去前缀会与其他概念重名（如 `Delta`），需恢复 pre-PR 命名（含 `（Natenberg）` 后缀）。 | 概念与知识图谱文件名一律不使用序号前缀；批量重命名前先对照 pre-PR 清单生成映射并校验目标集合，恢复既有命名并同步全部 wikilink（短链接、路径式、表格 `\|` 转义管道）；合并此类 PR 后先恢复命名再修内容。 |
 ## 检索清单
 
 声称清理/整理完成前，对以下模式做定向检索：
@@ -48,6 +49,8 @@ rg -n --glob "*.md" "status: empty|completion_status: pending" Knowledge/Concept
 rg -n --glob "*.md" "Raw Materials" . --glob "!AGENTS.md" --glob "!ERROR_RETROSPECTIVE.md"
 # 单数字编号残留（应补零为两位数，仅作线索，需人工判断）
 rg -n --glob "*.md" "第[1-9][^0-9]|[^0-9][1-9]号|[^0-9][1-9]\.md" Knowledge
+# 概念/知识图谱序号前缀残留（应无 C\d\d- / 0\d- / 00- 前缀）
+rg -n --glob "*.md" "\[\[[^\]]*\bC\d\d-" Knowledge
 ```
 
 ## 后续防线

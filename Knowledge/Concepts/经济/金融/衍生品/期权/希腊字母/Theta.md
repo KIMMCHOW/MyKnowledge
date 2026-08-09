@@ -44,4 +44,4 @@ $$
 - 为什么临近到期时不同价内外程度的 Theta 表现不同？
 
 ## 来源
-- [[C28-Theta|Natenberg 期权知识图谱：Theta]]
+- [[Theta（Natenberg）|Natenberg 期权知识图谱：Theta]]

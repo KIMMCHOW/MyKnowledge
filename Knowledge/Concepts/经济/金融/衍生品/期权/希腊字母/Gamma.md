@@ -46,4 +46,4 @@ Gamma 描述头寸的局部凸性以及 Delta 漂移的速度。正 Gamma 头寸
 - 离散对冲如何把 Gamma 暴露转化为实际盈亏？
 
 ## 来源
-- [[C27-Gamma|Natenberg 期权知识图谱：Gamma]]
+- [[Gamma（Natenberg）|Natenberg 期权知识图谱：Gamma]]
