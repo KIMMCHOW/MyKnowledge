@@ -12,3 +12,10 @@
 - `Raw Materials/` — 原始素材，只读、禁止改动，不纳入 git 跟踪
 
 总入口见 `Knowledge/Concepts/_索引_Concept.md`。每个主题只保留一个规范索引，避免平行目录和重复知识入口。
+
+## PR / 贡献规则
+
+- 禁止在 PR 中修改或新增 `Knowledge/` 目录下的任何文件（概念笔记、索引、课程笔记等一律不允许改动）。
+- 新内容只允许放在**根目录新建的文件夹**内（如 `新增主题/`），不得写入 `Knowledge/`、`Raw Materials/` 或 `.obsidian/`。
+- `Raw Materials/` 为只读原始素材，不纳入 git；`.obsidian/` 为本机配置，一律不提交。
+- 提交前请先阅读根目录 `AGENTS.md` 与 `ERROR_RETROSPECTIVE.md`。
