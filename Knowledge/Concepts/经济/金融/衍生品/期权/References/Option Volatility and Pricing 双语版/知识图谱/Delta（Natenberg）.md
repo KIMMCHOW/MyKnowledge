@@ -1,6 +1,5 @@
 ---
 title: "Delta / Delta"
-concept_id: C26
 graph_layer: 5
 tags: [期权知识图谱, 核心概念]
 generated_by: "tools/build_option_knowledge_graph.py"
@@ -15,18 +14,18 @@ generated_by: "tools/build_option_knowledge_graph.py"
 
 ### 向下游传导
 
-- **决定对冲数量 →** [[动态Delta对冲（Natenberg）|C33 动态Delta对冲]]：Delta 是局部等价标的头寸。
-- **与价格共同定义 →** [[Lambda|C31 Lambda]]：Lambda 将绝对 Delta 转为百分比弹性。
-- **汇总为组合暴露 →** [[组合Greeks与头寸分析|C32 组合Greeks与头寸分析]]：各腿 Delta 按数量和乘数相加。
+- **决定对冲数量 →** [[动态Delta对冲（Natenberg）|动态Delta对冲]]：Delta 是局部等价标的头寸。
+- **与价格共同定义 →** [[Lambda|Lambda]]：Lambda 将绝对 Delta 转为百分比弹性。
+- **汇总为组合暴露 →** [[组合Greeks与头寸分析|组合Greeks与头寸分析]]：各腿 Delta 按数量和乘数相加。
 
 ### 受上游约束
 
-- [[Black-Scholes模型|C22 Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型对标的价格求一阶敏感度。
-- [[二叉树与风险中性估值|C23 二叉树与风险中性估值]] **—以节点差分估计→ 本概念**：树上价值变化可估计 Delta。
-- [[Gamma（Natenberg）|C27 Gamma]] **—决定Delta漂移速度→ 本概念**：Gamma 把标的变动传导为 Delta 变化。
-- [[动态Delta对冲（Natenberg）|C33 动态Delta对冲]] **—局部中和→ 本概念**：再平衡把净 Delta 拉回目标区间。
-- [[垂直价差与牛熊价差|C34 垂直价差与牛熊价差]] **—主要形成方向暴露→ 本概念**：垂直价差用有界损益表达看多或看空观点。
-- [[保护性备兑与领式|C39 保护性备兑与领式]] **—变换标的方向风险→ 本概念**：保护、备兑和领式改变组合 Delta。
+- [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型对标的价格求一阶敏感度。
+- [[二叉树与风险中性估值|二叉树与风险中性估值]] **—以节点差分估计→ 本概念**：树上价值变化可估计 Delta。
+- [[Gamma（Natenberg）|Gamma]] **—决定Delta漂移速度→ 本概念**：Gamma 把标的变动传导为 Delta 变化。
+- [[动态Delta对冲（Natenberg）|动态Delta对冲]] **—局部中和→ 本概念**：再平衡把净 Delta 拉回目标区间。
+- [[垂直价差与牛熊价差|垂直价差与牛熊价差]] **—主要形成方向暴露→ 本概念**：垂直价差用有界损益表达看多或看空观点。
+- [[保护性备兑与领式|保护性备兑与领式]] **—变换标的方向风险→ 本概念**：保护、备兑和领式改变组合 Delta。
 
 ## 关键公式
 

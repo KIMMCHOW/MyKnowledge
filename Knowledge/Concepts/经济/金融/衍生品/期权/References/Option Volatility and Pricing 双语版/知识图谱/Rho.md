@@ -1,6 +1,5 @@
 ---
 title: "Rho / Rho"
-concept_id: C30
 graph_layer: 5
 tags: [期权知识图谱, 核心概念]
 generated_by: "tools/build_option_knowledge_graph.py"
@@ -15,12 +14,12 @@ generated_by: "tools/build_option_knowledge_graph.py"
 
 ### 向下游传导
 
-- **汇总为组合暴露 →** [[组合Greeks与头寸分析|C32 组合Greeks与头寸分析]]：各腿 Rho 形成利率风险。
+- **汇总为组合暴露 →** [[组合Greeks与头寸分析|组合Greeks与头寸分析]]：各腿 Rho 形成利率风险。
 
 ### 受上游约束
 
-- [[Black-Scholes模型|C22 Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型衡量利率输入变化的局部影响。
-- [[利率与融资成本|C08 利率与融资成本]] **—变化时经由Rho传导→ 本概念**：利率变化影响贴现和远期。
+- [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型衡量利率输入变化的局部影响。
+- [[利率与融资成本|利率与融资成本]] **—变化时经由Rho传导→ 本概念**：利率变化影响贴现和远期。
 
 ## 关键公式
 

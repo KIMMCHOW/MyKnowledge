@@ -1,6 +1,5 @@
 ---
 title: "跨式与宽跨式 / Straddles and Strangles"
-concept_id: C35
 graph_layer: 6
 tags: [期权知识图谱, 核心概念]
 generated_by: "tools/build_option_knowledge_graph.py"
@@ -15,10 +14,10 @@ generated_by: "tools/build_option_knowledge_graph.py"
 
 ### 向下游传导
 
-- **多头通常形成正凸性 →** [[Gamma（Natenberg）|C27 Gamma]]：多头跨式和宽跨式受益于大幅运动。
-- **多头通常形成正波动率暴露 →** [[Vega（Natenberg）|C29 Vega]]：隐波上升通常提高多头结构价值。
-- **多头通常承担时间衰减 →** [[Theta（Natenberg）|C28 Theta]]：若运动不足，权利金随时间损耗。
-- **汇总成风险画像 →** [[组合Greeks与头寸分析|C32 组合Greeks与头寸分析]]：波动率策略不能只用名称判断风险。
+- **多头通常形成正凸性 →** [[Gamma（Natenberg）|Gamma]]：多头跨式和宽跨式受益于大幅运动。
+- **多头通常形成正波动率暴露 →** [[Vega（Natenberg）|Vega]]：隐波上升通常提高多头结构价值。
+- **多头通常承担时间衰减 →** [[Theta（Natenberg）|Theta]]：若运动不足，权利金随时间损耗。
+- **汇总成风险画像 →** [[组合Greeks与头寸分析|组合Greeks与头寸分析]]：波动率策略不能只用名称判断风险。
 
 ## 关键公式
 

@@ -61,7 +61,7 @@ def audit() -> tuple[list[str], dict[str, int]]:
     failures: list[str] = []
     files = sorted(GRAPH.glob("*.md"))
     stems = {path.stem for path in files}
-    expected_stems = {"00-期权知识图谱"}
+    expected_stems = {"期权知识图谱"}
     expected_stems.update(layer.stem for layer in generator.LAYERS)
     expected_stems.update(concept.stem for concept in generator.CONCEPTS)
     if stems != expected_stems:
@@ -89,7 +89,7 @@ def audit() -> tuple[list[str], dict[str, int]]:
                 link_graph[path.stem].add(target)
                 link_graph[target].add(path.stem)
 
-    root = GRAPH / "00-期权知识图谱.md"
+    root = GRAPH / "期权知识图谱.md"
     root_targets = set(WIKILINK_RE.findall(root.read_text(encoding="utf-8")))
     layer_stems = {layer.stem for layer in generator.LAYERS}
     if root_targets != layer_stems:
@@ -99,13 +99,10 @@ def audit() -> tuple[list[str], dict[str, int]]:
     for concept in generator.CONCEPTS:
         path = GRAPH / f"{concept.stem}.md"
         if not path.exists():
+            failures.append(f"{concept.stem}: 概念页缺失")
             continue
+        ids.append(concept.cid)
         text = path.read_text(encoding="utf-8")
-        match = re.search(r"^concept_id:\s*(C\d{2})$", text, re.M)
-        if match:
-            ids.append(match.group(1))
-        else:
-            failures.append(f"{path.name}: 缺少 concept_id")
         for heading in ("## 核心关系", "## 风险经理检查", "## 主要章节"):
             if heading not in text:
                 failures.append(f"{path.name}: 缺少 `{heading}`")
@@ -115,8 +112,8 @@ def audit() -> tuple[list[str], dict[str, int]]:
         if concept.formula and "## 关键公式" not in text:
             failures.append(f"{path.name}: 应有公式但未生成")
 
-    if ids != [f"C{i:02d}" for i in range(1, 46)]:
-        failures.append("concept_id 必须完整且按 C01–C45 唯一排列")
+    if len(ids) != 45:
+        failures.append("概念页必须完整存在（45 页）")
 
     edge_checks = 0
     cmap = {concept.cid: concept for concept in generator.CONCEPTS}
@@ -134,7 +131,7 @@ def audit() -> tuple[list[str], dict[str, int]]:
         edge_checks += 1
 
     reached: set[str] = set()
-    queue: deque[str] = deque(["00-期权知识图谱"])
+    queue: deque[str] = deque(["期权知识图谱"])
     while queue:
         current = queue.popleft()
         if current in reached:

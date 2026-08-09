@@ -1,6 +1,5 @@
 ---
 title: "Black-Scholes模型 / Black-Scholes Model"
-concept_id: C22
 graph_layer: 4
 tags: [期权知识图谱, 核心概念]
 generated_by: "tools/build_option_knowledge_graph.py"
@@ -15,17 +14,17 @@ generated_by: "tools/build_option_knowledge_graph.py"
 
 ### 向下游传导
 
-- **计算 →** [[期望值与理论价值|C21 期望值与理论价值]]：Black–Scholes 把输入映射为理论价值。
-- **提供反解机制 →** [[隐含波动率（Natenberg）|C17 隐含波动率]]：隐波是模型依赖的报价坐标。
-- **导出局部敏感度 →** [[Delta（Natenberg）|C26 Delta]]：模型对标的价格求一阶敏感度。
-- **导出局部敏感度 →** [[Gamma（Natenberg）|C27 Gamma]]：模型对标的价格求二阶敏感度。
-- **导出局部敏感度 →** [[Theta（Natenberg）|C28 Theta]]：模型衡量时间流逝的局部影响。
-- **导出局部敏感度 →** [[Vega（Natenberg）|C29 Vega]]：模型衡量波动率输入变化的局部影响。
-- **导出局部敏感度 →** [[Rho|C30 Rho]]：模型衡量利率输入变化的局部影响。
+- **计算 →** [[期望值与理论价值|期望值与理论价值]]：Black–Scholes 把输入映射为理论价值。
+- **提供反解机制 →** [[隐含波动率（Natenberg）|隐含波动率]]：隐波是模型依赖的报价坐标。
+- **导出局部敏感度 →** [[Delta（Natenberg）|Delta]]：模型对标的价格求一阶敏感度。
+- **导出局部敏感度 →** [[Gamma（Natenberg）|Gamma]]：模型对标的价格求二阶敏感度。
+- **导出局部敏感度 →** [[Theta（Natenberg）|Theta]]：模型衡量时间流逝的局部影响。
+- **导出局部敏感度 →** [[Vega（Natenberg）|Vega]]：模型衡量波动率输入变化的局部影响。
+- **导出局部敏感度 →** [[Rho|Rho]]：模型衡量利率输入变化的局部影响。
 
 ### 受上游约束
 
-- [[波动率预测|C16 波动率预测]] **—提供波动率假设→ 本概念**：预测波动率可作为正向估值输入。
+- [[波动率预测|波动率预测]] **—提供波动率假设→ 本概念**：预测波动率可作为正向估值输入。
 
 ## 关键公式
 

@@ -28,7 +28,19 @@ class Layer:
 
     @property
     def stem(self) -> str:
-        return f"{self.number:02d}-{self.title}"
+        return self.title
+
+
+NOTE_NAME_OVERRIDES = {
+    # 库内已有同名概念页时，知识图谱侧保留教材出处后缀，避免双链歧义；键为 cid，值为目标文件名（不含序号）
+    "C17": "隐含波动率（Natenberg）",
+    "C26": "Delta（Natenberg）",
+    "C27": "Gamma（Natenberg）",
+    "C28": "Theta（Natenberg）",
+    "C29": "Vega（Natenberg）",
+    "C33": "动态Delta对冲（Natenberg）",
+    "C35": "跨式与宽跨式（Natenberg）",
+}
 
 
 @dataclass(frozen=True)
@@ -44,8 +56,10 @@ class Concept:
 
     @property
     def stem(self) -> str:
+        if self.cid in NOTE_NAME_OVERRIDES:
+            return NOTE_NAME_OVERRIDES[self.cid]
         safe = self.title.replace("/", "与").replace("：", "-")
-        return f"{self.cid}-{safe}"
+        return safe
 
 
 @dataclass(frozen=True)
@@ -309,7 +323,7 @@ def concept_map() -> dict[str, Concept]:
 
 def c_link(cid: str, label: str | None = None) -> str:
     concept = concept_map()[cid]
-    return f"[[{concept.stem}|{label or f'{concept.cid} {concept.title}'}]]"
+    return f"[[{concept.stem}|{label or concept.title}]]"
 
 
 def chapter_link(number: int) -> str:
@@ -392,7 +406,8 @@ def render_root() -> str:
 
 
 def mermaid_id(cid: str) -> str:
-    return cid
+    concept = concept_map()[cid]
+    return "".join(re.findall(r"[A-Za-z0-9]+", concept.english))
 
 
 def render_layer(layer: Layer) -> str:
@@ -421,7 +436,7 @@ def render_layer(layer: Layer) -> str:
         lines.append(f"- {c_link(concept.cid)} — {concept.definition.split('。')[0]}。")
     lines += ["", "## 本层关系图", "", "```mermaid", "flowchart LR"]
     for concept in local:
-        lines.append(f'    {mermaid_id(concept.cid)}["{concept.cid} {concept.title}"]')
+        lines.append(f'    {mermaid_id(concept.cid)}["{concept.title}"]')
     if internal:
         for edge in internal:
             lines.append(f'    {mermaid_id(edge.source)} -->|"{edge.verb}"| {mermaid_id(edge.target)}')
@@ -455,13 +470,12 @@ def render_concept(concept: Concept) -> str:
     lines = [
         "---",
         f"title: {yaml_escape(concept.title + ' / ' + concept.english)}",
-        f"concept_id: {concept.cid}",
         f"graph_layer: {concept.layer}",
         "tags: [期权知识图谱, 核心概念]",
         f"generated_by: {yaml_escape(GENERATOR)}",
         "---",
         "",
-        f"# {concept.cid} {concept.title} / {concept.english}",
+        f"# {concept.title} / {concept.english}",
         "",
         f"> [!definition] 定义",
         f"> {concept.definition}",
@@ -535,7 +549,7 @@ def validate() -> None:
 def write_files() -> list[Path]:
     validate()
     OUT.mkdir(parents=True, exist_ok=True)
-    documents: dict[str, str] = {"00-期权知识图谱.md": render_root()}
+    documents: dict[str, str] = {"期权知识图谱.md": render_root()}
     documents.update({f"{layer.stem}.md": render_layer(layer) for layer in LAYERS})
     documents.update({f"{concept.stem}.md": render_concept(concept) for concept in CONCEPTS})
     expected = set(documents)

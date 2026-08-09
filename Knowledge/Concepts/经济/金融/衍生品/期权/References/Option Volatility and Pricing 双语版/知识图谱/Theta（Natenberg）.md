@@ -1,6 +1,5 @@
 ---
 title: "Theta / Theta"
-concept_id: C28
 graph_layer: 5
 tags: [期权知识图谱, 核心概念]
 generated_by: "tools/build_option_knowledge_graph.py"
@@ -15,14 +14,14 @@ generated_by: "tools/build_option_knowledge_graph.py"
 
 ### 向下游传导
 
-- **汇总为组合暴露 →** [[组合Greeks与头寸分析|C32 组合Greeks与头寸分析]]：各腿 Theta 形成时间衰减预算。
+- **汇总为组合暴露 →** [[组合Greeks与头寸分析|组合Greeks与头寸分析]]：各腿 Theta 形成时间衰减预算。
 
 ### 受上游约束
 
-- [[Black-Scholes模型|C22 Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型衡量时间流逝的局部影响。
-- [[Gamma（Natenberg）|C27 Gamma]] **—通常伴随反向暴露→ 本概念**：同一模型条件下正 Gamma 通常伴随负 Theta。
-- [[到期时间与行权方式|C05 到期时间与行权方式]] **—通过时间流逝实现→ 本概念**：剩余期限减少会改变期权价值。
-- [[跨式与宽跨式（Natenberg）|C35 跨式与宽跨式]] **—多头通常承担时间衰减→ 本概念**：若运动不足，权利金随时间损耗。
+- [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型衡量时间流逝的局部影响。
+- [[Gamma（Natenberg）|Gamma]] **—通常伴随反向暴露→ 本概念**：同一模型条件下正 Gamma 通常伴随负 Theta。
+- [[到期时间与行权方式|到期时间与行权方式]] **—通过时间流逝实现→ 本概念**：剩余期限减少会改变期权价值。
+- [[跨式与宽跨式（Natenberg）|跨式与宽跨式]] **—多头通常承担时间衰减→ 本概念**：若运动不足，权利金随时间损耗。
 
 ## 关键公式
 

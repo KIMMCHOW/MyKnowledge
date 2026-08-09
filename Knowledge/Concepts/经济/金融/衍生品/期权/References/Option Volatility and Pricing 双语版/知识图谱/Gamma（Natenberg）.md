@@ -1,6 +1,5 @@
 ---
 title: "Gamma / Gamma"
-concept_id: C27
 graph_layer: 5
 tags: [期权知识图谱, 核心概念]
 generated_by: "tools/build_option_knowledge_graph.py"
@@ -15,18 +14,18 @@ generated_by: "tools/build_option_knowledge_graph.py"
 
 ### 向下游传导
 
-- **决定Delta漂移速度 →** [[Delta（Natenberg）|C26 Delta]]：Gamma 把标的变动传导为 Delta 变化。
-- **提高再平衡需求 →** [[动态Delta对冲（Natenberg）|C33 动态Delta对冲]]：高 Gamma 使对冲更快失衡。
-- **通常伴随反向暴露 →** [[Theta（Natenberg）|C28 Theta]]：同一模型条件下正 Gamma 通常伴随负 Theta。
-- **汇总为组合暴露 →** [[组合Greeks与头寸分析|C32 组合Greeks与头寸分析]]：各腿 Gamma 形成组合凸性。
+- **决定Delta漂移速度 →** [[Delta（Natenberg）|Delta]]：Gamma 把标的变动传导为 Delta 变化。
+- **提高再平衡需求 →** [[动态Delta对冲（Natenberg）|动态Delta对冲]]：高 Gamma 使对冲更快失衡。
+- **通常伴随反向暴露 →** [[Theta（Natenberg）|Theta]]：同一模型条件下正 Gamma 通常伴随负 Theta。
+- **汇总为组合暴露 →** [[组合Greeks与头寸分析|组合Greeks与头寸分析]]：各腿 Gamma 形成组合凸性。
 
 ### 受上游约束
 
-- [[Black-Scholes模型|C22 Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型对标的价格求二阶敏感度。
-- [[二叉树与风险中性估值|C23 二叉树与风险中性估值]] **—以节点差分估计→ 本概念**：相邻 Delta 变化可估计 Gamma。
-- [[跨式与宽跨式（Natenberg）|C35 跨式与宽跨式]] **—多头通常形成正凸性→ 本概念**：多头跨式和宽跨式受益于大幅运动。
-- [[蝶式与鹰式|C36 蝶式与鹰式]] **—表达局部曲率→ 本概念**：多执行价结构把 Gamma 集中在特定区间。
-- [[比率价差与圣诞树|C38 比率价差与圣诞树]] **—可能形成非对称尾部凸性→ 本概念**：不等数量使一侧远端风险突出。
+- [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→ 本概念**：模型对标的价格求二阶敏感度。
+- [[二叉树与风险中性估值|二叉树与风险中性估值]] **—以节点差分估计→ 本概念**：相邻 Delta 变化可估计 Gamma。
+- [[跨式与宽跨式（Natenberg）|跨式与宽跨式]] **—多头通常形成正凸性→ 本概念**：多头跨式和宽跨式受益于大幅运动。
+- [[蝶式与鹰式|蝶式与鹰式]] **—表达局部曲率→ 本概念**：多执行价结构把 Gamma 集中在特定区间。
+- [[比率价差与圣诞树|比率价差与圣诞树]] **—可能形成非对称尾部凸性→ 本概念**：不等数量使一侧远端风险突出。
 
 ## 关键公式
 
