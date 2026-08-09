@@ -3,8 +3,6 @@ Raw Materials/
 .claudian/
 .obsidian/workspace*.json
 **/.obsidian/workspace*.json
-.obsidian/graph*.json
-**/.obsidian/graph*.json
 .obsidian/plugins/*/data.json
 **/.obsidian/plugins/*/data.json
 desktop.ini

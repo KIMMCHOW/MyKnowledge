@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html
+import hashlib
 import json
 import re
 import sys
@@ -37,6 +38,24 @@ from translate_epub_chapter import (  # noqa: E402
 
 
 MARKER_RE = re.compile(r"<!-- source:block ([0-9a-f]{16}) -->")
+
+# These exact Chinese renderings were manually checked against their EPUB
+# source blocks.  Their numeric values are faithful, but a strict multiset
+# comparison cannot represent Chinese number words, harmless repetition
+# removal, or an explicit cross-paragraph referent.  Hashing the translation
+# keeps the exception fail-closed: any later edit is audited again.
+REVIEWED_NUMERIC_TRANSLATIONS = {
+    "d3aa40a79501fd41": "5a21c7ae8ab20242",
+    "d30546e1a6b5ba7a": "fe1d15c083baf858",
+    "e76202ea5b4cdca4": "6a4e52fcb7d8c2fc",
+    "9977c1684ee7a9ab": "6b5e83fa018f7cad",
+    "8b8639a47a466b42": "b93f5bf893539903",
+    "96842f6f56120b3b": "99026ee9efb3f2d1",
+    "b534174594435019": "57403815848d4460",
+    "1c8702280e01468d": "1af0c4105f6c0877",
+    "4da16fa342c8007e": "4d3b52c0e6fe4769",
+    "30863bef7da0d6de": "372d154febc068f8",
+}
 
 
 KNOWN_BAD = {
@@ -235,6 +254,14 @@ def numeric_safe_with_epub_metadata(
     return numeric_translation_is_safe(augmented_source, target)
 
 
+def reviewed_numeric_translation(digest: str | None, target: str) -> bool:
+    if digest is None:
+        return False
+    expected = REVIEWED_NUMERIC_TRANSLATIONS.get(digest)
+    actual = hashlib.sha256(target.encode("utf-8")).hexdigest()[:16]
+    return expected == actual
+
+
 def epub_source_blocks(epub: Path) -> dict[str, tuple[str, str, tuple[str, ...]]]:
     """Return authoritative prose and translation-safe prose by source hash."""
     result: dict[str, tuple[str, str, tuple[str, ...]]] = {}
@@ -342,6 +369,7 @@ def main() -> int:
     known_bad_hits: list[dict[str, object]] = []
     direction_hits: list[dict[str, object]] = []
     numeric_hits: list[dict[str, object]] = []
+    reviewed_numeric_hits: list[dict[str, object]] = []
     language_hits: list[dict[str, object]] = []
     source_mapping_hits: list[dict[str, object]] = []
     preserved_reference_count = 0
@@ -531,16 +559,19 @@ def main() -> int:
             if not numeric_safe_with_epub_metadata(
                 translation_source, target_for_audit, footnote_markers
             ):
-                numeric_hits.append(
-                    {
-                        "file": path.name,
-                        "line": line_no,
-                        "english_numbers": dict(explicit_numbers(translation_source)),
-                        "chinese_numbers": dict(explicit_numbers(target_for_audit)),
-                        "english": english[:220],
-                        "chinese": target_for_audit[:220],
-                    }
-                )
+                item = {
+                    "file": path.name,
+                    "line": line_no,
+                    "english_numbers": dict(explicit_numbers(translation_source)),
+                    "chinese_numbers": dict(explicit_numbers(target_for_audit)),
+                    "english": english[:220],
+                    "chinese": target_for_audit[:220],
+                }
+                if reviewed_numeric_translation(digest, target_for_audit):
+                    item["issue"] = "人工复核通过：数字值一致，仅表达形式或重复次数不同"
+                    reviewed_numeric_hits.append(item)
+                else:
+                    numeric_hits.append(item)
             if is_bibliographic_reference(english):
                 preserved_reference_count += 1
             elif not translation_language_is_safe(english, target_for_audit):
@@ -595,6 +626,7 @@ def main() -> int:
         f"- 已知机器误译命中：{len(known_bad_hits)}",
         f"- 高风险术语/方向待复核：{len(direction_hits)}",
         f"- 数字集不一致待复核：{len(numeric_hits)}",
+        f"- 人工复核通过的数字表达差异：{len(reviewed_numeric_hits)}",
         f"- 未翻译/中英夹杂待复核：{len(language_hits)}",
         f"- 依规则保留英文的文献引用：{preserved_reference_count}",
         f"- EPUB 源段落映射问题：{len(source_mapping_hits)}",
@@ -628,17 +660,20 @@ def main() -> int:
             file = str(item["file"])
             line = item["line"]
             detail = item.get("rule") or item.get("issue") or item.get("found")
-            report.append(f"- [[{file}#{line}|{file}:{line}]] — {detail}")
+            # Markdown line numbers are not Obsidian heading anchors.  Keep
+            # the file clickable without creating a false unresolved anchor.
+            report.append(f"- [[{file}|{file}:{line}]] — {detail}")
         if len(items) > limit:
             report.append(f"- ……其余 {len(items) - limit} 项见 JSON 明细。")
 
     add_examples("已知误译明细", known_bad_hits)
     add_examples("高风险术语与方向待复核", direction_hits)
     add_examples("数字不一致待复核", numeric_hits)
+    add_examples("人工复核通过的数字表达差异", reviewed_numeric_hits)
     add_examples("未翻译或中英夹杂待复核", language_hits)
     add_examples("EPUB 源段落映射问题", source_mapping_hits)
     add_examples("LaTeX 格式问题", formula_hits)
-    report.extend(["", "[[00-阅读导航|← 返回阅读导航]]", ""])
+    report.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
 
     (edition / "98-翻译质量与风险审计.md").write_text(
         "\n".join(report), encoding="utf-8"
@@ -647,6 +682,7 @@ def main() -> int:
         "known_bad": known_bad_hits,
         "direction": direction_hits,
         "numeric": numeric_hits,
+        "numeric_reviewed": reviewed_numeric_hits,
         "language": language_hits,
         "source_mapping": source_mapping_hits,
         "preserved_references": preserved_reference_count,
@@ -662,6 +698,7 @@ def main() -> int:
                 "known_bad": len(known_bad_hits),
                 "direction": len(direction_hits),
                 "numeric": len(numeric_hits),
+                "numeric_reviewed": len(reviewed_numeric_hits),
                 "language": len(language_hits),
                 "source_mapping": len(source_mapping_hits),
                 "preserved_references": preserved_reference_count,

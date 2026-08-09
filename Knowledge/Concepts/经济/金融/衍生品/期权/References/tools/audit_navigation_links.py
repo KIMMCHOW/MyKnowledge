@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 EDITION_NAME = "Option Volatility and Pricing 双语版"
-NAVIGATION_FILE = "00-阅读导航.md"
+NAVIGATION_FILE = "90-阅读导航.md"
 CONTENTS_FILE = "00-04-原书目录 Contents.md"
 REPORT_FILE = "96-导航链接审计.md"
 
@@ -65,7 +65,7 @@ def expected_context(edition: Path, number: int, english: str, current: Path | N
         return current, current.stem, False
 
     special = {
-        1: "00-前言 Preface",
+        1: "00-05-前言 Preface",
         156: "26-结语 A Final Thought",
         157: "27-附录A-期权术语表 Glossary of Option Terminology",
         158: "28-附录B-实用数学 Some Useful Math",
@@ -190,7 +190,7 @@ def write_report(
     if failures:
         lines.extend(["", "## 待处理（前 40 项）", ""])
         lines.extend(f"- {failure}" for failure in failures[:40])
-    lines.extend(["", "[[00-阅读导航|← 返回阅读导航]]", ""])
+    lines.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
     (edition / REPORT_FILE).write_text("\n".join(lines), encoding="utf-8")
 
 

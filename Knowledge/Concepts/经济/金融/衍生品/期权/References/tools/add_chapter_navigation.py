@@ -56,7 +56,7 @@ def navigation_block(
     links: list[str] = []
     if chapter > 1:
         links.append(f"[[{chapters[chapter - 2].stem}|← 上一章]]")
-    links.append("[[00-阅读导航|全书导航]]")
+    links.append("[[90-阅读导航|全书导航]]")
     if chapter < len(chapters):
         links.append(f"[[{chapters[chapter].stem}|下一章 →]]")
     return "\n".join(

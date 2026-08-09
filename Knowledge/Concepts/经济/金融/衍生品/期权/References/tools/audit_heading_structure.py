@@ -129,7 +129,7 @@ def main() -> int:
     ]
     if failures:
         report.extend(["", "## 待处理", ""] + [f"- {item}" for item in failures])
-    report.extend(["", "[[00-阅读导航|← 返回阅读导航]]", ""])
+    report.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
     (edition / "97-章节与标题结构审计.md").write_text(
         "\n".join(report), encoding="utf-8"
     )

@@ -40,4 +40,4 @@ instrument: 期权
 - 交易成本如何改变最优对冲频率？
 
 ## 来源
-- [[动态Delta对冲（Natenberg）|Natenberg 期权知识图谱：动态 Delta 对冲]]
+- [[C33-动态Delta对冲|Natenberg 期权知识图谱：动态 Delta 对冲]]

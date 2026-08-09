@@ -1677,7 +1677,7 @@ def main() -> int:
             "",
             f"# {section_label} {args.chinese_title} / {args.english_title}",
             "",
-            "[[00-阅读导航|← 返回阅读导航]] · [[00-翻译说明与术语表|术语表]]",
+            "[[90-阅读导航|← 返回阅读导航]] · [[91-翻译说明与术语表|术语表]]",
             "",
             "> [!warning] 翻译状态",
             "> 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。",
@@ -1809,7 +1809,7 @@ def main() -> int:
                 lines.extend(quote_callout(paragraph_number, english_markdown))
                 lines.extend([chinese, ""])
 
-    lines.extend(["---", "", "[[00-阅读导航|← 返回阅读导航]]", ""])
+    lines.extend(["---", "", "[[90-阅读导航|← 返回阅读导航]]", ""])
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("\n".join(lines), encoding="utf-8")
     print(f"wrote {args.output} with {paragraph_number} translated text blocks")

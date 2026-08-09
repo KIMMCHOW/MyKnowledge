@@ -34,8 +34,8 @@ tags:
 ## 常见策略表达
 
 - [[跨式与宽跨式]]：可表达对实际运动与隐含波动率的观点。
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/蝶式与鹰式|蝶式与鹰式]]：表达波动率曲面的局部曲率。
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/日历与对角价差|日历与对角价差]]：表达期限结构和远期波动率观点。
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/C36-蝶式与鹰式|蝶式与鹰式]]：表达波动率曲面的局部曲率。
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/C37-日历与对角价差|日历与对角价差]]：表达期限结构和远期波动率观点。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/Strategies/Short Straddle（卖出跨式）与 Short Strangle（卖出宽跨式）|卖出跨式与卖出宽跨式]]：典型的做空波动率结构。
 
 ## 风险特征
@@ -45,4 +45,4 @@ tags:
 ## 来源
 
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing - 教材结构提取报告|Option Volatility and Pricing 教材结构提取报告]]
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/期权知识图谱|期权知识图谱]]
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/00-期权知识图谱|期权知识图谱]]

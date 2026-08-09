@@ -22,8 +22,8 @@ FORBIDDEN = (
     "00-02-版权",
     "00-03-献词",
     "00-04-原书目录",
-    "00-阅读导航",
-    "00-翻译说明",
+    "90-阅读导航",
+    "91-翻译说明",
     "26-结语",
     "27-附录A",
     "29-索引",
@@ -185,7 +185,7 @@ def write_report(failures: list[str], stats: dict[str, int]) -> None:
     if failures:
         lines.extend(["", "## 待处理（前 50 项）", ""])
         lines.extend(f"- {failure}" for failure in failures[:50])
-    lines.extend(["", "[[00-阅读导航|← 返回阅读导航]]", ""])
+    lines.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
     REPORT.write_text("\n".join(lines), encoding="utf-8")
 
 

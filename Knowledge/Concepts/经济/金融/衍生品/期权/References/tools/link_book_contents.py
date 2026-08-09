@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 EDITION_NAME = "Option Volatility and Pricing 双语版"
-NAVIGATION_FILE = "00-阅读导航.md"
+NAVIGATION_FILE = "90-阅读导航.md"
 CONTENTS_FILE = "00-04-原书目录 Contents.md"
 CONTENTS_ITEM_RE = re.compile(
     r"(^> \[!quote\]- English (?P<number>\d+)\n> (?P<english>.+)\n\n)"
@@ -82,7 +82,7 @@ def link_contents(edition: Path) -> tuple[int, int]:
     linked = 0
 
     special = {
-        1: edition / "00-前言 Preface.md",
+        1: edition / "00-05-前言 Preface.md",
         156: edition / "26-结语 A Final Thought.md",
         157: edition / "27-附录A-期权术语表 Glossary of Option Terminology.md",
         158: edition / "28-附录B-实用数学 Some Useful Math.md",
