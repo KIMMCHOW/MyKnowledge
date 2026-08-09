@@ -538,11 +538,11 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 68
 > Because we are dealing with stock options, there are two additional risks—the risk of changing interest rates and the risk of changing dividends, assuming that at least one dividend payment falls between expirations. We know from Chapter 7 that stock option calls and puts react in just the opposite way to changes in interest rates and dividends. Rising interest rates or falling dividends cause calls to rise in value and puts to fall; falling interest rates and rising dividends cause calls to fall in value and puts to rise. Moreover, the impact of a change in either of these inputs will be greater for long-term options than for short-term options. We can measure the risk of changing interest rates by determining the total rho value for each spread. Even though there is no Greek for the dividend sensitivity, we can still use a computer to determine the dividend risk associated with each spread. The sensitivities for the individual options, as well as the total spread sensitivities, to changing interest rates and dividends are shown in Figure 13-14.
 
-由于我们处理的是股票期权，因此存在两个额外的风险-利率变化的风险和股息变化的风险，假设至少有一次股息支付落在两次期权之间。我们从第7章了解到，股票期权看涨和看跌的反应方式与利率和股息的变化恰恰相反。利率上升或股息下降导致看涨期权价值上升，看跌期权下跌;利率下降和股息上升导致看涨期权价值下跌，看跌期权上涨。此外，这些投入之一的变化对长期选择的影响将大于对短期选择的影响。我们可以通过确定每个价差的总Rho值来衡量利率变化的风险。尽管股息敏感性没有希腊语，但我们仍然可以使用计算机来确定与每个价差相关的股息风险。个别期权的敏感性以及总价差对利率和股息变化的敏感性如图13-14所示。
+由于这里讨论的是股票期权，还需要考虑另外两类风险：利率变动风险和股息变动风险——前提是两个到期日之间至少有一次股息支付。由第 7 章可知，股票看涨期权和看跌期权对利率及股息变动的反应恰好相反：利率上升或股息下降会使看涨期权价值上升、看跌期权价值下降；利率下降或股息上升则会使看涨期权价值下降、看跌期权价值上升。此外，无论哪项输入变量发生变化，对长期期权的影响都会大于对短期期权的影响。我们可以通过计算每个价差的 Rho 总值来衡量利率变动风险。尽管股息敏感度没有对应的 Greek（希腊字母风险指标），仍可借助计算机确定每个价差的股息风险。各单一期权以及整个价差对利率和股息变动的敏感度如图 13-14 所示。
 
 <!-- source:block 02d916085972026c -->
 
-*图13-14贷款利率和股息敏感性。 / Figure 13-14 Interest-rate and dividend sensitivity.*
+*图 13-14 利率和股息敏感度。 / Figure 13-14 Interest-rate and dividend sensitivity.*
 
 <!-- source:block 858cd09c13f24ba6 -->
 
