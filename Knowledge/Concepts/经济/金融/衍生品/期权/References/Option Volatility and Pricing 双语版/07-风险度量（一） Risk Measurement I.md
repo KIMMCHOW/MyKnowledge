@@ -376,14 +376,14 @@ Gamma（Γ），有时也被称为期权的曲率，是标的价格变化时Delt
 > [!quote]- English 42
 > For example, consider both an at-the-money call with a delta of 50 and an at-the-money put with a delta of –50. How will the delta change as the underlying price changes if both options have gamma values of 5? If the underlying price rises one full point, we add the gamma of 5 to the call delta of 50 to get the new delta of 55. To get the new put delta if the underlying contract rises one point, we also *add* the gamma of 5 to the put delta of –50 to get the new delta of –45. This is intuitively logical—as the underlying price rises, at-the-money calls move into the money and at-the-money puts move out of the money. If the underlying contract falls one full point, in both cases we *subtract* the gamma, resulting in a call delta of 50 – 5 = 45 and a put delta of –50 – 5 = –55. Now the call is moving out of the money and the put is moving into the money.
 
-例如，考虑Delta为50的ATM 看涨期权和Delta为-50的ATM 看跌期权。如果两个期权的Gamma值都为5，随着标的价格的变化，Delta将如何变化？ 如果标的价格上涨一个整点，我们将5的Gamma与50的看涨期权 Delta相加，以获得55的新Delta。如果标的合约上涨一个点，为了获得新的看跌期权 Delta，我们还将5的Gamma添加到-50的看跌期权 Delta中，以获得-45的新Delta。 这在直觉上是符合逻辑的——随着标的价格的上涨，ATM的看涨期权转入货币，而ATM的看涨期权转入OTM。 如果标的合约下跌一整点，在这两种情况下，我们都会减去Gamma，从而产生看涨期权 Delta为50 - 5 = 45，看跌期权 Delta为-50 - 5 = -55。现在看涨期权正在转移OTM，看跌期权正在转移到货币中。
+例如，考虑一份 Delta 为 50 的平值（ATM）看涨期权和一份 Delta 为 −50 的平值看跌期权。若两份期权的 Gamma 均为 5，当标的价格变化时，它们的 Delta 将如何变化？如果标的价格上涨一个点，我们将 Gamma 5 加到看涨期权原来的 Delta 50 上，得到新的 Delta 55；同样，也将 Gamma 5 加到看跌期权原来的 Delta −50 上，得到新的 Delta −45。这在直觉上是合理的——随着标的价格上涨，平值看涨期权转为价内（ITM），平值看跌期权转为价外（OTM）。如果标的价格下跌一个点，两者都要从原 Delta 中减去 Gamma，因此看涨期权的 Delta 为 50 − 5 = 45，看跌期权的 Delta 为 −50 − 5 = −55。此时，看涨期权正转为价外（OTM），看跌期权正转为价内（ITM）。
 
 <!-- source:block c149ff590fcdfd02 -->
 
 > [!quote]- English 43
 > Because all options individually have positive gamma values, we can create a positive gamma position by buying options, either calls or puts, and a negative gamma position by selling options. For a complex position consisting of many different options, we use the same interpretation of the gamma as we do for individual options, adding the gamma to the old delta as the underlying contract rises and subtracting the gamma as the market falls. A positive gamma position will gain deltas as the market rises (we are adding a positive number) and lose deltas as the market falls (we are subtracting a positive number). A negative gamma position will behave in just the opposite way, losing deltas as the market rises (we are adding a *negative* number) and gaining deltas as the market falls (we are subtracting a *negative* number). Moreover, the rate of change in the delta will be determined by the size of the gamma position. New traders are often advised to avoid large gamma positions, particularly negative ones, because of the speed with which the directional risk, as reflected by the delta, can change.
 
-由于所有期权都具有正的Gamma值，因此我们可以通过购买期权（无论是看涨期权还是看跌期权）来创建正的Gamma头寸，并通过出售期权来创建负的Gamma头寸。对于由许多不同期权组成的复杂头寸，我们使用与单个期权相同的Gamma解释，当标的合约上涨时，将Gamma添加到旧Delta上，当市场下跌时，将Gamma减去Gamma。正Gamma头寸将随着市场上涨而获得Delta（我们添加一个正值），而随着市场下跌（我们减去一个正值）将失去Delta。负Gamma头寸的表现方式恰恰相反，随着市场上涨而失去Delta（我们添加了一个负值），而随着市场下跌而获得Delta（我们减去了一个负值）。此外，Delta的变化率将由Gamma头寸的大小决定。新交易者通常被建议避免大额Gamma头寸，尤其是负值头寸，因为Delta所反映的方向风险的变化速度很快。
+由于每个单一期权的 Gamma 都为正，我们可以通过买入期权（无论看涨期权还是看跌期权）建立正 Gamma 头寸，也可以通过卖出期权建立负 Gamma 头寸。对于由多种期权构成的复杂头寸，Gamma 的含义与单一期权相同：标的价格上涨时，将 Gamma 加到原 Delta 上；标的价格下跌时，则从原 Delta 中减去 Gamma。正 Gamma 头寸会在市场上涨时增加 Delta（即加上一个正数），在市场下跌时减少 Delta（即减去一个正数）。负 Gamma 头寸的表现恰好相反：市场上涨时 Delta 减少（即加上一个负数），市场下跌时 Delta 增加（即减去一个负数）。此外，Delta 的变化速度取决于 Gamma 头寸的大小。交易新手通常会被建议避免持有过大的 Gamma 头寸，尤其是过大的负 Gamma 头寸，因为其 Delta 所反映的方向性风险可能迅速变化。
 
 <!-- source:block 5b8e87effac9317f -->
 
@@ -564,7 +564,7 @@ $$
 > [!quote]- English 66
 > We will look at theta in greater detail in Chapter 9. For now, there is one important characteristic of theta that is worth mentioning: if an option is exactly at the money as time passes, the theta of the option increases. With three months remaining to expiration, an at-the-money option may have a theta of –0.03. However, with three weeks to expiration, the same option, if it is still at the money, may have a theta of –0.06. And with three days to expiration, the option may have a theta of –0.16. The theta becomes increasingly large as expiration approaches.
 
-我们将在第9章更详细地研究Theta。目前，Theta有一个重要特征值得一提：如果随着时间的推移，期权的Theta正好在货币上，那么期权的Theta就会增加。距离到期还剩三个月，平值期权的Theta可能为-0.03。然而，距离到期还有三周，如果同样的期权仍在资金上，那么Theta可能为-0.06。距离到期还有三天，该期权的Theta可能为-0.16。随着到期的临近，Theta变得越来越大。
+我们将在第 9 章更详细地讨论 Theta。这里先说明 Theta 的一个重要特征：如果期权在时间流逝的过程中始终恰好处于平值状态，其 Theta 的绝对值会逐渐增大。距离到期还有三个月时，一份平值期权的 Theta 可能为 −0.03；距离到期还有三周时，如果该期权仍为平值，其 Theta 可能为 −0.06；距离到期仅剩三天时，其 Theta 可能达到 −0.16。也就是说，越接近到期，平值期权的 Theta 绝对值越大（Theta 变得越来越负）。
 
 <!-- source:block 817d4cda995b8ce2 -->
 
@@ -800,7 +800,7 @@ $$
 > [!quote]- English 96
 > As the market falls, the delta becomes a larger positive number. For the same reason we do not want the stock price to rise (we are creating a larger negative delta in a rising market), we also do not want the stock price to fall (we are creating a larger positive delta in a falling market). If we do not want the market to rise and we do not want the market to fall, there is only one favorable outcome remaining: we must want the market to sit still. In fact, a negative gamma position is a good indication that a trader either wants the underlying market to sit still or move only very slowly. A positive gamma position indicates a desire for very large and swift moves in the underlying market.
 
-当市场下跌时，Delta变成一个更大的正数。出于同样的原因，我们不希望股价上涨（我们在上涨的市场中创造了一个更大的负Delta），我们也不希望股价下跌（我们在下跌的市场中创造了一个更大的正Delta）。如果我们不想让市场上涨，也不想让市场下跌，那么就只有一个有利的结果：我们必须让市场坐下来。事实上，负Gamma头寸是一个很好的迹象，表明交易者要么希望标的市场静止不动，要么只想非常缓慢地移动。正的Gamma头寸表明希望标的市场出现非常大且迅速的波动。
+随着市场下跌，头寸的 Delta 会变得越来越正。正如我们不希望股价上涨——因为市场上涨时，头寸的 Delta 会变得越来越负——我们同样也不希望股价下跌——因为市场下跌时，头寸的 Delta 会变得越来越正。如果既不希望市场上涨，也不希望市场下跌，那么只剩下一种有利情形：市场保持平稳。事实上，负 Gamma 头寸通常意味着交易者希望标的市场基本不动，或者只发生非常缓慢的价格变化；正 Gamma 头寸则表示交易者希望标的市场出现幅度很大且速度很快的价格变化。
 
 <!-- source:block 77fb0faa1be517b6 -->
 
