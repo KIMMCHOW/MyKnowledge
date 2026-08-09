@@ -12,7 +12,7 @@ created: 2026-08-03
 
 # 前言 / Preface
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!quote] English 1
 > It probably seems strange for an author to wait 20 years to revise a professional publication, especially one that has been continuously in print over the entire period. To those of you who were hoping for at least one revision in the intervening years, I can only offer my apology and the excuse that other obligations prevented me from undertaking such a revision.
@@ -72,4 +72,4 @@ Sheldon Natenberg
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]

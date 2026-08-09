@@ -10,7 +10,7 @@ created: 2026-08-03
 
 # 第17章 使用期权进行对冲 / Hedging with Options
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!warning] 翻译状态
 > 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
@@ -30,7 +30,7 @@ created: 2026-08-03
 <!-- chapter-toc:end -->
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章首）
-> [[美式期权的提前行权 Early Exercise of American Options|← 上一章]] · [[阅读导航|全书导航]] · [[Black–Scholes 模型 The Black-Scholes Model|下一章 →]]
+> [[美式期权的提前行权 Early Exercise of American Options|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[Black–Scholes 模型 The Black-Scholes Model|下一章 →]]
 <!-- chapter-nav:end -->
 <!-- source:block 82a01a85cbb2e31a -->
 
@@ -844,9 +844,9 @@ $$
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]
 
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章末）
-> [[美式期权的提前行权 Early Exercise of American Options|← 上一章]] · [[阅读导航|全书导航]] · [[Black–Scholes 模型 The Black-Scholes Model|下一章 →]]
+> [[美式期权的提前行权 Early Exercise of American Options|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[Black–Scholes 模型 The Black-Scholes Model|下一章 →]]
 <!-- chapter-nav:end -->

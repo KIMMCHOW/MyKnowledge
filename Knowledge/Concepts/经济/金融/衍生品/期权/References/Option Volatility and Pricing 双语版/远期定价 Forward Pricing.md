@@ -10,7 +10,7 @@ created: 2026-08-03
 
 # 第2章 远期定价 / Forward Pricing
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!warning] 翻译状态
 > 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
@@ -34,7 +34,7 @@ created: 2026-08-03
 <!-- chapter-toc:end -->
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章首）
-> [[金融合约 Financial Contracts|← 上一章]] · [[阅读导航|全书导航]] · [[合约规格与期权术语 Contract Specifications and Option Terminology|下一章 →]]
+> [[金融合约 Financial Contracts|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[合约规格与期权术语 Contract Specifications and Option Terminology|下一章 →]]
 <!-- chapter-nav:end -->
 <!-- source:block 2764fcd17114a57d -->
 
@@ -1354,9 +1354,9 @@ $$
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]
 
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章末）
-> [[金融合约 Financial Contracts|← 上一章]] · [[阅读导航|全书导航]] · [[合约规格与期权术语 Contract Specifications and Option Terminology|下一章 →]]
+> [[金融合约 Financial Contracts|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[合约规格与期权术语 Contract Specifications and Option Terminology|下一章 →]]
 <!-- chapter-nav:end -->

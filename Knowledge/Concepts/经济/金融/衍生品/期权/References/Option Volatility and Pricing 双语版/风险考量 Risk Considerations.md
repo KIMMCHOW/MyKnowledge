@@ -10,7 +10,7 @@ created: 2026-08-03
 
 # 第13章 风险考量 / Risk Considerations
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!warning] 翻译状态
 > 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
@@ -33,7 +33,7 @@ created: 2026-08-03
 <!-- chapter-toc:end -->
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章首）
-> [[牛市与熊市价差 Bull and Bear Spreads|← 上一章]] · [[阅读导航|全书导航]] · [[合成头寸 Synthetics|下一章 →]]
+> [[牛市与熊市价差 Bull and Bear Spreads|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[合成头寸 Synthetics|下一章 →]]
 <!-- chapter-nav:end -->
 <!-- source:block 29342e12e7b0ec07 -->
 
@@ -1003,9 +1003,9 @@ $$
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]
 
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章末）
-> [[牛市与熊市价差 Bull and Bear Spreads|← 上一章]] · [[阅读导航|全书导航]] · [[合成头寸 Synthetics|下一章 →]]
+> [[牛市与熊市价差 Bull and Bear Spreads|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[合成头寸 Synthetics|下一章 →]]
 <!-- chapter-nav:end -->

@@ -10,7 +10,7 @@ created: 2026-08-03
 
 # 第7章 风险度量（一） / Risk Measurement I
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!warning] 翻译状态
 > 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
@@ -34,7 +34,7 @@ created: 2026-08-03
 <!-- chapter-toc:end -->
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章首）
-> [[波动率 Volatility|← 上一章]] · [[阅读导航|全书导航]] · [[动态对冲 Dynamic Hedging|下一章 →]]
+> [[波动率 Volatility|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[动态对冲 Dynamic Hedging|下一章 →]]
 <!-- chapter-nav:end -->
 <!-- source:block fdb922e954054c59 -->
 
@@ -1000,9 +1000,9 @@ $$
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]
 
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章末）
-> [[波动率 Volatility|← 上一章]] · [[阅读导航|全书导航]] · [[动态对冲 Dynamic Hedging|下一章 →]]
+> [[波动率 Volatility|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[动态对冲 Dynamic Hedging|下一章 →]]
 <!-- chapter-nav:end -->

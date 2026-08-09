@@ -10,7 +10,7 @@ created: 2026-08-03
 
 # 第1章 金融合约 / Financial Contracts
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!warning] 翻译状态
 > 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
@@ -28,7 +28,7 @@ created: 2026-08-03
 <!-- chapter-toc:end -->
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章首）
-> [[阅读导航|全书导航]] · [[远期定价 Forward Pricing|下一章 →]]
+> [[Option Volatility and Pricing 导航|全书导航]] · [[远期定价 Forward Pricing|下一章 →]]
 <!-- chapter-nav:end -->
 > [!quote]- English 1
 > My friend Jerry lives in a small town, the same town in which he was born and raised. Because Jerry’s parents are no longer alive and many of his friends have left, he is seriously thinking of packing up and moving to a larger city. However, Jerry recently heard that there is a plan to build a major highway that will pass very close to his hometown. Because the highway is likely to bring new life to the town, Jerry is reconsidering his decision to move away. It has also occurred to Jerry that the highway may bring new business opportunities.
@@ -329,9 +329,9 @@ created: 2026-08-03
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]
 
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章末）
-> [[阅读导航|全书导航]] · [[远期定价 Forward Pricing|下一章 →]]
+> [[Option Volatility and Pricing 导航|全书导航]] · [[远期定价 Forward Pricing|下一章 →]]
 <!-- chapter-nav:end -->

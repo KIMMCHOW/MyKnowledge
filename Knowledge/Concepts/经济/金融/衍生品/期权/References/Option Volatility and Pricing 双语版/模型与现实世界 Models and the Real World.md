@@ -10,7 +10,7 @@ created: 2026-08-03
 
 # 第23章 模型与现实世界 / Models and the Real World
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
 
 > [!warning] 翻译状态
 > 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
@@ -32,7 +32,7 @@ created: 2026-08-03
 <!-- chapter-toc:end -->
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章首）
-> [[股票指数期货与期权 Stock Index Futures and Options|← 上一章]] · [[阅读导航|全书导航]] · [[波动率偏斜 Volatility Skews|下一章 →]]
+> [[股票指数期货与期权 Stock Index Futures and Options|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[波动率偏斜 Volatility Skews|下一章 →]]
 <!-- chapter-nav:end -->
 <!-- source:block 84c28d29ee17a60e -->
 
@@ -755,9 +755,9 @@ ATM 跨式式可能很便宜，这一事实并不意味着交易员应该大量�
 
 ---
 
-[[阅读导航|← 返回阅读导航]]
+[[Option Volatility and Pricing 导航|← 返回阅读导航]]
 
 <!-- chapter-nav:start -->
 > [!tip] 章节导航（章末）
-> [[股票指数期货与期权 Stock Index Futures and Options|← 上一章]] · [[阅读导航|全书导航]] · [[波动率偏斜 Volatility Skews|下一章 →]]
+> [[股票指数期货与期权 Stock Index Futures and Options|← 上一章]] · [[Option Volatility and Pricing 导航|全书导航]] · [[波动率偏斜 Volatility Skews|下一章 →]]
 <!-- chapter-nav:end -->
