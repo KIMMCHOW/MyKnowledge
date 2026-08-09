@@ -35,8 +35,8 @@ Avellaneda–Stoikov 模型是通过随机控制联合决定做市报价中心�
 
 ## 深入笔记
 
-- [[Knowledge/Notes/Finance/Market Making/Avellaneda–Stoikov 做市模型|AS 库存型做市模型]]
-- [[Knowledge/Notes/Finance/Market Making/Avellaneda–Stoikov 研究资料|AS 模型研究资料]]
+- [[Avellaneda–Stoikov 做市模型|AS 库存型做市模型]]
+- [[Avellaneda–Stoikov 研究资料|AS 模型研究资料]]
 
 ## 相关问题
 - 有限期限近似与长时稳态解有什么区别？

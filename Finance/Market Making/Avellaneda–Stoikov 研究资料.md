@@ -20,7 +20,7 @@ source_type: primary-research
 # AS Model（Avellaneda–Stoikov）研究资料
 
 > [!info] 导航
-> 概念入口：[[Avellaneda–Stoikov模型]] · [[做市]] · [[流动性]]；专题入口：[[Knowledge/Notes/Finance/Market Making/_索引_做市|做市研究索引]]。
+> 概念入口：[[Avellaneda–Stoikov模型]] · [[做市]] · [[流动性]]；专题入口：[[_索引_做市|做市研究索引]]。
 
 > [!abstract] 这篇笔记是做什么的
 > 这是一份可独立复制的“单资产、库存感知做市”理论与实施速查。它解释 Avellaneda–Stoikov（AS）模型如何在**赚取买卖价差**与**控制库存价格风险**之间求解最优 bid/ask，并明确区分原始论文中的有限期限近似、精确 HJB 问题，以及 Guéant–Lehalle–Fernandez-Tapia（GLFT）的有限期限严格解与长时稳态近似。

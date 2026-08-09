@@ -8,6 +8,7 @@
 - `Knowledge/Concepts/数学/` — 博弈论、概率统计、分析与优化
 - `Knowledge/Concepts/经济/` — 微观、宏观、劳动、制度行为、国际政治经济、能源、产业与金融
 - `Knowledge/Concepts/经济/金融/衍生品/期权/` — 衍生品与期权的唯一专题入口，包含概念、Greeks、数学、策略、练习和资料
+- `Finance/` — 根目录研究专题（如 `Finance/Market Making/` 做市研究），索引见 `Finance/Market Making/_索引_做市.md`
 - `Knowledge/Notes/` — 课程/阅读笔记（Game Theory 系列等），索引见 `Knowledge/Notes/_索引_笔记.md`
 - `Raw Materials/` — 原始素材，只读、禁止改动，不纳入 git 跟踪
 

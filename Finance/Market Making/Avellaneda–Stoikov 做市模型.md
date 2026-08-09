@@ -19,7 +19,7 @@ updated: 2026-08-09
 # Avellaneda–Stoikov（AS）库存型做市模型
 
 > [!info] 导航
-> 概念入口：[[Avellaneda–Stoikov模型]] · [[做市]] · [[流动性]]；专题入口：[[Knowledge/Notes/Finance/Market Making/_索引_做市|做市研究索引]]。
+> 概念入口：[[Avellaneda–Stoikov模型]] · [[做市]] · [[流动性]]；专题入口：[[_索引_做市|做市研究索引]]。
 
 > **这篇笔记做什么**：说明经典 Avellaneda–Stoikov（AS）模型如何在“赚取买卖价差”和“控制库存风险”之间选择 Bid / Ask 报价，并给出可实现、可校准、可审计的公式与工程边界。
 >
