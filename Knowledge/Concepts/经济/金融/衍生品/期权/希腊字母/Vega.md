@@ -45,4 +45,4 @@ $$
 - 为什么 Vega 中性不等于波动率曲面中性？
 
 ## 来源
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/C29-Vega|Natenberg 期权知识图谱：Vega]]
+- [[Vega（Natenberg）|Natenberg 期权知识图谱：Vega]]

@@ -44,4 +44,4 @@ Delta 表示在其他条件不变、标的价格发生小幅变化时，期权�
 - 为什么 Delta 中性不等于无风险？
 
 ## 来源
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/C26-Delta|Natenberg 期权知识图谱：Delta]]
+- [[Delta（Natenberg）|Natenberg 期权知识图谱：Delta]]
