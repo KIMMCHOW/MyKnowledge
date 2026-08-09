@@ -165,11 +165,23 @@ def process_file(path: Path) -> int:
     return rewritten
 
 
+AUDIT_REPORT_NAMES = {
+    "索引 Index.md",
+    "翻译质量与风险审计.md",
+    "完整性审计.md",
+    "未翻译正文审计.md",
+    "知识图谱审计.md",
+    "导航链接审计.md",
+    "章节与标题结构审计.md",
+    "脚注链接审计.md",
+}
+
+
 def main() -> int:
     total = 0
     changed_files = 0
     for path in sorted(EDITION.glob("*.md")):
-        if path.name == "29-索引 Index.md" or path.name.startswith(("94-", "95-", "96-", "97-", "98-", "99-")):
+        if path.name in AUDIT_REPORT_NAMES:
             continue
         count = process_file(path)
         if count:

@@ -4,7 +4,13 @@
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
+
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from chapter_files import CHAPTER_STEMS  # noqa: E402
 
 
 TOC_START = "<!-- chapter-toc:start -->"
@@ -56,7 +62,7 @@ def navigation_block(
     links: list[str] = []
     if chapter > 1:
         links.append(f"[[{chapters[chapter - 2].stem}|← 上一章]]")
-    links.append("[[90-阅读导航|全书导航]]")
+    links.append("[[阅读导航|全书导航]]")
     if chapter < len(chapters):
         links.append(f"[[{chapters[chapter].stem}|下一章 →]]")
     return "\n".join(
@@ -84,7 +90,7 @@ def insertion_point_after_warning(text: str) -> int:
 def main() -> int:
     root = Path(__file__).resolve().parent.parent
     edition = root / "Option Volatility and Pricing 双语版"
-    chapters = [next(edition.glob(f"{chapter:02d}-*.md")) for chapter in range(1, 26)]
+    chapters = [edition / f"{stem}.md" for stem in CHAPTER_STEMS]
 
     for chapter, path in enumerate(chapters, 1):
         text = remove_generated_blocks(path.read_text(encoding="utf-8"))

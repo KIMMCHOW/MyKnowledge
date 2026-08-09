@@ -8,10 +8,15 @@ import sys
 from pathlib import Path
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from chapter_files import CHAPTER_STEMS  # noqa: E402
+
+
 EDITION_NAME = "Option Volatility and Pricing 双语版"
-NAVIGATION_FILE = "90-阅读导航.md"
-CONTENTS_FILE = "00-04-原书目录 Contents.md"
-REPORT_FILE = "96-导航链接审计.md"
+NAVIGATION_FILE = "阅读导航.md"
+CONTENTS_FILE = "原书目录 Contents.md"
+REPORT_FILE = "导航链接审计.md"
 
 NAV_ROW_RE = re.compile(r"^\|\s*(\d{2})\s*\|", re.M)
 VALID_NAV_ROW_RE = re.compile(
@@ -61,15 +66,15 @@ def validate_target(
 def expected_context(edition: Path, number: int, english: str, current: Path | None):
     chapter = re.match(r"^(\d{1,2})\s+(.+)$", english)
     if chapter and 1 <= int(chapter.group(1)) <= 25:
-        current = next(edition.glob(f"{int(chapter.group(1)):02d}-*.md"))
+        current = edition / f"{CHAPTER_STEMS[int(chapter.group(1)) - 1]}.md"
         return current, current.stem, False
 
     special = {
-        1: "00-05-前言 Preface",
-        156: "26-结语 A Final Thought",
-        157: "27-附录A-期权术语表 Glossary of Option Terminology",
-        158: "28-附录B-实用数学 Some Useful Math",
-        162: "29-索引 Index",
+        1: "前言 Preface",
+        156: "结语 A Final Thought",
+        157: "附录A-期权术语表 Glossary of Option Terminology",
+        158: "附录B-实用数学 Some Useful Math",
+        162: "索引 Index",
     }
     if number in special:
         path = edition / f"{special[number]}.md"
@@ -190,7 +195,7 @@ def write_report(
     if failures:
         lines.extend(["", "## 待处理（前 40 项）", ""])
         lines.extend(f"- {failure}" for failure in failures[:40])
-    lines.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
+    lines.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
     (edition / REPORT_FILE).write_text("\n".join(lines), encoding="utf-8")
 
 

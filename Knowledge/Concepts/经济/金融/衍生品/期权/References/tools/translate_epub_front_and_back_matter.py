@@ -10,11 +10,11 @@ from pathlib import Path
 
 
 SECTIONS = [
-    ("cover", "00-00-封面 Cover.md", 90, "封面", "Cover", "封面", "cover", None),
-    ("title", "00-01-书名页 Title Page.md", 91, "书名页", "Title Page", "书名页", "title-page", None),
+    ("cover", "封面 Cover.md", 90, "封面", "Cover", "封面", "cover", None),
+    ("title", "书名页 Title Page.md", 91, "书名页", "Title Page", "书名页", "title-page", None),
     (
         "copyright",
-        "00-02-版权与使用条款 Copyright and Terms of Use.md",
+        "版权与使用条款 Copyright and Terms of Use.md",
         92,
         "版权与使用条款",
         "Copyright and Terms of Use",
@@ -22,12 +22,12 @@ SECTIONS = [
         "copyright",
         None,
     ),
-    ("dedication", "00-03-献词 Dedication.md", 93, "献词", "Dedication", "献词", "dedication", None),
-    ("contents", "00-04-原书目录 Contents.md", 94, "原书目录", "Contents", "目录", "contents", None),
-    ("afterword", "26-结语 A Final Thought.md", 26, "结语", "A Final Thought", "结语", "afterword", None),
+    ("dedication", "献词 Dedication.md", 93, "献词", "Dedication", "献词", "dedication", None),
+    ("contents", "原书目录 Contents.md", 94, "原书目录", "Contents", "目录", "contents", None),
+    ("afterword", "结语 A Final Thought.md", 26, "结语", "A Final Thought", "结语", "afterword", None),
     (
         "appendixa",
-        "27-附录A-期权术语表 Glossary of Option Terminology.md",
+        "附录A-期权术语表 Glossary of Option Terminology.md",
         27,
         "期权术语表",
         "Glossary of Option Terminology",
@@ -37,7 +37,7 @@ SECTIONS = [
     ),
     (
         "appendixb",
-        "28-附录B-实用数学 Some Useful Math.md",
+        "附录B-实用数学 Some Useful Math.md",
         28,
         "实用数学",
         "Some Useful Math",
@@ -45,10 +45,10 @@ SECTIONS = [
         "appendix-b",
         "B",
     ),
-    ("index", "29-索引 Index.md", 29, "索引", "Index", "索引", "index", None),
+    ("index", "索引 Index.md", 29, "索引", "Index", "索引", "index", None),
     (
         "aboutauthor",
-        "30-关于作者 About the Author.md",
+        "关于作者 About the Author.md",
         30,
         "关于作者",
         "About the Author",

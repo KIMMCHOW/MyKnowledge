@@ -37,6 +37,8 @@
 | E-010 | 在 iCloud 管理目录（含 reparse point）下用 `git mv` 批量移动文件：同步回滚了已移动的 29 个 Game Theory 笔记（移回原平铺位置），且 `.git/index` 丢失、残留 `index.lock`，git 一度显示整库未跟踪。 | 文件本身未丢失；`git reset --mixed HEAD` 可从 HEAD 重建索引；改用 PowerShell `Move-Item` 后磁盘状态稳定，`git add -A` 正确识别为 rename。 | 本仓库批量移动一律用 `Move-Item` 不用 `git mv`；每次批量操作后立即 `git status` 并核对源/目标文件数量；index 异常时先确认无 git 进程，清除残留 `index.lock`，再 `git reset --mixed HEAD` 重建。 |
 | E-011 | 远端 PR 为期权知识图谱/概念文件批量添加序号前缀（`C01-…C45-`、`01-…07-`、`00-`），违反 Concepts 命名规范。 | 序号属于 PR #2 引入的本地渲染排序；pre-PR（9bd1780）即为无序号命名，且部分概念直接去前缀会与其他概念重名（如 `Delta`），需恢复 pre-PR 命名（含 `（Natenberg）` 后缀）。 | 概念与知识图谱文件名一律不使用序号前缀；批量重命名前先对照 pre-PR 清单生成映射并校验目标集合，恢复既有命名并同步全部 wikilink（短链接、路径式、表格 `\|` 转义管道）；合并此类 PR 后先恢复命名再修内容。 |
 | E-012 | 概念去序号只改了文件名与手改正文，生成脚本 `build_option_knowledge_graph.py` 仍输出 `Cxx-` 文件名与 `concept_id`、H1、wikilink 别名、mermaid 标签中的序号；审计脚本仍指向 `00-期权知识图谱`，一旦重新生成会把序号带回来。 | 生成器已改为无序号输出（`Layer.stem`/`Concept.stem` 去前缀、`NOTE_NAME_OVERRIDES` 处理重名、mermaid 用英文 slug、删除 `concept_id`、根文件 `期权知识图谱.md`），审计脚本同步更新，审计 PASS。 | 修改生成器后必须先到临时目录重生成并与现状 diff（差异只能含预期内容），再写入真实目录；生成器、审计脚本与手改文件必须同批同步，禁止只改一边；规范见 `docs/SOP_概念与知识图谱.md`。 |
+| E-013 | 教材章节文件去 `NN-` 前缀后，依赖文件名 `{chapter:02d}-*.md` 的脚本未同步：`audit_footnote_links.py` / `convert_obsidian_footnotes.py` 的 `prefix_for()` 仍从文件名提取 `ovpNN`（去前缀后全部退化为 `ovp`），脚注审计全量 FAIL；`translate_epub_chapter.py` 默认仍写 `section: 第N章`。 | 章节顺序已集中维护在 `tools/chapter_files.py` 的 `CHAPTER_STEMS`，frontmatter 统一 `chapter: NN`；共享函数 `footnote_prefix()` 从 frontmatter/映射表取前缀；翻译脚本默认写 `chapter:`，仅显式 `--section-label`（附录）时写 `section:`。 | 所有依赖章节序号的脚本（生成器、审计、转换、翻译）必须引用 `chapter_files.py` 的清单/共享函数，禁止再用文件名 `NN-` 正则提取；批量去前缀后必须重跑全部审计（导航/标题/脚注/翻译质量/知识图谱）。 |
+
 ## 检索清单
 
 声称清理/整理完成前，对以下模式做定向检索：
@@ -52,6 +54,10 @@ rg -n --glob "*.md" "Raw Materials" . --glob "!AGENTS.md" --glob "!ERROR_RETROSP
 rg -n --glob "*.md" "第[1-9][^0-9]|[^0-9][1-9]号|[^0-9][1-9]\.md" Knowledge
 # 概念/知识图谱序号前缀残留（应无 C\d\d- / 0\d- / 00- 前缀）
 rg -n --glob "*.md" "\[\[[^\]]*\bC\d\d-" Knowledge
+# 教材/图谱 frontmatter 第N章残留（应为 chapter: NN）
+rg -n --glob "*.md" "^section: 第" "Knowledge/Concepts/经济/金融/衍生品/期权/References"
+# 工具脚本内旧序号依赖残留（文件名 NN- 正则 / 第N章 拼接，应改为 chapter_files.py 共享逻辑）
+rg -n --glob "*.py" "\\d\{2\\}|f.第\{int\(args\.chapter_number\)\}章" "Knowledge/Concepts/经济/金融/衍生品/期权/References/tools"
 ```
 
 ## 后续防线

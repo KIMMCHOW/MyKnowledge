@@ -34,9 +34,9 @@ $$\Theta=\frac{\partial V}{\partial t}$$
 
 ## 主要章节
 
-- [[07-风险度量（一） Risk Measurement I|第7章 风险度量（一）]]
-- [[09-风险度量（二） Risk Measurement II|第9章 风险度量（二）]]
-- [[13-风险考量 Risk Considerations|第13章 风险考量]]
-- [[18-Black–Scholes 模型 The Black-Scholes Model|第18章 Black–Scholes 模型]]
-- [[19-二叉树期权定价 Binomial Option Pricing|第19章 二叉树期权定价]]
-- [[21-头寸分析 Position Analysis|第21章 头寸分析]]
+- [[风险度量（一） Risk Measurement I|风险度量（一）]]
+- [[风险度量（二） Risk Measurement II|风险度量（二）]]
+- [[风险考量 Risk Considerations|风险考量]]
+- [[Black–Scholes 模型 The Black-Scholes Model|Black–Scholes 模型]]
+- [[二叉树期权定价 Binomial Option Pricing|二叉树期权定价]]
+- [[头寸分析 Position Analysis|头寸分析]]

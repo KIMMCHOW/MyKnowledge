@@ -13,26 +13,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EDITION = ROOT / "Option Volatility and Pricing 双语版"
 GRAPH = EDITION / "知识图谱"
-REPORT = EDITION / "95-知识图谱审计.md"
+REPORT = EDITION / "知识图谱审计.md"
 GENERATOR = ROOT / "tools" / "build_option_knowledge_graph.py"
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 FORBIDDEN = (
-    "00-00-封面",
-    "00-01-书名页",
-    "00-02-版权",
-    "00-03-献词",
-    "00-04-原书目录",
-    "90-阅读导航",
-    "91-翻译说明",
-    "26-结语",
-    "27-附录A",
-    "29-索引",
-    "30-关于作者",
-    "95-知识图谱审计",
-    "96-导航链接审计",
-    "97-章节与标题结构审计",
-    "98-翻译质量与风险审计",
-    "99-完整性审计",
+    "封面",
+    "书名页",
+    "版权与使用条款",
+    "献词",
+    "原书目录",
+    "阅读导航",
+    "翻译说明与术语表",
+    "结语",
+    "附录A-期权术语表",
+    "附录B-实用数学",
+    "索引",
+    "关于作者",
+    "知识图谱审计",
+    "导航链接审计",
+    "章节与标题结构审计",
+    "翻译质量与风险审计",
+    "完整性审计",
+    "脚注链接审计",
+    "未翻译正文审计",
 )
 
 
@@ -182,7 +185,7 @@ def write_report(failures: list[str], stats: dict[str, int]) -> None:
     if failures:
         lines.extend(["", "## 待处理（前 50 项）", ""])
         lines.extend(f"- {failure}" for failure in failures[:50])
-    lines.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
+    lines.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
     REPORT.write_text("\n".join(lines), encoding="utf-8")
 
 

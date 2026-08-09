@@ -38,10 +38,10 @@ $$\Delta=\frac{\partial V}{\partial S}$$
 
 ## 主要章节
 
-- [[07-风险度量（一） Risk Measurement I|第7章 风险度量（一）]]
-- [[08-动态对冲 Dynamic Hedging|第8章 动态对冲]]
-- [[09-风险度量（二） Risk Measurement II|第9章 风险度量（二）]]
-- [[18-Black–Scholes 模型 The Black-Scholes Model|第18章 Black–Scholes 模型]]
-- [[19-二叉树期权定价 Binomial Option Pricing|第19章 二叉树期权定价]]
-- [[21-头寸分析 Position Analysis|第21章 头寸分析]]
-- [[24-波动率偏斜 Volatility Skews|第24章 波动率偏斜]]
+- [[风险度量（一） Risk Measurement I|风险度量（一）]]
+- [[动态对冲 Dynamic Hedging|动态对冲]]
+- [[风险度量（二） Risk Measurement II|风险度量（二）]]
+- [[Black–Scholes 模型 The Black-Scholes Model|Black–Scholes 模型]]
+- [[二叉树期权定价 Binomial Option Pricing|二叉树期权定价]]
+- [[头寸分析 Position Analysis|头寸分析]]
+- [[波动率偏斜 Volatility Skews|波动率偏斜]]

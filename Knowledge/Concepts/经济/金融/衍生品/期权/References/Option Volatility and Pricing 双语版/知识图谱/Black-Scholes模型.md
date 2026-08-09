@@ -37,7 +37,7 @@ $$C=S_0e^{-qT}N(d_1)-Ke^{-rT}N(d_2)$$\n$$d_1=\frac{\ln(S_0/K)+(r-q+\tfrac12\sigm
 
 ## 主要章节
 
-- [[05-理论定价模型 Theoretical Pricing Models|第5章 理论定价模型]]
-- [[18-Black–Scholes 模型 The Black-Scholes Model|第18章 Black–Scholes 模型]]
-- [[23-模型与现实世界 Models and the Real World|第23章 模型与现实世界]]
-- [[24-波动率偏斜 Volatility Skews|第24章 波动率偏斜]]
+- [[理论定价模型 Theoretical Pricing Models|理论定价模型]]
+- [[Black–Scholes 模型 The Black-Scholes Model|Black–Scholes 模型]]
+- [[模型与现实世界 Models and the Real World|模型与现实世界]]
+- [[波动率偏斜 Volatility Skews|波动率偏斜]]

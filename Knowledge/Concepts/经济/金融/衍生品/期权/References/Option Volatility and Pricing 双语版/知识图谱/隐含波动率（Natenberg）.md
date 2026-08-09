@@ -36,8 +36,8 @@ $$C_{\mathrm{mkt}}=BS(S,K,T,r,q,\sigma_{\mathrm{imp}})$$
 
 ## 主要章节
 
-- [[06-波动率 Volatility|第6章 波动率]]
-- [[08-动态对冲 Dynamic Hedging|第8章 动态对冲]]
-- [[20-再论波动率 Volatility Revisited|第20章 再论波动率]]
-- [[24-波动率偏斜 Volatility Skews|第24章 波动率偏斜]]
-- [[25-波动率合约 Volatility Contracts|第25章 波动率合约]]
+- [[波动率 Volatility|波动率]]
+- [[动态对冲 Dynamic Hedging|动态对冲]]
+- [[再论波动率 Volatility Revisited|再论波动率]]
+- [[波动率偏斜 Volatility Skews|波动率偏斜]]
+- [[波动率合约 Volatility Contracts|波动率合约]]

@@ -14,7 +14,7 @@ from audit_translation_quality import epub_source_blocks
 
 ROOT = Path(__file__).resolve().parents[1]
 EDITION = ROOT / "Option Volatility and Pricing 双语版"
-REPORT = EDITION / "93-脚注链接审计.md"
+REPORT = EDITION / "脚注链接审计.md"
 DETAILS = EDITION / ".footnote-link-audit.json"
 NOTE_RE = re.compile(r"^> \[!note\] Footnote \d+")
 MARKER_RE = re.compile(r"<sup>(\d+)</sup>")
@@ -24,8 +24,8 @@ SOURCE_BLOCK_RE = re.compile(r"<!-- source:block ([0-9a-f]{16}) -->")
 
 
 def prefix_for(path: Path) -> str:
-    prefix = re.match(r"(\d{2})", path.name)
-    return f"ovp{prefix.group(1)}" if prefix else "ovp"
+    from chapter_files import footnote_prefix
+    return footnote_prefix(path)
 
 
 def marker_before(lines: list[str], index: int) -> str | None:

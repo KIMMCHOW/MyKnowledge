@@ -10,6 +10,11 @@ import zipfile
 from pathlib import Path
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from chapter_files import CHAPTER_STEMS  # noqa: E402
+
+
 XHTML_NS = "{http://www.w3.org/1999/xhtml}"
 TOC_START = "<!-- chapter-toc:start -->"
 TOC_END = "<!-- chapter-toc:end -->"
@@ -57,7 +62,7 @@ def main() -> int:
     rows: list[str] = []
     with zipfile.ZipFile(epubs[0]) as archive:
         for chapter in range(1, 26):
-            path = next(edition.glob(f"{chapter:02d}-*.md"))
+            path = edition / f"{CHAPTER_STEMS[chapter - 1]}.md"
             text = path.read_text(encoding="utf-8")
             source = source_headings(archive, chapter)
             generated = markdown_headings(text)
@@ -129,8 +134,8 @@ def main() -> int:
     ]
     if failures:
         report.extend(["", "## 待处理", ""] + [f"- {item}" for item in failures])
-    report.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
-    (edition / "97-章节与标题结构审计.md").write_text(
+    report.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
+    (edition / "章节与标题结构审计.md").write_text(
         "\n".join(report), encoding="utf-8"
     )
 

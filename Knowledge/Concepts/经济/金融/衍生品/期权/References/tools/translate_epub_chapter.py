@@ -1634,7 +1634,7 @@ def main() -> int:
     parser.add_argument("--english-title", required=True)
     parser.add_argument(
         "--section-label",
-        help="Visible label such as '附录 A'; defaults to '第N章'",
+        help="Book section label for frontmatter (e.g. '附录 A'); defaults to the chapter number",
     )
     parser.add_argument(
         "--source-label",
@@ -1651,7 +1651,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    section_label = args.section_label or f"第{int(args.chapter_number)}章"
+    section_label = args.section_label or f"{int(args.chapter_number):02d}"
     asset_key = args.asset_key or f"ch{int(args.chapter_number):02d}"
     output_dir = args.output.parent
     assets_dir = output_dir / "assets" / asset_key
@@ -1666,18 +1666,18 @@ def main() -> int:
 
         lines = [
             "---",
-            f"title: {section_label} {args.chinese_title} / {args.english_title}",
+            f"title: {args.chinese_title} / {args.english_title}",
             "tags:",
             "  - 期权",
             "  - 双语阅读",
-            f"section: {section_label}",
+            f"{'section' if args.section_label else 'chapter'}: {section_label}",
             "translation_status: 腾讯云机器初译，公式已转 LaTeX，待复核",
             "created: 2026-08-03",
             "---",
             "",
-            f"# {section_label} {args.chinese_title} / {args.english_title}",
+            f"# {args.chinese_title} / {args.english_title}",
             "",
-            "[[90-阅读导航|← 返回阅读导航]] · [[91-翻译说明与术语表|术语表]]",
+            "[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]",
             "",
             "> [!warning] 翻译状态",
             "> 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。",
@@ -1809,7 +1809,7 @@ def main() -> int:
                 lines.extend(quote_callout(paragraph_number, english_markdown))
                 lines.extend([chinese, ""])
 
-    lines.extend(["---", "", "[[90-阅读导航|← 返回阅读导航]]", ""])
+    lines.extend(["---", "", "[[阅读导航|← 返回阅读导航]]", ""])
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text("\n".join(lines), encoding="utf-8")
     print(f"wrote {args.output} with {paragraph_number} translated text blocks")

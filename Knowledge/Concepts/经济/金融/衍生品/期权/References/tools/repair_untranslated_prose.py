@@ -141,7 +141,7 @@ def main() -> int:
 
     candidates: list[tuple[Path, dict[str, object]]] = []
     for path in sorted(EDITION.glob("*.md")):
-        if path.name in {"29-索引 Index.md", "94-未翻译正文审计.md"}:
+        if path.name in {"索引 Index.md", "未翻译正文审计.md"}:
             continue
         candidates.extend((path, hit) for hit in scan_file(path))
     if args.limit is not None:

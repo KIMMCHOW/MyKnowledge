@@ -30,5 +30,5 @@ $$\Pi_{\mathrm{long\ straddle}}=|S_T-K|-(C_0+P_0)$$
 
 ## 主要章节
 
-- [[11-波动率价差策略 Volatility Spreads|第11章 波动率价差策略]]
-- [[23-模型与现实世界 Models and the Real World|第23章 模型与现实世界]]
+- [[波动率价差策略 Volatility Spreads|波动率价差策略]]
+- [[模型与现实世界 Models and the Real World|模型与现实世界]]

@@ -36,10 +36,10 @@ class Section:
 
 def section_list() -> list[Section]:
     sections = [
-        Section("preface", "00-05-前言 Preface.md", "00", "Preface", manual=True),
+        Section("preface", "前言 Preface.md", "00", "Preface", manual=True),
         Section(
             "ch1",
-            "01-金融合约 Financial Contracts.md",
+            "金融合约 Financial Contracts.md",
             "1",
             "Financial Contracts",
             manual=True,
@@ -48,7 +48,7 @@ def section_list() -> list[Section]:
     sections.extend(
         Section(
             f"ch{number}",
-            f"{number:02d}-{chinese} {english}.md",
+            f"{chinese} {english}.md",
             str(number),
             english,
         )
@@ -263,8 +263,8 @@ def main() -> int:
     ]
     if failures:
         report.extend(["", "## 待处理项", ""] + [f"- {item}" for item in failures])
-    report.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
-    report_path = output_dir / "99-完整性审计.md"
+    report.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
+    report_path = output_dir / "完整性审计.md"
     report_path.write_text("\n".join(report), encoding="utf-8")
     print(f"wrote {report_path}")
     if failures:

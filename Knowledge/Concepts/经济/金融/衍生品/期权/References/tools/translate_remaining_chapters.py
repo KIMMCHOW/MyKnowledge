@@ -49,7 +49,7 @@ def main() -> int:
 
     def run_chapter(chapter: tuple[int, str, str]) -> tuple[int, str]:
         number, chinese, english = chapter
-        output = output_dir / f"{number:02d}-{chinese} {english}.md"
+        output = output_dir / f"{chinese} {english}.md"
         subprocess.run(
             [
                 sys.executable,

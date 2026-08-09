@@ -32,4 +32,4 @@ $$\Lambda=\frac{\partial V/V}{\partial S/S}=\Delta\frac{S}{V}$$
 
 ## 主要章节
 
-- [[09-风险度量（二） Risk Measurement II|第9章 风险度量（二）]]
+- [[风险度量（二） Risk Measurement II|风险度量（二）]]

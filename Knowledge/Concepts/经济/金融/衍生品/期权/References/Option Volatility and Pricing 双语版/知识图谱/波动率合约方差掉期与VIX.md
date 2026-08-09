@@ -35,4 +35,4 @@ $$\mathrm{Payoff}_{\mathrm{variance}}=N_{\mathrm{var}}\left(\sigma^2_{\mathrm{re
 
 ## 主要章节
 
-- [[25-波动率合约 Volatility Contracts|第25章 波动率合约]]
+- [[波动率合约 Volatility Contracts|波动率合约]]

@@ -357,6 +357,19 @@ def bilingual_pairs(text: str):
                 yield index + 2, marker_before(lines, index), "footnote", english, chinese
 
 
+AUDIT_REPORT_NAMES = {
+    "原书目录 Contents.md",
+    "索引 Index.md",
+    "翻译质量与风险审计.md",
+    "完整性审计.md",
+    "未翻译正文审计.md",
+    "知识图谱审计.md",
+    "导航链接审计.md",
+    "章节与标题结构审计.md",
+    "脚注链接审计.md",
+}
+
+
 def main() -> int:
     root = ROOT
     edition = root / "Option Volatility and Pricing 双语版"
@@ -370,8 +383,7 @@ def main() -> int:
     files = sorted(
         path
         for path in edition.glob("*.md")
-        if not path.name.startswith(("98-", "99-"))
-        and path.name not in {"00-04-原书目录 Contents.md", "29-索引 Index.md"}
+        if path.name not in AUDIT_REPORT_NAMES
     )
 
     known_bad_hits: list[dict[str, object]] = []
@@ -681,9 +693,9 @@ def main() -> int:
     add_examples("未翻译或中英夹杂待复核", language_hits)
     add_examples("EPUB 源段落映射问题", source_mapping_hits)
     add_examples("LaTeX 格式问题", formula_hits)
-    report.extend(["", "[[90-阅读导航|← 返回阅读导航]]", ""])
+    report.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
 
-    (edition / "98-翻译质量与风险审计.md").write_text(
+    (edition / "翻译质量与风险审计.md").write_text(
         "\n".join(report), encoding="utf-8"
     )
     details = {

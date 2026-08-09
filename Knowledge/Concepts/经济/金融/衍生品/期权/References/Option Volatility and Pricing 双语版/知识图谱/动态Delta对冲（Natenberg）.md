@@ -36,6 +36,6 @@ $$n_{\mathrm{hedge}}=-\Delta_{\mathrm{option}}$$\n$$dV\approx\Delta\,dS+\tfrac12
 
 ## 主要章节
 
-- [[08-动态对冲 Dynamic Hedging|第8章 动态对冲]]
-- [[13-风险考量 Risk Considerations|第13章 风险考量]]
-- [[25-波动率合约 Volatility Contracts|第25章 波动率合约]]
+- [[动态对冲 Dynamic Hedging|动态对冲]]
+- [[风险考量 Risk Considerations|风险考量]]
+- [[波动率合约 Volatility Contracts|波动率合约]]

@@ -18,8 +18,8 @@ SOURCE_BLOCK_RE = re.compile(r"<!-- source:block ([0-9a-f]{16}) -->")
 
 
 def prefix_for(path: Path) -> str:
-    prefix = re.match(r"(\d{2})", path.name)
-    return f"ovp{prefix.group(1)}" if prefix else "ovp"
+    from chapter_files import footnote_prefix
+    return footnote_prefix(path)
 
 
 def number_spans(text: str, number: str) -> list[tuple[int, int]]:

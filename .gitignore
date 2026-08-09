@@ -13,3 +13,14 @@ AGENTS.md
 # Python 构建产物
 __pycache__/
 *.pyc
+
+# Obsidian 本地渲染与 iCloud 冲突副本（与笔记内容无关）
+graph*.json
+*.graph.json
+
+# 翻译工具中间产物（可重新生成，不入库）
+.translation-cache/
+.footnote-link-audit.json
+.translation-quality-audit.json
+.untranslated-prose-audit.json
+腾讯云术语库-英译中.csv

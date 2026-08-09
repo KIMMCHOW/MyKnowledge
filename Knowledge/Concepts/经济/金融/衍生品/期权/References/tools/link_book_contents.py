@@ -9,9 +9,14 @@ import unicodedata
 from pathlib import Path
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from chapter_files import CHAPTER_STEMS  # noqa: E402
+
+
 EDITION_NAME = "Option Volatility and Pricing 双语版"
-NAVIGATION_FILE = "90-阅读导航.md"
-CONTENTS_FILE = "00-04-原书目录 Contents.md"
+NAVIGATION_FILE = "阅读导航.md"
+CONTENTS_FILE = "原书目录 Contents.md"
 CONTENTS_ITEM_RE = re.compile(
     r"(^> \[!quote\]- English (?P<number>\d+)\n> (?P<english>.+)\n\n)"
     r"(?P<visible>[^\n]+)$",
@@ -82,11 +87,11 @@ def link_contents(edition: Path) -> tuple[int, int]:
     linked = 0
 
     special = {
-        1: edition / "00-05-前言 Preface.md",
-        156: edition / "26-结语 A Final Thought.md",
-        157: edition / "27-附录A-期权术语表 Glossary of Option Terminology.md",
-        158: edition / "28-附录B-实用数学 Some Useful Math.md",
-        162: edition / "29-索引 Index.md",
+        1: edition / "前言 Preface.md",
+        156: edition / "结语 A Final Thought.md",
+        157: edition / "附录A-期权术语表 Glossary of Option Terminology.md",
+        158: edition / "附录B-实用数学 Some Useful Math.md",
+        162: edition / "索引 Index.md",
     }
 
     def replacement(match: re.Match[str]) -> str:
@@ -96,11 +101,12 @@ def link_contents(edition: Path) -> tuple[int, int]:
         visible = match.group("visible").strip()
         existing = EXISTING_LINK_RE.match(visible)
         alias = existing.group("alias") if existing else visible.removeprefix("## ").removeprefix("- ")
+        alias = re.sub(r"^\d{1,2}\s+", "", alias)
 
         chapter = re.match(r"^(\d{1,2})\s+(.+)$", english)
         is_section = False
         if chapter and 1 <= int(chapter.group(1)) <= 25:
-            current = next(edition.glob(f"{int(chapter.group(1)):02d}-*.md"))
+            current = edition / f"{CHAPTER_STEMS[int(chapter.group(1)) - 1]}.md"
             target = current.stem
         elif number in special:
             target_path = special[number]

@@ -14,9 +14,9 @@ from translate_epub_chapter import COMPACT_OPTION_POSITION_RE
 
 ROOT = Path(__file__).resolve().parents[1]
 EDITION = ROOT / "Option Volatility and Pricing 双语版"
-REPORT = EDITION / "94-未翻译正文审计.md"
+REPORT = EDITION / "未翻译正文审计.md"
 DETAILS = EDITION / ".untranslated-prose-audit.json"
-PRESERVE_ENGLISH = {"29-索引 Index.md"}
+PRESERVE_ENGLISH = {"索引 Index.md"}
 MIN_WORDS = 3
 
 

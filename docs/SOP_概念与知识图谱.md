@@ -5,10 +5,12 @@
 
 ## 1. 概念笔记禁止序号
 
-- 概念笔记的**文件名、frontmatter、H1 标题、wikilink 别名、mermaid 节点标签**一律禁止出现序号（如 `C01`、`C34`、`01-`）。
-- 序号只允许出现在教材正文文件（`References/...双语版/` 下按书脊顺序编号的 `00-00-封面`、`01-金融合约` 等）与辅助/审计文件（`90-99` 段）；这是唯一例外。
+- 概念笔记的**文件名、frontmatter、H1 标题、wikilink 别名、mermaid 节点标签**一律禁止出现序号（如 `C01`、`C34`、`01-`、`第N章`）。
+- 教材正文与知识图谱文件同样不使用序号前缀：章节文件名为纯 `中文 English.md`（如 `金融合约 Financial Contracts.md`）；章节顺序由 `tools/chapter_files.py` 的 `CHAPTER_STEMS` 清单集中维护，frontmatter 用机器字段 `chapter: NN`（如 `chapter: 01`），禁止写「第N章」文本。
+- 辅助/审计文件（`完整性审计.md`、`知识图谱审计.md` 等）命名同样不带序号前缀；脚注 ID 内部前缀 `ovpNN` 是机器标识，不属于用户可见序号。
 - 知识图谱的层级 MOC（`合约与损益语义.md` 等）与总图（`期权知识图谱.md`）文件名同样不加序号；正文中「第N层」是层级语义描述，不是文件序号。
-- 反例（禁止）：`# C34 垂直价差与牛熊价差`、frontmatter `concept_id: C34`、`[[Delta（Natenberg）|C26 Delta]]`、mermaid `C26["C26 Delta"]`、文件名 `C01-标的资产与现价.md`。
+- 教材正文内的自然语言引用（如「在第 8 章中，我们表明」）是书籍原文叙述，保留；标题、frontmatter、文件名、链接别名、mermaid 标签中的序号一律清除。
+- 反例（禁止）：`# C34 垂直价差与牛熊价差`、frontmatter `concept_id: C34` / `section: 第25章`、`[[Delta（Natenberg）|C26 Delta]]`、mermaid `C26["C26 Delta"]`、文件名 `C01-标的资产与现价.md` / `25-波动率合约 Volatility Contracts.md`。
 
 ## 2. 重名概念处理
 
@@ -19,7 +21,7 @@
 ## 3. 知识图谱生成与审计脚本
 
 - 生成器：`Knowledge/Concepts/经济/金融/衍生品/期权/References/tools/build_option_knowledge_graph.py`
-- 审计：`tools/audit_knowledge_graph.py`（输出 `95-知识图谱审计.md`）
+- 审计：`tools/audit_knowledge_graph.py`（输出 `知识图谱审计.md`）
 - 修改生成器后必须先到临时目录重生成、与现状 diff（差异只能包含预期内容），确认后再写入真实目录；脚本会删除带 `generated_by` 标记的过期文件。
 - 生成器、审计脚本与手改文件必须同批同步：禁止只手改文件而不同步生成器，反之亦然（见 E-012）。
 
@@ -27,7 +29,7 @@
 
 - 空壳定义：`type: concept` + `status: empty` + `completion_status: pending`，正文为空模板。
 - 检测：`rg "status: empty|completion_status: pending" Knowledge/Concepts`；正文过短（定义与核心解释全空）也按空壳处理。
-- 补全：按 IStart-Note-AI 插件 JSON 流程（definition / explanation / examples / related_concepts / related_questions / tags / domain），完成后按插件步骤：更新 frontmatter → 移动到对应 domain → 更新 `_索引_<domain>.md` 与总索引 `Knowledge/Concepts/_索引_Concept.md`。
+- 当前基线：库内空概念页与 `Knowledge/Concepts/_未分类/` 均应为 0；发现新空壳后按 IStart-Note-AI 插件 JSON 流程补全（definition / explanation / examples / related_concepts / related_questions / tags / domain），完成后按插件步骤：更新 frontmatter → 移动到对应 domain → 更新 `_索引_<domain>.md` 与总索引 `Knowledge/Concepts/_索引_Concept.md`。
 - 删除：仅允许删除无内容的重复空壳；删除前全局搜索 `[[概念名]]` 引用并改指；禁止删除非空概念。
 
 ## 5. 未创建概念页（悬空链接）处理
@@ -35,8 +37,10 @@
 - 先分类链接类型：
   1. 模板占位符（`_模板_*.md` 中的 `[[概念名]]`）→ 保留，不是悬空。
   2. 文件链接（`.pdf` / `.epub` / 带 `.md` 后缀）→ 确认目标文件存在，不是悬空。
-  3. 真悬空（指向不存在的 Markdown 页且非模板）→ 按插件规则在 `Knowledge/Concepts/_未分类/` 创建空壳等待补全，或改指到正式概念。
-- 检测：解析 `Knowledge/` 下所有 `[[...]]` 目标，与 `Knowledge/` 实际 `.md` 文件 stem 比对；处理 `.md` 后缀与路径式链接。
+  3. 标题/块锚点（`[[文件#标题]]`、`[[#^块ID]]`）→ 目标文件存在且标题匹配即有效，不是悬空。
+  4. 真悬空（指向不存在的 Markdown 页且非上述类型）→ 按插件规则在 `Knowledge/Concepts/_未分类/` 创建空壳等待补全，或改指到正式概念。
+- 检测：解析 `Knowledge/` 下所有 `[[...]]` 目标，与 `Knowledge/` 实际 `.md` 文件 stem 比对；解析时先处理表格转义 `[[目标\|别名]]`（`\|` 是表格内管道符，不是链接路径），再按 `|` 切分别名；对 `[[文件#标题]]` 需额外验证目标文件内存在该标题。
+- 当前基线：`Knowledge/` 内真悬空链接与失效锚点均为 0；每次批量重命名/移动后重跑该检测（见 E-013）。
 
 ## 6. 提交校验
 

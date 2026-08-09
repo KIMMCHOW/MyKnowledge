@@ -49,5 +49,5 @@ tags:
 
 ## 来源
 
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/11-波动率价差策略 Volatility Spreads|第11章：波动率价差策略]]
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/13-风险考量 Risk Considerations|第13章：风险考量]]
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/波动率价差策略 Volatility Spreads|第11章：波动率价差策略]]
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/风险考量 Risk Considerations|第13章：风险考量]]
