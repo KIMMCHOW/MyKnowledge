@@ -162,7 +162,7 @@ created: 2026-08-03
 > [!quote]- English 17
 > Even if we are familiar with the general effects of changing market conditions on option values, we still need to determine the magnitude of the risk. If market conditions change, will the change in option values be large or small, representing either a major or minor risk, or something in between? Fortunately, in addition to the theoretical value, pricing models generate a variety of other numbers that enable us to determine both the direction and magnitude of the change. These numbers, known variously as the *Greeks* (because they are commonly abbreviated with Greek letters), the *risk measures*, or (for the mathematically inclined) the *partial derivatives*, will not answer all our questions concerning changing market conditions, but they are an important starting point in analyzing the risks associated with both simple and complex option positions.
 
-即使我们熟悉市场条件变化对期权价值的一般影响，我们仍然需要确定风险的大小。如果市场条件发生变化，期权价值的变化会大还是小，代表主要风险还是次要风险，或者介于两者之间？幸运的是，除了理论价值之外，定价模型还生成各种其他数字，使我们能够确定变化的方向和幅度。这些数字，被称为希腊人（因为它们通常缩写为希腊字母）、风险指标或（对于数学倾向的人来说）偏衍生品，不会回答我们有关不断变化的市场条件的所有问题，但它们是分析与简单和复杂期权头寸相关的风险的重要起点。
+即使我们了解市场条件变化通常会如何影响期权价值，仍须确定风险的大小。市场条件一旦改变，期权价值的变动究竟会大还是小——它代表的是重大风险、轻微风险，还是介于二者之间？所幸，定价模型除了给出理论价值，还会生成一系列其他数值，使我们能够判断价值变动的方向和幅度。这些数值有多种称呼：Greeks（因其通常用希腊字母表示）、风险度量；对具备数学背景的读者而言，它们则是偏导数。它们无法解答我们关于市场条件变化的全部疑问，但却是分析简单和复杂期权头寸相关风险的重要起点。
 
 <!-- source:block 394a4856242a371e -->
 
@@ -631,7 +631,7 @@ $$
 > [!quote]- English 74
 > The sensitivity of an option’s theoretical value to a change in interest rates is given by its *rho* (**P**), usually expressed as the change in theoretical value for each one percentage point change in interest rates. Unlike the other sensitivities, one cannot generalize about the rho because its characteristics depend on the type of underlying instrument and the settlement procedure for the options. The general effects have already been summarized in Figure 7-2. Note that foreign-currency options that require delivery of the currency rather than delivery of a futures contract are affected by both domestic and foreign interest rates. Hence, such options have two interest-rate sensitivities, rho1 (the domestic interest-rate sensitivity) and rho2 (the foreign interest-rate sensitivity). The latter is sometimes denoted by the Greek letter phi (Φ).
 
-期权理论价值对利率变化的敏感性由其Rho（P）给出，通常表示为利率每变化一个百分点时理论价值的变化。与其他敏感性不同，人们不能对Rho一概而论，因为它的特征取决于标的工具的类型和期权的结算程序。总体效果已在图7-2中总结。请注意，需要交付货币而不是交付期货合约的外币期权受到国内和国外利率的影响。因此，此类期权具有两种利率敏感性：Rho 1（国内利率敏感性）和Rho 2（国外利率敏感性）。后者有时用希腊字母phy（Pi）来表示。
+期权理论价值对利率变化的敏感度由 Rho（ρ）衡量，通常表示利率每变动一个百分点时理论价值的变化。与其他敏感度不同，Rho 的特征取决于标的工具类型和期权结算程序，因此不能一概而论。其一般规律已在图 7-2 中概述。需要交割货币而非期货合约的外币期权会同时受到本国利率和外国利率的影响，因此具有两种利率敏感度：Rho 1（本国利率敏感度）和 Rho 2（外国利率敏感度）。后者有时用希腊字母 Phi（Φ）表示。
 
 <!-- source:block fdcda405be50a551 -->
 

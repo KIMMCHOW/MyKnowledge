@@ -356,7 +356,7 @@ Delta Neutral所有Delta总和约为0的头寸。在当前市场条件下，头�
 > [!quote]- English 49
 > **Elasticity** The percent change in an option’s value for a given percent change in the value of the underlying instrument. Sometimes referred to as an option’s *Leverage Value*. The elasticity is sometimes denoted by the Greek letter *Lambda* (Λ).
 
-弹性对于标的工具价值的给定百分比变化，期权价值的百分比变化。有时称为期权的杠杆价值。弹性有时用希腊字母Lambda（Á）来表示。
+弹性是指标的工具价值每变动一定百分比时，期权价值所发生的百分比变动。有时也称为期权的杠杆值。弹性有时用希腊字母 Lambda（Λ）表示。
 
 <!-- source:block 726dc775800066d6 -->
 
@@ -678,7 +678,7 @@ ITM内在价值大于0的期权。如果看涨期权的行权价低于标的合�
 > [!quote]- English 95
 > **Lambda (Λ)** See *Elasticity*.
 
-Lambda（Á）参见弹性。
+Lambda（Λ）参见弹性。
 
 <!-- source:block feaa32c736d08d60 -->
 
@@ -846,7 +846,7 @@ LEAP（长期股票预期证券）一种长期（通常超过一年）交易所�
 > [!quote]- English 119
 > **Omega (Ω)** The Greek letter sometimes used to denote an option’s elasticity. An alternative to lambda (Λ).
 
-Omega（欧米茄）希腊字母有时用于表示期权的弹性。拉姆达（Á）的替代方案。
+Omega（Ω）有时用来表示期权弹性的希腊字母，是 Lambda（Λ）的替代记号。
 
 <!-- source:block d5c9119379b3dace -->
 
@@ -1007,7 +1007,7 @@ Ratchet Option（棘轮期权）一种特殊期权，其最小价值由期权有
 > [!quote]- English 142
 > **Rho (P)** The sensitivity of an option’s theoretical value to a change in interest rates.
 
-Rho（P）期权理论价值对利率变化的敏感性。
+Rho（ρ）期权理论价值对利率变化的敏感度。
 
 <!-- source:block a8033b606ce7ffcb -->
 
