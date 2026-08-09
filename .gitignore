@@ -1,20 +1,15 @@
 .Trash/
 Raw Materials/
 .claudian/
-.obsidian/workspace*.json
-**/.obsidian/workspace*.json
-.obsidian/plugins/*/data.json
-**/.obsidian/plugins/*/data.json
 desktop.ini
 Thumbs.db
 .DS_Store
 AGENTS.md
 
-.obsidian/appearance.json
-**/.obsidian/appearance.json
+# Obsidian 本机配置：工作区、关系图（含 graph N.json 冲突副本）、主题、外观、插件状态等全部不入库
+.obsidian/
+**/.obsidian/
 
-# Knowledge 嵌套 vault 配置（本地状态，不入库）
-Knowledge/.obsidian/
-# Obsidian 本地主题（全部由 iCloud/本机管理，不入库）
-.obsidian/themes/
-**/.obsidian/themes/
+# Python 构建产物
+__pycache__/
+*.pyc
