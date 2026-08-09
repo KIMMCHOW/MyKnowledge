@@ -38,6 +38,7 @@ NOTE_NAME_OVERRIDES = {
     "C27": "Gamma（Natenberg）",
     "C28": "Theta（Natenberg）",
     "C29": "Vega（Natenberg）",
+    "C30": "Rho（Natenberg）",
     "C33": "动态Delta对冲（Natenberg）",
     "C35": "跨式与宽跨式（Natenberg）",
 }

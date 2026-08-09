@@ -24,7 +24,7 @@ generated_by: "tools/build_option_knowledge_graph.py"
 - [[Gamma（Natenberg）|Gamma]] **—汇总为组合暴露→ 本概念**：各腿 Gamma 形成组合凸性。
 - [[Theta（Natenberg）|Theta]] **—汇总为组合暴露→ 本概念**：各腿 Theta 形成时间衰减预算。
 - [[Vega（Natenberg）|Vega]] **—汇总为组合暴露→ 本概念**：各腿 Vega 形成波动率风险。
-- [[Rho|Rho]] **—汇总为组合暴露→ 本概念**：各腿 Rho 形成利率风险。
+- [[Rho（Natenberg）|Rho]] **—汇总为组合暴露→ 本概念**：各腿 Rho 形成利率风险。
 - [[垂直价差与牛熊价差|垂直价差与牛熊价差]] **—汇总成风险画像→ 本概念**：策略必须还原为组合 Greeks 与情景损益。
 - [[跨式与宽跨式（Natenberg）|跨式与宽跨式]] **—汇总成风险画像→ 本概念**：波动率策略不能只用名称判断风险。
 - [[蝶式与鹰式|蝶式与鹰式]] **—汇总成风险画像→ 本概念**：曲率结构的风险随标的和期限变化。

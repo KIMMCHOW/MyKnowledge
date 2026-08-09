@@ -20,7 +20,7 @@ generated_by: "tools/build_option_knowledge_graph.py"
 - **导出局部敏感度 →** [[Gamma（Natenberg）|Gamma]]：模型对标的价格求二阶敏感度。
 - **导出局部敏感度 →** [[Theta（Natenberg）|Theta]]：模型衡量时间流逝的局部影响。
 - **导出局部敏感度 →** [[Vega（Natenberg）|Vega]]：模型衡量波动率输入变化的局部影响。
-- **导出局部敏感度 →** [[Rho|Rho]]：模型衡量利率输入变化的局部影响。
+- **导出局部敏感度 →** [[Rho（Natenberg）|Rho]]：模型衡量利率输入变化的局部影响。
 
 ### 受上游约束
 

@@ -16,7 +16,7 @@ generated_by: "tools/build_option_knowledge_graph.py"
 - [[Gamma（Natenberg）|Gamma]] — Gamma 衡量 Delta 对标的价格的变化率，是头寸凸性以及再平衡需求的核心指标。
 - [[Theta（Natenberg）|Theta]] — Theta 衡量其他条件不变时，日历时间流逝对期权价值的局部影响，通常与 Gamma 暴露形成权衡。
 - [[Vega（Natenberg）|Vega]] — Vega 衡量模型波动率变化对期权价值的局部敏感度，是隐含波动率头寸的主要尺度。
-- [[Rho|Rho]] — Rho 衡量利率变化对期权价值的局部敏感度，在长期限、外汇和融资敏感头寸中更重要。
+- [[Rho（Natenberg）|Rho]] — Rho 衡量利率变化对期权价值的局部敏感度，在长期限、外汇和融资敏感头寸中更重要。
 - [[Lambda|Lambda]] — Lambda 是期权价值对标的百分比变化的弹性，反映单位资本上的方向杠杆。
 - [[组合Greeks与头寸分析|组合Greeks与头寸分析]] — 把各合约按数量、乘数和币种汇总为组合风险，并结合情景全重估形成做市账簿的风险视图。
 - [[动态Delta对冲（Natenberg）|动态Delta对冲]] — 根据模型 Delta 买卖标的并持续再平衡，使头寸在局部保持方向中性，并把价格路径转化为调整现金流。
@@ -55,13 +55,13 @@ flowchart LR
 - [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→** [[Gamma（Natenberg）|Gamma]]：模型对标的价格求二阶敏感度。
 - [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→** [[Theta（Natenberg）|Theta]]：模型衡量时间流逝的局部影响。
 - [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→** [[Vega（Natenberg）|Vega]]：模型衡量波动率输入变化的局部影响。
-- [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→** [[Rho|Rho]]：模型衡量利率输入变化的局部影响。
+- [[Black-Scholes模型|Black-Scholes模型]] **—导出局部敏感度→** [[Rho（Natenberg）|Rho]]：模型衡量利率输入变化的局部影响。
 - [[二叉树与风险中性估值|二叉树与风险中性估值]] **—以节点差分估计→** [[Delta（Natenberg）|Delta]]：树上价值变化可估计 Delta。
 - [[二叉树与风险中性估值|二叉树与风险中性估值]] **—以节点差分估计→** [[Gamma（Natenberg）|Gamma]]：相邻 Delta 变化可估计 Gamma。
 - [[模型假设与模型风险|模型假设与模型风险]] **—造成敏感度误差→** [[组合Greeks与头寸分析|组合Greeks与头寸分析]]：模型误设会让组合 Greeks 低估或错配真实风险。
 - [[到期时间与行权方式|到期时间与行权方式]] **—通过时间流逝实现→** [[Theta（Natenberg）|Theta]]：剩余期限减少会改变期权价值。
 - [[隐含波动率（Natenberg）|隐含波动率]] **—变化时经由Vega传导→** [[Vega（Natenberg）|Vega]]：隐波平移首先表现为 Vega 损益。
-- [[利率与融资成本|利率与融资成本]] **—变化时经由Rho传导→** [[Rho|Rho]]：利率变化影响贴现和远期。
+- [[利率与融资成本|利率与融资成本]] **—变化时经由Rho传导→** [[Rho（Natenberg）|Rho]]：利率变化影响贴现和远期。
 - [[Lambda|Lambda]] **—约束资本与头寸规模→** [[策略选择与调整|策略选择与调整]]：高弹性头寸需与最大损失、保证金和可退出性一起决定规模。
 - [[组合Greeks与头寸分析|组合Greeks与头寸分析]] **—约束→** [[策略选择与调整|策略选择与调整]]：组合风险限额决定可选策略、规模和调整。
 - [[动态Delta对冲（Natenberg）|动态Delta对冲]] **—通过换手产生→** [[流动性执行与结算风险|流动性执行与结算风险]]：每次再平衡消耗价差、费用和市场冲击。
