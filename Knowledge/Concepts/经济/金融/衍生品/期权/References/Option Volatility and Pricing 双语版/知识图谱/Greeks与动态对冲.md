@@ -5,7 +5,7 @@ tags: [期权知识图谱, 层级]
 generated_by: "tools/build_option_knowledge_graph.py"
 ---
 
-# 第5层：Greeks与动态对冲 / Greeks and Dynamic Hedging
+# Greeks与动态对冲 / Greeks and Dynamic Hedging
 
 > [!question] 价值变化如何传导到头寸？
 > 用局部敏感度汇总风险，并通过再平衡管理方向暴露。

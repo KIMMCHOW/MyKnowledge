@@ -425,7 +425,7 @@ def render_layer(layer: Layer) -> str:
         f"generated_by: {yaml_escape(GENERATOR)}",
         "---",
         "",
-        f"# 第{layer.number}层：{layer.title} / {layer.english}",
+        f"# {layer.title} / {layer.english}",
         "",
         f"> [!question] {layer.question}",
         f"> {layer.summary}",

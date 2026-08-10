@@ -5,12 +5,14 @@
 
 ## 1. 概念笔记禁止序号
 
-- 概念笔记的**文件名、frontmatter、H1 标题、wikilink 别名、mermaid 节点标签**一律禁止出现序号（如 `C01`、`C34`、`01-`、`第N章`）。
+- 本节只约束 `Knowledge/Concepts/`。`Knowledge/Notes/` 是课程与阅读笔记区，可按 `docs/SOP_笔记整理.md` 使用两位系列编号。
+- 概念笔记的**文件名、frontmatter、任意层级 Markdown 标题、wikilink 目标/别名、mermaid 节点标签**一律禁止把序号作为身份或结构标签（如 `C01`、`C34`、`01-`、`第N章`）；自写的正文导航同样不编号。
 - 教材正文与知识图谱文件同样不使用序号前缀：章节文件名为纯 `中文 English.md`（如 `金融合约 Financial Contracts.md`）；章节顺序由 `tools/chapter_files.py` 的 `CHAPTER_STEMS` 清单集中维护，frontmatter 用机器字段 `chapter: NN`（如 `chapter: 01`），禁止写「第N章」文本。
 - 辅助/审计文件（`完整性审计.md`、`知识图谱审计.md` 等）命名同样不带序号前缀；脚注 ID 内部前缀 `ovpNN` 是机器标识，不属于用户可见序号。
-- 知识图谱的层级 MOC（`合约与损益语义.md` 等）与总图（`期权知识图谱.md`）文件名同样不加序号；正文中「第N层」是层级语义描述，不是文件序号。
-- 教材正文内的自然语言引用（如「在第 8 章中，我们表明」）是书籍原文叙述，保留；标题、frontmatter、文件名、链接别名、mermaid 标签中的序号一律清除。
+- 知识图谱的层级 MOC（`合约与损益语义.md` 等）与总图（`期权知识图谱.md`）的文件名和标题同样不加序号；层级关系由图结构与构建清单维护，不写「第N层」。
+- 教材正文内的自然语言引用（如「在第 8 章中，我们表明」）是准确出处，保留；有语义的数字、公式参数与年份也不属于概念序号。标题、frontmatter、文件名、链接目标/别名、mermaid 标签中的结构序号一律清除。
 - 反例（禁止）：`# C34 垂直价差与牛熊价差`、frontmatter `concept_id: C34` / `section: 第25章`、`[[Delta（Natenberg）|C26 Delta]]`、mermaid `C26["C26 Delta"]`、文件名 `C01-标的资产与现价.md` / `25-波动率合约 Volatility Contracts.md`。
+- 自动审计：`powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit-concept-numbering.ps1`。脚本只检查 Concepts 文件名、`name` / `title` / `aliases` / `concept_id` / `section`、所有 Markdown 标题、mermaid 标签，以及 Concepts 内 wikilink 的目标和别名；当前基线为 0，不扫描 Notes 的合法系列编号。
 
 ## 2. 重名概念处理
 
@@ -59,5 +61,6 @@
 
 ## 8. 提交校验
 
+- `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit-concept-numbering.ps1`；必须 PASS，禁止带序号概念回归。
 - `git status` / `git diff --stat`；确认 `Raw Materials/`、`.obsidian/`、`AGENTS.md`、`__pycache__/` 未进入提交。
 - 提交信息：`reorganize:` / `complete:` / `docs:` / `cleanup:` + 中文简述。

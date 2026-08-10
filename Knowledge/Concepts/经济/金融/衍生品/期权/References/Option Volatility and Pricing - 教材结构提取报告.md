@@ -39,14 +39,14 @@ status: 待审阅
 
 ## 作者的核心框架
 
-### 1. Price、Value 与 Edge
+### Price、Value 与 Edge
 
 - **Price（价格）**是市场实际成交或报价。
 - **Theoretical Value（理论价值）**是基于概率、利率和其他模型输入，在长期重复交易中刚好盈亏平衡的现值。
 - **Theoretical Edge（理论优势）**是理论价值与市场价格之间的差异。
 - 使用场景：判断交易是否值得做时，不能只预测方向，还要比较“付出的价格”和“估计的价值”。
 
-### 2. 远期价格是期权定价的中心锚点
+### 远期价格是期权定价的中心锚点
 
 期权模型真正围绕的是到期时的远期价格，而不只是当前现货价格：
 
@@ -54,7 +54,7 @@ status: 待审阅
 
 利率、股息、仓储费、保险费和便利收益等因素，最终都通过远期价格影响期权价值。因此，`ATM` 与 `At-the-Forward` 并不总是同一个执行价。
 
-### 3. 概率分布与期望价值
+### 概率分布与期望价值
 
 构造期权价值的基本步骤是：
 
@@ -65,7 +65,7 @@ status: 待审阅
 
 Black–Scholes 和二叉树模型虽然数学形式不同，但都建立在这一思想上。
 
-### 4. 模型是“黑暗房间中的蜡烛”
+### 模型是“黑暗房间中的蜡烛”
 
 模型用于照亮市场结构，而不是复制现实。正确做法是同时检查：
 
@@ -74,7 +74,7 @@ Black–Scholes 和二叉树模型虽然数学形式不同，但都建立在这�
 
 模型能改善决策，但不能替代流动性、资本约束、经验与常识。
 
-### 5. Greeks 是风险坐标系，不是静态答案
+### Greeks 是风险坐标系，不是静态答案
 
 - **Delta**：方向风险，以及标的价格变化时的局部价值变化率。
 - **Gamma**：Delta 随标的价格变化的速度；也可理解为对实际价格运动幅度的偏好。
@@ -84,7 +84,7 @@ Black–Scholes 和二叉树模型虽然数学形式不同，但都建立在这�
 
 这些敏感度只描述当前市场状态附近的局部风险。标的、时间和波动率一变，Greeks 本身也会变化。
 
-### 6. Gamma–Theta 权衡
+### Gamma–Theta 权衡
 
 在通常情形下：
 
@@ -93,7 +93,7 @@ Black–Scholes 和二叉树模型虽然数学形式不同，但都建立在这�
 
 期权交易者不能同时免费获得“运动收益”和“时间收益”。策略分析的重点不是单独看 Gamma 或 Theta，而是比较获得一种收益时承担的另一种风险。
 
-### 7. 实际波动率与隐含波动率的双重视角
+### 实际波动率与隐含波动率的双重视角
 
 - **未来实际波动率（Future Realized Volatility）**决定期权最终的经济价值。
 - **隐含波动率（Implied Volatility）**是期权市场价格的另一种表达方式。
@@ -104,7 +104,7 @@ Black–Scholes 和二叉树模型虽然数学形式不同，但都建立在这�
 - 预期实际波动率低于隐含波动率时，倾向寻找负 Vega、负 Gamma 的卖方结构。
 - 持仓时间越长，实际波动率越重要；若持有至到期，最终结果主要由实际波动率决定。
 
-### 8. 动态对冲是一种期权复制
+### 动态对冲是一种期权复制
 
 动态对冲把期权寿命拆成一系列较小的 Delta 中性赌注：
 
@@ -115,7 +115,7 @@ Black–Scholes 和二叉树模型虽然数学形式不同，但都建立在这�
 
 理论上，所有调整现金流的现值之和等于期权理论价值。现实中，离散调整、跳空、买卖价差和手续费会造成复制误差。
 
-### 9. 波动率价差必须用完整风险向量分析
+### 波动率价差必须用完整风险向量分析
 
 Straddle、Strangle、Butterfly、Condor、Ratio Spread 和 Calendar Spread 即使初始 Delta 中性，也仍然暴露于 Gamma、Theta、Vega、期限结构与流动性风险。
 
@@ -127,7 +127,7 @@ Straddle、Strangle、Butterfly、Condor、Ratio Spread 和 Calendar Spread 即�
 - 所需资本和保证金；
 - 是否留有足够的 **Margin for Error（容错空间）**。
 
-### 10. Synthetics 与无套利等价关系
+### Synthetics 与无套利等价关系
 
 相同执行价和到期日的 Call、Put 与标的可以相互复制：
 
@@ -138,7 +138,7 @@ Straddle、Strangle、Butterfly、Condor、Ratio Spread 和 Calendar Spread 即�
 
 这些关系构成 Put–Call Parity、Conversion、Reversal、Box、Roll 以及 Iron Butterfly/Iron Condor 定价的基础。每次交易复杂结构前，都应检查是否存在更便宜、更易执行的合成表达。
 
-### 11. 波动率期限结构与 Forward Volatility
+### 波动率期限结构与 Forward Volatility
 
 不同到期月的隐含波动率不会等幅变化。由于均值回归，短期限波动率通常比长期限更“灵敏”。因此，简单相加各月份 Vega 得到零，并不代表组合真正 Vega 中性。
 
@@ -149,7 +149,7 @@ Straddle、Strangle、Butterfly、Condor、Ratio Spread 和 Calendar Spread 即�
 - 估计各月份相对主月份的变化比例；
 - 使用方差对时间可加的性质计算 Forward Volatility。
 
-### 12. Volatility Skew 是市场对模型缺陷的修正
+### Volatility Skew 是市场对模型缺陷的修正
 
 同一标的、同一到期日的不同执行价通常具有不同隐含波动率。Skew 可能来自：
 
@@ -160,7 +160,7 @@ Straddle、Strangle、Butterfly、Condor、Ratio Spread 和 Calendar Spread 即�
 
 需要同时分析执行价方向上的 Skew 与到期日方向上的 Term Structure，两者组合形成 Volatility Surface。
 
-### 13. 波动率合约将“交易波动率”直接产品化
+### 波动率合约将“交易波动率”直接产品化
 
 - **Realized Volatility Contract / Variance Swap**：按合约期间内实际实现的波动率或方差结算。
 - **Implied Volatility Contract / VIX 产品**：按指定期权组合反映的隐含波动率结算。

@@ -40,6 +40,7 @@
 | E-013 | 教材章节文件去 `NN-` 前缀后，依赖文件名 `{chapter:02d}-*.md` 的脚本未同步：`audit_footnote_links.py` / `convert_obsidian_footnotes.py` 的 `prefix_for()` 仍从文件名提取 `ovpNN`（去前缀后全部退化为 `ovp`），脚注审计全量 FAIL；`translate_epub_chapter.py` 默认仍写 `section: 第N章`。 | 章节顺序已集中维护在 `tools/chapter_files.py` 的 `CHAPTER_STEMS`，frontmatter 统一 `chapter: NN`；共享函数 `footnote_prefix()` 从 frontmatter/映射表取前缀；翻译脚本默认写 `chapter:`，仅显式 `--section-label`（附录）时写 `section:`。 | 所有依赖章节序号的脚本（生成器、审计、转换、翻译）必须引用 `chapter_files.py` 的清单/共享函数，禁止再用文件名 `NN-` 正则提取；批量去前缀后必须重跑全部审计（导航/标题/脚注/翻译质量/知识图谱）。 |
 | E-014 | 批量概念补全把三个 YAML 标签写成一个列表项（如 `- 政治   - 地缘政治   - 国家`），表面可读但 Obsidian 只识别为一个长标签。 | 本次确认 136 个概念页命中同一格式错误，均可无歧义拆成三个非空标签；已统一恢复为每行一个 `- 标签`，不改正文。 | SOP 新增折叠标签审计；批量生成/补全后必须检查 `tags` 项数与 2–5 个约束，禁止只凭视觉判断 YAML 结构。 |
 | E-015 | IStart-Note-AI 只用 `f.basename === concept` 判断概念存在，并把 Concepts 下的索引、教材和审计页一并当作已知概念；`C01-概念` 与 `概念` 因而被误判为不同页面。 | 当前磁盘上编号概念文件和编号 wikilink 均为 0，用户看到的是插件假阴性而非真实缺页；本机插件已加入序号规范化、`type: concept` 过滤、basename/name/aliases 唯一匹配与链接目标改写。 | 概念解析必须“精确优先、规范名唯一命中、歧义停止”，并覆盖 `C01-`、`01-`、`1.`、`1）` 与 `5G`/`3D打印` 等反例；`.obsidian` 不入库，插件升级或重装后必须复跑这些回归用例并向插件源码仓同步修复。 |
+| E-016 | README 仍要求给 `Knowledge/Concepts/**/References` 教材和辅助文件添加编号，与无序号概念/教材 SOP 及当前文件事实冲突，可能在后续整理中重新引入 `00-`、`NN-`、`第N章-`。 | `Knowledge/Concepts/` 内的概念、教材、知识图谱和辅助文件均使用无序号语义名与无序号结构标题；`Knowledge/Notes/` 可按笔记 SOP 使用两位系列编号，两者不得混淆。 | 已删除 README 的旧 Concepts 编号规则，并新增 `scripts/audit-concept-numbering.ps1`；脚本检查 Concepts 的文件名、身份与章节 frontmatter、所有 Markdown 标题、mermaid 与内部 wikilink，基线必须为 0，不误扫 Notes。 |
 
 ## 检索清单
 
