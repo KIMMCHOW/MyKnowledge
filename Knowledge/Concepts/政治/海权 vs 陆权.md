@@ -8,7 +8,9 @@ created_from: concept-completion
 created_at: 2026-08-08
 updated_at: 2026-08-08
 tags:
-  - 地缘   - 战略   - 理论
+  - 地缘
+  - 战略
+  - 理论
 domain: 政治
 ---
 

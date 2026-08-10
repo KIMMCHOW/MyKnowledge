@@ -8,7 +8,9 @@ created_from: concept-completion
 created_at: 2026-08-08
 updated_at: 2026-08-09
 tags:
-  - 核武器   - 末世   - 冲突
+  - 核武器
+  - 末世
+  - 冲突
 domain: 政治
 ---
 

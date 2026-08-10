@@ -8,7 +8,9 @@ created_from: concept-completion
 created_at: 2026-08-08
 updated_at: 2026-08-09
 tags:
-  - 核武器   - 规范   - 威慑
+  - 核武器
+  - 规范
+  - 威慑
 domain: 政治
 ---
 

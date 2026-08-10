@@ -8,7 +8,9 @@ created_from: concept-completion
 created_at: 2026-08-08
 updated_at: 2026-08-09
 tags:
-  - 博弈论   - 策略   - 数学
+  - 博弈论
+  - 策略
+  - 数学
 domain: 数学
 subdomain: 博弈论
 ---

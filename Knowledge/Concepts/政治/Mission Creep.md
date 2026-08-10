@@ -8,7 +8,9 @@ created_from: concept-completion
 created_at: 2026-08-08
 updated_at: 2026-08-09
 tags:
-  - 博弈论   - 军事   - 任务蠕变
+  - 博弈论
+  - 军事
+  - 任务蠕变
 domain: 政治
 ---
 

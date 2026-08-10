@@ -8,7 +8,9 @@ created_from: concept-completion
 created_at: 2026-08-08
 updated_at: 2026-08-09
 tags:
-  - 博弈论   - 丛林法则   - 秩序
+  - 博弈论
+  - 丛林法则
+  - 秩序
 domain: 政治
 ---
 
