@@ -27,7 +27,7 @@ created: 2026-08-03
 > [!quote]- English 2
 > **All or None (AON)** An order that must be filled in its entirety or not at all.
 
-全部或无（AON）必须完整填写或根本不填写的订单。
+**All or None (AON)**（全部成交或不成交）：订单必须全部成交，否则不成交。AON 本身不要求立即撤单。
 
 <!-- source:block 711e02f07293a550 -->
 
@@ -90,7 +90,7 @@ created: 2026-08-03
 > [!quote]- English 11
 > **Backspread** A spread, usually delta neutral, where more options are purchased than sold, where all options are the same type and expire at the same time.
 
-Backspread一种价差，通常为Delta中性，即买入期权多于卖出期权，所有期权类型相同，同时到期。
+**反向比率价差（Backspread）**：一种通常在建仓时调整为 Delta 中性的比率价差；买入期权的数量多于卖出数量，所有期权类型相同并具有相同到期日。
 
 <!-- source:block afc5c511458b2e06 -->
 
@@ -167,7 +167,7 @@ Backspread一种价差，通常为Delta中性，即买入期权多于卖出期�
 > [!quote]- English 22
 > **Calendar Spread** The purchase (sale) of one option expiring on one date and the sale (purchase) of another option expiring on a different date. Typically, both options are of the same type, have the same exercise price, and have the same underlying stock or commodity. Also known as a *Time Spread* or *Horizontal Spread*.
 
-日历价差购买（出售）在某个日期到期的一个期权以及出售（购买）在不同日期到期的另一个期权。通常，两种期权类型相同，具有相同的行权价，并且具有相同的标的股票或商品。也称为时间价差或水平价差。
+**日历价差（Calendar Spread）**：买入（卖出）某一到期日的期权，同时卖出（买入）另一到期日的期权。两腿通常类型相同、执行价相同，并对应同一标的股票或商品。也称**时间价差（Time Spread）**或**水平价差（Horizontal Spread）**。
 
 <!-- source:block 792ed9c8f28348d2 -->
 
@@ -202,7 +202,7 @@ Charm期权Delta对时间流逝的敏感性。
 > [!quote]- English 27
 > **Christmas Tree** A spread involving three exercise prices. One or more calls (puts) are purchased at the lowest (highest) exercise price, and one or more calls (puts) are sold at each of the higher (lower) exercise prices. All options must expire at the same time, be of the same type, and have the same underlying contract. Also known as a *Ladder*.
 
-圣诞树涉及三个行权价的价差。以最低（最高）行权价购买一个或多个看涨（看跌），并以每个较高（较低）行权价出售一个或多个看涨（看跌）。所有期权必须同时到期、类型相同且具有相同的标的合约。也被称为梯子。
+**圣诞树价差（Christmas Tree）**：涉及三个执行价的价差。在最低（最高）执行价买入一份或多份 Call（Put），并分别在两个更高（更低）执行价卖出一份或多份同类期权。所有期权必须标的相同、类型相同且到期日相同。也称**阶梯价差（Ladder Spread）**。
 
 <!-- source:block 2439729a72967e7c -->
 
@@ -447,7 +447,7 @@ Delta Neutral所有Delta总和约为0的头寸。在当前市场条件下，头�
 > [!quote]- English 62
 > **Fill or Kill (FOK)** An order that will automatically be canceled unless it can be executed immediately and in its entirety.
 
-填充或杀死（FOK）除非可以立即完整执行，否则将自动取消的订单。
+**Fill or Kill (FOK)**（立即全部成交，否则取消）：若订单无法立即全部成交，则自动取消。
 
 <!-- source:block 2d823779690a5ab1 -->
 
@@ -538,7 +538,7 @@ Gamma（Gamma）期权Delta对标的合约价格变化的敏感性。
 > [!quote]- English 75
 > **Guts** A strangle where both the call and the put are in the money.
 
-当看涨期权和看跌期权都是ITM的时候，宽跨式。
+**Guts（价内宽跨式）**：由同时处于价内的看涨期权和看跌期权构成的宽跨式。
 
 <!-- source:block 0fae6966619bc2a5 -->
 
@@ -566,14 +566,14 @@ Gamma（Gamma）期权Delta对标的合约价格变化的敏感性。
 > [!quote]- English 79
 > **Horizontal Spread** See *Calendar Spread*.
 
-水平价差请参阅日历价差。
+**水平价差（Horizontal Spread）**：参见日历价差（Calendar Spread）。
 
 <!-- source:block bc162147fccf3bbb -->
 
 > [!quote]- English 80
 > **Immediate or Cancel (IOC)** An order that will automatically be canceled if it cannot be executed immediately. An IOC order need not be filled in its entirety.
 
-立即或取消（IOC）如果订单不能立即执行，则将自动取消。国际奥委会的订单不需要全部填写。
+**Immediate or Cancel (IOC)**（立即成交可成交部分，其余取消）：订单必须立即执行；允许部分成交，未成交部分自动取消。
 
 <!-- source:block d7bbb11c65d1c721 -->
 
@@ -671,14 +671,14 @@ ITM内在价值大于0的期权。如果看涨期权的行权价低于标的合�
 > [!quote]- English 94
 > **Ladder** See *Christmas Tree*. Alternatively, a type of exotic option whose minimum value increases as the underlying contract goes through a series of predetermined prices, or rungs, over the life of the option.
 
-梯子看圣诞树。或者，一种奇异期权，其最低价值随着标的合约在期权有效期内经历一系列预定价格或等级而增加。
+**Ladder**：作为价差名称时，指圣诞树价差（Christmas Tree），中文称“阶梯价差”；作为奇异期权名称时，则指一种最低价值会随着标的在期权存续期内触及一系列预设价格阶梯而提高的期权。两种含义应结合语境区分。
 
 <!-- source:block f3bc7ef2f8701424 -->
 
 > [!quote]- English 95
 > **Lambda (Λ)** See *Elasticity*.
 
-Lambda（Λ）参见弹性。
+**Lambda（$\Lambda$）**：参见期权杠杆率（Elasticity，也称 Omega）。
 
 <!-- source:block feaa32c736d08d60 -->
 
@@ -839,7 +839,7 @@ LEAP（长期股票预期证券）一种长期（通常超过一年）交易所�
 > [!quote]- English 118
 > **Not Held** An order submitted to a broker but over which the broker has discretion as to when and how the order is executed.
 
-未持有提交给经纪商的订单，但经纪商有权自行决定何时以及如何执行该订单。
+**Not Held (NH)**（非严格指示委托）：订单提交给经纪人后，授权其对执行时机和方式作酌情判断。
 
 <!-- source:block 179487d9b9c243bc -->
 
@@ -1028,7 +1028,7 @@ Risk Restriction风险回补一种多头（空头）标的头寸，包括多头�
 > [!quote]- English 145
 > **Scalper** A floor trader on an exchange who hopes to profit by continually buying at the bid price and selling at the offer price in a specific market. Scalpers usually try to close out all positions at the end of each trading day.
 
-批发商交易所的场内交易员，希望通过在特定市场上持续以买入价买入并以卖出价卖出来获利。倒卖者通常会在每个交易日结束时试图平仓所有头寸。
+**剥头皮交易者（Scalper）**：交易所的场内交易员，试图通过在特定市场持续按买价买入、按卖价卖出来获利。剥头皮交易者通常会在每个交易日结束时平掉所有头寸。
 
 <!-- source:block 5ec21d5dfcdafea6 -->
 
@@ -1280,7 +1280,7 @@ Theta（Θ）：期权理论价值对剩余到期时间变化的敏感度。
 > [!quote]- English 181
 > **Time Spread** See *Calendar Spread*.
 
-时间价差请参阅日历价差。
+**时间价差（Time Spread）**：参见日历价差（Calendar Spread）。
 
 <!-- source:block ac6f2ca283809dca -->
 

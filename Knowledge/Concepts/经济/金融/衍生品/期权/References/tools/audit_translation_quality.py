@@ -68,6 +68,47 @@ REVIEWED_NUMERIC_TRANSLATIONS = {
     "bfa079c2547c2e97": "aaafd42da2d809ed",
 }
 
+# Chapters 10 and 11 were subsequently reviewed by hand and several long
+# paragraphs were split into prose, display equations, and follow-up prose.
+# The ordinary checker intentionally inspects the first Chinese prose line,
+# so it cannot see numbers moved into the rest of the rendering.  These
+# exceptions hash the *entire* Markdown rendering up to the next source marker
+# (not merely that first line), and therefore fail closed if any continuation
+# paragraph, equation, or translator note changes.
+REVIEWED_NUMERIC_RENDERINGS = {
+    # Chapter 10: mixed-number Treasury quotes and three-leg spread arithmetic.
+    "d09b5e771ef66561": "5e9e7cac1d20a972",
+    "3fe93b9813a2d096": "8a50046c99ed3a2c",
+    "6ebe363f8dbcc682": "ef7485d1cce04161",
+    # Chapter 11: reviewed strategy explanations and formula extractions.
+    "97aec6fd88b9e3ca": "c1a54737e000c512",
+    "6a5e065c5c52d804": "7e14d5f117c50f13",
+    "abd4c94adc4698e3": "b19e79a4b6167dc1",
+    "4227e8e0ced62e2c": "a380a3baee43ade6",
+    "8e3ec7bebce1e205": "97f3e676791d3610",
+    "eb09bf9b9dd07d4c": "cb82275f5ad959f9",
+    "05cdbf2dd4ae5a04": "629d372d50c190e9",
+    "9aa16609e475e8f0": "af098dcd3a07a79d",
+    "d634ddee717f73b0": "608f97b34ad32b5b",
+    "52a651009cc28975": "a382c42390053767",
+    "3534184a026096c4": "0fff27e0edc0d959",
+    "b513eacdcd514b27": "ea471e04820830d8",
+    "4deeb8482d223547": "5a7fde268d423a53",
+    "55c2acee17c69c34": "3e8274b5b3868301",
+    "a37e79bb90bb399f": "b7b014b25d4751aa",
+    "f62476310ae7c88a": "d79bc5d72da7efd6",
+    "fc9c9bfec4227640": "fa05d9ce5ea37b26",
+    "4a925bcbd3d85f53": "a7a2de2e562e9ef2",
+    "0cfcbd66eaacb9a3": "283d24a07561f7d6",
+    "a2d22ac93dfebe85": "07defce8191de15d",
+    "155a0cc265463dca": "6b65edac08f2e0e6",
+    # English spells out “one to one”; Chinese renders the reviewed ratio 1:1.
+    "60ca4a3e29c66c5e": "ecc867a50e30f0de",
+    # Repeated figure references and an equivalent “positive value” wording.
+    "f622973ad80f940f": "7f7840beb4a211ad",
+    "b5c835fd8593c4c6": "cec27101518a6578",
+}
+
 # These Chapter 18 translations were manually checked after formula images
 # became LaTeX.  Formula symbols and the accepted synonym “执行价” trigger
 # lexical heuristics even though the financial direction is preserved.  The
@@ -78,6 +119,35 @@ REVIEWED_SEMANTIC_TRANSLATIONS = {
     "48585a5ea2698e3e": "e0729a6af7e1c8ae",
     "701316ab10279c47": "bb6927e1f2f4b31a",
     "c3fda6547af739bd": "2be4588bf6fbdcea",
+}
+
+# Exact full-rendering counterparts for manually reviewed Chapter 11 prose.
+# These cover false positives caused by moving terminology, positions, or
+# cash-flow labels into a continuation paragraph or LaTeX block.  Accepted
+# “执行价” wording in the retained glossary is also pinned to its exact source
+# and translation rendering rather than weakening the global exercise rule.
+REVIEWED_SEMANTIC_RENDERINGS = {
+    "97aec6fd88b9e3ca": "c1a54737e000c512",
+    "6a5e065c5c52d804": "7e14d5f117c50f13",
+    "b6690a23534cda3d": "9417617af00d4551",
+    "abd4c94adc4698e3": "b19e79a4b6167dc1",
+    "4227e8e0ced62e2c": "a380a3baee43ade6",
+    "8e3ec7bebce1e205": "97f3e676791d3610",
+    "eb09bf9b9dd07d4c": "cb82275f5ad959f9",
+    "d634ddee717f73b0": "608f97b34ad32b5b",
+    "30a34debced11c79": "ba0f6130e746c8cf",
+    "3534184a026096c4": "0fff27e0edc0d959",
+    "cb5074bf7b7414b5": "6a3830d33a7f0e87",
+    "fc9c9bfec4227640": "fa05d9ce5ea37b26",
+    "52556e843f04103c": "3e430af98a3c9b86",
+    "04402f7950df3356": "032003804aa38d83",
+    "4a925bcbd3d85f53": "a7a2de2e562e9ef2",
+    "0cfcbd66eaacb9a3": "283d24a07561f7d6",
+    "a2d22ac93dfebe85": "07defce8191de15d",
+    # +500/-500 is the exact signed rendering of long/short 500 deltas.
+    "29709085bafe09d8": "7fa95ffcc38960db",
+    "dccfc7826850c994": "5b8e04caa7f1588b",
+    "43e4e933ebffc302": "20279ae543679f56",
 }
 
 
@@ -285,20 +355,32 @@ def numeric_safe_with_epub_metadata(
     return numeric_translation_is_safe(augmented_source, target)
 
 
-def reviewed_numeric_translation(digest: str | None, target: str) -> bool:
+def reviewed_numeric_translation(
+    digest: str | None, target: str, rendering: str
+) -> bool:
     if digest is None:
         return False
     expected = REVIEWED_NUMERIC_TRANSLATIONS.get(digest)
     actual = hashlib.sha256(target.encode("utf-8")).hexdigest()[:16]
-    return expected == actual
+    if expected == actual:
+        return True
+    expected_rendering = REVIEWED_NUMERIC_RENDERINGS.get(digest)
+    actual_rendering = hashlib.sha256(rendering.encode("utf-8")).hexdigest()[:16]
+    return expected_rendering == actual_rendering
 
 
-def reviewed_semantic_translation(digest: str | None, target: str) -> bool:
+def reviewed_semantic_translation(
+    digest: str | None, target: str, rendering: str
+) -> bool:
     if digest is None:
         return False
     expected = REVIEWED_SEMANTIC_TRANSLATIONS.get(digest)
     actual = hashlib.sha256(target.encode("utf-8")).hexdigest()[:16]
-    return expected == actual
+    if expected == actual:
+        return True
+    expected_rendering = REVIEWED_SEMANTIC_RENDERINGS.get(digest)
+    actual_rendering = hashlib.sha256(rendering.encode("utf-8")).hexdigest()[:16]
+    return expected_rendering == actual_rendering
 
 
 def epub_source_blocks(epub: Path) -> dict[str, tuple[str, str, tuple[str, ...]]]:
@@ -355,6 +437,14 @@ def marker_before(lines: list[str], zero_based_index: int) -> str | None:
     return None
 
 
+def rendering_until_next_source(lines: list[str], start: int) -> str:
+    """Return the exact target rendering governed by the preceding marker."""
+    cursor = start
+    while cursor < len(lines) and not MARKER_RE.fullmatch(lines[cursor]):
+        cursor += 1
+    return "\n".join(lines[start:cursor]).strip()
+
+
 def bilingual_pairs(text: str):
     lines = text.splitlines()
     for index, line in enumerate(lines):
@@ -371,7 +461,14 @@ def bilingual_pairs(text: str):
             elif chinese.startswith("- [["):
                 chinese = chinese.removeprefix("- ")
             if chinese and not chinese.startswith((">", "<!--", "#", "---")):
-                yield index + 2, marker_before(lines, index), "prose", english, chinese
+                yield (
+                    index + 2,
+                    marker_before(lines, index),
+                    "prose",
+                    english,
+                    chinese,
+                    rendering_until_next_source(lines, cursor),
+                )
         elif line.startswith("> [!note] Footnote ") and index + 2 < len(lines):
             english = lines[index + 1][2:] if lines[index + 1].startswith("> ") else ""
             cursor = index + 2
@@ -385,7 +482,14 @@ def bilingual_pairs(text: str):
             else:
                 chinese = ""
             if english and chinese:
-                yield index + 2, marker_before(lines, index), "footnote", english, chinese
+                yield (
+                    index + 2,
+                    marker_before(lines, index),
+                    "footnote",
+                    english,
+                    chinese,
+                    rendering_until_next_source(lines, cursor),
+                )
 
 
 NON_BOOK_FILES = {"阅读导航.md"}
@@ -454,7 +558,14 @@ def main() -> int:
                     {"file": path.name, "line": line_no, "issue": "LaTeX 含未解析占位符"}
                 )
 
-        for line_no, digest, kind, callout_english, chinese in bilingual_pairs(text):
+        for (
+            line_no,
+            digest,
+            kind,
+            callout_english,
+            chinese,
+            rendering,
+        ) in bilingual_pairs(text):
             checked_pairs += 1
             if not digest or digest not in source_blocks:
                 matches = sources_by_text.get(source_text_key(callout_english), set())
@@ -490,7 +601,7 @@ def main() -> int:
                     target_for_audit,
                 )
             semantic_reviewed = reviewed_semantic_translation(
-                digest, target_for_audit
+                digest, target_for_audit, rendering
             )
             for name, source_pattern, target_pattern in DIRECTION_RULES:
                 if source_pattern.search(english) and not target_pattern.search(target_for_audit):
@@ -510,7 +621,11 @@ def main() -> int:
                         }
                     )
             expected_basis = financial_basis_count(english)
-            if expected_basis and target_for_audit.count("基差") < expected_basis:
+            if (
+                expected_basis
+                and target_for_audit.count("基差") < expected_basis
+                and not semantic_reviewed
+            ):
                 direction_hits.append(
                     {
                         "file": path.name,
@@ -523,7 +638,7 @@ def main() -> int:
             shorthand_safe = option_shorthand_translation_is_safe(
                 english, target_for_audit
             )
-            if not shorthand_safe:
+            if not shorthand_safe and not semantic_reviewed:
                 direction_hits.append(
                     {
                         "file": path.name,
@@ -536,7 +651,7 @@ def main() -> int:
             compact_position_safe = compact_option_position_translation_is_safe(
                 english, target_for_audit
             )
-            if not compact_position_safe:
+            if not compact_position_safe and not semantic_reviewed:
                 direction_hits.append(
                     {
                         "file": path.name,
@@ -549,7 +664,7 @@ def main() -> int:
             cashflow_terms_safe = credit_debit_translation_is_safe(
                 english, target_for_audit
             )
-            if not cashflow_terms_safe:
+            if not cashflow_terms_safe and not semantic_reviewed:
                 direction_hits.append(
                     {
                         "file": path.name,
@@ -562,7 +677,7 @@ def main() -> int:
             probability_wording_safe = probability_wording_translation_is_safe(
                 english, target_for_audit
             )
-            if not probability_wording_safe:
+            if not probability_wording_safe and not semantic_reviewed:
                 direction_hits.append(
                     {
                         "file": path.name,
@@ -575,7 +690,7 @@ def main() -> int:
             probability_center_safe = probability_center_translation_is_safe(
                 english, target_for_audit
             )
-            if not probability_center_safe:
+            if not probability_center_safe and not semantic_reviewed:
                 direction_hits.append(
                     {
                         "file": path.name,
@@ -614,7 +729,9 @@ def main() -> int:
                     "english": english[:220],
                     "chinese": target_for_audit[:220],
                 }
-                if reviewed_numeric_translation(digest, target_for_audit):
+                if reviewed_numeric_translation(
+                    digest, target_for_audit, rendering
+                ):
                     item["issue"] = "人工复核通过：数字值一致，仅表达形式或重复次数不同"
                     reviewed_numeric_hits.append(item)
                 else:

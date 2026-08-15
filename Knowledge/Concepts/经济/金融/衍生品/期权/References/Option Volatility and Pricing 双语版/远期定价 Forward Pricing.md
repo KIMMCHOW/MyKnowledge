@@ -824,7 +824,7 @@ $$
 > [!quote]- English 85
 > Because cash markets and futures markets are so closely related, a common type of *cash-and-carry arbitrage* involves buying in the cash market, selling in the futures market, and carrying the position to maturity.
 
-由于现货市场和期货市场密切相关，一种常见的现金套利包括在现货市场买入、在期货市场卖出并将头寸结转至到期。
+由于现货市场与期货市场紧密相关，一种常见的**买入现货并持有套利**（cash-and-carry arbitrage，也称正向期现套利），就是在现货市场买入、在期货市场卖出，并持有这一组合至到期。
 
 <!-- source:block 17b47d42a139f05d -->
 
@@ -890,7 +890,7 @@ $$
 > [!quote]- English 93
 > Suppose that there is a market in forward contracts on this stock and that the price of an eight-month forward contract is \$69.50. What will a trader do? If the trader believes that the contract is worth only \$69.02, he will sell the forward contract at \$69.50 and simultaneously buy the stock for \$67.00. The cash-and-carry arbitrage profit should be
 
-假设该股票的远期合约存在市场，并且八个月远期合约的价格为69.50美元。交易者会做什么？如果交易员认为该合约仅值69.02美元，他将以69.50美元的价格出售该远期合约，同时以67.00美元的价格购买该股票。现付套利利润应该是
+假设该股票存在远期合约市场，且八个月期远期合约的价格为 69.50 美元。交易者会怎么做？如果他认为该合约的理论价值只有 69.02 美元，就会以 69.50 美元卖出远期合约，同时以 67.00 美元买入股票。买入现货并持有套利的利润应为
 
 <!-- source:block 260a36adb447b455 -->
 

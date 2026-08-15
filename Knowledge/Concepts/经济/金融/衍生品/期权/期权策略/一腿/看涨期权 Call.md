@@ -13,11 +13,14 @@ option_leg_count: 1
 underlying_leg_count: 0
 strategy_family: 单腿期权
 status: completed
+completion_status: completed
 created_at: 2026-08-15
 updated_at: 2026-08-15
 tags: [期权, 期权策略, 一腿策略, 看涨期权]
 domain: 经济
 subdomain: 金融
+product_domain: 衍生品
+instrument: 期权
 ---
 
 # 看涨期权 / Call
@@ -84,14 +87,20 @@ $$
 
 - 多头看涨以有限权利金换取凸性的上涨敞口，但没有股东投票权，通常不直接获得股息，而且会到期并承受时间衰减；它不是持有股票的等价替代。
 - 裸空看涨也不等同于卖空股票：$S_T\le K$ 时其收益被封顶在权利金 $c$，而 $S_T>K$ 后才逐步呈现负方向敞口；它还具有负 Gamma、负 Vega 和指派风险。
-- 若空头看涨由足量股票覆盖，应改用[[备兑看涨 Covered Call (Buy-Write)|备兑看涨]]的组合风险分析；若多头看涨用于保护空头股票，应参见[[保护性看涨 Protective Call|保护性看涨]]。
+- 若空头看涨由足量股票覆盖，应改用[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/备兑策略 Covered Strategy#备兑看涨 / Covered Call|备兑看涨]]的组合风险分析；若多头看涨用于保护空头股票，应参见[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/保护性策略 Protective Strategy#保护性看涨 / Protective Call|保护性看涨]]。
 
 ## 盈亏曲线（到期与到期前）
 
+### 多头看涨
+
 ![[../assets/看涨期权 Call 盈亏曲线.svg]]
 
+### 空头看涨
+
+![[../assets/空头看涨期权 Short Call 盈亏曲线.svg]]
+
 > [!note] 读图口径
-> 图中展示多头看涨的代表构造。实线为到期损益，虚线为尚余 30 天时的 Black–Scholes 理论损益；虚线假设隐含波动率、利率和股息率不变，并非收益预测。空头看涨是同一组腿的反向损益。
+> 两图分别展示多头与空头看涨。实线为到期损益，虚线为尚余 30 天时的 Black–Scholes 理论损益；虚线假设隐含波动率、利率和股息率不变，并非收益预测。
 
 ## 来源
 

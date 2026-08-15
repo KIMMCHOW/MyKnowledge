@@ -54,7 +54,7 @@ $$
 d(\mathrm{Vega})\approx
 \mathrm{Vanna}\,dS
 +\mathrm{Volga}\,d\sigma
-+\mathrm{VegaDecay}_{\tau}\,d\tau.
++\mathrm{VegaDecay}\,dt.
 $$
 
 其中：
@@ -64,7 +64,7 @@ $$
 \qquad
 \mathrm{Volga}=\frac{\partial\mathrm{Vega}}{\partial\sigma},
 \qquad
-\mathrm{VegaDecay}_{\tau}=\frac{\partial\mathrm{Vega}}{\partial\tau}.
+\mathrm{VegaDecay}=\frac{\partial\mathrm{Vega}}{\partial t}.
 $$
 
 ## 关联概念
@@ -72,7 +72,8 @@ $$
 - [[隐含波动率]]：隐含波动率变化通过 Vega 影响期权估值。
 - [[Vanna]]：Vega 对标的价格的敏感度。
 - [[Volga（Vomma）|Volga / Vomma]]：Vega 对波动率的敏感度。
-- [[Vega Decay|Vega decay]]：Vega 对距到期时间的敏感度。
+- [[Vega Decay|Vega decay]]：Vega 随当前时间推进的变化率。
+- [[波动率偏斜 Skew|波动率偏斜（Skew）]]：各腿 Vega 抵消不代表偏斜、曲率或期限风险为零。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/跨式 Straddle|跨式]]、[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/宽跨式 Strangle|宽跨式]]：多头结构通常具有正 Vega。
 
 ## 来源

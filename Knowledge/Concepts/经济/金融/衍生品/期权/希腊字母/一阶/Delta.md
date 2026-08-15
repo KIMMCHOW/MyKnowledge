@@ -79,7 +79,7 @@ $$
 d\Delta\approx
 \Gamma\,dS
 +\mathrm{Vanna}\,d\sigma
-+\mathrm{Charm}_{\tau}\,d\tau.
++\mathrm{Charm}\,dt.
 $$
 
 ## 典型形态
@@ -92,7 +92,7 @@ $$
 
 - [[Gamma]]：Delta 对标的价格的敏感度。
 - [[Vanna]]：Delta 对波动率的敏感度。
-- [[Charm]]：Delta 对距到期时间的敏感度。
+- [[Charm]]：Delta 随当前时间推进的变化率。
 - [[Lambda（期权杠杆率）|Lambda]]：Delta 的百分比标准化形式，即期权的局部价格杠杆。
 - [[动态Delta对冲]]：通过交易标的持续控制组合净 Delta。
 

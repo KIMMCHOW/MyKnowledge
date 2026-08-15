@@ -1524,7 +1524,7 @@ $$
 > [!note] Footnote 190
 > <sup>5</sup> A trader who tries to profit solely from the bid-ask spread, buying at the bid price and selling at the ask price without regard to theoretical value, is sometimes referred to as a *scalper*. Scalping is a common trading technique in open-outcry markets.
 
-[^ovp21-5]: 试图仅从买卖价差中获利的交易者，以买入价买入并以卖出价卖出，而不考虑理论价值，有时被称为“倒卖者”。倒票是公开喊价市场中常见的交易技术。
+[^ovp21-5]: 仅试图从买卖价差中获利、按买价买入并按卖价卖出而不考虑理论价值的交易者，有时称为“剥头皮交易者”。剥头皮交易是公开喊价市场中常见的交易手法。
 
 <!-- source:block e8a2c528448c7d45 -->
 

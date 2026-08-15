@@ -66,16 +66,16 @@ created: 2026-08-03
 $$
 rS\frac{\partial C}{\partial S}
 +\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial S^2}
-+\frac{\partial C}{\partial u}
++\frac{\partial C}{\partial t}
 =rC.
 $$
 
-这里用 $u$ 表示向前推进的日历时间，到期日固定为 $T$；后文统一用
+这里用 $t$ 表示当前时间，到期日固定为 $T$；剩余期限为
 
 $$
-\tau=T-u,
+\tau=T-t,
 \qquad
-\frac{\partial}{\partial u}=-\frac{\partial}{\partial\tau}
+\frac{\partial}{\partial t}=-\frac{\partial}{\partial\tau}
 $$
 
 表示剩余期限。因此，上式的时间项取正号；若改用 $\tau$ 写 PDE，同一项应写成 $-\partial C/\partial\tau$。
@@ -85,14 +85,14 @@ $$
 > [!quote]- English 3
 > Although this equation might look mysterious to many readers, it is just a mathematician’s way of expressing how changes in one set of variables—stock price *S* and time *t*—affect the value of something else, a call *C*. To determine the exact effect caused by changes in the variables, one must solve the equation.
 
-尽管这个方程对许多读者来说可能看起来很神秘，但它只是数学家表达一组变量（股价 $S$ 和日历时间 $u$）的变化如何影响其他事物（看涨期权 $C$）价值的方式。为了确定变量变化引起的确切影响，必须求解方程。
+尽管这个方程对许多读者来说可能看起来很神秘，但它只是数学家表达一组变量（股价 $S$ 和当前时间 $t$）的变化如何影响其他事物（看涨期权 $C$）价值的方式。为了确定变量变化引起的确切影响，必须求解方程。
 
 <!-- source:block 46187727fa2cbfd8 -->
 
 > [!quote]- English 4
 > Note that we did not refer to the volatility σ and interest rate *r* as variables. In the Black-Scholes equation, only the stock price and time are changing. As inputs into the model, the volatility and interest rate will affect the value of the option. But once they have been chosen, they are assumed to remain constant over the life of the option. This is consistent with the dynamic hedging examples in Chapter 8. Over the life of an option, we assumed that only the underlying price and time were changing. Everything else remained constant.
 
-请注意，我们没有将波动率 $\sigma$ 和利率 $r$ 视为状态变量。在 Black–Scholes 方程中，变化的状态量只有股价 $S$ 与日历时间 $u$。波动率和利率作为模型输入会影响期权价值，但一旦选定，便假设它们在期权存续期内保持不变。这与第 8 章的动态对冲示例一致：期权存续期内仅让标的价格和时间变化，其他输入保持不变。
+请注意，我们没有将波动率 $\sigma$ 和利率 $r$ 视为状态变量。在 Black–Scholes 方程中，变化的状态量只有股价 $S$ 与当前时间 $t$。波动率和利率作为模型输入会影响期权价值，但一旦选定，便假设它们在期权存续期内保持不变。这与第 8 章的动态对冲示例一致：期权存续期内仅让标的价格和时间变化，其他输入保持不变。
 
 <!-- source:block f43b300b2088170f -->
 
@@ -108,7 +108,7 @@ $$
 \qquad
 \frac{\partial^2 C}{\partial S^2},
 \qquad
-\frac{\partial C}{\partial u}
+\frac{\partial C}{\partial t}
 $$
 
 <!-- source:block bdf1e6fc79ee704d -->
@@ -116,7 +116,7 @@ $$
 > [!quote]- English 6
 > are the more formal mathematical notation for the option’s delta (Δ), gamma (Γ), and theta (Θ). The Black-Scholes equation states that changes in an option’s value depend on the sensitivity of the option to changes in the stock price (the delta), the sensitivity of the option’s delta to changes in the stock price (the gamma), and the sensitivity of the option to the passage of time (the theta).
 
-分别是期权的 Delta（$\Delta$）、Gamma（$\Gamma$）和日历时间 Theta（$\Theta_{\mathrm{calendar}}$）的正式数学记号。Black–Scholes 方程表明，期权价值的变化取决于期权对股价、Delta 对股价以及期权对日历时间推进的敏感度。
+分别是期权的 Delta（$\Delta$）、Gamma（$\Gamma$）和 Theta（$\Theta$）的正式数学记号。Black–Scholes 方程表明，期权价值的变化取决于期权对股价、Delta 对股价以及期权对时间流逝的敏感度。
 
 <!-- source:block f57324b55e88d9a7 -->
 
@@ -886,11 +886,11 @@ $$
 
 ### 传统敏感度公式
 
-以下公式统一使用剩余期限 $\tau$ 与持有成本 $b$。令 $n(\cdot)$ 为标准正态密度，$N(\cdot)$ 为标准正态累积分布函数。时间衰减指标统一按日历时间定义：
+以下公式统一使用剩余期限 $\tau$ 与持有成本 $b$。令 $n(\cdot)$ 为标准正态密度，$N(\cdot)$ 为标准正态累积分布函数。Theta 按当前时间 $t$ 定义：
 
 $$
-\Theta_{\mathrm{calendar}}
-=\frac{\partial V}{\partial u}
+\Theta
+=\frac{\partial V}{\partial t}
 =-\frac{\partial V}{\partial\tau}.
 $$
 
@@ -907,11 +907,11 @@ $$
 
 $$
 \begin{aligned}
-\Theta_{C,\mathrm{calendar}}
+\Theta_C
 &=-\frac{Se^{(b-r)\tau}n(d_1)\sigma}{2\sqrt\tau}
 -(b-r)Se^{(b-r)\tau}N(d_1)
 -rXe^{-r\tau}N(d_2),\\[4pt]
-\Theta_{P,\mathrm{calendar}}
+\Theta_P
 &=-\frac{Se^{(b-r)\tau}n(d_1)\sigma}{2\sqrt\tau}
 +(b-r)Se^{(b-r)\tau}N(-d_1)
 +rXe^{-r\tau}N(-d_2).
@@ -926,13 +926,15 @@ $$
 \rho_P=-\tau Xe^{-r\tau}N(-d_2).
 $$
 
-在原书的 $b=0$ 结算口径下，$\rho_C=-\tau C$、$\rho_P=-\tau P$。外国利率或连续收益率敏感度为
+在原书的 $b=0$ 结算口径下，$\rho_C=-\tau C$、$\rho_P=-\tau P$。对于 $b=r-r_f$ 的外汇期权，外国利率敏感度 Phi 为
 
 $$
 \Phi_C=-\tau Se^{(b-r)\tau}N(d_1),
 \qquad
 \Phi_P=\tau Se^{(b-r)\tau}N(-d_1),
 $$
+
+若股票模型采用 $b=r-q$，同样形式的表达式对应股息率敏感度 $\partial V/\partial q$，本目录不将其称为 Phi。
 
 而弹性为
 
@@ -943,24 +945,24 @@ $$
 $$
 
 > [!note] 报价单位
-> 上式 $\Theta_{\mathrm{calendar}}$ 是对一年日历时间推进的敏感度，换算为自然日近似值时除以 $365$。Vega 与 Rho 是对完整小数变化的导数；若交易系统按 1 个百分点报价，通常还需除以 $100$。不同系统的时间与结算口径可能不同，使用前必须核对定义。
+> 上式 $\Theta$ 以年为时间单位；换算为每自然日近似值时除以 $365$。Vega 与 Rho 是对完整小数变化的导数；若交易系统按 1 个百分点报价，通常还需除以 $100$。不同系统的时间与结算口径可能不同，使用前必须核对定义。
 
 <!-- source:block aba884c1481295b1 -->
 
 ### 高阶敏感度公式
 
-以下时间敏感度继续使用日历时间口径：
+以下命名时间敏感度均以当前时间 $t$ 为变量，并令 $\tau=T-t$：
 
 $$
 \begin{aligned}
-\mathrm{Charm}_{\mathrm{calendar}}
-&=\frac{\partial\Delta}{\partial u}
+\mathrm{Charm}
+&=\frac{\partial\Delta}{\partial t}
 =-\frac{\partial\Delta}{\partial\tau},\\
-\mathrm{Color}_{\mathrm{calendar}}
-&=\frac{\partial\Gamma}{\partial u}
+\mathrm{Color}
+&=\frac{\partial\Gamma}{\partial t}
 =-\frac{\partial\Gamma}{\partial\tau},\\
-\mathrm{VegaDecay}_{\mathrm{calendar}}
-&=\frac{\partial\mathrm{Vega}}{\partial u}
+\mathrm{VegaDecay}
+&=\frac{\partial\mathrm{Vega}}{\partial t}
 =-\frac{\partial\mathrm{Vega}}{\partial\tau}.
 \end{aligned}
 $$
@@ -972,13 +974,13 @@ $$
 
 $$
 \begin{aligned}
-\mathrm{Charm}_{C,\mathrm{calendar}}
+\mathrm{Charm}_{C}
 &=-e^{(b-r)\tau}
 \left[
 n(d_1)\left(\frac{b}{\sigma\sqrt\tau}-\frac{d_2}{2\tau}\right)
 +(b-r)N(d_1)
 \right],\\[4pt]
-\mathrm{Charm}_{P,\mathrm{calendar}}
+\mathrm{Charm}_{P}
 &=-e^{(b-r)\tau}
 \left[
 n(d_1)\left(\frac{b}{\sigma\sqrt\tau}-\frac{d_2}{2\tau}\right)
@@ -994,7 +996,7 @@ $$
 $$
 
 $$
-\mathrm{Color}_{\mathrm{calendar}}
+\mathrm{Color}
 =\Gamma\left[
 r-b
 +\frac{bd_1}{\sigma\sqrt\tau}
@@ -1008,7 +1010,7 @@ $$
 $$
 
 $$
-\mathrm{VegaDecay}_{\mathrm{calendar}}
+\mathrm{VegaDecay}
 =\mathrm{Vega}\left[
 r-b
 +\frac{bd_1}{\sigma\sqrt\tau}
@@ -1021,7 +1023,7 @@ $$
 =\Gamma\frac{d_1d_2-1}{\sigma}.
 $$
 
-这些公式分别对应[[Vanna]]、[[Charm]]、[[Speed]]、[[Color]]、[[Volga（Vomma）|Volga / Vomma]]、[[Vega Decay|Vega decay]]与[[Zomma]]。本节所有带 `calendar` 下标的指标均表示 $u$ 增加时的变化；若改为对剩余期限 $\tau$ 求导，符号整体相反。
+这些公式分别对应[[Vanna]]、[[Charm]]、[[Speed]]、[[Color]]、[[Volga（Vomma）|Volga / Vomma]]、[[Vega Decay|Vega decay]]与[[Zomma]]。本节的 Charm、Color 和 Vega decay 都表示 $t$ 增加时的变化；若直接对剩余期限 $\tau$ 求导，符号相反。
 
 <!-- source:block c4c9fb02140d6707 -->
 
@@ -1464,7 +1466,7 @@ $$
 | 无漂移 Theta 的绝对值最大 | $S=Xe^{-(b-\sigma^2/2)\tau}$ |
 | Vega 最大 | $S=Xe^{-(b-\sigma^2/2)\tau}$ |
 
-第一行的精确条件是 $d_1=0$；在广义模型中，$\Delta_C=e^{(b-r)\tau}N(d_1)$，因此只有 $b=r$ 时才恰好等于 $0.50$。Theta 一行指前文的无漂移（波动率衰减）分量；若把利率与持有成本项也计入完整的日历 Theta，其极值位置通常还取决于期权类型和结算口径。
+第一行的精确条件是 $d_1=0$；在广义模型中，$\Delta_C=e^{(b-r)\tau}N(d_1)$，因此只有 $b=r$ 时才恰好等于 $0.50$。Theta 一行指前文的无漂移（波动率衰减）分量；若把利率与持有成本项也计入完整 Theta，其极值位置通常还取决于期权类型和结算口径。
 
 <!-- source:block 9c6960de408f8569 -->
 
