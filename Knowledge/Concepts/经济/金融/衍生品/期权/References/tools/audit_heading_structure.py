@@ -51,6 +51,12 @@ def markdown_headings(text: str) -> list[tuple[int, str]]:
     ]
 
 
+def is_subsequence(expected: list[str], actual: list[str]) -> bool:
+    """Return whether every expected heading occurs in order in actual."""
+    cursor = iter(actual)
+    return all(any(candidate == heading for candidate in cursor) for heading in expected)
+
+
 def main() -> int:
     root = Path(__file__).resolve().parent.parent
     edition = root / "Option Volatility and Pricing 双语版"
@@ -59,7 +65,6 @@ def main() -> int:
         raise RuntimeError(f"expected one EPUB, found {len(epubs)}")
 
     failures: list[str] = []
-    rows: list[str] = []
     with zipfile.ZipFile(epubs[0]) as archive:
         for chapter in range(1, 26):
             path = edition / f"{CHAPTER_STEMS[chapter - 1]}.md"
@@ -68,7 +73,6 @@ def main() -> int:
             generated = markdown_headings(text)
             if not generated or generated[0][0] != 1:
                 failures.append(f"ch{chapter:02d}: missing chapter H1")
-                rows.append(f"| {chapter:02d} | {max(0, len(source) - 1)} | — | — | ❌ |")
                 continue
 
             # The EPUB's first real heading is the chapter title represented
@@ -79,7 +83,15 @@ def main() -> int:
                 for level, heading in generated[1:]
                 if level >= 2 and " / " in heading
             ]
-            if actual_sections != expected_sections:
+            # Chapter 18 replaces formula/table images with readable LaTeX and
+            # adds explanatory headings. EPUB headings must still all occur in
+            # order; other chapters retain exact heading equality.
+            sections_ok = (
+                is_subsequence(expected_sections, actual_sections)
+                if chapter == 18
+                else actual_sections == expected_sections
+            )
+            if not sections_ok:
                 failures.append(
                     f"ch{chapter:02d}: source/Markdown section order mismatch "
                     f"({len(expected_sections)} vs {len(actual_sections)})"
@@ -92,10 +104,6 @@ def main() -> int:
             )
             if not toc_match:
                 failures.append(f"ch{chapter:02d}: missing visible chapter TOC")
-                rows.append(
-                    f"| {chapter:02d} | {len(expected_sections)} | "
-                    f"{len(actual_sections)} | 0 | ❌ |"
-                )
                 continue
             toc_targets = re.findall(r"\[\[#([^]|]+)\|", toc_match.group(1))
             actual_titles = [heading for level, heading in generated[1:] if level >= 2]
@@ -104,41 +112,6 @@ def main() -> int:
                     f"ch{chapter:02d}: TOC does not match headings "
                     f"({len(toc_targets)} vs {len(actual_titles)})"
                 )
-            ok = actual_sections == expected_sections and toc_targets == actual_titles
-            rows.append(
-                f"| {chapter:02d} | {len(expected_sections)} | "
-                f"{len(actual_sections)} | {len(toc_targets)} | "
-                f"{'✅' if ok else '❌'} |"
-            )
-
-    report = [
-        "---",
-        "title: Option Volatility and Pricing 章节与标题结构审计",
-        "tags:",
-        "  - 期权",
-        "  - 双语阅读",
-        "  - 结构审计",
-        f"status: {'通过' if not failures else '待处理'}",
-        "created: 2026-08-03",
-        "---",
-        "",
-        "# 章节与标题结构审计",
-        "",
-        "> [!summary] 结论",
-        "> 逐章比对 EPUB 标题顺序、Markdown `# / ## / ###` 层级与可点击章内目录。",
-        "> 每章还包含章首和章末的上一章/下一章导航。",
-        "",
-        "| 章 | EPUB 小节 | Markdown 小节 | 目录链接 | 结果 |",
-        "|---:|---:|---:|---:|---|",
-        *rows,
-    ]
-    if failures:
-        report.extend(["", "## 待处理", ""] + [f"- {item}" for item in failures])
-    report.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
-    (edition / "章节与标题结构审计.md").write_text(
-        "\n".join(report), encoding="utf-8"
-    )
-
     if failures:
         print("heading structure audit: FAIL")
         for failure in failures:

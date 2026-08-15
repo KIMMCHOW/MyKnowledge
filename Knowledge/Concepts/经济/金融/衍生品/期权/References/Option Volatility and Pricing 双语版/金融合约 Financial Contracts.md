@@ -4,16 +4,16 @@ tags:
   - 期权
   - 双语阅读
 chapter: 01
-translation_status: 腾讯云机器初译，待复核
+translation_status: 翻译审计完毕
 created: 2026-08-03
 ---
 
 # 金融合约 / Financial Contracts
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[阅读导航|← 返回阅读导航]]
 
-> [!warning] 翻译状态
-> 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
+> [!success] 翻译状态
+> 本章翻译与风险审计已完成。英文原文、数字、公式和图表继续保留，便于逐段核对。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline

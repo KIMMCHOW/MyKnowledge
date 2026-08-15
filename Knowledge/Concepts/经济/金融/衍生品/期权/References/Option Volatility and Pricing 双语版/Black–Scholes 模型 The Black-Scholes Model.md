@@ -4,24 +4,37 @@ tags:
   - 期权
   - 双语阅读
 chapter: 18
-translation_status: 腾讯云机器初译，公式已转 LaTeX，待复核
+translation_status: 双语稿已生成，待人工复核
 created: 2026-08-03
 ---
 
 # Black–Scholes 模型 / The Black-Scholes Model
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[阅读导航|← 返回阅读导航]]
 
 > [!warning] 翻译状态
-> 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
+> 本章双语稿已生成，尚待逐段人工复核。英文原文、数字、公式和图表保留用于核对。
+
+> [!info] 先分清两个分布
+> Black–Scholes 的经典假设不是“价格服从正态分布”，而是[[正态分布|对数收益服从正态分布]]，从而使到期价格服从[[对数正态分布]]。本章中的 $N(\cdot)$ 是标准正态累积分布函数，用来计算风险中性定价权重。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline
 
 > [!abstract] 结构导航
 > 以下标题按原书顺序保留；点击可直接跳转。
+> 其中若干分组标题为本双语版为便于理解而增加的编辑性结构；英文原文与原书小节顺序未变。
 
-- [[#n(x) 与 N(x) / n(x) and N(x)|n(x) 与 N(x) / n(x) and N(x)]]
+- [[#模型目标与偏微分方程 / Model Objective and PDE|模型目标与偏微分方程 / Model Objective and PDE]]
+- [[#从偏微分方程到闭式解 / From PDE to Closed Form|从偏微分方程到闭式解 / From PDE to Closed Form]]
+- [[#定价公式的直觉 / Pricing Intuition|定价公式的直觉 / Pricing Intuition]]
+- [[#正态与对数正态 / Normal and Lognormal Distributions|正态与对数正态 / Normal and Lognormal Distributions]]
+  - [[#n(x) 与 N(x) / n(x) and N(x)|n(x) 与 N(x) / n(x) and N(x)]]
+- [[#从对数正态分布到 d1 与 d2 / From Lognormal Distribution to d1 and d2|从对数正态分布到 d1 与 d2 / From Lognormal Distribution to d1 and d2]]
+- [[#持有成本与模型变体 / Carry and Model Variants|持有成本与模型变体 / Carry and Model Variants]]
+  - [[#广义 Black–Scholes 定价公式|广义 Black–Scholes 定价公式]]
+  - [[#传统敏感度公式|传统敏感度公式]]
+  - [[#高阶敏感度公式|高阶敏感度公式]]
 - [[#一个实用的近似式 / A Useful Approximation|一个实用的近似式 / A Useful Approximation]]
 - [[#Delta（标的价格敏感度） / The Delta|Delta（标的价格敏感度） / The Delta]]
 - [[#Theta（时间敏感度） / The Theta|Theta（时间敏感度） / The Theta]]
@@ -31,6 +44,9 @@ created: 2026-08-03
 > [!tip] 章节导航（章首）
 > [[使用期权进行对冲 Hedging with Options|← 上一章]] · [[阅读导航|全书导航]] · [[二叉树期权定价 Binomial Option Pricing|下一章 →]]
 <!-- chapter-nav:end -->
+
+## 模型目标与偏微分方程 / Model Objective and PDE
+
 <!-- source:block dda1779c7e9e8874 -->
 
 > [!quote]- English 1
@@ -47,23 +63,36 @@ created: 2026-08-03
 
 <!-- source:block 443778ab3672e77d -->
 
-![原书图表](assets/ch18/e0339-01.jpg)
+$$
+rS\frac{\partial C}{\partial S}
++\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial S^2}
++\frac{\partial C}{\partial u}
+=rC.
+$$
 
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+这里用 $u$ 表示向前推进的日历时间，到期日固定为 $T$；后文统一用
+
+$$
+\tau=T-u,
+\qquad
+\frac{\partial}{\partial u}=-\frac{\partial}{\partial\tau}
+$$
+
+表示剩余期限。因此，上式的时间项取正号；若改用 $\tau$ 写 PDE，同一项应写成 $-\partial C/\partial\tau$。
 
 <!-- source:block 63ae4e25d5c27f74 -->
 
 > [!quote]- English 3
 > Although this equation might look mysterious to many readers, it is just a mathematician’s way of expressing how changes in one set of variables—stock price *S* and time *t*—affect the value of something else, a call *C*. To determine the exact effect caused by changes in the variables, one must solve the equation.
 
-尽管这个方程对许多读者来说可能看起来很神秘，但它只是数学家表达一组变量（股价S和时间t）的变化如何影响其他事物（看涨期权C）的价值的方式。为了确定变量变化引起的确切影响，必须求解方程。
+尽管这个方程对许多读者来说可能看起来很神秘，但它只是数学家表达一组变量（股价 $S$ 和日历时间 $u$）的变化如何影响其他事物（看涨期权 $C$）价值的方式。为了确定变量变化引起的确切影响，必须求解方程。
 
 <!-- source:block 46187727fa2cbfd8 -->
 
 > [!quote]- English 4
 > Note that we did not refer to the volatility σ and interest rate *r* as variables. In the Black-Scholes equation, only the stock price and time are changing. As inputs into the model, the volatility and interest rate will affect the value of the option. But once they have been chosen, they are assumed to remain constant over the life of the option. This is consistent with the dynamic hedging examples in Chapter 8. Over the life of an option, we assumed that only the underlying price and time were changing. Everything else remained constant.
 
-请注意，我们没有将波动率δ和利率r作为变量。在布莱克-斯科尔斯方程中，只有股价和时间在变化。作为模型的输入，波动率和利率将影响期权的价值。但一旦它们被选择，它们就被假设在期权的生命周期内保持不变。这与第8章中的动态对冲示例一致。在期权的有效期内，我们假设只有标的价格和时间发生变化。其他一切都保持不变。
+请注意，我们没有将波动率 $\sigma$ 和利率 $r$ 视为状态变量。在 Black–Scholes 方程中，变化的状态量只有股价 $S$ 与日历时间 $u$。波动率和利率作为模型输入会影响期权价值，但一旦选定，便假设它们在期权存续期内保持不变。这与第 8 章的动态对冲示例一致：期权存续期内仅让标的价格和时间变化，其他输入保持不变。
 
 <!-- source:block f43b300b2088170f -->
 
@@ -74,16 +103,20 @@ created: 2026-08-03
 
 <!-- source:block b12abde13d15b420 -->
 
-![原书图表](assets/ch18/e0340-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\frac{\partial C}{\partial S},
+\qquad
+\frac{\partial^2 C}{\partial S^2},
+\qquad
+\frac{\partial C}{\partial u}
+$$
 
 <!-- source:block bdf1e6fc79ee704d -->
 
 > [!quote]- English 6
 > are the more formal mathematical notation for the option’s delta (Δ), gamma (Γ), and theta (Θ). The Black-Scholes equation states that changes in an option’s value depend on the sensitivity of the option to changes in the stock price (the delta), the sensitivity of the option’s delta to changes in the stock price (the gamma), and the sensitivity of the option to the passage of time (the theta).
 
-是期权的Delta（Delta）、Gamma（Γ）和Theta（Theta）的更正式的数学符号。布莱克-斯科尔斯方程表明，期权价值的变化取决于期权对股价变化的敏感性（Delta）、期权的Delta对股价变化的敏感性（Gamma）以及期权对时间流逝的敏感性（Theta）。
+分别是期权的 Delta（$\Delta$）、Gamma（$\Gamma$）和日历时间 Theta（$\Theta_{\mathrm{calendar}}$）的正式数学记号。Black–Scholes 方程表明，期权价值的变化取决于期权对股价、Delta 对股价以及期权对日历时间推进的敏感度。
 
 <!-- source:block f57324b55e88d9a7 -->
 
@@ -126,9 +159,10 @@ $$
 
 <!-- source:block a974f464fabe1533 -->
 
-![原书图表](assets/ch18/e0340-02.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial S^2}
+=\frac{1}{2}\sigma^2S^2\Gamma.
+$$
 
 <!-- source:block 384ce9c14ef3edfd -->
 
@@ -155,9 +189,11 @@ $$
 
 <!-- source:block 01b093922ffd1800 -->
 
-![原书图表](assets/ch18/e0340-03.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\frac{\partial C}{\partial S}=\Delta,
+\qquad
+\frac{\partial^2 C}{\partial S^2}=\Gamma
+$$
 
 <!-- source:block 5036520004d90728 -->
 
@@ -168,9 +204,17 @@ $$
 
 <!-- source:block f100ec2660bb189f -->
 
-![原书图表](assets/ch18/e0341-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\begin{aligned}
+(S_1-S_2)\Delta
++\frac{1}{2}(S_1-S_2)^2\Gamma
+&=(S_1-S_2)\frac{\partial C}{\partial S}
++\frac{1}{2}(S_1-S_2)^2\frac{\partial^2 C}{\partial S^2},\\[4pt]
+rS\frac{\partial C}{\partial S}
++\frac{1}{2}\sigma^2S^2\frac{\partial^2 C}{\partial S^2}
+&\quad\text{是 PDE 中对应的一阶与二阶价格项。}
+\end{aligned}
+$$
 
 <!-- source:block febf485bd4e6ee97 -->
 
@@ -187,6 +231,8 @@ $$
 不可否认，这是解释布莱克-斯科尔斯方程中各个组成部分所扮演角色的一种非常简单化的尝试。然而，即使对于完全理解模型的人来说，能够写出方程并不一定会产生值。真正的目标是求解方程，以便计算期权的确切价值。
 
 <!-- source:block 4f5b8cfb60fd021f -->
+
+## 从偏微分方程到闭式解 / From PDE to Closed Form
 
 > [!quote]- English 18
 > The solution to the Black-Scholes equation yields the well-known *Black-Scholes model*: if
@@ -226,7 +272,7 @@ $$
 > *t* = time to expiration, in years
 
 $$
-t\,= \text{time to expiration}, \text{in years}
+\tau\,= \text{time to expiration}, \text{in years}
 $$
 
 <!-- source:block 0792778a44079bf7 -->
@@ -276,9 +322,26 @@ $$
 
 <!-- source:block 78c9299468435ee9 -->
 
-![原书图表](assets/ch18/e0341-02.jpg)
+$$
+\boxed{C=SN(d_1)-Xe^{-r\tau}N(d_2)}
+$$
+
+其中
+
+$$
+d_1=
+\frac{\ln(S/X)+\left(r+\tfrac12\sigma^2\right)\tau}
+{\sigma\sqrt\tau},
+\qquad
+d_2=
+\frac{\ln(S/X)+\left(r-\tfrac12\sigma^2\right)\tau}
+{\sigma\sqrt\tau}
+=d_1-\sigma\sqrt\tau.
+$$
 
 <!-- source:block 13f30ec9d7978734 -->
+
+## 定价公式的直觉 / Pricing Intuition
 
 > [!quote]- English 28
 > It may not be immediately apparent what the values in the Black-Scholes model represent, but one starting point is put-call parity, discussed in Chapter 15
@@ -287,9 +350,9 @@ $$
 
 <!-- source:block d6da3e5bd3094e45 -->
 
-![原书图表](assets/ch18/e0341-03.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+C-P=\frac{F-X}{1+r\tau}.
+$$
 
 <!-- source:block d1d38727edf4987c -->
 
@@ -304,7 +367,7 @@ $$
 > *F = S*× (1 *+ r* × *t*)
 
 $$
-F = S\times (1\,+ r \times\,t)
+F=S(1+r\tau)
 $$
 
 <!-- source:block a2fd81ae1f64451b -->
@@ -316,16 +379,18 @@ $$
 
 <!-- source:block e071445b453a9434 -->
 
-![原书图表](assets/ch18/e0342-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+C-P
+=\frac{S(1+r\tau)-X}{1+r\tau}
+=S-\frac{X}{1+r\tau}.
+$$
 
 <!-- source:block 15d3b6991395c830 -->
 
 > [!quote]- English 32
 > In our examples thus far, we have used simple interest. If, instead, we use continuous interest, rather than dividing by 1 + *r* × *t*, we can multiply by *e<sup>–rt</sup>*. This gives us
 
-到目前为止，在我们的例子中，我们使用了简单利息。相反，如果我们使用连续利息，而不是除以1 + r x t，我们可以乘以e-RT。这给了我们
+此前的例子使用简单利息。若改用连续复利，就不再除以 $1+r\tau$，而是乘以 $e^{-r\tau}$。于是得到
 
 <!-- source:block 50fbcddbcd86f35d -->
 
@@ -333,7 +398,7 @@ $$
 > *C – P = S – Xe<sup>–rt</sup>*
 
 $$
-C – P = S – Xe^{–rt}
+C-P=S-Xe^{-r\tau}
 $$
 
 <!-- source:block ccad282e70a1012d -->
@@ -349,7 +414,7 @@ $$
 > *S – Xe<sup>–rt</sup>*
 
 $$
-S – Xe^{–rt}
+S-Xe^{-r\tau}
 $$
 
 <!-- source:block b52da4ca5341aa85 -->
@@ -357,7 +422,7 @@ $$
 > [!quote]- English 36
 > This expression looks similar to the Black-Scholes value for a call option, but without the terms *N*(*d*1) and *N*(*d*2) attached to *S* and *Xe<sup>–rt</sup>*, respectively. What do *N*(*d*1) and *N*(*d*2) represent?
 
-该公式看起来类似于看涨期权的Black-Scholes值，但没有分别附加到S和Xe-tt的N（d1）和N（d2）项。N（d1）和N（d2）代表什么？
+这个表达式与 Black–Scholes 看涨期权公式相似，只是 $S$ 与 $Xe^{-r\tau}$ 后面还没有分别乘上 $N(d_1)$ 与 $N(d_2)$。那么，$N(d_1)$ 和 $N(d_2)$ 分别代表什么？
 
 <!-- source:block 612d97b699482b7e -->
 
@@ -368,9 +433,9 @@ $$
 
 <!-- source:block ad4c79afa58725c9 -->
 
-![原书图表](assets/ch18/e0342-02.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\sum_{i=1}^{n}p_i\max(S_i-X,0).
+$$
 
 <!-- source:block 86c823b7c8b62ada -->
 
@@ -477,7 +542,7 @@ $$
 > [!quote]- English 51
 > In the Black-Scholes model, the average value of all stock above the exercise price is given by *Se<sup>rt</sup>N*(*d*1), where *Se<sup>rt</sup>* is the forward price of the stock. The average amount we will have to pay is given by *XN*(*d*2). The expected value for a call option is the difference between these two numbers
 
-在Black-Scholes模型中，所有高于行权价的股票的平均价值由SertN（d1）给出，其中Sert是股票的远期价格。我们必须支付的平均金额由XN（d2）给出。看涨期权的预期值是这两个数字之间的差
+在 Black–Scholes 模型中，到期时高于行权价部分的标的平均价值写作 $Se^{r\tau}N(d_1)$，其中 $Se^{r\tau}$ 是股票的远期价格；届时平均支付额写作 $XN(d_2)$。看涨期权的到期预期价值就是两者之差：
 
 <!-- source:block 2fcfe64f75c04bb2 -->
 
@@ -485,7 +550,7 @@ $$
 > *Se<sup>rt</sup>N*(*d*1) – *XN*(*d*2) = 6.45 – 4.90 = 1.55
 
 $$
-Se^{rt}N(d_{1}) -\,XN(d_{2}) = 6.45 - 4.90 = 1.55
+Se^{r\tau}N(d_{1})-XN(d_{2})=6.45-4.90=1.55
 $$
 
 <!-- source:block 51b99bb7c793b866 -->
@@ -493,7 +558,7 @@ $$
 > [!quote]- English 53
 > These terms are slightly different from the terms that appear in the model, *SN*(*d*1) and *Xe<sup>–rt</sup>N*(*d*2), but we will show shortly how *Se<sup>rt</sup>N*(*d*1) becomes *SN*(*d*1) and how *XN*(*d*2) becomes *Xe<sup>–rt</sup>N*(*d*2).
 
-这些项与模型中出现的项SN（d1）和Xe-rtN（d2）略有不同，但我们将很快展示SertN（d1）如何变成SN（d1）以及XN（d2）如何变成Xe-rtN（d2）。
+这些项与模型中的 $SN(d_1)$ 和 $Xe^{-r\tau}N(d_2)$ 略有不同；下文会说明，贴现后 $Se^{r\tau}N(d_1)$ 如何变为 $SN(d_1)$，而 $XN(d_2)$ 如何变为 $Xe^{-r\tau}N(d_2)$。
 
 <!-- source:block b30086b0ba169e31 -->
 
@@ -515,7 +580,9 @@ $$
 
 <!-- source:block 4f6d9d3805cca01e -->
 
-## n(x) 与 N(x) / n(x) and N(x)
+## 正态与对数正态 / Normal and Lognormal Distributions
+
+### n(x) 与 N(x) / n(x) and N(x)
 
 <!-- source:block f29f05d89acca960 -->
 
@@ -575,21 +642,21 @@ Black-Scholes模型使用与正态分布相关的概率进行所有计算。这�
 > [!quote]- English 63
 > ***Mode***. The peak of the distribution. The point at which the greatest number of occurrences take place.
 
-模式分布的峰值。发生次数最多的点。
+**众数（Mode）**：分布的峰值，即出现次数最多的点。
 
 <!-- source:block eb4774a94671a1e6 -->
 
 > [!quote]- English 64
 > ***Mean***. The balance point of the distribution. The point at which half the value of the occurrences fall to the left and half to the right.
 
-意思分配的平衡点。事件值一半落在左侧、一半落在右侧的点。
+**均值（Mean）**：分布的平衡点，也就是所有结果按概率加权后的平均值。
 
 <!-- source:block a397a0805ffdfc16 -->
 
 > [!quote]- English 65
 > ***Median***. The point at which half the occurrences fall to the left and half to the right.
 
-中位数。一半事件落在左侧、一半事件落在右侧的点。
+**中位数（Median）**：使一半事件落在左侧、另一半落在右侧的点。
 
 <!-- source:block 9a7199615ed9649c -->
 
@@ -608,6 +675,8 @@ Black-Scholes模型使用与正态分布相关的概率进行所有计算。这�
 
 <!-- source:block 9ee17008ef344a48 -->
 
+## 从对数正态分布到 d1 与 d2 / From Lognormal Distribution to d1 and d2
+
 > [!quote]- English 68
 > The Black-Scholes model begins by defining the relationship between the exercise price and the underlying price. In a normal distribution, this is simply *S* – *X*, but in a lognormal distribution, the relationship is
 
@@ -615,9 +684,9 @@ Black-Scholes模型使用与正态分布相关的概率进行所有计算。这�
 
 <!-- source:block cc2b0cd8b3be281a -->
 
-![原书图表](assets/ch18/e0346-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\ln\!\left(\frac{S}{X}\right).
+$$
 
 <!-- source:block 4f033da361252e8a -->
 
@@ -631,26 +700,26 @@ Black-Scholes模型使用与正态分布相关的概率进行所有计算。这�
 > [!quote]- English 70
 > Next, because options are valued off the forward price and the forward price is a function of interest rates, we must adjust this relationship by the interest component over the life of the option *rt*. This gives us<sup>2</sup>
 
-接下来，由于期权是根据远期价格进行估值的，而远期价格是利率的函数，因此我们必须在期权RT的有效期内通过利息成分调整这种关系。这给了我们[^ovp18-2]
+接下来，由于期权是根据远期价格进行估值的，而远期价格是利率的函数，因此必须加入期权剩余期限内的利息成分 $r\tau$。于是得到[^ovp18-2]
 
 <!-- source:block 05b902766d446e71 -->
 
-![原书图表](assets/ch18/e0347-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\ln\!\left(\frac{S}{X}\right)+r\tau.
+$$
 
 <!-- source:block f1a7e14c6ac23ba7 -->
 
 > [!quote]- English 71
 > The number of standard deviations associated with an occurrence depends on how far the occurrence is from the mean of the distribution. In a normal distribution, the mean, like the mode, is located in the exact center of the distribution. But in Figure 18-4, which approximates a lognormal distribution, with its elongated right tail, we can see that the mean must be somewhere to the right of the mode. How far to the right? This depends on the standard deviation of the lognormal distribution. The higher the standard deviation, the longer the right tail, and consequently, the further to the right we must shift the mean. Mathematically, the shift is equal to σ*<sup>2</sup>t*/2. Adding this adjustment gives us
 
-一个结果对应多少个标准差，取决于该结果偏离分布均值的程度。在正态分布中，均值与众数一样位于分布正中心。但图 18-4 近似对数正态分布，具有拉长的右尾，因而均值必然位于众数右侧。向右偏移多远取决于对数正态分布的标准差：标准差越大，右尾越长，均值就必须向右移得越远。从数学上说，这一偏移量等于 $\sigma^2 t/2$。加入这项调整后得到：
+一个结果对应多少个标准差，取决于该结果偏离分布均值的程度。在正态分布中，均值与众数一样位于分布正中心。但图 18-4 近似对数正态分布，具有拉长的右尾，因而均值必然位于众数右侧。向右偏移多远取决于对数正态分布的标准差：标准差越大，右尾越长，均值就必须向右移得越远。从数学上说，这一偏移量等于 $\sigma^2\tau/2$。加入这项调整后得到：
 
 <!-- source:block 1af3b871c9a4c441 -->
 
-![原书图表](assets/ch18/e0347-02.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\ln\!\left(\frac{S}{X}\right)+r\tau+\frac{\sigma^2\tau}{2}.
+$$
 
 <!-- source:block 1d96f5950ec64156 -->
 
@@ -661,13 +730,14 @@ Black-Scholes模型使用与正态分布相关的概率进行所有计算。这�
 
 <!-- source:block 8b4a459263700a76 -->
 
-![原书图表](assets/ch18/e0348-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+d_1=
+\frac{
+\ln(S/X)+\left(r+\tfrac12\sigma^2\right)\tau
+}{\sigma\sqrt\tau}.
+$$
 
 <!-- source:block 58466d1a0b5a8b02 -->
-
-![原书图表](assets/ch18/qroot.jpg)
 
 <!-- source:block 05096bbd2b952421 -->
 
@@ -693,13 +763,14 @@ Black-Scholes模型使用与正态分布相关的概率进行所有计算。这�
 
 <!-- source:block 0e04bea492c83c20 -->
 
-![原书图表](assets/ch18/qroot.jpg)
-
 <!-- source:block 3fe76d0d18fedbc5 -->
 
-![原书图表](assets/ch18/e0349-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+d_2=d_1-\sigma\sqrt\tau
+=\frac{
+\ln(S/X)+\left(r-\tfrac12\sigma^2\right)\tau
+}{\sigma\sqrt\tau}.
+$$
 
 <!-- source:block e34fd950401672c6 -->
 
@@ -730,7 +801,7 @@ $$
 > *Se<sup>rt</sup>N*(*d*1) – *XN*(*d*2)
 
 $$
-Se^{rt}N(d_{1}) -\,XN(d_{2})
+Se^{r\tau}N(d_{1})-XN(d_{2})
 $$
 
 <!-- source:block df5db672a68d292e -->
@@ -738,7 +809,7 @@ $$
 > [!quote]- English 80
 > There is still one final step in calculating the theoretical value of a call option, and this step explains how the terms *S<sup>–rt</sup>N*(*d*1) and *XN*(*d*2) become *SN*(*d*1) and *Xe<sup>–rt</sup>N*(*d*2), which is the way they appear in the Black-Scholes model. The expression *Se<sup>rt</sup>N*(*d*1) – *XN*(*d*2) represents the expected value of the option at expiration. If we must pay for the option today, the theoretical value is the present value of the expected value. Multiplying the expected value by *e<sup>–rt</sup>* yields the familiar form of the Black-Scholes model
 
-计算看涨期权的理论价值还有最后一步，这一步解释了S-rtN（d1）和XN（d2）项如何变成SN（d1）和Xe-rtN（d2），这就是它们在布莱克-斯科尔斯模型中的出现方式。SertN（d1）- XN（d2）表示期权到期时的预期价值。如果我们今天必须为期权付费，那么理论价值就是预期价值的现值。将预期值乘以e-RT就会产生熟悉的Black-Scholes模型形式
+计算看涨期权理论价值还差最后一步：说明 $Se^{r\tau}N(d_1)$ 与 $XN(d_2)$ 如何变成模型中的 $SN(d_1)$ 与 $Xe^{-r\tau}N(d_2)$。前者之差是期权到期时的预期价值；今天支付的理论价值应是该预期价值的现值，因此再乘以 $e^{-r\tau}$。
 
 <!-- source:block 33a9c6615f064f0a -->
 
@@ -746,21 +817,26 @@ $$
 > *C =*[*Se<sup>rt</sup>N*(*d*1) – *XN*(*d*2)]*e<sup>–rt</sup> = SN*(*d*1) – *Xe<sup>–rt</sup>N*(*d*2)
 
 $$
-C =[Se^{rt}N(d_{1}) -\,XN(d_{2})]e^{–rt} = SN(d_{1}) -\,Xe^{–rt}N(d_{2})
+C=\left[Se^{r\tau}N(d_1)-XN(d_2)\right]e^{-r\tau}
+=SN(d_1)-Xe^{-r\tau}N(d_2).
 $$
 
 <!-- source:block f8c73266aa262aae -->
 
+## 持有成本与模型变体 / Carry and Model Variants
+
 > [!quote]- English 82
 > In the original Black-Scholes model, the underlying contract was assumed to be a non-dividend-paying stock. However, since its introduction, the model has been extended to evaluate options on other types of underlying instruments. This is most commonly done by including an adjustment factor *b* that varies depending on the type of underlying instrument and the settlement procedure for the options. If *r* is the domestic interest rate and *rf* is the foreign interest rate, then
 
-在最初的布莱克-斯科尔斯模型中，标的合约被假设为不派息股票。然而，自推出以来，该模型已扩展到评估其他类型标的工具的期权。这最常见的方法是包括调整因子b，调整因子b根据标的工具的类型和期权的结算程序而变化。如果r是国内利率，ref是国外利率，那么
+原始 Black–Scholes 模型假设标的是不派息股票。后来模型被扩展到其他标的工具，常见做法是引入持有成本参数 $b$；其取值取决于标的类型与期权结算方式。若 $r$ 为本国利率、$r_f$ 为外国利率，则常见取值如下：
 
 <!-- source:block 169376c279fc721a -->
 
-![原书图表](assets/ch18/t0349-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+| 持有成本参数 | 常见模型与标的 |
+|---|---|
+| $b=r$ | 原始 Black–Scholes：不派息股票期权 |
+| $b=0$ | Black：期货期权 |
+| $b=r-r_f$ | Garman–Kohlhagen：外汇期权，其中 $r_f$ 为外国利率 |
 
 <!-- source:block 8a1f2cf83354329c -->
 
@@ -771,15 +847,181 @@ $$
 
 <!-- source:block 15d5674fc216333c -->
 
-*图18-6布莱克-斯科尔斯模型。 / Figure 18-6 The Black-Scholes model.*
+*图 18-6 Black–Scholes 模型（原图公式已改为 LaTeX）。 / Figure 18-6 The Black-Scholes model, reset in LaTeX.*
 
 <!-- source:block dc449a0d3e4efa07 -->
 
-![原书图表](assets/ch18/f0350-01.jpg)
+### 广义 Black–Scholes 定价公式
+
+设 $S$ 为现货或标的价格，$X$ 为行权价，$\tau$ 为距到期时间（年），$r$ 为本国无风险利率，$b$ 为持有成本率，$\sigma$ 为年化波动率，则
+
+$$
+\begin{aligned}
+C&=Se^{(b-r)\tau}N(d_1)-Xe^{-r\tau}N(d_2),\\
+P&=Xe^{-r\tau}N(-d_2)-Se^{(b-r)\tau}N(-d_1),
+\end{aligned}
+$$
+
+其中
+
+$$
+d_1=
+\frac{\ln(S/X)+\left(b+\tfrac12\sigma^2\right)\tau}
+{\sigma\sqrt\tau},
+\qquad
+d_2=
+\frac{\ln(S/X)+\left(b-\tfrac12\sigma^2\right)\tau}
+{\sigma\sqrt\tau}
+=d_1-\sigma\sqrt\tau.
+$$
+
+常见取值为：$b=r$ 对应不派息股票；$b=0$ 对应 Black 期货期权模型；$b=r-r_f$ 对应 Garman–Kohlhagen 外汇模型。连续股息率为 $q$ 的股票可令 $b=r-q$。若股息是离散现金流，可将现货价格替换为
+
+$$
+S_{\mathrm{adj}}
+=S-\sum_i D_i e^{-r\tau_i},
+$$
+
+其中 $D_i$ 是到期前第 $i$ 笔股息，$\tau_i$ 是距该笔股息支付日的时间。
+
+### 传统敏感度公式
+
+以下公式统一使用剩余期限 $\tau$ 与持有成本 $b$。令 $n(\cdot)$ 为标准正态密度，$N(\cdot)$ 为标准正态累积分布函数。时间衰减指标统一按日历时间定义：
+
+$$
+\Theta_{\mathrm{calendar}}
+=\frac{\partial V}{\partial u}
+=-\frac{\partial V}{\partial\tau}.
+$$
+
+$$
+\begin{aligned}
+\Delta_C&=e^{(b-r)\tau}N(d_1),\\
+\Delta_P&=e^{(b-r)\tau}\left[N(d_1)-1\right],\\[4pt]
+\Gamma_C=\Gamma_P
+&=\frac{e^{(b-r)\tau}n(d_1)}{S\sigma\sqrt\tau},\\[4pt]
+\mathrm{Vega}_C=\mathrm{Vega}_P
+&=Se^{(b-r)\tau}n(d_1)\sqrt\tau.
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\Theta_{C,\mathrm{calendar}}
+&=-\frac{Se^{(b-r)\tau}n(d_1)\sigma}{2\sqrt\tau}
+-(b-r)Se^{(b-r)\tau}N(d_1)
+-rXe^{-r\tau}N(d_2),\\[4pt]
+\Theta_{P,\mathrm{calendar}}
+&=-\frac{Se^{(b-r)\tau}n(d_1)\sigma}{2\sqrt\tau}
++(b-r)Se^{(b-r)\tau}N(-d_1)
++rXe^{-r\tau}N(-d_2).
+\end{aligned}
+$$
+
+当 $b\ne0$ 时，
+
+$$
+\rho_C=\tau Xe^{-r\tau}N(d_2),
+\qquad
+\rho_P=-\tau Xe^{-r\tau}N(-d_2).
+$$
+
+在原书的 $b=0$ 结算口径下，$\rho_C=-\tau C$、$\rho_P=-\tau P$。外国利率或连续收益率敏感度为
+
+$$
+\Phi_C=-\tau Se^{(b-r)\tau}N(d_1),
+\qquad
+\Phi_P=\tau Se^{(b-r)\tau}N(-d_1),
+$$
+
+而弹性为
+
+$$
+\Lambda_C=\Delta_C\frac{S}{C},
+\qquad
+\Lambda_P=\Delta_P\frac{S}{P}.
+$$
+
+> [!note] 报价单位
+> 上式 $\Theta_{\mathrm{calendar}}$ 是对一年日历时间推进的敏感度，换算为自然日近似值时除以 $365$。Vega 与 Rho 是对完整小数变化的导数；若交易系统按 1 个百分点报价，通常还需除以 $100$。不同系统的时间与结算口径可能不同，使用前必须核对定义。
 
 <!-- source:block aba884c1481295b1 -->
 
-![原书图表](assets/ch18/f0351-01.jpg)
+### 高阶敏感度公式
+
+以下时间敏感度继续使用日历时间口径：
+
+$$
+\begin{aligned}
+\mathrm{Charm}_{\mathrm{calendar}}
+&=\frac{\partial\Delta}{\partial u}
+=-\frac{\partial\Delta}{\partial\tau},\\
+\mathrm{Color}_{\mathrm{calendar}}
+&=\frac{\partial\Gamma}{\partial u}
+=-\frac{\partial\Gamma}{\partial\tau},\\
+\mathrm{VegaDecay}_{\mathrm{calendar}}
+&=\frac{\partial\mathrm{Vega}}{\partial u}
+=-\frac{\partial\mathrm{Vega}}{\partial\tau}.
+\end{aligned}
+$$
+
+$$
+\mathrm{Vanna}
+=-e^{(b-r)\tau}n(d_1)\frac{d_2}{\sigma}.
+$$
+
+$$
+\begin{aligned}
+\mathrm{Charm}_{C,\mathrm{calendar}}
+&=-e^{(b-r)\tau}
+\left[
+n(d_1)\left(\frac{b}{\sigma\sqrt\tau}-\frac{d_2}{2\tau}\right)
++(b-r)N(d_1)
+\right],\\[4pt]
+\mathrm{Charm}_{P,\mathrm{calendar}}
+&=-e^{(b-r)\tau}
+\left[
+n(d_1)\left(\frac{b}{\sigma\sqrt\tau}-\frac{d_2}{2\tau}\right)
+-(b-r)N(-d_1)
+\right].
+\end{aligned}
+$$
+
+$$
+\mathrm{Speed}
+=-\frac{\Gamma}{S}
+\left(1+\frac{d_1}{\sigma\sqrt\tau}\right).
+$$
+
+$$
+\mathrm{Color}_{\mathrm{calendar}}
+=\Gamma\left[
+r-b
++\frac{bd_1}{\sigma\sqrt\tau}
++\frac{1-d_1d_2}{2\tau}
+\right].
+$$
+
+$$
+\mathrm{Volga}
+=\mathrm{Vega}\frac{d_1d_2}{\sigma}.
+$$
+
+$$
+\mathrm{VegaDecay}_{\mathrm{calendar}}
+=\mathrm{Vega}\left[
+r-b
++\frac{bd_1}{\sigma\sqrt\tau}
+-\frac{1+d_1d_2}{2\tau}
+\right].
+$$
+
+$$
+\mathrm{Zomma}
+=\Gamma\frac{d_1d_2-1}{\sigma}.
+$$
+
+这些公式分别对应[[Vanna]]、[[Charm]]、[[Speed]]、[[Color]]、[[Volga（Vomma）|Volga / Vomma]]、[[Vega Decay|Vega decay]]与[[Zomma]]。本节所有带 `calendar` 下标的指标均表示 $u$ 增加时的变化；若改为对剩余期限 $\tau$ 求导，符号整体相反。
 
 <!-- source:block c4c9fb02140d6707 -->
 
@@ -794,13 +1036,18 @@ $$
 
 <!-- source:block 66559af5b181c685 -->
 
-![原书图表](assets/ch18/qroot.jpg)
+对于恰好处于远期平值、期限为一年、利率为 $0$ 且波动率为 $1\%=0.01$ 的期权，
+
+$$
+d_1=\frac{0.01^2/2}{0.01}=0.005,
+\qquad
+d_2=\frac{-0.01^2/2}{0.01}=-0.005.
+$$
+
+> [!note] 公式校正
+> 原书公式图片把 $d_2$ 的最终结果排成了正的 $0.005$；由负分子及下文 $N(d_2)=0.498005$ 可知，正确结果应为 $-0.005$。
 
 <!-- source:block e604338f41e2291c -->
-
-![原书图表](assets/ch18/e0351-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
 
 <!-- source:block a253c597b4233e85 -->
 
@@ -926,13 +1173,15 @@ $$
 > [!quote]- English 101
 > We can further refine our approximation if we note that an at-the-money option is made up entirely of time value and that the time value of an option is proportional to the square root of time. If a one-year 100 call is worth 7.98 at a volatility of 20 percent, the same call with six months to expiration (*t* = 0.5) must be worth
 
-如果我们注意到平值期权完全由时间价值组成，并且期权的时间价值与时间的平方根成正比，我们可以进一步完善我们的近似。如果一年期100看涨期权的价值为7.98，波动率为20%，那么距离到期六个月（t = 0.5）的同一看涨期权的价值必须为
+如果我们注意到平值期权完全由时间价值组成，并且期权的时间价值与剩余期限的平方根成正比，我们可以进一步完善这一近似。如果一年期 100 看涨期权的价值为 7.98，波动率为 20%，那么距离到期六个月（$\tau=0.5$）的同一看涨期权价值应近似为
 
 <!-- source:block f53c909d21af72f6 -->
 
-![原书图表](assets/ch18/e0352-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+7.98\sqrt{0.5}
+=7.98\times0.707
+=5.64.
+$$
 
 <!-- source:block 65ddade3361bd1ff -->
 
@@ -943,9 +1192,13 @@ $$
 
 <!-- source:block 278ac5a70b3235bf -->
 
-![原书图表](assets/ch18/e0352-02.jpg)
+$$
+\operatorname{EV}_{T}
+\approx
+X\,(100\sigma)\sqrt\tau\,(0.00399),
+$$
 
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+其中 $\sigma$ 以小数表示，因此 $100\sigma$ 是波动率百分点数。
 
 <!-- source:block f0f7d02d1647127e -->
 
@@ -956,9 +1209,11 @@ $$
 
 <!-- source:block cec6d7e3c9d420b3 -->
 
-![原书图表](assets/ch18/e0353-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+V_0
+\approx
+\frac{X\,(100\sigma)\sqrt\tau\,(0.00399)}{1+r\tau}.
+$$
 
 <!-- source:block af53bfdf6251d232 -->
 
@@ -972,13 +1227,15 @@ $$
 > [!quote]- English 105
 > For example, if volatility is 18 percent, what is the expected value of a three-month (*t* = ¼) at-the-forward option with an exercise price of 65?
 
-例如，如果波动率为18%，那么行权价为65的三个月期（t = ½）远期期权的预期价值是多少？
+例如，如果波动率为 $18\%$，那么行权价为 $65$ 的三个月期（$\tau=\tfrac14$）远期平值期权的预期价值是多少？
 
 <!-- source:block c1ef8b33c817d540 -->
 
-![原书图表](assets/ch18/e0353-02.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+65\times0.18\times100\times\sqrt{\frac14}\times0.00399
+=65\times18\times\frac12\times0.00399
+\approx2.33.
+$$
 
 <!-- source:block 4f5ec3329c9b8642 -->
 
@@ -989,9 +1246,11 @@ $$
 
 <!-- source:block 15f0eba09bc5670e -->
 
-![原书图表](assets/ch18/e0353-03.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\frac{2.33}{1+0.04/4}
+=\frac{2.33}{1.01}
+\approx2.31.
+$$
 
 <!-- source:block e4356502cb6e2c66 -->
 
@@ -1002,9 +1261,11 @@ $$
 
 <!-- source:block bc4e1e924b426836 -->
 
-![原书图表](assets/ch18/e0353-04.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+65\times40\times\sqrt2\times0.00399
+=65\times40\times1.414\times0.00399
+\approx14.67.
+$$
 
 <!-- source:block 0c36ed5923a402f4 -->
 
@@ -1029,14 +1290,14 @@ $$
 > [!quote]- English 110
 > In the Black-Scholes model, the delta of an option is equal to *N*(*d*1). When we defined the delta in Chapter 7, we suggested that the delta is approximately the probability that an option will finish in the money. But we now know that the true probability that an option will finish in the money is equal to *N*(*d*2). Although *N*(*d*1) and *N*(*d*2) are often very close in value, especially for short-term options, *N*(*d*1) (the delta) is always larger than *N*(*d*2).
 
-在Black-Scholes模型中，期权的Delta等于N（d1）。当我们在第7,章中定义Delta时，我们建议Delta大约是期权完成ITM的概率。 但我们现在知道，期权完成ITM的真实概率等于N（d2）。尽管N（d1）和N（d2）的价值通常非常接近，尤其是对于短期期权，但N（d1）（Delta）始终大于N（d2）。
+在原始无股息 Black–Scholes 模型中，看涨期权的 Delta 等于 $N(d_1)$。第 7 章曾把 Delta 粗略解释为期权到期价内的概率；更准确地说，在模型的风险中性测度下，看涨期权到期价内概率为 $N(d_2)$。它不是现实测度下的“真实概率”。$N(d_1)$ 与 $N(d_2)$ 对短期期权往往很接近，但 $N(d_1)$ 始终大于 $N(d_2)$。
 
 <!-- source:block f7f318553f4d2078 -->
 
 > [!quote]- English 111
 > For a call option that is at the forward, the delta will be greater than 50, even if only slightly. Because we know that
 
-对于远期平值看涨期权，Delta将大于50，即使只是稍微大一点。因为我们知道
+对于远期平值看涨期权，看涨 Delta 会略大于 $0.50$；按原书采用的 0–100 报价标度，就是略大于 50。又因为
 
 <!-- source:block a09f27104e707996 -->
 
@@ -1044,7 +1305,9 @@ $$
 > Put delta = call delta – 100
 
 $$
-\text{Put delta} = \text{call delta} - 100
+\Delta_P=\Delta_C-1
+\qquad
+\left(\text{0--100 报价标度：put delta = call delta - 100}\right).
 $$
 
 <!-- source:block bfa079c2547c2e97 -->
@@ -1052,20 +1315,22 @@ $$
 > [!quote]- English 113
 > the delta of a put will be less than –50 in absolute value. This means that an at-the-forward straddle will have a positive delta. If a call and put have the same exercise price, at what forward price will the delta of the call and put be identical? This will occur when *d*1 is exactly 0. A straddle will therefore be exactly delta neutral when
 
-看跌期权的Delta绝对值将小于-50。这意味着远期平值跨式将具有正的Delta。如果看涨和看跌期权具有相同的行权价，那么看涨和看跌期权的Delta在什么远期价格上将相同？当d1恰好为0时，就会发生这种情况。因此，当情况发生时，跨式将完全处于Delta中性状态
+看跌 Delta 因而介于 $-0.50$ 与 $0$ 之间（其绝对值小于 $0.50$），所以远期平值跨式的净 Delta 为正。对于执行价相同的看涨与看跌期权，当二者 Delta 的绝对值相等时，跨式为 Delta 中性；这等价于 $d_1=0$，即
 
 <!-- source:block 6fd72a16b80e0925 -->
 
-![原书图表](assets/ch18/e0354-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+\ln\!\left(\frac{S}{X}\right)
++\left(r+\frac{\sigma^2}{2}\right)\tau
+=0.
+$$
 
 <!-- source:block 08d4407781358a6e -->
 
 > [!quote]- English 114
 > Solving, for *S*, we get
 
-对于S，我们得到
+解出此时的即期价格 $S_*$，得到
 
 <!-- source:block 9abebbaa9c20adfc -->
 
@@ -1073,7 +1338,7 @@ $$
 > *S* = *Xe*<sup>–[*r*+(σ</sup><sup>2</sup>/2)]<sup>t</sup>
 
 $$
-S\,=\,Xe^{-[r}^{2}/2)]^{t}
+S_*=Xe^{-\left(r+\tfrac12\sigma^2\right)\tau}.
 $$
 
 <!-- source:block 48585a5ea2698e3e -->
@@ -1081,7 +1346,7 @@ $$
 > [!quote]- English 116
 > For a straddle to be exactly delta neutral, the forward price will be less than the exercise price by a factor of
 
-对于跨式完全是Delta中性的，远期价格将比行权价低一个因子
+原文随后把这一带有利率项的表达式称为“远期价格”因子；严格地说，它是即期价格与执行价之比。按无股息远期关系 $F=S e^{r\tau}$ 换算后，利率项抵消：
 
 <!-- source:block 0ddcf27bab9128f3 -->
 
@@ -1089,7 +1354,9 @@ $$
 > *e*<sup>–[*r*+σ<sup>2</sup>/2)]*t*</sup>
 
 $$
-e^{-[r2t}
+\frac{S_*}{X}=e^{-\left(r+\tfrac12\sigma^2\right)\tau},
+\qquad
+\frac{F_*}{X}=e^{-\tfrac12\sigma^2\tau}.
 $$
 
 <!-- source:block 701316ab10279c47 -->
@@ -1097,7 +1364,7 @@ $$
 > [!quote]- English 118
 > As time or volatility increases, the forward price at which the straddle is delta neutral drops further and further below the exercise price—the call goes further out of the money, and the put goes further into the money. With a 0 interest rate, the underlying price at which a 100 straddle will be exactly delta neutral is shown in Figure 18-7. At very low volatilities, the delta-neutral price is close to 100. But, at very high volatilities and with increasing time to expiration, the delta-neutral price is well below 100.
 
-随着时间或波动率的增加，跨式为Delta中性的远期价格进一步下降到行权价以下-看涨期权进一步价外，看跌期权进一步进入货币。在利率为0时，100跨式的标的价格恰好为Delta中性，如图18-7所示。在波动率非常低的情况下，Delta中性价格接近100。但是，在波动率非常高且到期时间增加的情况下，Delta中性价格远低于100。
+随着剩余期限或波动率增加，Delta 中性远期价格相对执行价的比例 $F_*/X$ 会进一步下降——看涨期权更价外，看跌期权更价内。当利率为 0 时，即期价与远期价相同，图 18-7 展示了执行价为 100 的跨式在不同波动率和期限下的 Delta 中性标的价格。波动率很低时，该价格接近 100；波动率很高且剩余期限较长时，该价格会明显低于 100。
 
 <!-- source:block eaac2ae12f697922 -->
 
@@ -1120,9 +1387,9 @@ $$
 
 <!-- source:block e22da4b3daffa6d7 -->
 
-![原书图表](assets/ch18/e0355-01.jpg)
-
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+$$
+-\frac{Se^{(b-r)\tau}n(d_1)\sigma}{2\sqrt\tau}.
+$$
 
 <!-- source:block fd999edfebfa714b -->
 
@@ -1137,7 +1404,7 @@ $$
 > (*b* – *r*)*Se*<sup>(*b–r*)*t*</sup> *N*(*d*1
 
 $$
-(b\,-\,r)Se^{(\text{b-rt}}\,N(d_{1}
+(b-r)Se^{(b-r)\tau}N(d_1).
 $$
 
 <!-- source:block 753371a3f601d1a4 -->
@@ -1153,7 +1420,7 @@ $$
 > *rXe*<sup>–rt</sup> *N*(*d*2)
 
 $$
-rXe^{-rt}\,N(d_{2})
+rXe^{-r\tau}\,N(d_{2}).
 $$
 
 <!-- source:block fbed0d2c51b57053 -->
@@ -1190,9 +1457,14 @@ $$
 
 <!-- source:block 080e5482bfde7485 -->
 
-![原书图表](assets/ch18/t0356-01.jpg)
+| 临界条件 | 对应标的价格 $S$ |
+|---|---:|
+| $d_1=0$（原始股票模型中 Delta 为 $0.50$，书中记作 50） | $S=Xe^{-(b+\sigma^2/2)\tau}$ |
+| Gamma 最大 | $S=Xe^{-(b+3\sigma^2/2)\tau}$ |
+| 无漂移 Theta 的绝对值最大 | $S=Xe^{-(b-\sigma^2/2)\tau}$ |
+| Vega 最大 | $S=Xe^{-(b-\sigma^2/2)\tau}$ |
 
-<!-- 原 EPUB 中此公式为图片，已原样保留 -->
+第一行的精确条件是 $d_1=0$；在广义模型中，$\Delta_C=e^{(b-r)\tau}N(d_1)$，因此只有 $b=r$ 时才恰好等于 $0.50$。Theta 一行指前文的无漂移（波动率衰减）分量；若把利率与持有成本项也计入完整的日历 Theta，其极值位置通常还取决于期权类型和结算口径。
 
 <!-- source:block 9c6960de408f8569 -->
 
@@ -1272,21 +1544,22 @@ $$
 
 > [!note] Footnote 139
 > <sup>2.</sup> We could in fact drop *rt* and at the same time replace *S* with its forward price *Sert*. The values are the same: ln(*S*/*X*) + *rt* = ln(*Sert/X*).
-> 事实上，我们可以放弃RT，同时用其远期价格Sert替换S。值相同：ln(S/X)+tt = ln(Sert/X)。
+
+[^ovp18-2]: 事实上，可以去掉 $r\tau$ 项，同时把 $S$ 替换为其远期价格 $F=Se^{r\tau}$；两种写法相同：$\ln(S/X)+r\tau=\ln(Se^{r\tau}/X)=\ln(F/X)$。
 
 <!-- source:block d4800cb79ac34aca -->
 
 > [!note] Footnote 140
 > <sup>3</sup> To further simplify this approximation, many traders round .00399 to .004. This leads to what is sometimes referred to as the *40% rule*: the expected value of an at-the-forward option is equal to approximately 40% of one standard deviation, where one standard deviation is equal to *F*× σ√*t*.
 
-[^ovp18-3]: 为了进一步简化这种逼近，许多交易者将.00399舍入到.004。这导致了有时所谓的40%规则：远期期权的预期值约等于一个标准差的40%，其中一个标准差等于F x Sigma ' t。
+[^ovp18-3]: 为了进一步简化这一近似，许多交易者会把 $0.00399$ 舍入为 $0.004$。这导出了所谓的“40% 规则”：远期平值期权的预期价值约等于一个标准差的 $40\%$，其中一个标准差为 $F\sigma\sqrt\tau$。
 
 <!-- source:block ed256dc1e1793aef -->
 
 > [!note] Footnote 141
 > <sup>4</sup> For a more exact calculation, 1 + *r* × *t* can be replaced by *e<sup>rt</sup>*.
 
-[^ovp18-4]: 为了更精确的计算，1 + r x t可以用ert代替。
+[^ovp18-4]: 若使用连续复利进行更精确的计算，可用 $e^{r\tau}$ 代替 $1+r\tau$。
 
 ---
 

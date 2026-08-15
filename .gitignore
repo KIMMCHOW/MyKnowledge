@@ -6,7 +6,7 @@ Thumbs.db
 .DS_Store
 AGENTS.md
 
-# Obsidian 本机配置：工作区、关系图（含 graph N.json 冲突副本）、主题、外观、插件状态等全部不入库
+# Obsidian 本机配置默认不入库：工作区、冲突副本、主题、外观、插件状态等
 .obsidian/
 **/.obsidian/
 
@@ -17,6 +17,11 @@ __pycache__/
 # Obsidian 本地渲染与 iCloud 冲突副本（与笔记内容无关）
 graph*.json
 *.graph.json
+
+# 仅共享全局关系图的颜色分组；主题及其他本机配置继续忽略
+!/.obsidian/
+/.obsidian/*
+!/.obsidian/graph.json
 
 # 翻译工具中间产物（可重新生成，不入库）
 .translation-cache/

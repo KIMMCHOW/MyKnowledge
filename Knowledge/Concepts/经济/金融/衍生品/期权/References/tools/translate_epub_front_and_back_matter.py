@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate bilingual Markdown for every non-chapter item in the EPUB spine."""
+"""Generate the retained conclusion and two bilingual appendices."""
 
 from __future__ import annotations
 
@@ -10,20 +10,6 @@ from pathlib import Path
 
 
 SECTIONS = [
-    ("cover", "封面 Cover.md", 90, "封面", "Cover", "封面", "cover", None),
-    ("title", "书名页 Title Page.md", 91, "书名页", "Title Page", "书名页", "title-page", None),
-    (
-        "copyright",
-        "版权与使用条款 Copyright and Terms of Use.md",
-        92,
-        "版权与使用条款",
-        "Copyright and Terms of Use",
-        "版权页",
-        "copyright",
-        None,
-    ),
-    ("dedication", "献词 Dedication.md", 93, "献词", "Dedication", "献词", "dedication", None),
-    ("contents", "原书目录 Contents.md", 94, "原书目录", "Contents", "目录", "contents", None),
     ("afterword", "结语 A Final Thought.md", 26, "结语", "A Final Thought", "结语", "afterword", None),
     (
         "appendixa",
@@ -44,17 +30,6 @@ SECTIONS = [
         "附录 B",
         "appendix-b",
         "B",
-    ),
-    ("index", "索引 Index.md", 29, "索引", "Index", "索引", "index", None),
-    (
-        "aboutauthor",
-        "关于作者 About the Author.md",
-        30,
-        "关于作者",
-        "About the Author",
-        "作者简介",
-        "about-author",
-        None,
     ),
 ]
 
@@ -88,59 +63,16 @@ def main() -> int:
         ]
         if source_label:
             command.extend(["--source-label", source_label])
-        if source == "index":
-            command.append("--preserve-english")
         subprocess.run(command, cwd=root, check=True)
         return label, english
 
-    print("running front and back matter with up to 3 workers", flush=True)
+    print("generating retained back matter with up to 3 workers", flush=True)
     with ThreadPoolExecutor(max_workers=3) as pool:
         futures = {pool.submit(run, section): section for section in SECTIONS}
         for future in as_completed(futures):
             label, english = future.result()
             print(f"[{label} completed] {english}", flush=True)
 
-    # Rebuilding the EPUB contents produces plain translated paragraphs.
-    # Restore the Obsidian chapter/section links and verify every target.
-    linker = root / "tools" / "link_book_contents.py"
-    link_audit = root / "tools" / "audit_navigation_links.py"
-    subprocess.run([sys.executable, str(linker)], cwd=root, check=True)
-    subprocess.run([sys.executable, str(link_audit)], cwd=root, check=True)
-    for script in (
-        "repair_untranslated_prose.py",
-        "normalize_visible_option_terms.py",
-        "repair_latex_formulas.py",
-    ):
-        subprocess.run(
-            [sys.executable, str(root / "tools" / script)],
-            cwd=root,
-            check=True,
-        )
-    subprocess.run(
-        [sys.executable, str(root / "tools" / "build_option_knowledge_graph.py")],
-        cwd=root,
-        check=True,
-    )
-    subprocess.run(
-        [sys.executable, str(root / "tools" / "audit_knowledge_graph.py")],
-        cwd=root,
-        check=True,
-    )
-    subprocess.run(
-        [sys.executable, str(root / "tools" / "audit_translation_quality.py")],
-        cwd=root,
-        check=True,
-    )
-    subprocess.run(
-        [sys.executable, str(root / "tools" / "audit_untranslated_prose.py")],
-        cwd=root,
-        check=True,
-    )
-    subprocess.run(
-        [sys.executable, str(root / "tools" / "audit_bilingual_edition.py")],
-        cwd=root,
-        check=True,
-    )
     return 0
 
 

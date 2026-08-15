@@ -82,13 +82,11 @@ def main() -> int:
         cwd=root,
         check=True,
     )
-    # Reconnect the full-book contents to any regenerated headings, rebuild
-    # the concept-first knowledge graph, and fail fast on broken structure.
+    # Rebuild the concept-first knowledge graph and fail fast on broken structure.
     for script in (
         "repair_untranslated_prose.py",
         "normalize_visible_option_terms.py",
         "repair_latex_formulas.py",
-        "link_book_contents.py",
         "build_option_knowledge_graph.py",
         "audit_heading_structure.py",
         "audit_navigation_links.py",

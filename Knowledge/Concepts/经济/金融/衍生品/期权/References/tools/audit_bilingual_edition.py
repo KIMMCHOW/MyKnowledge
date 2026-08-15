@@ -20,7 +20,6 @@ from translate_epub_chapter import (
     plain_text,
     source_hash,
 )
-from translate_epub_front_and_back_matter import SECTIONS
 from translate_remaining_chapters import CHAPTERS
 
 
@@ -34,9 +33,47 @@ class Section:
     manual: bool = False
 
 
+CH18_CONVERTED_IMAGES = frozenset(
+    {
+        "e0339-01.jpg",
+        "e0340-01.jpg",
+        "e0340-02.jpg",
+        "e0340-03.jpg",
+        "e0341-01.jpg",
+        "e0341-02.jpg",
+        "e0341-03.jpg",
+        "e0342-01.jpg",
+        "e0342-02.jpg",
+        "e0346-01.jpg",
+        "e0347-01.jpg",
+        "e0347-02.jpg",
+        "e0348-01.jpg",
+        "e0349-01.jpg",
+        "e0351-01.jpg",
+        "e0352-01.jpg",
+        "e0352-02.jpg",
+        "e0353-01.jpg",
+        "e0353-02.jpg",
+        "e0353-03.jpg",
+        "e0353-04.jpg",
+        "e0354-01.jpg",
+        "e0355-01.jpg",
+        "f0350-01.jpg",
+        "f0351-01.jpg",
+        "qroot.jpg",
+        "t0349-01.jpg",
+        "t0356-01.jpg",
+    }
+)
+CH18_DISPLAY_FORMULA_IMAGES = frozenset(
+    name
+    for name in CH18_CONVERTED_IMAGES
+    if name.startswith(("e", "f"))
+)
+
+
 def section_list() -> list[Section]:
     sections = [
-        Section("preface", "前言 Preface.md", "00", "Preface", manual=True),
         Section(
             "ch1",
             "金融合约 Financial Contracts.md",
@@ -55,25 +92,30 @@ def section_list() -> list[Section]:
         for number, chinese, english in CHAPTERS
     )
     sections.extend(
-        Section(source, filename, str(number), english, source_label)
-        for source, filename, number, _chinese, english, _label, _key, source_label in SECTIONS
+        (
+            Section(
+                "afterword",
+                "结语 A Final Thought.md",
+                "26",
+                "A Final Thought",
+            ),
+            Section(
+                "appendixa",
+                "附录A-期权术语表 Glossary of Option Terminology.md",
+                "27",
+                "Glossary of Option Terminology",
+                "A",
+            ),
+            Section(
+                "appendixb",
+                "附录B-实用数学 Some Useful Math.md",
+                "28",
+                "Some Useful Math",
+                "B",
+            ),
+        )
     )
-    # Match the EPUB spine rather than filename order.
-    order = {
-        "cover": 0,
-        "title": 1,
-        "copyright": 2,
-        "dedication": 3,
-        "contents": 4,
-        "preface": 5,
-        **{f"ch{number}": 5 + number for number in range(1, 26)},
-        "afterword": 31,
-        "appendixa": 32,
-        "appendixb": 33,
-        "index": 34,
-        "aboutauthor": 35,
-    }
-    return sorted(sections, key=lambda item: order[item.source])
+    return sections
 
 
 def source_metrics(archive: zipfile.ZipFile, section: Section) -> dict[str, object]:
@@ -82,8 +124,7 @@ def source_metrics(archive: zipfile.ZipFile, section: Section) -> dict[str, obje
     if body is None:
         raise RuntimeError(f"{section.source}: missing body")
     hashes: list[str] = []
-    images = 0
-    formula_images = 0
+    image_names: list[str] = []
     formulas = 0
     text_blocks = 0
     skipped_title = False
@@ -95,8 +136,9 @@ def source_metrics(archive: zipfile.ZipFile, section: Section) -> dict[str, obje
         ]
         if block_images:
             hashes.append(source_hash(block))
-            images += len(block_images)
-            formula_images += int(css_class.startswith("eq"))
+            image_names.extend(
+                Path(node.attrib.get("src", "")).name for node in block_images
+            )
             continue
         text = plain_text(block)
         if not text:
@@ -113,8 +155,7 @@ def source_metrics(archive: zipfile.ZipFile, section: Section) -> dict[str, obje
         formulas += int(tag == "p" and is_formula_block(css_class, text))
     return {
         "hashes": hashes,
-        "images": images,
-        "formula_images": formula_images,
+        "image_names": image_names,
         "formulas": formulas,
         "text_blocks": text_blocks,
     }
@@ -140,6 +181,7 @@ def markdown_metrics(path: Path) -> dict[str, object]:
     return {
         "hashes": hashes,
         "images": image_refs,
+        "image_names": [Path(ref).name for ref in image_refs],
         "latex_blocks": latex_delimiters // 2,
         "latex_balanced": latex_delimiters % 2 == 0,
         "bad_latex_tokens": bool(
@@ -160,25 +202,23 @@ def main() -> int:
     if len(epubs) != 1:
         raise RuntimeError(f"expected one EPUB, found {len(epubs)}")
 
-    rows: list[str] = []
     failures: list[str] = []
     total_source_blocks = total_generated_blocks = 0
+    manual_source_units = manual_generated_units = 0
     total_source_images = total_generated_images = 0
-    total_formulas = total_formula_images = 0
+    total_formulas = total_converted_images = 0
 
     with zipfile.ZipFile(epubs[0]) as archive:
         for section in section_list():
             output = output_dir / section.output
             if not output.exists():
                 failures.append(f"{section.source}: 缺少 {section.output}")
-                rows.append(f"| {section.source} | — | — | — | — | ❌ 缺少文件 |")
                 continue
             source = source_metrics(archive, section)
             generated = markdown_metrics(output)
             source_counter = Counter(source["hashes"])
             generated_counter = Counter(generated["hashes"])
             if section.manual:
-                coverage = "人工稿计数核对"
                 # Manual files predate hash annotations; compare source paragraph
                 # count with retained English callouts and verify all images.
                 english_count = (
@@ -187,12 +227,43 @@ def main() -> int:
                     + int(generated["figure_captions"])
                 )
                 text_ok = english_count == int(source["text_blocks"])
+                manual_source_units += int(source["text_blocks"])
+                manual_generated_units += english_count
             else:
-                coverage = f"{sum((source_counter & generated_counter).values())}/{sum(source_counter.values())}"
                 text_ok = source_counter == generated_counter
-            images_ok = len(generated["images"]) == int(source["images"])
+                total_source_blocks += len(source["hashes"])
+                total_generated_blocks += len(generated["hashes"])
+            source_images = Counter(source["image_names"])
+            expected_images = source_images
+            expected_formula_blocks = int(source["formulas"])
+            if section.source == "ch18":
+                expected_images = Counter(
+                    name
+                    for name in source["image_names"]
+                    if name not in CH18_CONVERTED_IMAGES
+                )
+                converted_images = sum(
+                    count
+                    for name, count in source_images.items()
+                    if name in CH18_CONVERTED_IMAGES
+                )
+                total_converted_images += converted_images
+                expected_formula_blocks += sum(
+                    count
+                    for name, count in source_images.items()
+                    if name in CH18_DISPLAY_FORMULA_IMAGES
+                )
+                formula_count_ok = (
+                    int(generated["latex_blocks"]) >= expected_formula_blocks
+                )
+            else:
+                formula_count_ok = (
+                    int(generated["latex_blocks"]) == expected_formula_blocks
+                )
+            generated_images = Counter(generated["image_names"])
+            images_ok = generated_images == expected_images
             formula_ok = (
-                int(generated["latex_blocks"]) == int(source["formulas"])
+                formula_count_ok
                 and bool(generated["latex_balanced"])
                 and not bool(generated["bad_latex_tokens"])
             )
@@ -201,75 +272,30 @@ def main() -> int:
             if not ok:
                 failures.append(
                     f"{section.source}: text={text_ok}, images={images_ok}, "
-                    f"formula={formula_ok}, currency={currency_ok}"
+                    f"formula={formula_ok}, currency={currency_ok}; "
+                    f"images={sum(generated_images.values())}/{sum(expected_images.values())}, "
+                    f"latex={generated['latex_blocks']}/{expected_formula_blocks}"
                 )
-            status = "✅ 通过" if ok else "❌ 待处理"
-            rows.append(
-                f"| {section.source} | {len(source['hashes'])} | {coverage} | "
-                f"{len(generated['images'])}/{source['images']} | "
-                f"{generated['latex_blocks']}/{source['formulas']} + 图片 {source['formula_images']} | {status} |"
-            )
-            total_source_blocks += len(source["hashes"])
-            total_generated_blocks += (
-                len(generated["hashes"])
-                if not section.manual
-                else (
-                    int(generated["quotes"])
-                    + int(generated["footnotes"])
-                    + int(generated["figure_captions"])
-                )
-            )
-            total_source_images += int(source["images"])
-            total_generated_images += len(generated["images"])
+            total_source_images += sum(expected_images.values())
+            total_generated_images += sum(generated_images.values())
             total_formulas += int(source["formulas"])
-            total_formula_images += int(source["formula_images"])
-
-    overall = "通过" if not failures else "待处理"
-    report = [
-        "---",
-        "title: Option Volatility and Pricing 双语版完整性审计",
-        "tags:",
-        "  - 期权",
-        "  - 双语阅读",
-        "  - 完整性审计",
-        "created: 2026-08-03",
-        f"status: {overall}",
-        "---",
-        "",
-        "# 完整性审计 / Completeness Audit",
-        "",
-        "> [!summary] 审计范围",
-        "> 按 EPUB 书脊顺序核对封面、书名页、版权页、献词、目录、前言、25 章正文、结语、两个附录、索引和作者简介。",
-        "> 机器初译文件使用源块指纹逐块校验；前言和第 1 章为早期人工稿，使用英文段落数与图像数核对。",
-        "",
-        "| EPUB 部分 | 源块 | 文本覆盖 | 图像 | LaTeX 公式 + 公式图 | 结果 |",
-        "|---|---:|---:|---:|---:|---|",
-        *rows,
-        "",
-        "## 汇总",
-        "",
-        f"- EPUB 可处理源块：{total_source_blocks}",
-        f"- Markdown 已核对块：{total_generated_blocks}",
-        f"- 原书图像：{total_generated_images}/{total_source_images}",
-        f"- 文本公式转 LaTeX：{total_formulas}",
-        f"- 原 EPUB 以图片存储的公式（原样保留）：{total_formula_images}",
-        "",
-        "## 公式规则",
-        "",
-        "- 独立公式使用 `$$...$$`。",
-        "- 变量、上下标、希腊字母和运算符不送入翻译接口。",
-        "- `>>` 推导符转为 `\\Rightarrow`，Unicode 分数转为 `\\frac{...}{...}`。",
-        "- 原 EPUB 中只有图片、无可靠公式文本的项目保留原图，不猜测转写。",
-    ]
     if failures:
-        report.extend(["", "## 待处理项", ""] + [f"- {item}" for item in failures])
-    report.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
-    report_path = output_dir / "完整性审计.md"
-    report_path.write_text("\n".join(report), encoding="utf-8")
-    print(f"wrote {report_path}")
-    if failures:
-        print("\n".join(failures), file=sys.stderr)
+        print(
+            f"bilingual edition audit: FAIL ({len(failures)} retained sections)",
+            file=sys.stderr,
+        )
+        for failure in failures:
+            print(f"- {failure}", file=sys.stderr)
         return 1
+    print(
+        "bilingual edition audit: PASS "
+        f"({len(section_list())} retained files, "
+        f"source fingerprints {total_generated_blocks}/{total_source_blocks}, "
+        f"chapter 1 manual units {manual_generated_units}/{manual_source_units}, "
+        f"non-formula images {total_generated_images}/{total_source_images}, "
+        f"chapter 18 converted image occurrences {total_converted_images}, "
+        f"source text formulas {total_formulas})"
+    )
     return 0
 
 
