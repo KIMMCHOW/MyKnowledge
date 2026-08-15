@@ -12,15 +12,18 @@ option_leg_count: 4
 underlying_leg_count: 0
 strategy_family: 铁鹰式价差
 status: completed
+completion_status: completed
 created_at: 2026-08-15
 updated_at: 2026-08-15
 tags:
   - 期权
   - 期权策略
   - 铁鹰式
-  - 多腿策略
+  - 四腿策略
 domain: 经济
 subdomain: 金融
+product_domain: 衍生品
+instrument: 期权
 ---
 
 # 铁鹰式 / Iron Condor
@@ -129,10 +132,16 @@ $$
 
 ## 盈亏曲线（到期与到期前）
 
+### 信用铁鹰式
+
 ![[../assets/铁鹰式 Iron Condor 盈亏曲线.svg]]
 
+### 反向铁鹰式
+
+![[../assets/反向铁鹰式 Reverse Iron Condor 盈亏曲线.svg]]
+
 > [!note] 读图口径
-> 图中展示信用铁鹰：买入远端保护翼、卖出较近 Put 与 Call。实线为到期损益，虚线为四条腿尚余 30 天时的理论损益；中间区域是到期最大盈利平台。反向铁鹰或不等翼结构需要重新估值。
+> 两图分别展示信用铁鹰与反向铁鹰。实线为到期损益，虚线为四条腿尚余 30 天时的理论损益；不等翼结构需按两侧翼宽分别重新估值。
 
 ## 来源
 

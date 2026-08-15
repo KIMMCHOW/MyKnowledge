@@ -13,8 +13,9 @@ Conventions
 * Same-expiry strategies are opened with 90 calendar days remaining, observed
   with 30 days remaining, and then valued at expiry.
 * Calendar and diagonal spreads use a 90-day near leg and a 180-day far leg.
-  They are observed when the near leg has 30 days left; the solid curve is the
-  near-leg expiry date, when the far leg still has 90 days left.
+  Time butterflies use equally spaced 90-, 120- and 150-day legs.  Multi-expiry
+  strategies are observed when the near leg has 30 days left; the solid curve
+  is the near-leg expiry date.
 * Stock legs use ``quantity * (S - S0)``.  Option legs use the change from the
   entry model value to the evaluation model value.
 
@@ -42,6 +43,8 @@ ENTRY_DAYS = 90
 OBSERVATION_ELAPSED_DAYS = 60
 KEY_ELAPSED_DAYS = 90
 FAR_DAYS = 180
+TIME_FLY_MIDDLE_DAYS = 120
+TIME_FLY_FAR_DAYS = 150
 
 X_MIN = 50.0
 X_MAX = 150.0
@@ -86,63 +89,163 @@ def put(quantity: float, strike: float, maturity_days: int = ENTRY_DAYS) -> Opti
 STRATEGIES: tuple[Strategy, ...] = (
     Strategy(
         "看涨期权 Call",
-        "看涨期权 / Call",
+        "多头看涨期权 / Long Call",
         "代表构造：多头看涨（买入 1 份 K=100 Call）",
         (call(+1, 100),),
     ),
     Strategy(
         "看跌期权 Put",
-        "看跌期权 / Put",
+        "多头看跌期权 / Long Put",
         "代表构造：多头看跌（买入 1 份 K=100 Put）",
         (put(+1, 100),),
     ),
     Strategy(
+        "空头看涨期权 Short Call",
+        "空头看涨期权 / Short Call",
+        "代表构造：空头看涨（卖出 1 份 K=100 Call）",
+        (call(-1, 100),),
+    ),
+    Strategy(
+        "空头看跌期权 Short Put",
+        "空头看跌期权 / Short Put",
+        "代表构造：空头看跌（卖出 1 份 K=100 Put）",
+        (put(-1, 100),),
+    ),
+    Strategy(
         "看涨垂直价差 Vertical Call",
-        "看涨垂直价差 / Vertical Call",
+        "牛市看涨垂直价差 / Bull Call Spread",
         "代表构造：牛市借记价差（买 K=95 Call，卖 K=105 Call）",
         (call(+1, 95), call(-1, 105)),
     ),
     Strategy(
         "看跌垂直价差 Vertical Put",
-        "看跌垂直价差 / Vertical Put",
+        "熊市看跌垂直价差 / Bear Put Spread",
         "代表构造：熊市借记价差（买 K=105 Put，卖 K=95 Put）",
         (put(+1, 105), put(-1, 95)),
     ),
     Strategy(
+        "熊市看涨垂直价差 Bear Call Spread",
+        "熊市看涨垂直价差 / Bear Call Spread",
+        "代表构造：熊市信用价差（卖 K=95 Call，买 K=105 Call）",
+        (call(-1, 95), call(+1, 105)),
+    ),
+    Strategy(
+        "牛市看跌垂直价差 Bull Put Spread",
+        "牛市看跌垂直价差 / Bull Put Spread",
+        "代表构造：牛市信用价差（卖 K=105 Put，买 K=95 Put）",
+        (put(-1, 105), put(+1, 95)),
+    ),
+    Strategy(
         "看涨日历价差 Calendar Call",
-        "看涨日历价差 / Calendar Call",
+        "多头看涨日历价差 / Long Call Calendar Spread",
         "代表构造：卖近月 K=100 Call，买远月 K=100 Call",
         (call(-1, 100, ENTRY_DAYS), call(+1, 100, FAR_DAYS)),
     ),
     Strategy(
         "看跌日历价差 Calendar Put",
-        "看跌日历价差 / Calendar Put",
+        "多头看跌日历价差 / Long Put Calendar Spread",
         "代表构造：卖近月 K=100 Put，买远月 K=100 Put",
         (put(-1, 100, ENTRY_DAYS), put(+1, 100, FAR_DAYS)),
     ),
     Strategy(
+        "空头看涨日历价差 Short Call Calendar Spread",
+        "空头看涨日历价差 / Short Call Calendar Spread",
+        "代表构造：买近月 K=100 Call，卖远月 K=100 Call",
+        (call(+1, 100, ENTRY_DAYS), call(-1, 100, FAR_DAYS)),
+    ),
+    Strategy(
+        "空头看跌日历价差 Short Put Calendar Spread",
+        "空头看跌日历价差 / Short Put Calendar Spread",
+        "代表构造：买近月 K=100 Put，卖远月 K=100 Put",
+        (put(+1, 100, ENTRY_DAYS), put(-1, 100, FAR_DAYS)),
+    ),
+    Strategy(
+        "多头看涨时间蝶式 Long Call Time Butterfly",
+        "多头看涨时间蝶式 / Long Call Time Butterfly",
+        "代表构造（同 K=100）：−May Call +2 June Call −July Call",
+        (
+            call(-1, 100, ENTRY_DAYS),
+            call(+2, 100, TIME_FLY_MIDDLE_DAYS),
+            call(-1, 100, TIME_FLY_FAR_DAYS),
+        ),
+    ),
+    Strategy(
+        "空头看涨时间蝶式 Short Call Time Butterfly",
+        "空头看涨时间蝶式 / Short Call Time Butterfly",
+        "代表构造（同 K=100）：+May Call −2 June Call +July Call",
+        (
+            call(+1, 100, ENTRY_DAYS),
+            call(-2, 100, TIME_FLY_MIDDLE_DAYS),
+            call(+1, 100, TIME_FLY_FAR_DAYS),
+        ),
+    ),
+    Strategy(
+        "多头看跌时间蝶式 Long Put Time Butterfly",
+        "多头看跌时间蝶式 / Long Put Time Butterfly",
+        "代表构造（同 K=100）：−May Put +2 June Put −July Put",
+        (
+            put(-1, 100, ENTRY_DAYS),
+            put(+2, 100, TIME_FLY_MIDDLE_DAYS),
+            put(-1, 100, TIME_FLY_FAR_DAYS),
+        ),
+    ),
+    Strategy(
+        "空头看跌时间蝶式 Short Put Time Butterfly",
+        "空头看跌时间蝶式 / Short Put Time Butterfly",
+        "代表构造（同 K=100）：+May Put −2 June Put +July Put",
+        (
+            put(+1, 100, ENTRY_DAYS),
+            put(-2, 100, TIME_FLY_MIDDLE_DAYS),
+            put(+1, 100, TIME_FLY_FAR_DAYS),
+        ),
+    ),
+    Strategy(
         "看涨对角价差 Diagonal Call",
-        "看涨对角价差 / Diagonal Call",
+        "多头看涨对角价差 / Long Call Diagonal Spread",
         "代表构造：卖近月 K=105 Call，买远月 K=95 Call",
         (call(-1, 105, ENTRY_DAYS), call(+1, 95, FAR_DAYS)),
     ),
     Strategy(
         "看跌对角价差 Diagonal Put",
-        "看跌对角价差 / Diagonal Put",
+        "多头看跌对角价差 / Long Put Diagonal Spread",
         "代表构造：卖近月 K=95 Put，买远月 K=105 Put",
         (put(-1, 95, ENTRY_DAYS), put(+1, 105, FAR_DAYS)),
     ),
     Strategy(
+        "空头看涨对角价差 Short Call Diagonal Spread",
+        "空头看涨对角价差 / Short Call Diagonal Spread",
+        "代表构造：买近月 K=105 Call，卖远月 K=95 Call",
+        (call(+1, 105, ENTRY_DAYS), call(-1, 95, FAR_DAYS)),
+    ),
+    Strategy(
+        "空头看跌对角价差 Short Put Diagonal Spread",
+        "空头看跌对角价差 / Short Put Diagonal Spread",
+        "代表构造：买近月 K=95 Put，卖远月 K=105 Put",
+        (put(+1, 95, ENTRY_DAYS), put(-1, 105, FAR_DAYS)),
+    ),
+    Strategy(
         "看涨比率价差 Ratio Call",
-        "看涨比率价差 / Ratio Call",
+        "看涨正向比率价差 / Call Ratio Spread",
         "代表构造：1×2（买 1 份 K=95 Call，卖 2 份 K=110 Call）",
         (call(+1, 95), call(-2, 110)),
     ),
     Strategy(
         "看跌比率价差 Ratio Put",
-        "看跌比率价差 / Ratio Put",
+        "看跌正向比率价差 / Put Ratio Spread",
         "代表构造：1×2（买 1 份 K=105 Put，卖 2 份 K=90 Put）",
         (put(+1, 105), put(-2, 90)),
+    ),
+    Strategy(
+        "看涨反向比率价差 Call Ratio Backspread",
+        "看涨反向比率价差 / Call Ratio Backspread",
+        "代表构造：1×2（卖 1 份 K=95 Call，买 2 份 K=110 Call）",
+        (call(-1, 95), call(+2, 110)),
+    ),
+    Strategy(
+        "看跌反向比率价差 Put Ratio Backspread",
+        "看跌反向比率价差 / Put Ratio Backspread",
+        "代表构造：1×2（卖 1 份 K=105 Put，买 2 份 K=90 Put）",
+        (put(-1, 105), put(+2, 90)),
     ),
     Strategy(
         "备兑看涨 Covered Call (Buy-Write)",
@@ -174,45 +277,111 @@ STRATEGIES: tuple[Strategy, ...] = (
     ),
     Strategy(
         "跨式 Straddle",
-        "跨式 / Straddle",
+        "多头跨式 / Long Straddle",
         "代表构造：多头跨式（买入 K=100 Call 与 K=100 Put）",
         (call(+1, 100), put(+1, 100)),
     ),
     Strategy(
         "宽跨式 Strangle",
-        "宽跨式 / Strangle",
+        "多头宽跨式 / Long Strangle",
         "代表构造：多头宽跨式（买入 K=90 Put 与 K=110 Call）",
         (put(+1, 90), call(+1, 110)),
     ),
     Strategy(
+        "空头跨式 Short Straddle",
+        "空头跨式 / Short Straddle",
+        "代表构造：卖出 K=100 Call 与 K=100 Put",
+        (call(-1, 100), put(-1, 100)),
+    ),
+    Strategy(
+        "空头宽跨式 Short Strangle",
+        "空头宽跨式 / Short Strangle",
+        "代表构造：卖出 K=90 Put 与 K=110 Call",
+        (put(-1, 90), call(-1, 110)),
+    ),
+    Strategy(
         "看涨蝶式 Butterfly Call",
-        "看涨蝶式 / Butterfly Call",
+        "多头看涨蝶式 / Long Call Butterfly",
         "代表构造：多头 1:−2:1（K=90/100/110 Call）",
         (call(+1, 90), call(-2, 100), call(+1, 110)),
     ),
     Strategy(
         "看跌蝶式 Butterfly Put",
-        "看跌蝶式 / Butterfly Put",
+        "多头看跌蝶式 / Long Put Butterfly",
         "代表构造：多头 1:−2:1（K=90/100/110 Put）",
         (put(+1, 90), put(-2, 100), put(+1, 110)),
     ),
     Strategy(
+        "空头看涨蝶式 Short Call Butterfly",
+        "空头看涨蝶式 / Short Call Butterfly",
+        "代表构造：空头 −1:2:−1（K=90/100/110 Call）",
+        (call(-1, 90), call(+2, 100), call(-1, 110)),
+    ),
+    Strategy(
+        "空头看跌蝶式 Short Put Butterfly",
+        "空头看跌蝶式 / Short Put Butterfly",
+        "代表构造：空头 −1:2:−1（K=90/100/110 Put）",
+        (put(-1, 90), put(+2, 100), put(-1, 110)),
+    ),
+    Strategy(
+        "圣诞树价差 Christmas Tree Spread",
+        "多头看涨圣诞树 / Long Call Christmas Tree",
+        "多头看涨圣诞树：+C(90)−C(100)−C(110)；上涨端净空 1 份 Call，亏损无上限",
+        (call(+1, 90), call(-1, 100), call(-1, 110)),
+    ),
+    Strategy(
+        "空头看涨圣诞树 Short Call Christmas Tree",
+        "空头看涨圣诞树 / Short Call Christmas Tree",
+        "代表构造：−C(90)+C(100)+C(110)；上涨端净多 1 份 Call",
+        (call(-1, 90), call(+1, 100), call(+1, 110)),
+    ),
+    Strategy(
+        "多头看跌圣诞树 Long Put Christmas Tree",
+        "多头看跌圣诞树 / Long Put Christmas Tree",
+        "代表构造：+P(110)−P(100)−P(90)；下跌端净空 1 份 Put",
+        (put(-1, 90), put(-1, 100), put(+1, 110)),
+    ),
+    Strategy(
+        "空头看跌圣诞树 Short Put Christmas Tree",
+        "空头看跌圣诞树 / Short Put Christmas Tree",
+        "代表构造：−P(110)+P(100)+P(90)；下跌端净多 1 份 Put",
+        (put(+1, 90), put(+1, 100), put(-1, 110)),
+    ),
+    Strategy(
         "看涨鹰式 Condor Call",
-        "看涨鹰式 / Condor Call",
+        "多头看涨鹰式 / Long Call Condor",
         "代表构造：多头 1:−1:−1:1（K=85/95/105/115 Call）",
         (call(+1, 85), call(-1, 95), call(-1, 105), call(+1, 115)),
     ),
     Strategy(
         "看跌鹰式 Condor Put",
-        "看跌鹰式 / Condor Put",
+        "多头看跌鹰式 / Long Put Condor",
         "代表构造：多头 1:−1:−1:1（K=85/95/105/115 Put）",
         (put(+1, 85), put(-1, 95), put(-1, 105), put(+1, 115)),
+    ),
+    Strategy(
+        "空头看涨鹰式 Short Call Condor",
+        "空头看涨鹰式 / Short Call Condor",
+        "代表构造：空头 −1:1:1:−1（K=85/95/105/115 Call）",
+        (call(-1, 85), call(+1, 95), call(+1, 105), call(-1, 115)),
+    ),
+    Strategy(
+        "空头看跌鹰式 Short Put Condor",
+        "空头看跌鹰式 / Short Put Condor",
+        "代表构造：空头 −1:1:1:−1（K=85/95/105/115 Put）",
+        (put(-1, 85), put(+1, 95), put(+1, 105), put(-1, 115)),
     ),
     Strategy(
         "铁鹰式 Iron Condor",
         "铁鹰式 / Iron Condor",
         "代表构造：信用铁鹰（买 P85、卖 P95、卖 C105、买 C115）",
         (put(+1, 85), put(-1, 95), call(-1, 105), call(+1, 115)),
+    ),
+    Strategy(
+        "反向铁鹰式 Reverse Iron Condor",
+        "反向铁鹰式 / Reverse Iron Condor",
+        "代表构造：借记铁鹰（卖 P85、买 P95、买 C105、卖 C115）",
+        (put(-1, 85), put(+1, 95), call(+1, 105), call(-1, 115)),
     ),
 )
 
@@ -335,7 +504,33 @@ def cashflow_text(strategy: Strategy) -> str:
 
 
 def curve_labels(strategy: Strategy) -> tuple[str, str, str]:
-    if strategy.has_multiple_expiries:
+    expiry_days = sorted({leg.maturity_days for leg in strategy.option_legs})
+    if len(expiry_days) == 3:
+        near, middle, far = expiry_days
+        observation_remaining = (
+            near - OBSERVATION_ELAPSED_DAYS,
+            middle - OBSERVATION_ELAPSED_DAYS,
+            far - OBSERVATION_ELAPSED_DAYS,
+        )
+        key_remaining = (
+            middle - KEY_ELAPSED_DAYS,
+            far - KEY_ELAPSED_DAYS,
+        )
+        timing = (
+            f"期限：近/中/远月分别 {near}/{middle}/{far} 天；"
+            f"更早观察日各剩 {observation_remaining[0]}/"
+            f"{observation_remaining[1]}/{observation_remaining[2]} 天"
+        )
+        solid = (
+            f"近月到期日（中月剩 {key_remaining[0]} 天、"
+            f"远月剩 {key_remaining[1]} 天）理论损益"
+        )
+        dashed = (
+            "更早观察日（近/中/远月剩 "
+            f"{observation_remaining[0]}/{observation_remaining[1]}/"
+            f"{observation_remaining[2]} 天）理论损益"
+        )
+    elif strategy.has_multiple_expiries:
         timing = "期限：近月 90 天、远月 180 天；观察时近月剩 30 天、远月剩 120 天"
         solid = "近月到期日（远月剩 90 天）理论损益"
         dashed = "到期前（近月剩 30 天）理论损益"
@@ -497,15 +692,121 @@ def assert_close(left: float, right: float, tolerance: float = 1e-8) -> None:
         raise AssertionError(f"expected {left:.8f} ≈ {right:.8f}")
 
 
+def assert_inverse_pair(
+    by_stem: dict[str, Strategy],
+    primary_stem: str,
+    inverse_stem: str,
+) -> None:
+    """Assert two named strategies are exact position-level opposites."""
+    primary = by_stem[primary_stem]
+    inverse = by_stem[inverse_stem]
+    for elapsed_days in (OBSERVATION_ELAPSED_DAYS, KEY_ELAPSED_DAYS):
+        for spot in (50.0, 70.0, 90.0, 100.0, 110.0, 130.0, 150.0):
+            assert_close(
+                strategy_profit(primary, spot, elapsed_days),
+                -strategy_profit(inverse, spot, elapsed_days),
+            )
+
+
 def validate_strategy_shapes() -> None:
     """Catch the most consequential direction/ratio mistakes."""
     by_stem = {strategy.asset_stem: strategy for strategy in STRATEGIES}
     key = KEY_ELAPSED_DAYS
 
+    inverse_pairs = (
+        ("看涨期权 Call", "空头看涨期权 Short Call"),
+        ("看跌期权 Put", "空头看跌期权 Short Put"),
+        ("看涨垂直价差 Vertical Call", "熊市看涨垂直价差 Bear Call Spread"),
+        ("看跌垂直价差 Vertical Put", "牛市看跌垂直价差 Bull Put Spread"),
+        (
+            "看涨日历价差 Calendar Call",
+            "空头看涨日历价差 Short Call Calendar Spread",
+        ),
+        (
+            "看跌日历价差 Calendar Put",
+            "空头看跌日历价差 Short Put Calendar Spread",
+        ),
+        (
+            "多头看涨时间蝶式 Long Call Time Butterfly",
+            "空头看涨时间蝶式 Short Call Time Butterfly",
+        ),
+        (
+            "多头看跌时间蝶式 Long Put Time Butterfly",
+            "空头看跌时间蝶式 Short Put Time Butterfly",
+        ),
+        (
+            "看涨对角价差 Diagonal Call",
+            "空头看涨对角价差 Short Call Diagonal Spread",
+        ),
+        (
+            "看跌对角价差 Diagonal Put",
+            "空头看跌对角价差 Short Put Diagonal Spread",
+        ),
+        ("看涨比率价差 Ratio Call", "看涨反向比率价差 Call Ratio Backspread"),
+        ("看跌比率价差 Ratio Put", "看跌反向比率价差 Put Ratio Backspread"),
+        ("跨式 Straddle", "空头跨式 Short Straddle"),
+        ("宽跨式 Strangle", "空头宽跨式 Short Strangle"),
+        ("看涨蝶式 Butterfly Call", "空头看涨蝶式 Short Call Butterfly"),
+        ("看跌蝶式 Butterfly Put", "空头看跌蝶式 Short Put Butterfly"),
+        (
+            "圣诞树价差 Christmas Tree Spread",
+            "空头看涨圣诞树 Short Call Christmas Tree",
+        ),
+        (
+            "多头看跌圣诞树 Long Put Christmas Tree",
+            "空头看跌圣诞树 Short Put Christmas Tree",
+        ),
+        ("看涨鹰式 Condor Call", "空头看涨鹰式 Short Call Condor"),
+        ("看跌鹰式 Condor Put", "空头看跌鹰式 Short Put Condor"),
+        ("铁鹰式 Iron Condor", "反向铁鹰式 Reverse Iron Condor"),
+    )
+    for primary_stem, inverse_stem in inverse_pairs:
+        assert_inverse_pair(by_stem, primary_stem, inverse_stem)
+
     long_call = by_stem["看涨期权 Call"]
     assert strategy_profit(long_call, 150, key) > strategy_profit(long_call, 100, key)
     long_put = by_stem["看跌期权 Put"]
     assert strategy_profit(long_put, 50, key) > strategy_profit(long_put, 100, key)
+
+    bull_call = by_stem["看涨垂直价差 Vertical Call"]
+    assert strategy_profit(bull_call, 130, key) > strategy_profit(bull_call, 70, key)
+    bear_put = by_stem["看跌垂直价差 Vertical Put"]
+    assert strategy_profit(bear_put, 70, key) > strategy_profit(bear_put, 130, key)
+
+    for stem in ("看涨日历价差 Calendar Call", "看跌日历价差 Calendar Put"):
+        strategy = by_stem[stem]
+        assert strategy_profit(strategy, 100, key) > strategy_profit(strategy, 70, key)
+        assert strategy_profit(strategy, 100, key) > strategy_profit(strategy, 130, key)
+
+    long_time_fly_stems = (
+        "多头看涨时间蝶式 Long Call Time Butterfly",
+        "多头看跌时间蝶式 Long Put Time Butterfly",
+    )
+    for stem in long_time_fly_stems:
+        strategy = by_stem[stem]
+        assert strategy_profit(strategy, 100, key) > strategy_profit(strategy, 70, key)
+        assert strategy_profit(strategy, 100, key) > strategy_profit(strategy, 130, key)
+        assert strategy_profit(strategy, 100, key) > strategy_profit(
+            strategy, 100, OBSERVATION_ELAPSED_DAYS
+        )
+
+    short_time_fly_stems = (
+        "空头看涨时间蝶式 Short Call Time Butterfly",
+        "空头看跌时间蝶式 Short Put Time Butterfly",
+    )
+    for stem in short_time_fly_stems:
+        strategy = by_stem[stem]
+        assert strategy_profit(strategy, 100, key) < strategy_profit(strategy, 70, key)
+        assert strategy_profit(strategy, 100, key) < strategy_profit(strategy, 130, key)
+
+    call_diagonal = by_stem["看涨对角价差 Diagonal Call"]
+    assert strategy_profit(call_diagonal, 130, key) > strategy_profit(
+        call_diagonal, 70, key
+    )
+    put_diagonal = by_stem["看跌对角价差 Diagonal Put"]
+    assert strategy_profit(put_diagonal, 70, key) > strategy_profit(
+        put_diagonal, 130, key
+    )
 
     covered_call = by_stem["备兑看涨 Covered Call (Buy-Write)"]
     assert_close(
@@ -535,10 +836,50 @@ def validate_strategy_shapes() -> None:
     ratio_put = by_stem["看跌比率价差 Ratio Put"]
     assert strategy_profit(ratio_put, 50, key) < strategy_profit(ratio_put, 90, key)
 
+    for stem in ("跨式 Straddle", "宽跨式 Strangle"):
+        strategy = by_stem[stem]
+        assert strategy_profit(strategy, 70, key) > strategy_profit(strategy, 100, key)
+        assert strategy_profit(strategy, 130, key) > strategy_profit(strategy, 100, key)
+
     for stem in ("看涨蝶式 Butterfly Call", "看跌蝶式 Butterfly Put"):
         strategy = by_stem[stem]
         assert strategy_profit(strategy, 100, key) > strategy_profit(strategy, 70, key)
         assert strategy_profit(strategy, 100, key) > strategy_profit(strategy, 130, key)
+
+    christmas_tree = by_stem["圣诞树价差 Christmas Tree Spread"]
+    assert_close(
+        sum(
+            leg.quantity
+            for leg in christmas_tree.option_legs
+            if leg.kind == "call"
+        ),
+        -1.0,
+    )
+    assert strategy_profit(christmas_tree, 105, key) > strategy_profit(
+        christmas_tree, 70, key
+    )
+    assert strategy_profit(christmas_tree, 105, key) > strategy_profit(
+        christmas_tree, 150, key
+    )
+    assert strategy_profit(christmas_tree, 150, key) < strategy_profit(
+        christmas_tree, 130, key
+    )
+
+    put_christmas_tree = by_stem["多头看跌圣诞树 Long Put Christmas Tree"]
+    assert_close(
+        sum(
+            leg.quantity
+            for leg in put_christmas_tree.option_legs
+            if leg.kind == "put"
+        ),
+        -1.0,
+    )
+    assert strategy_profit(put_christmas_tree, 95, key) > strategy_profit(
+        put_christmas_tree, 50, key
+    )
+    assert strategy_profit(put_christmas_tree, 95, key) > strategy_profit(
+        put_christmas_tree, 130, key
+    )
 
     for stem in ("看涨鹰式 Condor Call", "看跌鹰式 Condor Put"):
         strategy = by_stem[stem]
@@ -560,8 +901,8 @@ def validate_strategy_shapes() -> None:
 
 
 def main() -> None:
-    if len(STRATEGIES) != 21:
-        raise AssertionError(f"expected 21 strategies, got {len(STRATEGIES)}")
+    if len(STRATEGIES) != 46:
+        raise AssertionError(f"expected 46 strategies, got {len(STRATEGIES)}")
     stems = [strategy.asset_stem for strategy in STRATEGIES]
     if len(stems) != len(set(stems)):
         raise AssertionError("duplicate SVG asset stem")

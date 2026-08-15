@@ -13,11 +13,14 @@ option_leg_count: 1
 underlying_leg_count: 0
 strategy_family: 单腿期权
 status: completed
+completion_status: completed
 created_at: 2026-08-15
 updated_at: 2026-08-15
 tags: [期权, 期权策略, 一腿策略, 看跌期权]
 domain: 经济
 subdomain: 金融
+product_domain: 衍生品
+instrument: 期权
 ---
 
 # 看跌期权 / Put
@@ -84,14 +87,20 @@ $$
 
 - 多头看跌不是卖空股票：它的最大到期盈利受标的价格下界限制为端点损益 $K-p$，会到期并承受时间衰减，但没有借券、召回或无限上涨损失。
 - 裸空看跌也不是直接持有股票：其上涨收益封顶在权利金 $p$；只有跌破 $K$ 后，损益才以近似一比一的斜率随标的下跌，经济上的到期买入成本为 $K-p$。
-- 若多头 Put 与股票多头配合，应改用[[保护性看跌 Protective Put|保护性看跌]]分析；传统[[备兑看跌 Covered Put (Sell-Write)|备兑看跌]]则是空头股票与空头 Put，不能和现金担保裸卖 Put 混为一谈。
+- 若多头 Put 与股票多头配合，应改用[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/保护性策略 Protective Strategy#保护性看跌 / Protective Put|保护性看跌]]分析；传统[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/备兑策略 Covered Strategy#备兑看跌 / Covered Put|备兑看跌]]则是空头股票与空头 Put，不能和现金担保裸卖 Put 混为一谈。
 
 ## 盈亏曲线（到期与到期前）
 
+### 多头看跌
+
 ![[../assets/看跌期权 Put 盈亏曲线.svg]]
 
+### 空头看跌
+
+![[../assets/空头看跌期权 Short Put 盈亏曲线.svg]]
+
 > [!note] 读图口径
-> 图中展示多头看跌的代表构造。实线为到期损益，虚线为尚余 30 天时的 Black–Scholes 理论损益；虚线假设隐含波动率、利率和股息率不变，并非收益预测。空头看跌是同一组腿的反向损益。
+> 两图分别展示多头与空头看跌。实线为到期损益，虚线为尚余 30 天时的 Black–Scholes 理论损益；虚线假设隐含波动率、利率和股息率不变，并非收益预测。
 
 ## 来源
 

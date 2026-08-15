@@ -68,14 +68,14 @@ $$
 - 普通看涨与看跌期权多头的 Gamma 通常为正，空头通常为负。
 - $|\Gamma|$ 通常在平值、临近到期且低波动率时最集中。
 - 在相同价内外程度下，平值期权的 Gamma 通常与行权价近似成反比；同样 $1$ 点价格变化在较低价格水平上代表更大的百分比变化。
-- 正 Gamma 头寸受益于凸性，但通常承担负日历 Theta；负 Gamma 头寸则暴露于跳空与频繁再对冲风险。
+- 正 Gamma 头寸受益于凸性，但通常承担负 Theta；负 Gamma 头寸则暴露于跳空与频繁再对冲风险。
 
 ## Gamma 如何漂移
 
 $$
 d\Gamma\approx
 \mathrm{Speed}\,dS
-+\mathrm{Color}_{\tau}\,d\tau
++\mathrm{Color}\,dt
 +\mathrm{Zomma}\,d\sigma.
 $$
 
@@ -84,7 +84,7 @@ $$
 $$
 \mathrm{Speed}=\frac{\partial\Gamma}{\partial S},
 \qquad
-\mathrm{Color}_{\tau}=\frac{\partial\Gamma}{\partial\tau},
+\mathrm{Color}=\frac{\partial\Gamma}{\partial t},
 \qquad
 \mathrm{Zomma}=\frac{\partial\Gamma}{\partial\sigma}.
 $$
@@ -92,11 +92,12 @@ $$
 ## 关联概念
 
 - [[Delta]]：Gamma 决定 Delta 随标的价格变化的速度。
-- [[Theta]]：Gamma 与日历 Theta 常形成凸性与持有成本的权衡。
+- [[Theta]]：Gamma 与 Theta 常形成凸性与持有成本的权衡。
 - [[Speed]]：Gamma 对标的价格的敏感度。
-- [[Color]]：Gamma 对距到期时间的敏感度。
+- [[Color]]：Gamma 随当前时间推进的变化率。
 - [[Zomma]]：Gamma 对波动率的敏感度。
 - [[动态Delta对冲]]：Gamma 越高，维持 Delta 中性所需的调整通常越频繁。
+- [[凸性|期权凸性]]：Gamma 是期权价值相对于标的价格的局部二阶凸性。
 
 ## 来源
 

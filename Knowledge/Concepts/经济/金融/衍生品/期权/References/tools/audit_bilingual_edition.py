@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
 import sys
 import xml.etree.ElementTree as ET
@@ -70,6 +71,34 @@ CH18_DISPLAY_FORMULA_IMAGES = frozenset(
     for name in CH18_CONVERTED_IMAGES
     if name.startswith(("e", "f"))
 )
+
+# Chapters 10 and 11 were manually copy-edited after their translation audit.
+# A few source prose/table passages were deliberately rewritten as displayed
+# LaTeX so that mixed-number quotes and multi-leg arithmetic remain legible.
+# The exception is deliberately fail-closed: source count, generated count,
+# and the digest of every displayed LaTeX block must all match the reviewed
+# rendering.  Any later formula edit is audited again instead of inheriting a
+# chapter-wide allowance.
+REVIEWED_FORMULA_REWRITES = {
+    "ch10": (8, 10, "a66f3b26cf5cd993"),
+    "ch11": (15, 23, "01737ce91fc6d09b"),
+}
+
+
+def displayed_latex_digest(text: str) -> str:
+    """Hash the exact ordered contents of all balanced display-math blocks."""
+    blocks: list[str] = []
+    current: list[str] | None = None
+    for line in text.splitlines():
+        if line.strip() == "$$":
+            if current is None:
+                current = []
+            else:
+                blocks.append("\n".join(current).strip())
+                current = None
+        elif current is not None:
+            current.append(line)
+    return hashlib.sha256("\n\n".join(blocks).encode("utf-8")).hexdigest()[:16]
 
 
 def section_list() -> list[Section]:
@@ -183,6 +212,7 @@ def markdown_metrics(path: Path) -> dict[str, object]:
         "images": image_refs,
         "image_names": [Path(ref).name for ref in image_refs],
         "latex_blocks": latex_delimiters // 2,
+        "latex_digest": displayed_latex_digest(text),
         "latex_balanced": latex_delimiters % 2 == 0,
         "bad_latex_tokens": bool(
             re.search(r"\ue000|@@|\\text\{frac\}|(?<!>)>>(?!>)", visible_text)
@@ -257,9 +287,20 @@ def main() -> int:
                     int(generated["latex_blocks"]) >= expected_formula_blocks
                 )
             else:
-                formula_count_ok = (
-                    int(generated["latex_blocks"]) == expected_formula_blocks
-                )
+                generated_formula_blocks = int(generated["latex_blocks"])
+                formula_count_ok = generated_formula_blocks == expected_formula_blocks
+                reviewed_rewrite = REVIEWED_FORMULA_REWRITES.get(section.source)
+                if not formula_count_ok and reviewed_rewrite is not None:
+                    (
+                        reviewed_source_count,
+                        reviewed_generated_count,
+                        reviewed_digest,
+                    ) = reviewed_rewrite
+                    formula_count_ok = (
+                        expected_formula_blocks == reviewed_source_count
+                        and generated_formula_blocks == reviewed_generated_count
+                        and generated["latex_digest"] == reviewed_digest
+                    )
             generated_images = Counter(generated["image_names"])
             images_ok = generated_images == expected_images
             formula_ok = (

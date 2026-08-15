@@ -4,7 +4,7 @@ tags:
   - 期权
   - 双语阅读
 chapter: 10
-translation_status: 双语稿已生成，待人工复核
+translation_status: 翻译审计完毕
 created: 2026-08-03
 ---
 
@@ -12,8 +12,8 @@ created: 2026-08-03
 
 [[阅读导航|← 返回阅读导航]]
 
-> [!warning] 翻译状态
-> 本章双语稿已生成，尚待逐段人工复核。英文原文、数字、公式和图表保留用于核对。
+> [!success] 翻译状态
+> 本章翻译与风险审计已完成。英文原文、数字、公式和图表继续保留，便于逐段核对。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline
@@ -33,7 +33,7 @@ created: 2026-08-03
 > [!quote]- English 1
 > In option markets, as in all markets, there are many different approaches to trading. At one time, *scalping* was a popular strategy among traders on the floors of futures exchanges. By observing the activity in a particular market, a scalper would try to determine an equilibrium price that reflected a balance between buyers and sellers. The scalper would then quote a bid-ask spread around this equilibrium price, attempting to buy at the bid price and sell at the offer price as often as possible without taking either a long or short position for any extended period of time. The scalper made no attempt to determine the theoretical value of the contract. Although the profit from each trade might be small, if a trader was able to trade often enough, he expected to show a reasonable profit. Scalping, however, requires a highly liquid market, and option markets are rarely sufficiently liquid to support this type of trading.
 
-在期权市场中，就像在所有市场中一样，有许多不同的交易方法。曾经，在期货交易所的交易员中，刷单是一种流行的策略。通过观察特定市场的活动，黄牛会试图确定一个反映买卖双方平衡的均衡价格。然后，黄牛会在这个均衡价格附近报出买卖价差，试图尽可能多地以买入价买入，以卖出价卖出，而不长时间持有多头或空头头寸。黄牛党没有试图确定合约的理论价值。尽管每次交易的利润可能很小，但如果交易者能够足够频繁地交易，他预计会表现出合理的利润。然而，倒卖股票需要一个高流动性的市场，而期权市场的流动性很少足以支持此类交易。
+在期权市场中，与所有市场一样，交易方式多种多样。过去，剥头皮交易曾是期货交易所场内交易员中颇为流行的策略。剥头皮交易者通过观察特定市场的交易活动，试图判断一个反映买卖双方力量平衡的均衡价格。随后，他会围绕这一均衡价格报出买卖双向报价，力求尽可能频繁地按买价买入、按卖价卖出，同时避免长时间持有多头或空头头寸。剥头皮交易者并不试图判断合约的理论价值。虽然每笔交易的利润可能很小，但只要交易足够频繁，交易者仍期望获得合理的总体利润。然而，剥头皮交易要求市场具有很高的流动性，而期权市场通常很少具备足以支持这种交易方式的流动性。
 
 <!-- source:block 35dcfc142552b0e4 -->
 
@@ -65,7 +65,7 @@ created: 2026-08-03
 > [!quote]- English 5
 > Many common spreading strategies are based on arbitrage relationships, buying and selling the same or very closely related instruments in different markets to profit from a mispricing. The *cash-and-carry strategy* common in commodity markets is an example of this type of spread. Given the current cash price, interest rate, and storage and insurance costs, a commodity trader can calculate the value of a forward contract. If the actual market price of the forward contract is higher than the calculated value, the trader will create a spread by purchasing the commodity, selling the overpriced forward contract, and carrying the position to maturity.<sup>1</sup>
 
-许多常见的价差策略都基于套利关系，在不同市场买卖相同或非常密切相关的工具，以从错误定价中获利。大宗商品市场常见的现付自付策略就是此类价差的一个例子。鉴于当前的现金价格、利率以及储存和保险成本，大宗商品交易员可以计算远期合约的价值。如果远期合约的实际市场价格高于计算价值，交易员将通过购买商品、出售定价过高的远期合约并将头寸持有至到期来创造价差。[^ovp10-1]
+许多常见的价差策略以套利关系为基础：在不同市场买卖同一种工具或高度相关的工具，以从错误定价中获利。商品市场常见的**买入现货并持有套利**（cash-and-carry strategy，也称正向期现套利）就是这类价差的一个例子。根据当前现货价格、利率以及仓储和保险成本，商品交易者可以计算远期合约的理论价值。如果远期合约的实际市场价格高于这一理论价值，交易者便可买入现货商品、卖出被高估的远期合约，并持有现货头寸至到期，从而建立套利价差。[^ovp10-1]
 
 <!-- source:block 4b03552e7898af22 -->
 
@@ -187,7 +187,7 @@ $$
 > [!quote]- English 17
 > Spreading strategies are often done to reduce one or more risks. In a cash-and-carry strategy, much of the directional risk is eliminated because the value of the long cash contract and the value of the short forward contract will tend to move in opposite directions. But a spreading strategy will not necessarily eliminate all risks. In our example, we assumed that we were able to borrow money at a fixed rate, thereby eliminating any interest-rate risk. We also assumed that storage and insurance costs were fixed when the strategy was initiated. If we are dealing only with futures contracts, changes in interest rates, as well as changes in storage and insurance costs, may affect the price relationship between futures months. If the changes are large enough, a seemingly profitable spreading strategy may in fact become unprofitable. In the preceding example, if interest rates and storage costs rise after the strategy has been initiated, the spread between the two-month and four-month futures contract will widen, resulting in a smaller profit to the trader or perhaps even a loss.
 
-价差策略通常是为了降低一个或多个风险。在现金自付策略中，大部分方向性风险都被消除，因为长期现金合约的价值和短期远期合约的价值往往会朝着相反的方向移动。但价差策略不一定能消除所有风险。在我们的例子中，我们假设我们能够以固定利率借钱，从而消除任何利率风险。我们还假设存储和保险成本在战略启动时是固定的。如果我们只处理期货合约，利率的变化以及存储和保险成本的变化可能会影响期货月份之间的价格关系。如果变化足够大，看似有利可图的价差策略实际上可能会变得无利可图。在上例中，如果策略启动后利率和储存成本上升，则两个月期和四个月期期货合约之间的价差将会扩大，导致交易者利润减少，甚至可能出现损失。
+价差策略往往用于降低一种或多种风险。在买入现货并持有套利中，现货多头与远期空头的价值通常反向变动，因此大部分方向风险会被抵消；但价差策略未必能消除所有风险。在本例中，我们假定交易者能够按固定利率借款，因而排除了利率风险；同时还假定建仓时仓储和保险成本已经固定。如果只交易期货合约，利率以及仓储和保险成本的变化都可能影响不同到期月份期货合约之间的价格关系。若这些变化足够大，看似有利可图的价差策略实际上可能转为亏损。在前例中，如果建仓后利率和仓储成本上升，两个月期与四个月期货合约之间的价差将会扩大，使交易者的利润减少，甚至产生亏损。
 
 <!-- source:block e31b8d73f709254b -->
 
@@ -208,7 +208,7 @@ $$
 > [!quote]- English 20
 > Consider two futures contracts with the same time to maturity, a 10-year Treasury note future trading at price of 116 <sup>14</sup>/32 and a 30-year Treasury bond future trading at a price of 118 <sup>27</sup>/32.<sup>3</sup> The spread between the two is
 
-考虑两份到期时间相同的期货合约，一份是以116 14/32价格交易的10年期国债期货，一份是以118 27/32价格交易的30年期国债期货。两者之间的价差是 [^ovp10-3]
+考虑两份到期时间相同的期货合约：10 年期美国国债期货的报价为 $116+\frac{14}{32}$，30 年期美国国债期货的报价为 $118+\frac{27}{32}$。美债期货报价中的分数部分以一个点的 $\frac{1}{32}$ 为单位，因此两者之间的价差为：[^ovp10-3]
 
 <!-- source:block 457e8a0a8e8c4a59 -->
 
@@ -216,7 +216,9 @@ $$
 > 118 <sup>27</sup>/32 – 116 <sup>14</sup>/32 = 2 <sup>13</sup>/32
 
 $$
-118 ^{27}/_{32} - 116 ^{14}/_{32} = 2 ^{13}/_{32}
+\left(118+\frac{27}{32}\right)
+-\left(116+\frac{14}{32}\right)
+=2+\frac{13}{32}
 $$
 
 <!-- source:block b41b6bc9b9c7b47d -->
@@ -224,7 +226,7 @@ $$
 > [!quote]- English 22
 > The prices of Treasury contracts move in the opposite direction of interest rates. If interest rates rise, Treasury prices will fall; if interest rates fall, Treasury prices will rise. If a trader believes that interest rates will rise but that long-term rates will rise more quickly than short-term rates, he might sell the 10-year/30-year spread.<sup>4</sup> If he is correct, the spread will narrow, perhaps at a later date trading at
 
-国债合约的价格与利率的方向相反。如果利率上升，国债价格就会下跌;如果利率下降，国债价格就会上涨。如果交易员认为利率将会上升，但长期利率的上升速度将快于短期利率，他可能会出售10年期/30年期价差。[^ovp10-4]如果他是正确的，价差将会缩小，也许会在稍后的交易日期
+美国国债合约价格与利率反向变动：利率上升时，国债价格下跌；利率下降时，国债价格上涨。如果交易者认为利率将会上升，而且长期利率的上升速度会快于短期利率，他可能会卖出 10 年期／30 年期国债期货价差。[^ovp10-4]若判断正确，价差将会收窄，之后可能报价为：
 
 <!-- source:block a1fdd2a7653bff58 -->
 
@@ -232,7 +234,9 @@ $$
 > 115<sup>10</sup>/32 – 113<sup>7</sup>/32 = 2<sup>3</sup>/32
 
 $$
-115^{10}/_{32} - 113^{7}/_{32} = 2^{3}/_{32}
+\left(115+\frac{10}{32}\right)
+-\left(113+\frac{7}{32}\right)
+=2+\frac{3}{32}
 $$
 
 <!-- source:block ffe867fc5e0342e0 -->
@@ -240,7 +244,7 @@ $$
 > [!quote]- English 24
 > If the trader originally sold the spread at 2<sup>13</sup>/32 and later buys the spread back at 2<sup>3</sup>/32, he will show a profit of
 
-如果交易者最初在2 13/32出售价差，后来在2 3/32回购价差，他将显示利润
+如果交易者最初以 $2+\frac{13}{32}$ 卖出价差，后来以 $2+\frac{3}{32}$ 买回价差，其利润为：
 
 <!-- source:block 0355373c7b4b8375 -->
 
@@ -248,7 +252,10 @@ $$
 > <sup>213</sup>/32 – 2<sup>3</sup>/32 = <sup>10</sup>/32
 
 $$
-^{213}/_{32} - 2^{3}/_{32} = ^{10}/_{32}
+\left(2+\frac{13}{32}\right)
+-\left(2+\frac{3}{32}\right)
+=\frac{10}{32}
+=\frac{5}{16}
 $$
 
 <!-- source:block f39c2b178a3237f2 -->
@@ -338,14 +345,14 @@ $$
 > [!quote]- English 36
 > In energy markets, a common spreading strategy consists of buying or selling crude oil futures and taking an opposing position in futures in products that are made from crude oil—gasoline and heating oil. The value of this *crack spread* depends on the cost of refining, or *cracking*, crude oil into its derivative products, as well as the demand for these products relative to the cost of crude oil. If the costs of refining rise or the demand for refined products rises, the value of the spread will widen. If costs fall or demand falls, the value of the spread will narrow.<sup>5</sup>
 
-在能源市场中，常见的价差策略包括购买或出售原油期货，并在原油汽油和取暖油制成的产品的期货中采取相反头寸。这种裂缝价差的价值取决于将原油精炼或压裂为其衍生产品的成本，以及对这些产品相对于原油成本的需求。如果炼油成本上升或成品油需求上升，价差价值就会扩大。如果成本下降或需求下降，价差价值就会缩小。[^ovp10-5]
+在能源市场中，一种常见的价差策略是买入或卖出原油期货，同时在原油制成品——汽油和取暖油——的期货上建立相反方向的头寸。这种**裂解价差**（crack spread，也称炼油价差）的价值取决于原油裂解、炼制为成品油的成本，以及成品油需求相对于原油成本的强弱。炼制成本上升或成品油需求增加时，价差会扩大；成本下降或需求减弱时，价差会收窄。[^ovp10-5]
 
 <!-- source:block 5c98bf4720ef6a06 -->
 
 > [!quote]- English 37
 > There are a number of ratios in which the crack spread can be traded, but one common ratio is the 3:2:1—3 gallons of crude oil to yield 2 gallons of gasoline and 1 gallon of heating oil. Because the value of the refined products is greater than that of crude oil, a trader is said to buy the spread when he buys the products and sells crude oil.
 
-裂缝散布物的交易比例有多种，但一种常见的比例是3：2：1-3加仑原油生产2加仑汽油和1加仑取暖油。由于成品油的价值大于原油的价值，因此据说交易员在购买产品并出售原油时就购买价差。
+裂解价差可以采用多种配比交易，其中常见的一种是 $3:2:1$，即以 3 单位原油对应 2 单位汽油和 1 单位取暖油。由于成品油组合的价值高于投入的原油，买入成品油期货并卖出原油期货称为**买入裂解价差**。
 
 <!-- source:block d6e54681e3ca1d67 -->
 
@@ -353,7 +360,10 @@ $$
 > Price of the 3:2:1 crack spread = (2 × gasoline) + (1 × heating oil) – (3 × crude oil)
 
 $$
-\text{Price of the} 3:2:1 \text{crack spread} = (2 \times \text{gasoline}) + (1 \times \text{heating oil}) - (3 \times \text{crude oil})
+V_{\text{crack},\,3:2:1}
+=2P_{\text{gasoline}}
++P_{\text{heating oil}}
+-3P_{\text{crude oil}}
 $$
 
 <!-- source:block 60da5bbcfa7c1c09 -->
@@ -361,21 +371,23 @@ $$
 > [!quote]- English 39
 > A trader who believes that the demand for refined products will fall can sell the crack spread. A trader who believes that demand will rise can buy the spread.
 
-认为成品油需求将会下降的贸易商可以出售裂缝价差。相信需求将会上升的交易员可以购买价差。
+预期成品油需求下降的交易者可以卖出裂解价差；预期需求上升的交易者则可以买入裂解价差。
 
 <!-- source:block 7615844c6daa37c6 -->
 
 > [!quote]- English 40
 > In some markets, it may be necessary to execute each leg of a spread separately because there may be no counterparty willing to execute the entire spread at one time. If the spread consists of multiple legs and the trader has only been able to execute one leg, he will be at risk until he completes the spread by executing the remaining legs. If the trader must execute the spread one leg at a time, he needs to consider the risk resulting from this piecemeal execution. Determining how best to execute a spread is usually a matter of experience. It is often true that some legs, owing to the liquidity in the respective markets, will be more difficult to execute than other legs. As a consequence, most traders learn that it is usually best to execute the more difficult leg first. If a trader does this, he will find that execution risk is reduced because he will be able to more easily complete the spread. If, on the other hand, a trader executes the easier leg first, he may be left with a *naked* position if he is unable to execute the remaining legs in a timely manner or at a reasonable price.
 
-在某些市场中，可能有必要单独执行每一个价差，因为可能没有交易对手愿意同时执行整个价差。如果价差由多个分支组成，并且交易员只能执行一个分支，那么他将面临风险，直到他通过执行其余分支完成价差。如果交易者必须一次执行一条价差，他需要考虑这种零碎执行所产生的风险。确定如何最好地行权价差通常是一个经验问题。事实上，由于各自市场的流动性，某些腿通常比其他腿更难执行。因此，大多数交易者都了解到，通常最好先执行更困难的一段。如果交易者这样做，他会发现执行风险会降低，因为他将能够更轻松地完成价差。另一方面，如果交易者首先执行较轻松的交易头寸，如果他无法及时或以合理的价格执行剩余的交易头寸，他可能会留下裸头寸。
+在某些市场中，可能必须逐腿执行价差，因为未必有交易对手愿意一次成交整个组合。若价差包含多条腿，而交易者目前只成交了一条，那么在其余各腿成交、组合完整建立之前，他将持续暴露于市场风险。必须逐腿成交时，交易者应事先考虑这种分拆执行带来的风险；如何安排最佳执行顺序，通常取决于经验。
+
+由于各合约市场的流动性不同，有些腿会比其他腿更难成交。多数交易者因此会先执行最难成交的腿，再完成较易成交的腿，从而降低执行风险。反之，若先成交容易执行的腿，却无法及时或以合理价格完成其余各腿，交易者就可能被迫留下裸露头寸。
 
 <!-- source:block 21629a11bd78ef5b -->
 
 > [!quote]- English 41
 > Fortunately, in many markets, spreads are traded all at one time as if they are one contract. A quote for the spread will typically consist of one bid price and one offer price, no matter how complex the spread. Consider a spread that consists of buying Contract A and selling Contracts B and C with the following bid-ask quotes:
 
-幸运的是，在许多市场中，价差是同时交易的，就好像它们是一份合约一样。无论价差有多复杂，价差的报价通常由一个买入价和一个卖出价组成。考虑由购买合约A并出售合约B和C组成的价差，并具有以下买卖报价：
+好在许多市场允许整个价差组合一次性成交，交易方式就像买卖一份合约。无论组合包含多少条腿，市场通常只对整个组合报出一个买价（bid）和一个卖价（ask/offer）。下面定义一个价差组合：买入合约 A，同时卖出合约 B 和 C；三份合约各自的买卖报价如下：
 
 <!-- source:block 4fee5237964aa5cb -->
 
@@ -386,7 +398,7 @@ $$
 > [!quote]- English 42
 > From the bid-ask quotes for each of the individual contracts, the current market for the spread is
 
-从每份合约的买卖报价来看，当前的价差市场为
+先将一单位价差定义为“买入 A、卖出 B、卖出 C”。如果逐腿按各自盘口立即成交，则整个组合的可执行报价为：
 
 <!-- source:block 86fabb14e5fa5e1c -->
 
@@ -394,19 +406,48 @@ $$
 
 <!-- 原 EPUB 中此公式为图片，已原样保留 -->
 
+从交易者的角度看，计算过程如下：
+
+$$
+\begin{aligned}
+P_{\text{bid}}
+&=A_{\text{bid}}-B_{\text{ask}}-C_{\text{ask}} \\
+&=128-49-70=9,
+\\[4pt]
+P_{\text{ask}}
+&=A_{\text{ask}}-B_{\text{bid}}-C_{\text{bid}} \\
+&=131-47-68=16.
+\end{aligned}
+$$
+
+也就是说，交易者立即**卖出**整个组合可获得 9；立即**买入**整个组合则需支付 16。原图括号中的买卖方向采用做市商视角，与交易者视角正好相反。
+
 <!-- source:block 3fe93b9813a2d096 -->
 
 > [!quote]- English 43
 > If a trader wants to buy the spread, he can immediately trade all three contracts individually and pay a total of 16. If he wants to sell the spread, he can do so at a price of 9. But a trader may take the position that because he is trading multiple contracts, he ought to get some discount. A market maker in this spread will often take the view that because he has less risk when he executes all contracts at one time, he is willing to do so at a price more favorable to the trader. If the trader asks for a market for the entire spread, he will often find that the difference between the bid price and ask price is narrower than the sum of the bid-ask prices, perhaps 11 bid, 14 offer. Executing the entire spread as one transaction will clearly be better than executing the spread as three individual transactions.
 
-如果交易员想要购买价差，他可以立即单独交易所有三份合约，并总共支付16美元。如果他想出售价差，他可以以9的价格出售。但交易者可能会采取这样的头寸：因为他正在交易多个合约，所以他应该得到一些折扣。这种价差的做市商通常会认为，由于他同时执行所有合约时风险较小，因此他愿意以对交易员更有利的价格执行。如果交易者要求整个价差的市场，他常常会发现买入价和卖出价之间的差异比买入价之和窄，也许是11个买入，14个卖出。将整个价差作为一笔交易执行显然比将价差作为三笔单独交易执行更好。
+如果交易者逐腿买入该价差，他必须以 131 买入 A，再分别以 47 和 68 卖出 B、C，净支出为 16；如果逐腿卖出该价差，则以 128 卖出 A，再分别以 49 和 70 买入 B、C，净收入为 9。因此，将三条腿各自的买卖价差简单相加后，整个组合的盘口是 **9 bid / 16 ask**，买卖价差宽达 7。
+
+不过，交易者一次执行多份合约，通常会希望获得更好的组合价格。做市商也可能愿意让价，因为三条腿同时成交时，他承担的逐腿执行风险较小。因此，整个价差的组合报价往往会收窄，例如 **11 bid / 14 offer**：交易者卖出组合可以成交在 11，而买入组合只需支付 14。与分别执行三条腿相比，将整个价差作为一笔组合订单成交显然更有利。
 
 <!-- source:block 6ebe363f8dbcc682 -->
 
 > [!quote]- English 44
 > Even if a spread is executed as one trade, many exchanges require that parties trading a spread still report the prices of the individual contracts. If this is the case, what prices should be reported if a trader buys the entire spread at a price of 14? In fact, the individual prices really don’t matter. Whether the trader pays 129 for Contract A and sells Contracts B and C at 47 and 68 (129 – 47 – 68 = 14) or pays 131 for Contract A and sells Contracts B and C at 48 and 69 (131 – 48 – 69 = 14), the total price is still 14. Indeed, the parties could decide for whatever reason to trade Contract A at a price of 200 and Contracts B and C at prices of 86 and 100 (200 – 86 100 = 14). As far as the parties to the trade are concerned, all that matters is that the individual prices add up to the agreed-on spread price of 14.<sup>6</sup>
 
-即使价差作为一笔交易执行，许多交易所要求价差交易各方仍然报告单个合约的价格。如果是这种情况，如果交易员以14的价格购买整个价差，应该报告什么价格？ In fact, the individual prices really don’t matter. Whether the trader pays 129 for Contract A and sells Contracts B and C at 47 and 68 (129 – 47 – 68 = 14) or pays 131 for Contract A and sells Contracts B and C at 48 and 69 (131 – 48 – 69 = 14), the total price is still 14. 事实上，双方可以出于任何原因决定以200的价格交易合约A，以86和100的价格交易合约B和C（200 - 86 100 = 14）。就交易各方而言，重要的是各个价格加起来等于商定的价差价格14。 [^ovp10-6]
+即使整个价差以一笔组合订单成交，许多交易所仍要求交易双方分别申报每条腿的成交价。假设交易者以净价 14 买入“买 A、卖 B、卖 C”的组合，应当怎样分配三份合约的成交价？
+
+从组合净价的角度看，具体分配并不唯一。例如，下面两组价格都会得到相同的净价：
+
+$$
+\begin{aligned}
+129-47-68&=14,\\
+131-48-69&=14.
+\end{aligned}
+$$
+
+纯粹从算术上说，甚至可以申报为 A 成交于 200、B 成交于 86、C 成交于 100，因为 $200-86-100=14$。对交易双方而言，关键是各条腿的价格按组合方向相加后，等于约定的价差净价 14。不过在实际申报时，各条腿的价格仍应合理反映当时的市场行情。[^ovp10-6]
 
 <!-- source:block b04a3a2177fd671f -->
 
@@ -554,7 +595,7 @@ $$
 > [!note] Footnote 64
 > <sup>1</sup> The opposite type of arbitrage, selling the commodity and buying a forward contract, is not usually possible in commodity markets because commodities, unlike financial instruments, cannot be borrowed and sold short.
 
-[^ovp10-1]: 相反类型的套利，即出售大宗商品并购买远期合约，在大宗商品市场上通常不可能，因为大宗商品与金融工具不同，不能借入和卖空。
+[^ovp10-1]: 相反方向的套利是卖出现货商品并买入远期合约。但在商品市场中，这种做法通常不可行，因为商品不同于金融工具，一般无法借入后卖空。
 
 <!-- source:block 3e2a9ebfe03843e2 -->
 
@@ -582,7 +623,7 @@ $$
 > [!note] Footnote 68
 > <sup>5</sup> A similar type of three-sided spread is available in the soybean market. The *crush spread* consists of buying or selling soybean futures and taking an opposing futures position in the products that are made from soybeans—soybean oil and soybean meal.
 
-[^ovp10-5]: 大豆市场上也有类似类型的三面价差。挤压价差包括购买或出售大豆期货以及在大豆制成的产品（大豆油和大豆粉）中持有相反的期货头寸。
+[^ovp10-5]: 大豆市场也有类似的三腿组合。**压榨价差**（crush spread）由大豆期货与其制成品——豆油和豆粕——的期货构成：买入或卖出大豆期货，同时在豆油和豆粕期货上建立相反方向的头寸。
 
 <!-- source:block de537f6431951860 -->
 

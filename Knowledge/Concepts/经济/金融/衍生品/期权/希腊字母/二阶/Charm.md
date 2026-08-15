@@ -24,36 +24,28 @@ concept_group: 希腊字母
 # Charm
 
 > [!definition] 定义
-> Charm 又称 Delta decay，衡量 Delta 对时间变量的敏感度。
+> Charm 又称 Delta decay，衡量当前时间 $t$ 向前推进时 Delta 的局部变化率。
 
 ## 数学表示
 
-本目录用 $\tau$ 表示距到期时间：
+令 $t$ 表示当前时间，到期日 $T$ 固定，剩余期限为 $\tau=T-t$：
 
 $$
 \boxed{
-\mathrm{Charm}_{\tau}
-=\frac{\partial\Delta}{\partial\tau}
-=\frac{\partial\Theta_{\tau}}{\partial S}
-=\frac{\partial^2V}{\partial S\,\partial\tau}
-}
-$$
-
-若 $u$ 表示向前推进的日历时间，则
-
-$$
-\boxed{
-\mathrm{Charm}_{\text{calendar}}
-=\frac{\partial\Delta}{\partial u}
-=-\mathrm{Charm}_{\tau}
+\mathrm{Charm}
+=\frac{\partial\Delta}{\partial t}
+=\frac{\partial\Theta}{\partial S}
+=\frac{\partial^2V}{\partial S\,\partial t}
+=-\frac{\partial\Delta}{\partial\tau}
 }
 $$
 
 对应的局部 Delta 漂移为
 
 $$
-d\Delta\approx\mathrm{Charm}_{\tau}\,d\tau
-=\mathrm{Charm}_{\text{calendar}}\,du.
+d\Delta\approx\mathrm{Charm}\,dt
+=\frac{\partial\Delta}{\partial\tau}\,d\tau,
+\qquad d\tau=-dt.
 $$
 
 ## 典型形态
@@ -71,7 +63,7 @@ $$
 \Delta_{\text{tomorrow}}
 \approx
 \Delta_{\text{today}}
-+\mathrm{Charm}_{\text{calendar}}\,\Delta u.
++\mathrm{Charm}\,\Delta t.
 $$
 
 临近到期时，应把 Charm 纳入次日开盘对冲量和周末风险估计，而不是假设 Delta 静止不变。
@@ -79,7 +71,7 @@ $$
 ## 关联概念
 
 - [[Delta]]：Charm 描述 Delta 的时间漂移。
-- [[Theta]]：Charm 也可写为 $\partial\Theta_{\tau}/\partial S$。
+- [[Theta]]：Charm 也可写为 $\partial\Theta/\partial S$。
 - [[Color]]：Color 是 Charm 对标的价格的敏感度。
 - [[动态Delta对冲]]：时间推移会改变下一次再平衡所需的标的数量。
 
