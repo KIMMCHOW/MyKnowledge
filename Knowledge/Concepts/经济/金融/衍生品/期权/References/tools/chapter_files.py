@@ -30,11 +30,10 @@ CHAPTER_STEMS = (
 
 
 # Footnote id prefixes (ovpNN) used by convert/audit footnote scripts.
-# Ordered stems give chapters 1..25; appendix/index keep their legacy numbers.
+# Ordered stems give chapters 1..25; retained appendices keep their legacy numbers.
 FOOTNOTE_PREFIX_OVERRIDES = {
     "附录A-期权术语表 Glossary of Option Terminology": "ovp27",
     "附录B-实用数学 Some Useful Math": "ovp28",
-    "索引 Index": "ovp29",
 }
 
 

@@ -316,7 +316,7 @@ Straddle、Strangle、Butterfly、Condor、Ratio Spread 和 Calendar Spread 即�
 | 当前笔记 | 对应教材章节 | 建议用途 |
 |---|---|---|
 | [[Volatility Trading]] | Ch 6、8、11、13、20、23–25 | 作为波动率交易总入口，补充 IV/RV、Gamma–Theta、期限结构与 Skew |
-| [[Short Straddle（卖出跨式）与 Short Strangle（卖出宽跨式）]] | Ch 7、8、11、13、20、23 | 补充风险向量、调整规则、容错空间、跳空与尾部风险 |
+| [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/跨式 Straddle|跨式]]、[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/宽跨式 Strangle|宽跨式]] | Ch 7、8、11、13、20、23 | 补充风险向量、调整规则、容错空间、跳空与尾部风险 |
 | [[Gamma]] | Ch 7、8、9、13、18、23 | 作为 Greeks 与凸性风险的核心概念页，并连接动态对冲 |
 | [[数学/概率统计/正态分布]] | Ch 5、6、19、23 | 用于概率分布、随机游走、风险中性分布与肥尾偏差 |
 | [[数学/概率统计/标准差|标准差（波动率）]] | Ch 6、20、25 | 用于标准差、平方根时间、历史波动率与方差合约 |

@@ -33,10 +33,10 @@ tags:
 
 ## 常见策略表达
 
-- [[跨式与宽跨式]]：可表达对实际运动与隐含波动率的观点。
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/跨式 Straddle|跨式]]与[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/宽跨式 Strangle|宽跨式]]：可表达对实际运动与隐含波动率的观点。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/蝶式与鹰式|蝶式与鹰式]]：表达波动率曲面的局部曲率。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/日历与对角价差|日历与对角价差]]：表达期限结构和远期波动率观点。
-- [[Knowledge/Concepts/经济/金融/衍生品/期权/Strategies/Short Straddle（卖出跨式）与 Short Strangle（卖出宽跨式）|卖出跨式与卖出宽跨式]]：典型的做空波动率结构。
+- [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/_索引_期权策略|期权策略总览]]：按腿数查看 2 个单腿页面与 19 个规范组合策略。
 
 ## 风险特征
 

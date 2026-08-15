@@ -67,8 +67,8 @@ Knowledge/Notes/
 1. `git status` 确认移动范围正确、无意外文件。
 2. 全局搜索旧路径残留：`rg "Knowledge/Notes/Game Theory 0"` 等（旧路径链接在新位置会失效）。
 3. 核对总索引 `_索引_笔记.md` 与专题索引：新增/删除/移动的笔记均已同步。
-4. 核对引用本专题的跨区文档：`README.md` 目录结构、`Knowledge/Concepts/_说明_关系图谱颜色组.md` 路径、相关概念索引。
-5. 确认 `Raw Materials/`、`.obsidian/` 状态文件、`AGENTS.md` 未出现在改动中。
+4. 核对引用本专题的跨区文档：`README.md` 目录结构、`Knowledge/Concepts/_说明_关系图谱颜色组.md` 路径、相关概念索引；若目录负责关系图颜色，还要同步根目录 `.obsidian/graph.json`。
+5. 确认 `Raw Materials/`、`AGENTS.md` 与 `.obsidian/` 本机状态文件未出现在改动中；唯一允许的 Obsidian 配置例外是根目录 `.obsidian/graph.json` 的共享颜色分组。
 
 ## 7. 整理流程（标准步骤）
 
@@ -80,6 +80,6 @@ Knowledge/Notes/
 
 ## 8. 注意事项
 
-- `Raw Materials/` 只读（改动需用户明确确认）；`.obsidian/`、`.Trash/`、`.claudian/` 一律不提交。
+- `Raw Materials/` 只读（改动需用户明确确认）；`.Trash/`、`.claudian/` 及 `.obsidian/` 本机状态一律不提交。只有根目录 `.obsidian/graph.json` 的共享关系图颜色分组可以随相应笔记结构变更提交，主题、外观、工作区和插件状态不属于该例外。
 - 本仓库位于 iCloud Drive：批量移动文件优先用资源管理器/PowerShell `Move-Item`，避免用 `git mv` 触发同步回滚；操作后立刻 `git status` 验证。
 - 不删除有内容的笔记；合并/删除前先全局搜索引用并改指。

@@ -14,9 +14,7 @@ from translate_epub_chapter import COMPACT_OPTION_POSITION_RE
 
 ROOT = Path(__file__).resolve().parents[1]
 EDITION = ROOT / "Option Volatility and Pricing 双语版"
-REPORT = EDITION / "未翻译正文审计.md"
 DETAILS = EDITION / ".untranslated-prose-audit.json"
-PRESERVE_ENGLISH = {"索引 Index.md"}
 MIN_WORDS = 3
 
 
@@ -104,53 +102,15 @@ def scan_file(path: Path) -> list[dict[str, object]]:
     return hits
 
 
-def write_report(hits: list[dict[str, object]]) -> None:
-    by_file: dict[str, int] = {}
-    for hit in hits:
-        name = str(hit["file"])
-        by_file[name] = by_file.get(name, 0) + 1
-    lines = [
-        "---",
-        "title: Option Volatility and Pricing 未翻译正文审计",
-        "tags: [期权, 双语阅读, 翻译审计]",
-        f"status: {'通过' if not hits else '待处理'}",
-        "created: 2026-08-03",
-        "---",
-        "",
-        "# 未翻译正文审计",
-        "",
-        "> [!summary] 规则",
-        f"> 折叠的 English 原文后，可见正文或脚注不得再原样重复 {MIN_WORDS} 个以上的英文单词。英文索引和 LaTeX 公式不纳入。",
-        "",
-        f"- 未翻译长段落：{len(hits)}",
-        f"- 受影响文件：{len(by_file)}",
-        "",
-        "## 文件分布",
-        "",
-        "| 文件 | 段落 |",
-        "|---|---:|",
-    ]
-    for name, count in sorted(by_file.items(), key=lambda item: (-item[1], item[0])):
-        lines.append(f"| {name} | {count} |")
-    if hits:
-        lines.extend(["", "## 待处理（前 100 项）", ""])
-        for hit in hits[:100]:
-            excerpt = str(hit["english"])[:120].replace("|", "\\|")
-            lines.append(
-                f"- `{hit['file']}:{hit['visible_line']}` — "
-                f"{hit['words']} words — {excerpt}…"
-            )
-    REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+def write_details(hits: list[dict[str, object]]) -> None:
     DETAILS.write_text(json.dumps(hits, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def main() -> int:
     hits: list[dict[str, object]] = []
     for path in sorted(EDITION.glob("*.md")):
-        if path.name in PRESERVE_ENGLISH or path.name == REPORT.name:
-            continue
         hits.extend(scan_file(path))
-    write_report(hits)
+    write_details(hits)
     if hits:
         print(
             f"untranslated prose audit: FAIL "

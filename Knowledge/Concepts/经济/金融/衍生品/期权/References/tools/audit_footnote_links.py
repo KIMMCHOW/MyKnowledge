@@ -14,7 +14,6 @@ from audit_translation_quality import epub_source_blocks
 
 ROOT = Path(__file__).resolve().parents[1]
 EDITION = ROOT / "Option Volatility and Pricing 双语版"
-REPORT = EDITION / "脚注链接审计.md"
 DETAILS = EDITION / ".footnote-link-audit.json"
 NOTE_RE = re.compile(r"^> \[!note\] Footnote \d+")
 MARKER_RE = re.compile(r"<sup>(\d+)</sup>")
@@ -106,24 +105,14 @@ def main() -> int:
         if (result := scan(path, source_blocks)) is not None
     ]
     DETAILS.write_text(json.dumps(failures, ensure_ascii=False, indent=2), encoding="utf-8")
-    lines = [
-        "---",
-        "title: Option Volatility and Pricing 脚注链接审计",
-        f"status: {'待处理' if failures else '通过'}",
-        "tags: [期权, 双语阅读, 脚注审计]",
-        "---",
-        "",
-        "# 脚注链接审计",
-        "",
-        f"- 存在问题的文件：{len(failures)}",
-        "- 规则：每个原书脚注引用必须对应一个 Obsidian `[^id]` 引用和且仅一个定义。",
-        "",
-    ]
-    for item in failures:
-        lines.append(f"- `{item['file']}`：{item['missing_references']} / {item['missing_definitions']}")
-    REPORT.write_text("\n".join(lines) + "\n", encoding="utf-8")
     if failures:
         print(f"footnote link audit: FAIL ({len(failures)} files)")
+        for item in failures[:20]:
+            print(
+                f"- {item['file']}: missing references "
+                f"{item['missing_references']}, missing definitions "
+                f"{item['missing_definitions']}"
+            )
         return 1
     print("footnote link audit: PASS")
     return 0

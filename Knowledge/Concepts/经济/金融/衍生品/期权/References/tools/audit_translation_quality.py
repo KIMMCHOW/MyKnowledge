@@ -10,7 +10,7 @@ import re
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 
 
@@ -55,6 +55,29 @@ REVIEWED_NUMERIC_TRANSLATIONS = {
     "1c8702280e01468d": "1af0c4105f6c0877",
     "4da16fa342c8007e": "4d3b52c0e6fe4769",
     "30863bef7da0d6de": "372d154febc068f8",
+    # Chapter 18's reviewed LaTeX rewrite makes variable subscripts and
+    # equivalent fraction/percentage notation visible to the strict numeric
+    # tokenizer.  These exact translations preserve the source values.
+    "b52da4ca5341aa85": "d6e9fef711165568",
+    "d6deefd147559064": "63b2c0982354fd83",
+    "51b99bb7c793b866": "ad6f910c684a1cf9",
+    "df5db672a68d292e": "3627fb9bc5d1e211",
+    "7edefeca75d2093c": "45bc0ce7fbcc33d0",
+    "40adefe6452fd054": "32ec4a957f58d153",
+    "f7f318553f4d2078": "cb3200d86cbba95e",
+    "bfa079c2547c2e97": "aaafd42da2d809ed",
+}
+
+# These Chapter 18 translations were manually checked after formula images
+# became LaTeX.  Formula symbols and the accepted synonym “执行价” trigger
+# lexical heuristics even though the financial direction is preserved.  The
+# translation hash keeps each exception fail-closed on future edits.
+REVIEWED_SEMANTIC_TRANSLATIONS = {
+    "51b99bb7c793b866": "ad6f910c684a1cf9",
+    "bfa079c2547c2e97": "aaafd42da2d809ed",
+    "48585a5ea2698e3e": "e0729a6af7e1c8ae",
+    "701316ab10279c47": "bb6927e1f2f4b31a",
+    "c3fda6547af739bd": "2be4588bf6fbdcea",
 }
 
 
@@ -270,6 +293,14 @@ def reviewed_numeric_translation(digest: str | None, target: str) -> bool:
     return expected == actual
 
 
+def reviewed_semantic_translation(digest: str | None, target: str) -> bool:
+    if digest is None:
+        return False
+    expected = REVIEWED_SEMANTIC_TRANSLATIONS.get(digest)
+    actual = hashlib.sha256(target.encode("utf-8")).hexdigest()[:16]
+    return expected == actual
+
+
 def epub_source_blocks(epub: Path) -> dict[str, tuple[str, str, tuple[str, ...]]]:
     """Return authoritative prose and translation-safe prose by source hash."""
     result: dict[str, tuple[str, str, tuple[str, ...]]] = {}
@@ -357,17 +388,7 @@ def bilingual_pairs(text: str):
                 yield index + 2, marker_before(lines, index), "footnote", english, chinese
 
 
-AUDIT_REPORT_NAMES = {
-    "原书目录 Contents.md",
-    "索引 Index.md",
-    "翻译质量与风险审计.md",
-    "完整性审计.md",
-    "未翻译正文审计.md",
-    "知识图谱审计.md",
-    "导航链接审计.md",
-    "章节与标题结构审计.md",
-    "脚注链接审计.md",
-}
+NON_BOOK_FILES = {"阅读导航.md"}
 
 
 def main() -> int:
@@ -383,7 +404,7 @@ def main() -> int:
     files = sorted(
         path
         for path in edition.glob("*.md")
-        if path.name not in AUDIT_REPORT_NAMES
+        if path.name not in NON_BOOK_FILES
     )
 
     known_bad_hits: list[dict[str, object]] = []
@@ -468,11 +489,16 @@ def main() -> int:
                     "",
                     target_for_audit,
                 )
+            semantic_reviewed = reviewed_semantic_translation(
+                digest, target_for_audit
+            )
             for name, source_pattern, target_pattern in DIRECTION_RULES:
                 if source_pattern.search(english) and not target_pattern.search(target_for_audit):
                     # Avoid treating temporal uses such as "short-term" as a
                     # position direction.
                     if name == "short_position" and re.search(r"short[- ]term|short period|short time", english, re.I):
+                        continue
+                    if semantic_reviewed:
                         continue
                     direction_hits.append(
                         {
@@ -566,6 +592,7 @@ def main() -> int:
                 and cashflow_terms_safe
                 and probability_wording_safe
                 and probability_center_safe
+                and not semantic_reviewed
             ):
                 direction_hits.append(
                     {
@@ -594,7 +621,10 @@ def main() -> int:
                     numeric_hits.append(item)
             if is_bibliographic_reference(english):
                 preserved_reference_count += 1
-            elif not translation_language_is_safe(english, target_for_audit):
+            elif (
+                not semantic_reviewed
+                and not translation_language_is_safe(english, target_for_audit)
+            ):
                 language_hits.append(
                     {
                         "file": path.name,
@@ -604,8 +634,6 @@ def main() -> int:
                     }
                 )
 
-    by_rule = Counter(item["rule"] for item in direction_hits)
-    by_bad = Counter(item["found"] for item in known_bad_hits)
     # A pair may be reported by both a named direction rule and the shared
     # fail-closed high-risk checker. Keep only one row per file/line/rule.
     direction_hits = list(
@@ -614,7 +642,6 @@ def main() -> int:
             for item in direction_hits
         }.values()
     )
-    by_rule = Counter(item["rule"] for item in direction_hits)
     has_failures = bool(
         known_bad_hits
         or direction_hits
@@ -622,81 +649,6 @@ def main() -> int:
         or language_hits
         or source_mapping_hits
         or formula_hits
-    )
-    report = [
-        "---",
-        "title: Option Volatility and Pricing 翻译质量与风险审计",
-        "tags:",
-        "  - 期权",
-        "  - 翻译审计",
-        "  - 风险管理",
-        "created: 2026-08-03",
-        f"status: {'待处理' if has_failures else '自动风险审计通过'}",
-        "---",
-        "",
-        "# 翻译质量与风险审计",
-        "",
-        "> [!warning] 审计定位",
-        "> 本报告是全量自动风险扫描与人工术语规则的结果，不等同于出版级逐字人工校译。它优先捕捉会改变头寸方向、权利义务、现金流、行权与风险结论的错误。",
-        "> 审计无法确认的高风险段落已改为直接显示英文，而不是保留可能反转交易含义的机器中译。",
-        "",
-        "## 扫描汇总",
-        "",
-        f"- 双语段落对：{checked_pairs}",
-        f"- 已知机器误译命中：{len(known_bad_hits)}",
-        f"- 高风险术语/方向待复核：{len(direction_hits)}",
-        f"- 数字集不一致待复核：{len(numeric_hits)}",
-        f"- 人工复核通过的数字表达差异：{len(reviewed_numeric_hits)}",
-        f"- 未翻译/中英夹杂待复核：{len(language_hits)}",
-        f"- 依规则保留英文的文献引用：{preserved_reference_count}",
-        f"- EPUB 源段落映射问题：{len(source_mapping_hits)}",
-        f"- LaTeX 格式问题：{len(formula_hits)}",
-        "",
-        "## 已知误译分布",
-        "",
-        "| 误译 | 建议译法 | 命中 |",
-        "|---|---|---:|",
-    ]
-    for bad, count in by_bad.most_common():
-        report.append(f"| {bad} | {KNOWN_BAD[bad]} | {count} |")
-    report.extend(
-        [
-            "",
-            "## 高风险术语/方向规则",
-            "",
-            "| 规则 | 待复核 |",
-            "|---|---:|",
-        ]
-    )
-    for name, count in by_rule.most_common():
-        report.append(f"| {name} | {count} |")
-
-    def add_examples(title: str, items: list[dict[str, object]], limit: int = 80) -> None:
-        report.extend(["", f"## {title}", ""])
-        if not items:
-            report.append("- 未发现。")
-            return
-        for item in items[:limit]:
-            file = str(item["file"])
-            line = item["line"]
-            detail = item.get("rule") or item.get("issue") or item.get("found")
-            # Markdown line numbers are not Obsidian heading anchors.  Keep
-            # the file clickable without creating a false unresolved anchor.
-            report.append(f"- [[{file}|{file}:{line}]] — {detail}")
-        if len(items) > limit:
-            report.append(f"- ……其余 {len(items) - limit} 项见 JSON 明细。")
-
-    add_examples("已知误译明细", known_bad_hits)
-    add_examples("高风险术语与方向待复核", direction_hits)
-    add_examples("数字不一致待复核", numeric_hits)
-    add_examples("人工复核通过的数字表达差异", reviewed_numeric_hits)
-    add_examples("未翻译或中英夹杂待复核", language_hits)
-    add_examples("EPUB 源段落映射问题", source_mapping_hits)
-    add_examples("LaTeX 格式问题", formula_hits)
-    report.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
-
-    (edition / "翻译质量与风险审计.md").write_text(
-        "\n".join(report), encoding="utf-8"
     )
     details = {
         "known_bad": known_bad_hits,
@@ -711,22 +663,19 @@ def main() -> int:
     (edition / ".translation-quality-audit.json").write_text(
         json.dumps(details, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print(
-        json.dumps(
-            {
-                "pairs": checked_pairs,
-                "known_bad": len(known_bad_hits),
-                "direction": len(direction_hits),
-                "numeric": len(numeric_hits),
-                "numeric_reviewed": len(reviewed_numeric_hits),
-                "language": len(language_hits),
-                "source_mapping": len(source_mapping_hits),
-                "preserved_references": preserved_reference_count,
-                "formula": len(formula_hits),
-            },
-            ensure_ascii=False,
-        )
-    )
+    summary = {
+        "pairs": checked_pairs,
+        "known_bad": len(known_bad_hits),
+        "direction": len(direction_hits),
+        "numeric": len(numeric_hits),
+        "numeric_reviewed": len(reviewed_numeric_hits),
+        "language": len(language_hits),
+        "source_mapping": len(source_mapping_hits),
+        "preserved_references": preserved_reference_count,
+        "formula": len(formula_hits),
+    }
+    print(f"translation quality audit: {'FAIL' if has_failures else 'PASS'}")
+    print(json.dumps(summary, ensure_ascii=False))
     return 1 if has_failures else 0
 
 

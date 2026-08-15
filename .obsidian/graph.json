@@ -1,0 +1,58 @@
+{
+  "collapse-filter": true,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:\"Knowledge/Concepts/经济/金融/衍生品/期权/希腊字母\"",
+      "color": {
+        "a": 1,
+        "rgb": 16020150
+      }
+    },
+    {
+      "query": "path:\"Knowledge/Notes/Finance/Market Making\" OR path:\"Knowledge/Concepts/经济/金融/衍生品/期权/期权策略\" OR tag:#波动率交易 OR tag:#做市",
+      "color": {
+        "a": 1,
+        "rgb": 3003583
+      }
+    },
+    {
+      "query": "path:\"Knowledge/Concepts/数学\" OR tag:#期权数学",
+      "color": {
+        "a": 1,
+        "rgb": 9133302
+      }
+    },
+    {
+      "query": "path:\"Knowledge/Concepts/经济/金融/衍生品\" OR tag:#期权",
+      "color": {
+        "a": 1,
+        "rgb": 8702998
+      }
+    },
+    {
+      "query": "path:\"Knowledge/Concepts/经济/金融\" OR path:\"Knowledge/Notes/Finance\" OR tag:#金融",
+      "color": {
+        "a": 1,
+        "rgb": 16498468
+      }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.535454155955441,
+  "repelStrength": 20,
+  "linkStrength": 1,
+  "linkDistance": 30,
+  "scale": 0.03122016294836868,
+  "close": false
+}

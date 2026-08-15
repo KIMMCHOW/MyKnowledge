@@ -13,7 +13,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EDITION = ROOT / "Option Volatility and Pricing 双语版"
 GRAPH = EDITION / "知识图谱"
-REPORT = EDITION / "知识图谱审计.md"
 GENERATOR = ROOT / "tools" / "build_option_knowledge_graph.py"
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 FORBIDDEN = (
@@ -157,41 +156,8 @@ def audit() -> tuple[list[str], dict[str, int]]:
     return failures, stats
 
 
-def write_report(failures: list[str], stats: dict[str, int]) -> None:
-    ok = not failures
-    lines = [
-        "---",
-        "title: Option Volatility and Pricing 知识图谱审计",
-        "tags: [期权, 双语阅读, 知识图谱审计]",
-        f"status: {'通过' if ok else '待处理'}",
-        "created: 2026-08-03",
-        "---",
-        "",
-        "# 知识图谱审计",
-        "",
-        "> [!summary] 结论",
-        "> 图谱以概念因果关系而非文件导航为边；封面、版权、献词、作者与审计文件被排除。",
-        "",
-        "| 检查项 | 结果 |",
-        "|---|---:|",
-        f"| Markdown 节点 | {stats['files']} / 53 |",
-        f"| 知识层 | {stats['layers']} / 7 |",
-        f"| 核心概念 | {stats['concepts']} / 45 |",
-        f"| 语义关系 | {stats['edges']} / {stats['expected_edges']} |",
-        f"| 内部与章节链接 | {stats['links']} |",
-        f"| 含 LaTeX 的概念页 | {stats['formula_notes']} |",
-        f"| 不应进入图谱的链接 | {stats['excluded_links']} |",
-    ]
-    if failures:
-        lines.extend(["", "## 待处理（前 50 项）", ""])
-        lines.extend(f"- {failure}" for failure in failures[:50])
-    lines.extend(["", "[[阅读导航|← 返回阅读导航]]", ""])
-    REPORT.write_text("\n".join(lines), encoding="utf-8")
-
-
 def main() -> int:
     failures, stats = audit()
-    write_report(failures, stats)
     if failures:
         print("knowledge graph audit: FAIL")
         for failure in failures[:30]:

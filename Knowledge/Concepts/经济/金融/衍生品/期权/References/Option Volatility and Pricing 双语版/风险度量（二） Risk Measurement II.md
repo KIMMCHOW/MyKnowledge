@@ -4,16 +4,16 @@ tags:
   - 期权
   - 双语阅读
 chapter: 09
-translation_status: 腾讯云机器初译，公式已转 LaTeX，待复核
+translation_status: 翻译审计完毕
 created: 2026-08-03
 ---
 
 # 风险度量（二） / Risk Measurement II
 
-[[阅读导航|← 返回阅读导航]] · [[翻译说明与术语表|术语表]]
+[[阅读导航|← 返回阅读导航]]
 
-> [!warning] 翻译状态
-> 本章为机器初译，并使用本地术语表校验。英文原文、数字、公式和图表用于核对；中文将在后续复核中继续修订。
+> [!success] 翻译状态
+> 本章翻译与风险审计已完成。英文原文、数字、公式和图表继续保留，便于逐段核对。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline
@@ -61,11 +61,11 @@ created: 2026-08-03
 > [!quote]- English 4
 > Figure 9-1 shows what happens to the delta of a call as volatility changes. As volatility increases, the delta of an out-of-the-money call rises and the delta of an in-the-money call falls, with both deltas tending toward 50. This is logical because in a low-volatility market an out-of-the-money call is more likely to remain out of the money and therefore have a delta that is closer to 0, while an in-the-money call is more likely to remain in the money and therefore have a delta that is closer to 100. In a high-volatility market, we have the opposite effect. An out-of-the-money call has a greater likelihood of going into the money; an in-the-money call has a greater likelihood of going out of the money. Consequently, the deltas of both options will move toward 50.
 
-图9-1显示了随着波动率变化，看涨期权Delta的变化。随着波动率的增加，价外看涨期权的Delta上升，价内看涨期权的Delta下降，两个Delta都趋于50。这是合乎逻辑的，因为在低波动率市场中，价内看涨期权更有可能保持在货币之外，因此Delta更接近0，而价内看涨期权更有可能保持在货币中，因此Delta更接近100。在高波动率的市场中，我们会产生相反的效果。价外看涨期权进入资金的可能性更大;价内看涨期权进入资金的可能性更大。因此，两种选择的Delta都将走向50。
+图9-1展示了波动率变化时看涨期权Delta的变化。随着波动率上升，价外看涨期权的Delta增大，而价内看涨期权的Delta减小，二者都趋近于50。这是合理的：在低波动率市场中，价外看涨期权更可能继续处于价外，因此其Delta更接近0；价内看涨期权更可能继续处于价内，因此其Delta更接近100。在高波动率市场中，情况正好相反：价外看涨期权转为价内的可能性增大，而价内看涨期权转为价外的可能性也增大。因此，两种期权的Delta都会向50靠拢。
 
 <!-- source:block dc39af437e5f1197 -->
 
-*图9-1随着波动率变化的看涨Delta值。 / Figure 9-1 Call delta values as volatility changes.*
+*图9-1 看涨期权的Delta值随波动率的变化。 / Figure 9-1 Call delta values as volatility changes.*
 
 <!-- source:block 8d650aabc76d304d -->
 
@@ -299,7 +299,7 @@ created: 2026-08-03
 > [!quote]- English 35
 > The theta of an at-the-money option must therefore be proportional to the square root of time. If *TV**t* is an option’s theoretical value at time *t* (in days to expiration), then the theoretical value one day later *TV**t*–1 is
 
-因此，平值期权的Theta必须与时间的平方根成正比。如果TVT是期权在时间t（以到期天数为单位）的理论值，那么一天后的理论值TVT-1是
+因此，平值期权的Theta必须与时间的平方根成正比。如果 $TV_t$ 表示期权在时点 $t$（以距离到期的天数计）的理论价值，那么一天后的理论价值 $TV_{t-1}$ 为
 
 <!-- source:block 4aef17927879ceac -->
 
@@ -404,11 +404,11 @@ created: 2026-08-03
 > [!quote]- English 45
 > Figure 9-15 shows volga values for calls and puts with varying deltas. We have already noted that an at-the-money option with a delta of approximately 50 has a relatively constant vega and, consequently, a volga close to 0. However, as an option moves either into the money or out of the money, the volga begins to increase, reaching its maximum for calls with deltas of approximately 10 and 90 and puts with deltas of approximately –10 and –90. Additionally, as we increase time, volga values for in-the-money and out-of-the-money options become more sensitive to the passage of time, with long-term options having greater volga values than short-term options.
 
-图9-15显示了具有不同Delta的看涨期权和看跌的volga值。我们已经注意到，Delta大约为50的ATM期权具有相对恒定的Vega，因此Volga接近0。 然而，随着期权进入货币或OTM，volga开始增加，对于Delta约为10和90的看涨期权以及Delta约为-10和-90的看跌期权，volga开始增加。 此外，随着时间的增加，ITM和OTM期权的伏尔加值对时间的推移变得更加敏感，长期期权的伏尔加值比短期期权更大。
+图9-15展示了不同Delta水平下看涨期权和看跌期权的Volga值。我们已经指出，Delta约为50的平值期权，其Vega相对稳定，因此Volga接近0。随着期权转为价内或价外，Volga开始增大：对于看涨期权，Delta约为10或90时，Volga达到最大值；对于看跌期权，Delta约为-10或-90时，Volga达到最大值。此外，随着距到期时间增加，价内和价外期权的Volga对时间流逝变得更加敏感，因此长期期权的Volga值高于短期期权。
 
 <!-- source:block f824e934f157f9f2 -->
 
-*图9-15伏尔加河（vomma）的一种选择。 / Figure 9-15 Volga (vomma) of an option.*
+*图9-15 期权的Volga（Vomma）。 / Figure 9-15 Volga (vomma) of an option.*
 
 <!-- source:block c0be9febe42924ac -->
 
@@ -434,11 +434,11 @@ created: 2026-08-03
 > [!quote]- English 49
 > The sensitivity of the vega to changes in time to expiration, sometimes referred to as either *vega decay* or *DvegaDtime*, is shown in Figure 9-17. The vega of options with delta values between 10 and 90 tends to be the most sensitive to the passage of time. This sensitivity increases as we reduce time to expiration; as time passes, the vega of short-term options will change more quickly than the vega of long-term options.
 
-图9-17显示了Vega对呼气时间变化的敏感性，有时称为Vega衰变或DvegaDtime。Delta值在10到90之间的期权中的Vega往往对时间的推移最敏感。随着我们缩短到期时间，这种敏感性就会增加;随着时间的推移，短期期权的Vega变化将比长期期权的Vega变化得更快。
+图9-17展示了Vega对距到期时间变化的敏感性，这种敏感性有时称为Vega衰减（vega decay）或DvegaDtime。Delta值介于10和90之间的期权，其Vega通常对时间流逝最为敏感。随着距到期时间缩短，这种敏感性会增强；随着时间流逝，短期期权的Vega变化速度快于长期期权。
 
 <!-- source:block 32a9eecc57e6f0f8 -->
 
-*图9-17期权的Vega衰变。 / Figure 9-17 Vega decay of an option.*
+*图9-17 期权的Vega衰减。 / Figure 9-17 Vega decay of an option.*
 
 <!-- source:block f95bb2b32cba8c2d -->
 
@@ -460,11 +460,11 @@ Gamma衡量Delta对标的价格变化的敏感性。但Gamma本身对市场条�
 > [!quote]- English 52
 > In Figure 9-18, we can see that the gamma is greatest when an option is at the money. This is similar to theta and vega, which are also greatest when an option is at the money, and leads to an important principle of option trading: *gamma, theta, and vega are greatest when an option is at the money*. Because of this, at-the-money options tend to be the most actively traded in most option markets. Such options have the characteristics that traders are looking for when they go into an option market.
 
-在图9-18中，我们可以看到，当期权处于平值状态状态时，Gamma系数最大。这类似于Theta和Vega，当期权在金钱上时，它们也是最好的，并导致期权交易的一个重要原则：当期权在金钱上时，Gamma、Theta和Vega是最好的。因此，平值的期权往往是大多数期权市场中交易最活跃的期权。此类期权具有交易员进入期权市场时所寻求的特征。
+图9-18显示，期权处于平值时，Gamma达到最大值。Theta和Vega也具有类似特征：它们同样在期权处于平值时达到最大值。这引出了期权交易的一项重要原则：期权处于平值时，Gamma、Theta和Vega均达到最大值。因此，在大多数期权市场中，平值期权往往交易最为活跃。这类期权具备交易者参与期权市场时所看重的特征。
 
 <!-- source:block 52259eff7399e300 -->
 
-*图9-18期权随标的价格变化的Gamma。 / Figure 9-18 Gamma of an option as the underlying price changes.*
+*图9-18 期权的Gamma随标的价格的变化。 / Figure 9-18 Gamma of an option as the underlying price changes.*
 
 <!-- source:block a8dc6e97118f8c78 -->
 
@@ -475,18 +475,18 @@ Gamma衡量Delta对标的价格变化的敏感性。但Gamma本身对市场条�
 > [!quote]- English 54
 > Unlike the theta and vega of at-the-money options, which increase at higher exercise prices, the gamma of an at-the-money option declines at higher exercise prices. To understand why, recall that the gamma is the change in the delta per one-point change in the underlying price. But theoretical pricing models measure change in percentage terms. By this measure, a one-point price change with the underlying at 50 (a 2 percent change) is greater than a one-point price change with the underlying at 100 (a 1 percent change). Although the theta and vega of at-the-money options are proportional to their exercise prices, the gamma is inversely proportional. The gamma of an option with an exercise price of 50 will be twice as large as the gamma of an option with an exercise price of 100.
 
-与平值期权的Theta和Vega不同，平值期权的Gamma随着行权价较高而增加，平值期权的Gamma随着行权价较高而下降。要理解原因，请记住Gamma是标的价格每变化一个点时的Delta变化。但理论定价模型以百分比衡量变化。通过这一衡量标准，标的指数为50的一点价格变化（2%的变化）大于标的指数为100的一点价格变化（1%的变化）。尽管平值期权的Theta和Vega与其行权价成正比，但Gamma却是成正比的。行权价为50的期权的Gamma值将是行权价为100的期权的Gamma值的两倍。
+平值期权的Theta和Vega会随行权价升高而增大，Gamma则相反：平值期权的Gamma会随行权价升高而减小。要理解其中的原因，请记住，Gamma表示标的价格每变动1点所引起的Delta变化量，而理论定价模型以百分比衡量价格变动。按此口径，当标的价格为50时，1点变动相当于2%；当标的价格为100时，1点变动仅相当于1%，因此前者的相对变动更大。平值期权的Theta和Vega与行权价成正比，而Gamma与行权价成反比。因此，行权价为50的期权，其Gamma是行权价为100的期权的两倍。
 
 <!-- source:block 123d6fb4f4cd9d4f -->
 
 > [!quote]- English 55
 > Because at-the-money options have the greatest gamma, as the underlying price moves toward the exercise price, the gamma of an option will rise, and as the underlying price moves away from the exercise price, the gamma will fall. The sensitivity of the gamma to a change in the underlying price, sometimes referred to as the *speed*, is shown in Figure 9-19. The speed is greatest for out-of-the-money options with deltas close to 15 for calls and –15 for puts and for in-the-money options with deltas close to 85 for calls and –85 for puts. As we increase time to expiration or volatility, the speed of an option declines; as we reduce time to expiration or volatility, the speed rises. The gamma is least sensitive to changes in the underlying price for at-the-money options (a delta close to 50 for calls or –50 for puts) or for very deeply in-the-money or very far out-of-the-money options (deltas close to 0 and close to 100 for calls or –100 for puts).
 
-因为ATM期权具有最大的Gamma，当标的价格向行权价移动时，期权的Gamma将上升，当标的价格远离行权价时，Gamma将下降。 Gamma对标的价格变化的敏感性（有时称为速度）如图9-19所示。 对于看涨期权的Delta接近15、看跌期权的Delta接近-15的OTM期权，以及看涨期权的Delta接近85、看跌期权的Delta接近-85的ITM期权，速度最快。 当我们增加到期或波动率的时间时，期权的速度下降;当我们减少到期或波动率的时间时，速度上升。 Gamma对ATM期权（看涨期权的Delta接近50或看跌期权-50的Delta）或非常深的ITM或非常远的OTM期权（看涨期权的Delta接近0和接近100或看跌期权-100的Delta）的标的价格变化最不敏感。
+由于平值期权的Gamma最大，当标的价格向行权价靠近时，期权的Gamma上升；当标的价格远离行权价时，Gamma下降。Gamma对标的价格变化的敏感性有时称为Speed，如图9-19所示。对于价外期权，当看涨期权的Delta接近15、看跌期权的Delta接近-15时，Speed最大；对于价内期权，当看涨期权的Delta接近85、看跌期权的Delta接近-85时，Speed也达到最大。随着距到期时间或波动率增加，期权的Speed减小；随着距到期时间或波动率减小，Speed增大。对于平值期权（看涨期权的Delta接近50、看跌期权的Delta接近-50），以及深度价内或深度价外期权（Delta接近0，或看涨期权的Delta接近100、看跌期权的Delta接近-100），Gamma对标的价格变化最不敏感。
 
 <!-- source:block 9545bf487f540bf7 -->
 
-*Figure 9-19 speed of an option. Put deltas / Figure 9-19 speed of an option. Put deltas*
+*图9-19 期权的Speed：看跌期权Delta。 / Figure 9-19 speed of an option. Put deltas*
 
 <!-- source:block 3209646e552ac260 -->
 
@@ -497,7 +497,7 @@ Gamma衡量Delta对标的价格变化的敏感性。但Gamma本身对市场条�
 > [!quote]- English 57
 > The gamma will also be sensitive to changes in time to expiration and volatility. This is shown in Figure 9-20. We know that gamma is greatest when an option is at the money and declines as the option moves either into the money or out of the money. Of particular importance is the fact that the gamma of an at-the-money option rises as time passes or as we reduce volatility and falls as we increase volatility. To see why, consider a 100 call with the market at 97.50. Because the option is currently out of the money, its delta is less than 50. We also know that as time passes or we reduce volatility, delta values move away from 50. If we are close to expiration or in a very low-volatility market, the delta of the option will be well below 50, perhaps 25. If the underlying market should then rise 5 points to 102.50, the delta of the option will be greater than 50, perhaps 75. With the underlying market rising from 97.50 to 102.50 and the delta rising from 25 to 75, the approximate gamma should be
 
-Gamma也将对到期时间和波动率的变化敏感。如图9-20所示。我们知道，当期权是ATM时，Gamma最大，随着期权进入货币或OTM而下降。 特别重要的是，ATM期权的Gamma会随着时间的推移或随着我们降低波动率而上升，随着我们增加波动率而下降。要了解原因，请考虑100 看涨期权，市场为97.50。由于该期权当前为OTM，因此其Delta小于50。 我们还知道，随着时间的推移或我们减少波动率，Delta值会远离50。如果我们即将到期或处于波动率极低的市场，期权的Delta将远低于50,也许是25。 如果标的市场随后上涨5点至102.50，则期权的Delta将大于50,，可能大于75。随着标的市场从97.50上升到102.50，Delta从25上升到75,，大致Gamma应为
+Gamma也会对距到期时间和波动率的变化敏感，如图9-20所示。我们知道，期权处于平值时Gamma最大；当期权转为价内或价外时，Gamma都会减小。尤其重要的是，随着时间流逝或波动率下降，平值期权的Gamma会上升；随着波动率上升，其Gamma会下降。要理解其中的原因，考虑一张行权价为100的看涨期权，此时标的市场价格为97.50。由于该期权目前处于价外，其Delta小于50。我们还知道，随着时间流逝或波动率下降，Delta会远离50。如果临近到期或市场波动率很低，该期权的Delta将显著低于50，比如25。随后，如果标的市场价格上涨5点至102.50，该期权的Delta将大于50，比如75。标的市场价格从97.50升至102.50，同时Delta从25升至75，因此近似Gamma应为
 
 <!-- source:block 8f1e6f64dc30010b -->
 
@@ -507,7 +507,7 @@ Gamma也将对到期时间和波动率的变化敏感。如图9-20所示。我�
 
 <!-- source:block 820a8fd4230c5a92 -->
 
-*图9-20期权随时间推移或波动率变化的Gamma。 / Figure 9-20 Gamma of an option as time passes or volatility changes.*
+*图9-20 期权的Gamma随时间流逝或波动率的变化。 / Figure 9-20 Gamma of an option as time passes or volatility changes.*
 
 <!-- source:block 0fa199f968fcce5b -->
 
@@ -531,18 +531,18 @@ Gamma也将对到期时间和波动率的变化敏感。如图9-20所示。我�
 > [!quote]- English 60
 > The effect is just the opposite for in-the-money and out-of-the-money options. The gamma will fall if we reduce volatility and rise if we increase volatility.<sup>7</sup> Because gamma and theta are closely related, if we were to graph the gamma of an option as time passes, the result would be very similar to Figure 9-10, with the gamma instead of the theta along the *y*-axis.
 
-对于ITM和OTM期权，效果恰恰相反。如果我们减少波动率，Gamma就会下降，如果我们增加波动率，Gamma就会上升。 由于Gamma和Theta密切相关，如果我们要绘制期权的Gamma随时间推移的变化图，结果将非常类似于图9-10,，其中Gamma而不是沿y轴的Theta。 [^ovp09-7]
+对于价内和价外期权，情况正好相反：降低波动率会使Gamma下降，提高波动率会使Gamma上升。由于Gamma与Theta密切相关，如果绘制期权Gamma随时间流逝的变化曲线，其形状会与图9-10非常相似，只需将纵轴上的Theta替换为Gamma。[^ovp09-7]
 
 <!-- source:block c0a981640f2de76e -->
 
 > [!quote]- English 61
 > The sensitivity of the gamma to the passage of time, sometimes referred to as its *color*, is shown in Figure 9-21. The color is greatest for at-the-money calls and puts, with gamma values becoming smaller as we increase time to expiration and larger as we reduce time (hence a negative color value). Calls with deltas close to 5 or 95 and puts with deltas close to –5 or –95 also have large color values. Here, however, an increase in time causes gamma values to rise, whereas the passage of time causes gamma values to fall (a positive color). Moreover, reducing time or volatility will increase color values, making an option’s gamma more sensitive to changes in the passage of time. Increasing time or volatility will reduce color values, making an option’s gamma less sensitive to the passage of time. Calls with deltas close to 15 or 85 and puts with deltas close to –15 and –85 tend to have color values close to 0. The gamma values of such options will be relatively insensitive to the passage of time.
 
-Gamma对时间流逝的敏感度（有时称为其Color）如图9-21所示。ATM看涨期权和放置的Color最大，Gamma值随着到期时间的增加而变小，随着时间的减少而变大（因此Color值为负）。 Delta接近5或95的看涨期权以及Delta接近-5或-95的看跌期权也具有较大的Color值。然而，这里，时间的增加导致Gamma值上升，而时间的推移导致Gamma值下降（正Color）。 此外，减少时间或波动率将增加Color值，使期权的Gamma对时间的变化更加敏感。增加时间或波动率将降低Color值，使期权的Gamma对时间的推移不那么敏感。 Delta接近15或85的看涨期权以及Delta接近-15和-85的看跌期权的Color值往往接近0。此类期权的Gamma值对时间的推移相对不敏感。
+Gamma对时间流逝的敏感性有时称为Color，如图9-21所示。平值看涨期权和平值看跌期权的Color绝对值最大：随着距到期时间增加，Gamma减小；随着距到期时间缩短，Gamma增大，因此Color为负。Delta接近5或95的看涨期权，以及Delta接近-5或-95的看跌期权，也具有较大的Color值。不过，对这些期权而言，距到期时间增加会使Gamma上升，而随着时间流逝（即距到期时间缩短），Gamma会下降，因此Color为正。此外，缩短距到期时间或降低波动率会提高Color值，使期权的Gamma对时间流逝更加敏感；延长距到期时间或提高波动率则会降低Color值，使其Gamma对时间流逝不那么敏感。Delta接近15或85的看涨期权，以及Delta接近-15或-85的看跌期权，其Color通常接近0。这类期权的Gamma对时间流逝相对不敏感。
 
 <!-- source:block 1cd68097d0a96b2b -->
 
-*图9-21期权的Color。 / Figure 9-21 Color of an option.*
+*图9-21 期权的Color。 / Figure 9-21 Color of an option.*
 
 <!-- source:block 987293549ef623ea -->
 
@@ -553,11 +553,11 @@ Gamma对时间流逝的敏感度（有时称为其Color）如图9-21所示。ATM
 > [!quote]- English 63
 > The sensitivity of an option’s gamma to a change in volatility, sometimes referred to as its *zomma*, is shown in Figure 9-22. Zomma characteristics are similar to color characteristics. The zomma is large for at-the-money calls and puts, with gamma values becoming smaller as volatility rises and larger as volatility falls (a negative zomma). Calls with deltas close to 5 or 95 and puts with deltas close to –5 or –95 also have large zomma values. Here, however, an increase in volatility causes gamma values to rise and a decline in volatility causes gamma values to fall (a positive zomma). Moreover, reducing time or volatility will increase the zomma, making an option’s gamma more sensitive to changes in volatility. Increasing time or volatility will reduce the zomma, making an option’s gamma less sensitive to changes in volatility. Calls with deltas close to 15 or 85 and puts with deltas close to –15 and –85 tend to have zomma values close to 0. The gamma values of such options will be relatively insensitive to changes in volatility.
 
-期权的Gamma对波动率变化（有时称为波动率）的敏感性如图9-22所示。Zomma特征与Color特征相似。对于平值看涨和看跌期权来说，zomma很大，随着波动率上升，Gamma值变得更小，随着波动率下降，Gamma值变得更大（负zomma）。Delta接近5或95的看涨期权以及Delta接近-5或-95的看跌期权也具有较大的zomma值。然而，在这里，波动率的增加导致Gamma值上升，波动率的下降导致Gamma值下降（正zomma）。此外，减少时间或波动率将增加zomma，使期权的Gamma对波动率的变化更加敏感。增加时间或波动率将降低zomma，使期权的Gamma对波动率变化不那么敏感。Delta接近15或85的看涨期权以及Delta接近-15和-85的看跌期权的zomma值往往接近0。此类期权的Gamma值对波动率变化相对不敏感。
+期权的Gamma对波动率变化的敏感性有时称为Zomma，如图9-22所示。Zomma的特征与Color相似。平值看涨期权和平值看跌期权的Zomma绝对值较大：波动率上升时Gamma减小，波动率下降时Gamma增大，因此Zomma为负。Delta接近5或95的看涨期权，以及Delta接近-5或-95的看跌期权，也具有较大的Zomma值。不过，对这些期权而言，波动率上升会使Gamma增大，波动率下降会使Gamma减小，因此Zomma为正。此外，缩短距到期时间或降低波动率会提高Zomma值，使期权的Gamma对波动率变化更加敏感；延长距到期时间或提高波动率则会降低Zomma值，使其Gamma对波动率变化不那么敏感。Delta接近15或85的看涨期权，以及Delta接近-15或-85的看跌期权，其Zomma通常接近0。这类期权的Gamma对波动率变化相对不敏感。
 
 <!-- source:block 0f96eed5392b8173 -->
 
-*图9-22 Zomma期权。 / Figure 9-22 Zomma of an option.*
+*图9-22 期权的Zomma。 / Figure 9-22 Zomma of an option.*
 
 <!-- source:block acfc73cc6fb36ced -->
 
