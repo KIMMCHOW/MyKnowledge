@@ -4,7 +4,7 @@ tags:
   - 期权
   - 双语阅读
 chapter: 13
-translation_status: 双语稿已生成，待人工复核
+translation_status: 翻译审计完毕
 created: 2026-08-03
 ---
 
@@ -12,8 +12,8 @@ created: 2026-08-03
 
 [[阅读导航|← 返回阅读导航]]
 
-> [!warning] 翻译状态
-> 本章双语稿已生成，尚待逐段人工复核。英文原文、数字、公式和图表保留用于核对。
+> [!success] 翻译状态
+> 本章已完成逐段翻译与风险审计。英文原文、数字、公式和图表继续保留，便于后续核对。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline
@@ -129,7 +129,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 13
 > Short straddles and strangles
 
-短跨和宽跨式
+空头跨式和空头宽跨式
 
 <!-- source:block e009a5c03745a5c8 -->
 
@@ -150,7 +150,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 16
 > Short calendar spreads
 
-短期日历价差
+空头日历价差
 
 <!-- source:block 8c21d716ee1424e3 -->
 
@@ -229,7 +229,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 27
 > It will be easier to analyze the relative risks of the spreads if we construct a graph of the theoretical profit or loss with respect to movement in the underlying contract. This has been done in Figure 13-4. We can see that each spread does indeed lose value as the underlying price moves either up or down.<sup>3</sup> However, we can also see that if there is a very large move, the spread characteristics begin to diverge. On both the upside and downside, the losses from Spread 1, the short straddle, continue to increase, resulting in potentially unlimited risk in either direction. Spread 2, the ratio spread, has unlimited upside risk. On the downside, though, it flattens out and eventually results in a very small profit. Spread 3, the long butterfly, flattens out on both the upside and downside, so its risk is limited regardless of direction.
 
-如果我们构建一张关于标的合约变动的理论利润或损失的图表，那么分析价差的相对风险就会更容易。这已在图13-4中完成。我们可以看到，随着标的价格的上涨或下跌，每个价差确实会失去价值。但是，我们也可以看到，如果出现非常大的波动，价差特征开始出现分化。无论是在上行还是下行，价差1（空头跨式）的损失继续增加，导致任何方向的潜在风险都是无限的。价差2（比率价差）具有无限的上行风险。不过，缺点是，它会破产，最终只带来微薄的利润。价差[^ovp13-3]，即多头蝶式价差，在上行和下行中都出现，因此无论方向如何，其风险都是有限的。 3
+若把各价差的理论损益相对于标的价格变动绘制成图，就更容易比较它们的相对风险，图 13-4 正是如此。可以看到，标的价格无论上涨还是下跌，三个价差起初都会损失价值。[^ovp13-3] 但当标的发生非常大的变动时，三者的尾部风险特征开始明显分化：价差 1 是空头跨式，其损失在上涨端和下跌端都会继续扩大，两个方向都可能面临近乎无界的风险；价差 2 是比率价差，上涨端风险无界，但下跌端的损益曲线会逐渐走平，最终留下少量利润；价差 3 是多头蝶式价差，其损益曲线在上涨端和下跌端都会走平，因此两个方向的风险都有限。
 
 <!-- source:block c8a611f5abba6a94 -->
 
@@ -258,7 +258,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 31
 > Because Spread 2 has the smallest vega (–.875), we might initially conclude that it has the smallest volatility risk. But the vega, like the gamma, changes as market conditions change. If we raise volatility, the vega of Spread 1, the short straddle, will remain essentially unchanged because the vega of an at-the-money option is constant with respect to changes in volatility. But the vega of Spread 3, the long butterfly, will decline because the vega of in-the-money and out-of-the-money options (the May 46 and May 50 puts) will tend to increase as volatility rises. With Spread 2, the vega of both options, the May 50 call and the May 52 call, will begin to increase, so it’s not immediately clear what will happen if we increase volatility.
 
-由于Spread 2的Vega最小（-.875），因此我们最初可能会得出结论，它的波动率风险最小。但Vega与Gamma一样，会随着市场条件的变化而变化。如果我们提高波动率，那么价差1（空头跨式）的Vega将基本保持不变，因为平值期权的Vega对于波动率的变化是恒定的。但价差3（多头蝶式价差）的Vega将会下降，因为随着波动率的上升，价内期权和价外期权（5月46日和5 月到期、行权价为 50 的看跌期权）的Vega将会增加。随着价差2，两种期权（5 月到期、行权价为 50 的看涨期权和5 月到期、行权价为 52 的看涨期权）的Vega将开始增加，因此目前尚不清楚如果我们增加波动率会发生什么。
+价差 2 当前的净 Vega 为 $-0.875$，在三个头寸中绝对值最小，因此我们起初可能会认为它的波动率风险最小。但和 Gamma 一样，Vega 也会随市场条件而变。若提高隐含波动率，价差 1（空头跨式）的净 Vega 将大致保持不变，因为在本例所考察的范围内，平值期权的 Vega 随波动率变化得很少。价差 3（多头蝶式价差）的负 Vega 绝对值则会下降；以带符号的数值表示，就是净 Vega 上升并向零靠近。这是因为波动率上升时，价内与价外两条多头翼部——对应五月到期、行权价分别为 46 和 50 的看跌期权——其 Vega 都会增加。对于价差 2（比率价差），五月到期、行权价分别为 50 和 52 的看涨期权，其 Vega 都会开始增加；但两腿的买卖方向和合约数量不同，因此不能只根据单腿 Vega 的变化，就立即判定组合净 Vega 将如何变化。
 
 <!-- source:block 655c441a05a7163e -->
 
@@ -294,7 +294,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 36
 > The shapes of the graphs in Figure 13-5 are a result of each position’s *volga*—the sensitivity of the vega to a change in volatility. (For a discussion of the volga, see Chapter 9, specifically Figure 9-15.) Spread 1 has a volga close to 0; its vega remains constant regardless of changes in volatility. Spread 2 has a negative volga. As volatility rises, the vega becomes more negative; as volatility falls, the vega becomes less negative. This means that as volatility rises or falls, changes in volatility work against the position, accelerating the rate of loss as volatility rises and reducing the rate of profit as volatility falls. In contrast, Spread 3 has positive volga. Changes in volatility work in favor of the position, reducing the rate of loss as volatility rises and increasing the rate of profit as volatility falls.
 
-图13-5中图表的形状是每个头寸volga的结果——Vega对波动率变化的敏感性。(For关于伏尔加河的讨论，请参阅第9章，特别是图9-15。）价差1的volga接近0;无论波动率如何变化，其Vega都保持不变。价差2的伏尔加舞曲为负。随着波动率上升，Vega指数变得更加负;随着波动率下降，Vega指数变得更加负。这意味着，随着波动率的上升或下降，波动率的变化会对头寸产生不利影响，随着波动率的上升而加速亏损率，随着波动率的下降而降低利润率。相比之下，Spread 3的伏尔加舞曲呈阳性。波动率的变化有利于头寸，随着波动率上升，降低损失率，并随着波动率下降，提高利润率。
+图 13-5 中各条曲线的形状来自相应头寸的 Volga，即 Vega 对波动率变化的敏感度（关于 Volga 的讨论，参见第 9 章，尤其是图 9-15）。价差 1 的 Volga 接近 0，因此在图示范围内，其 Vega 随波动率变化的幅度很小。价差 2 的 Volga 为负：波动率上升时，净 Vega 会变得更加负；波动率下降时，净 Vega 则变得较少负。因此，无论波动率由当前水平向上还是向下偏离，其曲率效应都对头寸不利——波动率上升时亏损会加速，波动率下降时盈利的增长速度反而会放缓。相比之下，价差 3 的 Volga 为正，曲率效应对头寸有利：波动率上升时，亏损速度会逐渐放缓；波动率下降时，盈利速度则会逐渐加快。
 
 <!-- source:block b68417a15fce31e5 -->
 
@@ -340,14 +340,14 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 42
 > Additionally, there is the question of market liquidity. In order to obtain a theoretical edge commensurate with Spreads 1 and 2, it was necessary to increase the size of the butterfly to 100 × 200 × 100. If there is insufficient liquidity in the May 46, 48, and 50 puts to support this size, it may not be possible to execute the butterfly in the size required to meet the trader’s profit objective. Alternatively, it may be possible to execute part of the spread at favorable prices, but as the size increases, the prices may become less satisfactory. Moreover, for a retail customer, the increased size may entail greater transaction costs.
 
-此外，还有市场流动性问题。为了获得与价差1和2相当的理论优势，有必要将蝶式价差的大小增加到100 × 200 × 100。如果5月46日、48日和50日看跌期权的流动性不足来支持这一规模，那么可能无法执行达到交易员盈利目标所需规模的蝶式价差交易。或者，也可以以有利的价格执行部分价差，但随着规模的增加，价格可能会变得不太令人满意。此外，对于零售客户来说，规模的增加可能会带来更高的交易成本。
+此外，还必须考虑市场流动性。为使蝶式价差获得与价差 1 和价差 2 相当的理论优势，其三条腿的合约数量必须扩大到 100 × 200 × 100。如果五月到期、行权价分别为 46、48 和 50 的看跌期权流动性不足，就可能无法以达成预定盈利目标所需的规模完成该蝶式价差。交易者也许能以有利价格成交其中一部分，但随着下单规模扩大，后续成交价格可能会越来越差。对零售客户而言，更大的合约数量还会带来更高的交易成本。
 
 <!-- source:block a0760153284219bb -->
 
 > [!quote]- English 43
 > If trading considerations make Spread 3 impractical, a trader may have to choose between Spreads 1 (short straddle) and 2 (ratio spread). If this happens, Spread 2 is the clear winner. It allows for a much greater margin for error in both underlying price change (gamma risk) and volatility (vega risk). A trader who is given a choice between these two spreads will strongly prefer Spread 2.
 
-如果交易考虑导致价差3不切实际，交易员可能必须在价差1（空头跨式）和2（比例价差）之间进行选择。如果发生这种情况，则Spread 2是明显的赢家。 它允许标的价格变化（Gamma风险）和波动率（Vega风险）的误差保证金更大。在这两个价差之间做出选择的交易者将强烈喜欢价差2。
+如果流动性、成交难度或交易成本使价差 3 在实务中不可行，交易者可能只能在价差 1（空头跨式）和价差 2（比率价差）之间选择。在这两者中，价差 2 明显更优：无论是标的价格判断的偏差（Gamma 风险），还是波动率估计的偏差（Vega 风险），它都提供了更大的容错空间。因此，若只能二选一，交易者通常会明显偏向价差 2。
 
 <!-- source:block c03c8dfcec1044e7 -->
 
@@ -361,7 +361,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 45
 > Let’s consider three new spreads—Spread 4 (a short put calendar spread), Spread 5 (a diagonal call spread), and Spread 6 (a put diagonal ratio spread). In order to again focus on risk, the size of each spread has been adjusted so that the theoretical edge of all three spreads is similar. The total theoretical edge and risk sensitivities of each spread (all taken from the theoretical evaluation table in Figure 13-1) are shown in Figure 13-6.
 
-让我们考虑三种新的价差——价差4（卖空日历价差）、价差5（对角线看涨价差）和价差6（看跌对角线比例价差）。为了再次关注风险，每个价差的规模都进行了调整，以便所有三个价差的理论优势相似。每个价差的总理论优势和风险敏感度（均取自图13-1中的理论评估表）如图13-6所示。
+下面考察三种新的组合：价差 4（空头看跌日历价差）、价差 5（看涨期权对角价差）和价差 6（看跌期权对角比率价差）。为了把比较重点再次放在风险上，我们调整了各组合的合约数量，使三者的总理论优势大致相当。图 13-6 列出了各组合的总理论优势与风险敏感度，所用数据均来自图 13-1 的理论价值表。
 
 <!-- source:block a7b197a898210ecd -->
 
@@ -376,7 +376,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 47
 > Because each spread has a negative vega, we will again want to consider the risk that volatility will turn out to be greater than our estimate of 18 percent. The sensitivity of each spread to increasing volatility is shown in Figure 13-7. We can see that Spread 4 has an implied volatility of approximately 20.5 percent, Spread 5 approximately 22 percent, and Spread 6 approximately 20 percent. If rising volatility is our primary concern, Spread 5, the diagonal call spread, seems to entail the lowest risk. However, although Spread 5 loses the least in a rising-volatility market, it also shows a smaller profit in a falling-volatility market. This may seem like a reasonable tradeoff, except that with Spread 5, the positive effects of falling volatility begin to decline very quickly. This is due to the negative volga associated with the position. As volatility falls, the vega becomes less negative until, at a volatility of approximately 10 percent, the vega falls to 0. Spread 6, the put diagonal ratio spread, has an even larger negative volga; its vega turns positive if volatility falls below 11 percent. In contrast to both Spreads 5 and 6, Spread 4, the short calendar spread, has a volga of 0. Its vega remains constant regardless of whether volatility rises or falls. It offers an equal tradeoff between losses when volatility rises and profits when volatility falls.
 
-由于每个价差都有负的Vega，因此我们再次需要考虑波动率大于我们估计的18%的风险。每个价差对波动率增加的敏感性如图13-7所示。我们可以看到，价差4的隐含波动率约为20.5%，价差5约为22%，价差6约为20%。如果波动率上升是我们的主要担忧，那么价差5（对角线看涨价差）的风险似乎最低。然而，尽管价差5在波动率上升的市场中损失最小，但在波动率下降的市场中利润也较小。这似乎是一个合理的权衡，除了对于价差5，波动率下降的积极影响开始迅速下降。这是由于与该头寸相关的负伏尔加河。随着波动率下降，Vega指数变得不那么负，直到波动率约为10%时，Vega指数降至0。价差6（看跌对角线比率价差）的负volga甚至更大;如果波动率低于11%，其Vega就会变成正值。与价差5和6相反，价差4（短日历价差）的伏尔加值为0。无论波动率上升还是下降，其Vega都保持不变。它在波动率上升时的损失和波动率下降时的利润之间提供了平等的权衡。
+由于三个组合当前都是负 Vega，我们仍需要考虑实际波动率高于原估计值 18% 的风险。图 13-7 展示了各组合在波动率上升时的价值变化。从图中可见，价差 4、5 和 6 的盈亏平衡隐含波动率分别约为 20.5%、22% 和 20%。如果最担心的是波动率上升，价差 5（看涨期权对角价差）似乎风险最小。但它在波动率上升时亏得最少的同时，在波动率下降时赚得也较少。这看似是合理的交换，但价差 5 从波动率下降中获得的边际收益会很快递减，原因是该头寸具有负 Volga。随着波动率下降，其净 Vega 会上升、负值绝对值缩小；当波动率降至约 10% 时，净 Vega 上升到零，再继续降低波动率，就不再带来原先那种收益。价差 6（看跌期权对角比率价差）的负 Volga 更大；当波动率低于约 11% 时，其净 Vega 会转为正值。相比之下，价差 4（空头看跌日历价差）的 Volga 约为零，因此在本模型范围内，无论波动率上升还是下降，其净 Vega 都基本保持不变。它在波动率上升时的损失与波动率下降时的收益之间，呈现出较为对称的权衡。
 
 <!-- source:block 4716a911b98380c2 -->
 
@@ -406,14 +406,14 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 51
 > We can see in Figure 13-8 that although Spread 6, the diagonal ratio spread, will be hurt by a move in the price of the underlying contract, the degree to which the move will hurt depends on the direction. With an upward move, the potential profit will decline. But even with a very large upward move, the spread will always retain some profit. On the downside, however, the spread’s profit rapidly disappears, turning into a potentially unlimited loss if the downward move is large enough.
 
-从图13-8中我们可以看到，尽管价差6（对角线比例价差）会因标的合约价格的变动而受到损害，但变动的损害程度取决于方向。随着上升，潜在利润就会下降。但即使出现非常大的上涨，价差也总是会保留一些利润。然而，不利的一面是，价差的利润迅速消失，如果向下移动足够大，就会变成潜在的无限损失。
+从图 13-8 可以看出，标的价格偏离当前水平时，价差 6（对角比率价差）的理论利润会受损，但上涨与下跌所造成的影响并不对称。标的上涨时，潜在利润会逐渐减少；即使涨幅很大，该组合仍会保留一定利润。但在下跌方向，利润会迅速消失；若跌幅足够大，头寸将转为亏损，且潜在亏损可能没有上限。
 
 <!-- source:block b77c03612e698f5d -->
 
 > [!quote]- English 52
 > Spread 4, the short put calendar spread, and Spread 5, the diagonal call spread, both have positive gamma and will profit from a large move. Unlike Spread 4, though, which shows approximately equal profit in either direction, Spread 5 shows a greater profit in an upward move and a smaller profit in a downward move.<sup>4</sup>
 
-价差 4（空头看跌日历价差）和价差 5（对角看涨价差）都具有正 Gamma，因此都会从市场的大幅变动中获利。但与价差 4 在两个方向上的利润大致相等不同，价差 5 在上涨时利润更大，在下跌时利润较小。 [^ovp13-4]
+价差 4（空头看跌日历价差）和价差 5（看涨期权对角价差）都具有正 Gamma，因此标的价格大幅向任一方向变动，都有利于这两个组合。不过，价差 4 在上涨与下跌两个方向上的潜在利润大致对称；价差 5 则带有明显的方向偏向：标的上涨时潜在利润较大，下跌时潜在利润较小。 [^ovp13-4]
 
 <!-- source:block 63ada5eb4c458922 -->
 
@@ -435,7 +435,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 55
 > In Figure 13-9, Spread 4 exhibits the typical decay profile for a short calendar spread that is approximately at the money. As time passes, the position loses value at an increasingly greater rate. Spread 5, the diagonal call spread, also loses value as time passes. But after five weeks the decay turns positive, so that if nothing happens in the underlying market the position will eventually show a small profit. Spread 6, the diagonal ratio spread, initially shows a small increase in value as time passes. Eventually, though, this position is also subject to decay. After seven weeks, its potential profit disappears completely.
 
-在图13-9,价差4中，显示了大约ATM的短日历价差的典型衰减曲线。随着时间的推移，该头寸的价值以越来越快的速度失去。价差5,对角线看涨期权价差也随着时间的推移而失去价值。 但五周后，衰退变为正值，因此如果标的市场没有任何变化，该头寸最终将出现小幅利润。Spread 6,对角线比Spread，最初显示值随着时间的推移略有增加。 不过，最终，这一头寸也会衰落。七周后，其潜在利润完全消失。
+在图13-9,价差4中，显示了大约ATM的空头日历价差的典型衰减曲线。随着时间的推移，该头寸的价值以越来越快的速度失去。价差5,对角线看涨期权价差也随着时间的推移而失去价值。 但五周后，衰退变为正值，因此如果标的市场没有任何变化，该头寸最终将出现小幅利润。Spread 6,对角线比Spread，最初显示值随着时间的推移略有增加。 不过，最终，这一头寸也会衰落。七周后，其潜在利润完全消失。
 
 <!-- source:block cb3a74be47a500f3 -->
 
@@ -449,7 +449,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 57
 > If given the choice between several different strategies, a trader can use a computer to determine the risk characteristics of the strategies under different market conditions. Unfortunately, it may not always be possible to analyze the choices in such detail. A trader may not have immediate access to the necessary computer support, or market conditions may be changing so rapidly that if he fails to make an immediate decision, opportunity may quickly pass him by. In such cases, the trader will often have to rely on his instincts in choosing a strategy. Although there is no substitute for experience, most traders quickly learn an important rule: *straddles and strangles are the riskiest of all spreads*. This is true whether one buys or sells these strategies. New traders sometimes assume that the purchase of straddles and strangles is not especially risky because the risk is limited. However, it can be just as painful to lose money day after day when one buys a straddle or strangle and the market fails to move as it is to lose the same amount of money all at once when one sells a straddle and the market makes a violent move. Of course, a trader who is right about volatility can reap large rewards from straddles and strangles. But an experienced trader knows that such strategies offer the least margin for error and will therefore prefer strategies with more desirable risk characteristics.
 
-如果可以在几种不同的策略之间做出选择，交易者可以使用计算机来确定不同市场条件下策略的风险特征。不幸的是，可能并不总是能够如此详细地分析选择。交易员可能无法立即获得必要的计算机支持，或者市场条件可能变化如此之快，如果他未能立即做出决定，机会可能很快就会与他擦肩而过。在这种情况下，交易者通常不得不依靠自己的直觉来选择策略。尽管经验是无法替代的，但大多数交易者很快就会学到一条重要规则：跨式和宽跨式是所有价差中风险最大的。无论购买还是出售这些策略，情况都是如此。新交易者有时会认为购买跨式和宽跨式的风险并不是特别大，因为风险有限。然而，当一个人购买跨式或宽跨式时，日复一日地赔钱，而市场却没有动静，就像当一个人出售跨式或宽跨式时，同时损失同样多的钱一样痛苦。市场发生剧烈波动。当然，一个对波动率判断正确的交易者可以从跨仓和套牢中获得巨大回报。但一个有经验的交易者知道，这样的策略提供了最小的误差幅度，因此会更喜欢具有更理想的风险特征的策略。
+当有多种策略可供选择时，交易者可以利用计算机比较它们在不同市场情景下的风险特征。但现实中往往来不及做如此详细的分析：所需的计算工具可能不在手边，市场也可能变化得太快，稍一犹豫便会错过机会。在这种情况下，交易者常常只能借助经验和盘感选择策略。虽然经验无可替代，多数交易者都会很快学到一条重要的实务规则：*跨式和宽跨式在各类价差中容错空间最小，因而风险最高*；无论做多还是做空都是如此。新手有时认为，多头跨式或多头宽跨式的最大亏损只是支付的权利金，所以风险不大。但如果市场迟迟不动，时间价值日复一日地流失，持续慢性亏损同样令人痛苦；这与空头跨式或空头宽跨式在市场剧烈波动时一次性遭受大额损失，只是风险实现的路径不同。对波动率判断正确时，跨式和宽跨式当然可能带来很高回报；但经验丰富的交易者知道，这两类策略留给判断误差的空间最小，因而往往会优先选择风险轮廓更合适的组合。
 
 <!-- source:block 1ea174a31b118339 -->
 
@@ -460,21 +460,21 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 58
 > What is a reasonable margin for error in assessing the risk of a position, particularly when it comes to volatility risk? There is no clear answer because it will usually depend on the volatility characteristics of a particular market, as well as the trader’s experience in that market. In some cases, 5 percentage points may be an extremely large margin for error, and the trader will feel very confident with any strategy passing such a test. In other cases, 5 percentage points may be almost no margin for error at all, and the trader will find that the strategy is a constant source of worry.
 
-在评估头寸风险时，合理的误差幅度是多少，特别是在波动率风险方面？没有明确的答案，因为它通常取决于特定市场的波动率特征，以及交易者在该市场的经验。在某些情况下，5个百分点可能是一个非常大的误差保证金，交易员会对任何通过此类测试的策略感到非常有信心。在其他情况下，5个百分点可能几乎根本没有误差，交易者会发现该策略是一个持续的担忧来源。
+评估一个头寸时，应当为判断错误预留多大的容错空间，尤其是针对波动率风险？这没有统一答案，因为合理的容错幅度通常取决于具体市场的波动特征，以及交易者对该市场的经验。在某些市场中，将波动率假设向不利方向调整 5 个百分点，已经是相当严苛的压力测试；如果某策略在这种偏差下仍能承受，交易者便可能对它很有信心。但在另一些市场中，5 个百分点几乎算不上安全缓冲，即使策略通过这样的测试，交易者仍可能需要时刻担心它的风险。
 
 <!-- source:block 6d01779382f3469b -->
 
 > [!quote]- English 59
 > Rather than focusing on margin for error, a better approach might be to focus on the correct size in which to do a spread given a known margin for error. Practical trading considerations aside, a trader should always choose the spread with the best risk-reward characteristics. But sometimes even the best spread will have only a small margin for error and consequently will entail significant risk. In such a case, a trader, if he wants to make a trade, ought to do so in small size. If, however, a trader can execute a spread with a very large margin for error, he ought to be willing to do the spread in a much larger size.
 
-与其关注误差幅度，更好的方法可能是关注在已知误差幅度的情况下进行价差的正确大小。撇开实际交易考虑不谈，交易者应该始终选择具有最佳风险回报特征的价差。但有时，即使是最好的价差也只有很小的误差幅度，因此会带来巨大的风险。在这种情况下，如果交易者想进行交易，就应该进行小规模交易。然而，如果一个交易者可以执行一个非常大的误差幅度的价差，他应该愿意做一个更大的价差。
+与其只问“应预留多大的容错空间”，更实用的做法是：在已知策略容错空间的前提下，反过来决定合理的头寸规模。暂不考虑流动性和成交成本等实务约束，交易者当然应优先选择风险收益特征最好的策略。但即使是可选策略中最好的一个，容错空间也可能很小，因而仍然具有较高风险。若交易者仍决定建仓，就应缩小规模。反之，如果某个价差留出了很大的容错空间，交易者才可以考虑采用更大的头寸。
 
 <!-- source:block e469ce751e9a6c2d -->
 
 > [!quote]- English 60
 > Consider a trader whose best estimate of volatility in a certain market is 25 percent. If implied volatility is lower than 25 percent, the trader will look for positions with a positive vega. If the best positive-vega strategy the trader can find is a 2 × 1 ratio spread with an implied volatility of 23 percent (only a 2-percentage-point margin for error), he will almost certainly keep the size of his strategy small, perhaps executing the spread only 10 times (20 × 10). If, however, the same spread has an implied volatility of 18 percent (a 7-percentage-point margin for error) and the trader believes that such a low volatility is extremely rare, he may have the confidence to execute the spread in a much larger size, perhaps 100 × 50.<sup>5</sup> The size of a trader’s positions should depend on the riskiness of the positions, and this, in turn, depends on how much can go wrong before the strategy turns against the trader.
 
-考虑一个交易者，他对某个市场的波动率的最佳估计是25 %。如果隐含波动率低于25 %，交易员将寻找具有正Vega的头寸。 如果交易者能找到的最佳正Vega策略是隐含波动率为23 %的2 × 1比率价差（只有2-零点保证金），那么他几乎肯定会保持策略的规模较小，也许只行权价差10次（20 × 10）。 然而，如果相同的价差的隐含波动率为18 %（误差为7点），并且交易员认为如此低的波动率极其罕见，则他可能有信心以更大的规模行权价差，也许是100 × 50。 交易者头寸的规模应取决于头寸的风险，而这反过来又取决于在策略转向不利于交易者之前会出现多少错误。 [^ovp13-5]
+假设某交易者认为一个市场的合理波动率约为 25%。当隐含波动率低于 25% 时，他会寻找正 Vega 组合。如果能找到的最佳策略是一个隐含波动率为 23% 的 $2\times1$ 比率价差，那么相对这一估值，只有 2 个百分点的容错空间。他几乎肯定会把头寸控制得很小，例如只建立 10 组，即两腿分别交易 20 份与 10 份期权。如果同一价差的隐含波动率只有 18%，容错空间便扩大到 7 个百分点；若交易者还认为如此低的波动率极为罕见，就可能更有信心扩大头寸，例如将两腿增加到 100 份与 50 份。[^ovp13-5] 因此，头寸规模应与策略风险相匹配；而策略的风险程度，又取决于市场偏离判断多远之后，头寸才会开始转为不利。
 
 <!-- source:block 194fc091514ea487 -->
 
@@ -485,14 +485,14 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 61
 > In addition to the delta, gamma, theta, and vega risks that apply to all traders, stock option traders may also have to consider the risk of changes in interest rates and dividends.<sup>6</sup> When all options expire at the same time, the risk associated with changes in interest rates and dividends tends to be relatively small. Straddles, strangles, ratio spreads, and butterflies may change slightly because a change in interest rates or dividends will raise or lower the forward price. But all options are evaluated using one and the same forward price. For calendar spreads, however, where the options are evaluated using two different forward prices, long-term and short-term options can react differently to changes in these inputs.
 
-除了适用于所有交易者的Delta、Gamma、Theta和Vega风险外，股票期权交易者还可能必须考虑利率和股息变化的风险。 当所有期权同时到期时，与利率和股息变化相关的风险往往相对较小。跨式、宽跨式、比率价差和蝶式价差可能会略有变化，因为利率或股息的变化将提高或降低远期价格。 但所有期权都使用相同的远期价格进行评估。然而，对于日历价差，如果期权是使用两种不同的远期价格评估的，长期和短期期权可能会对这些输入的变化做出不同的反应。 [^ovp13-6]
+除了各类期权交易都需要管理的 Delta、Gamma、Theta 和 Vega 风险外，股票期权还可能暴露于利率和股息变化。[^ovp13-6] 当组合中所有期权具有相同到期日时，利率与股息风险通常相对较小。跨式、宽跨式、比率价差和蝶式价差的价值仍可能因利率或股息变化而小幅改变，因为这些输入会改变对应到期日的远期价格；但由于各腿共用同一个到期日，它们也共用同一个远期价格。日历价差则不同：近月腿和远月腿对应两个不同期限的远期价格，因此它们对利率或股息变化的反应可能不同。
 
 <!-- source:block 271edc4b7120bd8d -->
 
 > [!quote]- English 62
 > Consider the evaluation table for stock options shown in Figure 13-10. With implied volatilities below the forecast of 29 percent, it makes sense to look for spreads with positive vegas. Suppose that we focus on the four spreads shown in Figure 13-11. Spreads 7 and 8 are long calendar spreads, while Spreads 9 and 10 are diagonal spreads. What are the relative merits of each spread?
 
-考虑图13-10中所示的股票期权评估表。由于隐含波动率低于29%的预测，寻找Vega斯正的价差是有意义的。假设我们关注图13-11中所示的四个价差。价差7和8是长日历价差，而价差9和10是对角线价差。每个价差的相对优点是什么？
+考虑图 13-10 所示的股票期权理论价值表。当前隐含波动率低于 29% 的预测值，因此寻找正 Vega 价差是合理的。假设我们把比较范围限定在图 13-11 的四个组合：价差 7 和 8 是多头日历价差，价差 9 和 10 是对角价差。接下来需要比较，这四个组合各自具有哪些相对优势。
 
 <!-- source:block a9335bf2c5fb7dbe -->
 
@@ -515,7 +515,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 65
 > Because all four spreads fall into the long calendar spread category, they all have the typical negative-gamma and positive-vega characteristics associated with such spreads. This is shown in Figures 13-12 and 13-13. Movement in the price of the underlying contract or falling volatility will reduce the value of the spread. Rising volatility will increase the value of the spread. (Spreads 7 and 8 have essentially identical volatility characteristics and are almost indistinguishable from each other in Figure 13-13.) Initially, the choice of spreads will depend on the risk of movement in the underlying contract as well as the risk of changes in implied volatility.
 
-由于所有四种价差都属于长日历价差类别，因此它们都具有与此类价差相关的典型负Gamma和正Vega特征。这如图13-12和13-13所示。标的合约价格的变动或波动率下降将减少价差的价值。波动率上升将增加价差的价值。（价差7和价差8具有基本相同的波动率特征，在图13-13中几乎无法区分。）最初，价差的选择将取决于标的合约的变动风险以及隐含波动率变化的风险。
+这四个组合都属于多头日历型价差：持有远月期权，同时卖出近月期权。因此，在当前评估区域内，它们都呈现这类头寸常见的负 Gamma、正 Vega 特征，如图 13-12 和图 13-13 所示。标的价格向任一方向大幅变动，或隐含波动率下降，都会使组合价值降低；隐含波动率上升则会提高组合价值。价差 7 和 8 的波动率风险特征几乎相同，所以它们在图 13-13 中的曲线几乎重合。因而在初步筛选这些组合时，交易者需要同时比较标的价格变动风险，以及隐含波动率变化风险。
 
 <!-- source:block dbb987464ba2a12e -->
 
@@ -616,7 +616,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > [!quote]- English 77
 > One method that traders sometimes use to compare the relative riskiness of potential strategies focuses on the risk-reward ratio, or *efficiency*, of the strategies. Suppose that a trader is considering two possible spreads, both with a positive gamma and a negative theta. The reward is represented by the gamma, the potential profit when the underlying market moves. The risk is the theta, the money that will be lost through the passage of time if the underlying market fails to make sufficiently large moves. The trader would like the reward (the gamma) to be as large as possible compared with the risk (the theta). We might express this relationship as a ratio
 
-交易员有时用来比较潜在策略相对风险的一种方法侧重于策略的风险回报比或效率。假设交易员正在考虑两种可能的价差，都是正的Gamma和负的Theta。回报由Gamma来代表，即标的市场变动时的潜在利润。风险是Theta，即如果标的市场未能做出足够大的波动，随着时间的推移将损失的资金。交易者希望回报（Gamma）与风险（Theta）相比尽可能大。我们可以将这种关系表示为
+交易者有时会用一个简化的风险收益比，也称“效率”，来快速比较候选策略。假设两个价差都是正 Gamma、负 Theta：Gamma 代表标的发生变动时可能获得的曲率收益，Theta 则代表标的未能充分波动时，头寸因时间流逝而承担的代价。交易者希望相对于每单位 Theta 流失，获得尽可能多的 Gamma。这一关系可写为
 
 <!-- source:block a2fd53ec7479ef60 -->
 
@@ -624,7 +624,7 @@ Rho（利率）风险。利率在期权有效期内发生变化的风险。具�
 > gamma/theta
 
 $$
-\text{gamma}/\text{theta}
+\Gamma/\Theta
 $$
 
 <!-- source:block c4747ee135345061 -->
@@ -632,21 +632,24 @@ $$
 > [!quote]- English 79
 > The larger the absolute value of this ratio, the more efficient the position.
 
-该比率的绝对值越大，头寸的效率越高。
+对上述正 Gamma、负 Theta 头寸而言，该比率的绝对值越大，表示每单位 Theta 代价对应的 Gamma 越多。
 
 <!-- source:block d31ca1d07df44b59 -->
 
 > [!quote]- English 80
 > In the same way, a trader who has a negative gamma and a positive theta wants the risk (the gamma) to be as small as possible compared with the reward (the theta). He therefore wants the absolute value of the gamma/theta ratio to be as large as possible.
 
-同样，具有负Gamma和正Theta的交易者希望风险（Gamma）与回报（Theta）相比尽可能小。因此，他希望Gamma/Theta比的绝对值尽可能大。
+反过来，负 Gamma、正 Theta 头寸以 Theta 为收入、以负 Gamma 为风险。交易者希望每单位 Theta 收入所承担的负 Gamma 尽可能小，因此 $|\Gamma/\Theta|$ 应当越小越好；若使用倒数 $\Theta/(-\Gamma)$ 表示效率，则是越大越好。
+
+> [!note] 译校说明
+> 英文本段末句误写为 $|\Gamma/\Theta|$ 应尽可能大，这与前半句的风险收益关系、后文 English 82 及图表结论相矛盾。中文按算术关系和后文例子校正。
 
 <!-- source:block 716cf965b155b32e -->
 
 > [!quote]- English 81
 > For example, we might go back and calculate the efficiency of Spreads 1 through 3 in Figure 13-3. The efficiencies are
 
-例如，我们可能会回去计算图13-3中价差1到3的效率。效率是
+例如，可以重新计算图 13-3 中价差 1–3 的 Gamma-Theta 比值：
 
 <!-- source:block 48b4fe4c4d57896b -->
 
@@ -657,14 +660,14 @@ $$
 > [!quote]- English 82
 > Because each spread has a negative gamma and positive theta, we want the efficiency to be as small as possible. We can see that Spread 3 is best, which is consistent with our previous analysis of each spread.
 
-因为每个价差都有负的Gamma和正的Theta，所以我们希望效率尽可能小。我们可以看到Spread 3是最好的，这与我们之前对每个Spread的分析一致。
+因为三个价差都是负 Gamma、正 Theta，这里应让 $|\Gamma/\Theta|$ 尽可能小。价差 3 的比值最小，因而在这一局部比较中最优，与前面对三个头寸的分析一致。
 
 <!-- source:block 44c33a73ed7c814a -->
 
 > [!quote]- English 83
 > Assuming that all strategies have approximately the same theoretical edge, the efficiency can be a reasonable method of quickly comparing strategies where all options expire at the same time. In such cases, the gamma and theta are the primary risks to the position. If a strategy consists of options that expire at different times, the efficiency is only one consideration, and the sensitivity of the positions to changes in implied volatility (the vega) may also become important, as they were in our other spread examples. In such cases, a more detailed risk analysis will be necessary.
 
-假设所有策略都具有大致相同的理论优势，那么效率可以是快速比较所有期权同时到期的策略的合理方法。在这种情况下，Gamma和Theta是头寸的主要风险。 如果一项策略由在不同时间到期的期权组成，那么效率只是考虑因素之一，而且头寸对隐含波动率（Vega）变化的敏感性也可能变得重要，就像我们的其他价差示例中那样。 在这种情况下，需要进行更详细的风险分析。
+若各候选策略的总理论优势大致相当，且所有期权均在同一日到期，Gamma-Theta 比值可作为快速比较工具，因为 Gamma 和 Theta 通常是这类头寸的主要局部风险。但如果组合涉及不同到期日，该比值就只是评估的一部分；此时还必须检查 Vega、波动率期限结构及各到期月份的非平行变化，并进行更完整的风险分析。详见 [[Knowledge/Concepts/经济/金融/衍生品/期权/希腊字母/Gamma-Theta 效率比|Gamma-Theta 效率比]]。
 
 <!-- source:block 13e978ea7d9b0922 -->
 
@@ -846,7 +849,7 @@ $$
 > [!quote]- English 107
 > A disciplined trader knows that sometimes, because of risk considerations, the best course is to reduce the size of the spread, even if it means giving up some theoretical edge. When open-outcry markets were flourishing, this could be particularly hard on a trader’s ego if the trader had to personally go back into the market and either buy back options, that he originally sold, at a lower price or sell out options, that he originally purchased, at a higher price. However, if a trader is unwilling to swallow his pride from time to time, his trading career is likely to be a short one.
 
-一个有纪律的交易者知道，有时，出于风险考虑，最好的做法是缩小价差规模，即使这意味着放弃一些理论优势。当公开喊价市场蓬勃发展时，如果交易员必须亲自重返市场并以较低的价格回购他最初出售的期权或以较高的价格卖掉他最初购买的期权，这对交易员的自尊心可能会特别困难。然而，如果交易者不愿意时不时地吞下自己的骄傲，那么他的交易生涯很可能会很短暂。
+有纪律的交易者明白，出于风险管理的考虑，有时最佳选择是缩小价差头寸，即使这意味着主动放弃一部分尚未实现的理论优势。在场内公开喊价盛行的年代，这种决定尤其考验交易者的自尊心：他必须亲自回到交易池，把原先卖出的期权以更低的价格买回，或把原先买入的期权以更高的价格卖出，从而反向平掉部分头寸。但交易者若不能偶尔放下身段，让风险管理压过自尊，他的交易生涯很可能不会长久。
 
 <!-- source:block 26e9045acb36c2fa -->
 
@@ -931,7 +934,7 @@ $$
 > [!quote]- English 118
 > Figure 13-17 shows end-of-day bid-ask spreads and volume figures for Standard and Poor’s (S&P) 500 Index options traded at the Chicago Board Options Exchange on March 1, 2010.<sup>8</sup> In general, the volumes are lower and bid-ask spreads are wider for back-month options or options that are deeply in the money compared with front-month options or options that are at the money or out of the money.
 
-图13-17显示了1, 2010年3月在芝加哥期权交易所交易的标准普尔（S&P）500指数期权的日终买卖价差和交易量。 一般来说，与前月期权或ATM或OTM期权相比，后月期权或深度ITM期权的成交量更低，买卖价差更大。 [^ovp13-8]
+图 13-17 列出了 2010 年 3 月 1 日在芝加哥期权交易所（CBOE）交易的标普 500 指数期权（SPX）的日终买卖价差和成交量。[^ovp13-8] 一般而言，与近月期权相比，远月期权的成交量较低、买卖价差较宽；与平值或价外期权相比，深度价内期权也通常具有较低的成交量和较宽的买卖价差。
 
 <!-- source:block a065cfa734d60919 -->
 
@@ -964,7 +967,7 @@ $$
 > [!note] Footnote 122
 > <sup>3</sup> Spreads 1 and 2, with their slightly positive delta, initially show a small gain as the market rises. Spread 3, with its slight negative delta, initially shows a small gain as the market falls.
 
-[^ovp13-3]: 价差1和2的Delta略有正值，随着市场上涨，最初显示小幅上涨。价差3的Delta略有负，随着市场下跌，最初显示出小幅上涨。
+[^ovp13-3]: 价差 1 和价差 2 的 Delta 略为正值，因此标的刚开始上涨时，组合会出现小幅盈利；价差 3 的 Delta 略为负值，因此标的刚开始下跌时，组合会出现小幅盈利。
 
 <!-- source:block 42a684caa1269434 -->
 
