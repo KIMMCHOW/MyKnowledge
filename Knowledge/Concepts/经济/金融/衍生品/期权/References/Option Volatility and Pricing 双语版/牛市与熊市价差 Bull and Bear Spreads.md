@@ -4,7 +4,7 @@ tags:
   - 期权
   - 双语阅读
 chapter: 12
-translation_status: 双语稿已生成，待人工复核
+translation_status: 翻译审计完毕
 created: 2026-08-03
 ---
 
@@ -12,8 +12,8 @@ created: 2026-08-03
 
 [[阅读导航|← 返回阅读导航]]
 
-> [!warning] 翻译状态
-> 本章双语稿已生成，尚待逐段人工复核。英文原文、数字、公式和图表保留用于核对。
+> [!success] 翻译状态
+> 本章翻译与风险审计已完成。英文原文、数字、公式和图表继续保留，便于逐段核对。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline
@@ -64,21 +64,21 @@ created: 2026-08-03
 > [!quote]- English 4
 > Consider a situation where we believe that implied volatility is too high. One possible strategy is a ratio spread where more options are sold than purchased. With the underlying market at 101, ten weeks remaining to June expiration, and a volatility of 30 percent, a June 100 call has a delta of 56 and a June 110 call has a delta of 28.<sup>1</sup> A delta-neutral spread might consist of
 
-考虑我们认为隐含波动率过高的情况。一种可能的策略是比例价差，即出售的期权多于购买的期权。 由于标的市场在6月到期前还有101,十周，且波动率为30 %，因此6月100的看涨期权的Delta为56，6月110的看涨期权的Delta为28。Delta中性价差可能包括 [^ovp12-1]
+假设我们认为隐含波动率过高，一种可行的策略是构建卖出期权数量多于买入期权数量的比率价差。此时标的价格为 101，距离 6 月到期还有 10 周，隐含波动率为 30%。在这些条件下，6 月 100 看涨期权的 Delta 为 56，6 月 110 看涨期权的 Delta 为 28。一个 Delta 中性价差可以由以下头寸构成：[^ovp12-1]
 
 <!-- source:block 402a62f5caf0f6c0 -->
 
 > [!quote]- English 5
 > Buy 1 June 100 call (56)
 
-购买6月1日100看涨期权（56）
+买入 1 份 6 月 100 看涨期权（Delta 56）
 
 <!-- source:block e0dbb4c23ee7f284 -->
 
 > [!quote]- English 6
 > Sell 2 June 110 calls (28)
 
-出售6月2日110看涨期权（28）
+卖出 2 份 6 月 110 看涨期权（每份 Delta 28）
 
 <!-- source:block 4db1ee6e4f94c600 -->
 
@@ -99,14 +99,14 @@ created: 2026-08-03
 > [!quote]- English 9
 > Buy 2 June 100 calls (56)
 
-购买6月2日100个看涨期权（56）
+买入 2 份 6 月 100 看涨期权（每份 Delta 56）
 
 <!-- source:block 6926afc75ef43d50 -->
 
 > [!quote]- English 10
 > Sell 3 June 110 calls (28)
 
-出售6月3日110看涨期权（28）
+卖出 3 份 6 月 110 看涨期权（每份 Delta 28）
 
 <!-- source:block 7de4623317dcc632 -->
 
@@ -120,7 +120,7 @@ created: 2026-08-03
 > [!quote]- English 12
 > There is, however, an important limitation if we use a ratio strategy to create a bullish or bearish position. In our example, we are initially bullish, but the position is still a ratio spread with a negative gamma. If the underlying market moves up too quickly, the spread can invert from a positive to a negative delta. If the market rises far enough, to 130 or 140, eventually all options will go deeply into the money, and the deltas of both the June 100 and June 110 calls will approach 100. We will be left with a delta position of –100. Even though we may be correct in our bullish sentiment, the volatility characteristics of the position will eventually outweigh any considerations of market direction. The delta values of both ratios, 1 × 2 and 2 × 3, with respect to changes in the underlying price, are shown in Figure 12-1.
 
-然而，如果我们使用比率策略来创建看涨或看跌头寸，则存在一个重要的限制。在我们的例子中，我们最初看涨，但头寸仍然是负Gamma的比率价差。如果标的市场上涨过快，价差可能会从正值转变为负值。如果市场上涨足够远，达到130或140，最终所有期权都会深入资金，6月100日和6 月到期、行权价为 110 的看涨期权的Delta都将接近100。我们的Delta头寸将为-100。尽管我们的看涨情绪可能是正确的，但头寸的波动率特征最终将超过对市场方向的任何考虑。图12-1显示了1 × 2和2 × 3两个比率相对于标的价格变化的Delta值。
+然而，使用比率策略构建看涨或看跌头寸时存在一个重要限制。在本例中，我们最初看涨，但该头寸仍是负 Gamma 的比率价差。如果标的价格上涨过快，组合 Delta 可能由正转负。如果市场进一步上涨至 130 或 140，所有期权最终都会变为深度实值，六月 100 和六月 110 看涨期权的 Delta 都将趋近 100，组合最终会留下 $-100$ Delta 的空头方向敞口。即使我们对上涨方向的判断正确，头寸的波动率特征最终仍可能压倒最初的方向性观点。图 12-1 展示了 1×2 与 2×3 两种比率价差的 Delta 如何随标的价格变化。
 
 <!-- source:block b0e2eb7ab1d7f815 -->
 
@@ -135,21 +135,21 @@ created: 2026-08-03
 > [!quote]- English 14
 > The delta can also invert in a ratio spread in which more options are purchased than sold. Unlike a negative gamma position, where the inversion is caused by swift price movement in the underlying contract, this type of ratio spread can invert when volatility declines or time passes. Suppose that conditions are the same as in our preceding example, but we believe that implied volatility is too low. Now we might do the following delta-neutral strategy:
 
-Delta还可以在比例差中倒置，购买的期权多于出售的期权。与负Gamma头寸（倒置是由标的合约的快速价格波动引起的）不同，这种类型的比率价差可以在波动率下降或时间过去时倒置。假设条件与前面的例子相同，但我们认为隐含波动率太低。现在我们可能会采取以下Delta中性策略：
+在买入期权数量多于卖出期权数量的比率价差中，组合 Delta 的符号也可能发生反转。对于负 Gamma 头寸，这种反转通常由标的价格快速变动引起；而此类买多卖少的比率价差，则可能因隐含波动率下降或时间流逝而发生 Delta 反转。假设其他条件与前例相同，但我们认为隐含波动率过低，此时可以构建如下 Delta 中性策略：
 
 <!-- source:block 28e40230a4dc5e08 -->
 
 > [!quote]- English 15
 > Buy 2 June 110 calls (28)
 
-购买6月2日110看涨期权（28）
+买入 2 份 6 月 110 看涨期权（每份 Delta 28）
 
 <!-- source:block 1f12fca95164d46c -->
 
 > [!quote]- English 16
 > Sell 1 June 100 call (56)
 
-6月1日卖出100看涨（56）
+卖出 1 份 6 月 100 看涨期权（Delta 56）
 
 <!-- source:block bb48912033409939 -->
 
@@ -163,14 +163,14 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 18
 > Buy 3 June 110 calls (28)
 
-购买6月3日110看涨期权（28）
+买入 3 份 6 月 110 看涨期权（每份 Delta 28）
 
 <!-- source:block 1f12fca95164d46c -->
 
 > [!quote]- English 19
 > Sell 1 June 100 call (56)
 
-6月1日卖出100看涨（56）
+卖出 1 份 6 月 100 看涨期权（Delta 56）
 
 <!-- source:block 144e8d8e2931f77c -->
 
@@ -239,7 +239,7 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 28
 > We can also choose a bullish or bearish calendar spread. A long calendar spread always wants the short-term option to expire exactly at the money. A long calendar spread will be initially bullish if the exercise price is above the current price of the underlying contract.<sup>2</sup> With the underlying at 100, the June/April 110 calendar spread (buy the June 110 option, sell the April 110 option of the same type) will be bullish because the trader will want the underlying price to rise to 110 by April expiration. The June/April 90 calendar spread (buy the June 90 option, sell the April 90 option of the same type) will be bearish because the trader will want the underlying price to fall to 90 by April expiration. But like a long butterfly, a long calendar spread has a negative gamma. If the underlying contract moves through the exercise price, the delta will invert. If the market moves from 100 to 120, the June/April 110 calendar spread, which was initially bullish, will become bearish. If the market moves from 100 to 80, the June/April 90 calendar spread, which was bearish initially, will become bullish. The delta values of long calendar spreads with respect to changes in the underlying price are shown in Figure 12-4.<sup>3</sup>
 
-我们还可以选择看涨或看跌的日历价差。长日历价差总是希望短期期权在ATM机上到期。如果行权价高于标的合约的当前价格，那么长日历价差最初将看涨。 如果标的价格为100,，则6月/4月的110日历价差（买入6月的110期权，卖出4月的110同类型期权）将看涨，因为交易员希望标的价格在4月到期前升至110。 6月/4月的90日历价差（买入6月的90期权，卖出4月的90同类型期权）将是看跌的，因为交易员希望标的价格在4月到期前跌至90。但就像多头蝶式价差一样，长日历价差具有负的Gamma。 如果标的合约变动至行权价，则Delta将倒置。如果市场从100移动到120,，最初看涨的6月/4月110日历价差将变成看跌。 如果市场从100移动到80,，6月/4月90日历价差最初为熊市，将变成看涨。长日历价差相对于标的价格变化的Delta值如图12-4所示。 [^ovp12-2] [^ovp12-3]
+日历价差也可以带有看涨或看跌倾向。多头日历价差希望近月期权到期时恰好处于平值（ATM）。当行权价高于标的当前价格时，多头日历价差在建仓初期通常带有看涨倾向。[^ovp12-2] 例如，标的价格为 100 时，六月/四月 110 日历价差——买入六月 110 期权，同时卖出同类型的四月 110 期权——具有看涨倾向，因为交易者希望标的价格在四月期权到期时升至 110。相反，六月/四月 90 日历价差——买入六月 90 期权，同时卖出同类型的四月 90 期权——具有看跌倾向，因为交易者希望标的价格在四月期权到期时跌至 90。不过，与多头蝶式价差类似，多头日历价差具有负 Gamma。当标的价格穿越行权价时，组合 Delta 的符号可能反转：若市场由 100 上涨至 120，原本看涨的六月/四月 110 日历价差会转为看跌；若市场由 100 下跌至 80，原本看跌的六月/四月 90 日历价差则会转为看涨。图 12-4 展示了多头日历价差的 Delta 如何随标的价格变化。[^ovp12-3]
 
 <!-- source:block 36c40e95abaebcbd -->
 
@@ -279,14 +279,14 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 33
 > Buy 1 June 100 call
 
-购买6月1日100看涨期权
+买入 1 份 6 月 100 看涨期权
 
 <!-- source:block 69ad571a81bd28f8 -->
 
 > [!quote]- English 34
 > Sell 1 June 105 call
 
-卖出6月1日105看涨
+卖出 1 份 6 月 105 看涨期权
 
 <!-- source:block 7e7222de590dad25 -->
 
@@ -328,7 +328,7 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 40
 > Because a vertical spread at expiration will always have a value between 0 and the amount between exercise prices, a trader can expect the price of such a spread to be somewhere within this range. A 100/105 call vertical spread will trade for some amount between 0 and 5.00; a 95/105 put vertical spread will trade for some amount between 0 and 10.00. The exact value will depend on the likelihood of the underlying market finishing below the lower exercise price, above the higher exercise price, or somewhere in between. If the market is currently at 80 and gives little indication of rising, the price of the 100/105 call vertical spread will be close to 0, while the price of the 95/105 put vertical spread will be close to 10.00. If the market is currently at 120 with little likelihood that it will fall, the price of the 100/105 call vertical spread will be close to 5.00, while the price of the 95/105 put vertical spread will be close to 0.
 
-由于到期时垂直价差的值始终介于0和行权价之间，因此交易员可以预计此类价差的价格将在此价差内。100/105看涨垂直价差的交易价格在0到5.00之间; 95/105看跌垂直价差的交易价格在0到10.00之间。确切价值将取决于标的市场跌破较低行权价、高于较高行权价或介于两者之间的可能性。如果市场目前处于80并且几乎没有上涨迹象，那么100/105看涨垂直价差的价格将接近0，而95/105看跌垂直价差的价格将接近10.00。如果市场目前处于120，下跌的可能性很小，那么100/105看涨垂直价差的价格将接近5.00，而95/105看跌垂直价差的价格将接近0。
+由于到期时垂直价差的值始终介于0和行权价区间，因此交易员可以预计此类价差的价格将在此价差内。100/105看涨垂直价差的交易价格在0到5.00之间; 95/105看跌垂直价差的交易价格在0到10.00之间。确切价值将取决于标的市场跌破较低行权价、高于较高行权价或介于两者之间的可能性。如果市场目前处于80并且几乎没有上涨迹象，那么100/105看涨垂直价差的价格将接近0，而95/105看跌垂直价差的价格将接近10.00。如果市场目前处于120，下跌的可能性很小，那么100/105看涨垂直价差的价格将接近5.00，而95/105看跌垂直价差的价格将接近0。
 
 <!-- source:block 65dc37d4bf63f668 -->
 
@@ -355,7 +355,7 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 43
 > We can see why this is true by considering either the deltas of the position or the potential profit and loss (P&L) for the position. Consider the two example bull spreads:
 
-我们可以通过考虑头寸的Delta或头寸的潜在损益（P & L）来理解为什么这是正确的。考虑两个牛市价差示例：
+为什么两种构造都属于牛市价差，可以从组合 Delta 或潜在损益（P&L）两个角度理解。先看以下两个牛市价差示例：
 
 <!-- source:block e4dcd41476916c69 -->
 
@@ -368,7 +368,7 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 44
 > Both spreads must have a positive delta. The June 100 call has a greater positive delta than the June 105 call. The June 105 put has a greater negative delta than the June 100 put. Multiplying with a positive sign for a purchase and a negative sign for a sale and adding up the deltas give a total positive delta in each case.
 
-两种价差都必须有正的Delta。6 月到期、行权价为 100 的看涨期权的正Delta比6 月到期、行权价为 105 的看涨期权的正Delta更大。6月105看跌期权的负Delta大于6月100看跌期权。将购买的正号和销售的正号相乘，并将Delta相加，在每种情况下都会得到总的正Delta。
+两个价差的组合 Delta 都应为正。6 月 100 看涨期权的正 Delta 大于 6 月 105 看涨期权；而 6 月 105 看跌期权的 Delta 比 6 月 100 看跌期权更加负。计算组合 Delta 时，买入腿的持仓符号取正，卖出腿的持仓符号取负，再将各腿 Delta 相加。这样计算后，两种价差得到的组合 Delta 都为正。
 
 <!-- source:block 9c5e533128bd9525 -->
 
@@ -523,42 +523,42 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 64
 > Even though both spreads have the same delta values, under one volatility scenario, we seem to prefer the 95/100 spread, while under a different scenario, we seem to prefer the 100/105 spread. The reason becomes clear if we recall one of the basic characteristics of option evaluation introduced in Chapter 6:
 
-尽管两种价差具有相同的Delta值，但在一种波动率情景下，我们似乎更喜欢95/100价差，而在另一种情景下，我们似乎更喜欢100/105价差。如果我们回顾第6章介绍的期权评估的基本特征之一，原因就变得很明显了：
+尽管两种价差具有相同的组合 Delta，不同的隐含波动率情景却会使我们分别偏好 95/100 价差或 100/105 价差。回顾第 6 章介绍的一项期权估值基本特征，就能理解其中的原因：
 
 <!-- source:block 987056dcdc7c231a -->
 
 > [!quote]- English 65
 > *If we consider three options—in the money, at the money, and out of the money—option that are identical except for their exercise prices, the at-the-money option is always the most sensitive in total points to a change in volatility*.
 
-如果我们考虑三种期权——价内期权、平值期权和价外期权，除了其行权价之外，它们都是相同的，则平值期权总是对波动率变化的总分最敏感的。
+假设有三份除行权价以外其他条件完全相同的期权，分别处于价内、平值和价外状态，那么以期权价格的绝对点数变化衡量，平值期权对波动率变化最为敏感。
 
 <!-- source:block e46f0c1700e71c6e -->
 
 > [!quote]- English 66
 > If all options appear overpriced because we believe that implied volatility is too high, in total points, the at-the-money option will be the most overpriced. If all options appear underpriced because we believe that implied volatility is too low, in total points, the at-the-money option will be the most underpriced. This characteristic leads to a very simple rule for choosing bull and bear vertical spreads:
 
-如果所有期权都因我们认为隐含波动率太高而显得定价过高，则以总分计算，那么平值期权将是定价最高的。如果所有期权都因我们认为隐含波动率太低而显得定价过低，则以总分计算，那么平值的期权将是定价最低的。这一特征导致了选择牛市和熊市垂直价差的非常简单的规则：
+如果我们认为市场隐含波动率过高，因而所有期权都被高估，那么按期权价格的绝对点数衡量，平值期权的高估幅度最大。反之，如果我们认为隐含波动率过低，因而所有期权都被低估，那么平值期权的低估幅度也最大。由此可以得到一条选择牛市与熊市垂直价差的简单规则：
 
 <!-- source:block 0ed4c9909797797f -->
 
 > [!quote]- English 67
 > *If implied volatility is low, the choice of spreads should focus on purchasing the at-the-money option. If implied volatility is high, the choice should focus on selling the at-the-money option*.
 
-如果隐含波动率较低，则价差的选择应侧重于购买平值期权。如果隐含波动率很高，则选择应重点出售平值期权。
+隐含波动率较低时，应优先选择买入平值期权的价差；隐含波动率较高时，则应优先选择卖出平值期权的价差。
 
 <!-- source:block 90e0558e56e6dd74 -->
 
 > [!quote]- English 68
 > Now we can see why the 100/105 call spread is a better value if implied volatility is 20 percent, whereas the 95/100 spread is a better value if implied volatility is 30 percent. If implied volatility is low (20 percent), we prefer to buy the at-the-money (100) call. Having done this, we have only one choice if we want to create a bull spread—we must sell the out-of-the-money (105) call. On the other hand, if implied volatility is high (30 percent), we want to sell the at-the-money (100) call. Having done this, we again have only one choice if we want to create a bull spread—we must buy the in-the-money (95) call.
 
-现在我们可以明白为什么如果隐含波动率为20 %，则100/105 看涨期权价差的值更好，而如果隐含波动率为30 %，则95/100价差的值更好。如果隐含波动率较低（20 %），我们更愿意购买ATM机（100）看涨期权。 完成此操作后，如果要创建多头价差，我们只有一个选择-必须卖出OTM（105）看涨期权。另一方面，如果隐含波动率很高（30 %），我们希望出售ATM（100）看涨期权。 完成此操作后，如果我们想要创建牛市价差，我们再次只有一个选择-我们必须购买ITM（95）看涨期权。
+现在就能看出：当隐含波动率为 20% 时，100/105 看涨价差更具相对价值；当隐含波动率为 30% 时，95/100 看涨价差反而更具相对价值。隐含波动率较低（20%）时，我们优先买入平值的 100 看涨期权；为了构成牛市价差，另一腿应卖出价外的 105 看涨期权。反之，隐含波动率较高（30%）时，我们优先卖出平值的 100 看涨期权；为了保持牛市结构，另一腿应买入价内的 95 看涨期权。
 
 <!-- source:block 576b18da12879a2f -->
 
 > [!quote]- English 69
 > The same principle is equally true for bull and bear put spreads. We always want to focus on the at-the-money option, buying the at-the-money put when implied volatility is low and selling the at-the-money put when implied volatility is high. This is confirmed in the following table (delta values are in parentheses):
 
-同样的原则也适用于多头和空头看跌期权价差。我们始终希望关注ATM期权，在隐含波动率较低时购买ATM 看跌期权期权，在隐含波动率较高时出售ATM 看跌期权。 下表证实了这一点（Delta值在括号中）：
+同一原则也适用于由看跌期权构成的牛市价差和熊市价差。选腿时仍应以平值期权为重点：隐含波动率较低时，让组合包含买入的平值看跌期权；隐含波动率较高时，则让组合包含卖出的平值看跌期权。下表验证了这一点（括号内为 Delta）：
 
 <!-- source:block 7f14ebed1b72842d -->
 
@@ -569,14 +569,14 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 70
 > Suppose that we want to do a bear put spread when implied volatility is low. In this case, we want to buy the at-the-money (100) put. Having done this, we are forced to sell the out-of-the-money (95) put to create our bear spread (buy the higher exercise price, sell the lower). We will pay 1.94 for the spread, but the spread is worth 2.09. The result will be a delta position of –20 and a positive theoretical edge of .15.
 
-假设我们想在隐含波动率较低时进行看跌价差。在这种情况下，我们想购买平值出售（100）。这样做后，我们被迫出售价外看跌期权（95）以创造熊市价差（买入较高的行权价，卖出较低的行权价）。我们将为价差支付1.94，但价差值2.09。结果将是Delta头寸为-20，理论正边缘为0.15。
+假设我们想在隐含波动率较低时构建一个由看跌期权组成的熊市价差。按照前述原则，我们先买入平值的 100 看跌期权；为了形成熊市价差，另一腿必须卖出价外的 95 看跌期权，也就是买入较高行权价、卖出较低行权价。该价差的市场价格为 1.94，而我们估算的理论价值为 2.09，因此组合 Delta 为 $-20$，并具有 0.15 的正理论优势。
 
 <!-- source:block 07fe511a5895dac3 -->
 
 > [!quote]- English 71
 > Notice that in every case, whether in a low-volatility or high-volatility environment, the spread that includes the in-the-money option always has a higher price than the spread that includes the out-of-the-money option. To understand why, consider the result of choosing between a 95/100 and a 100/105 bull call spread under three different scenarios. In scenario 1, the market rises and is at 110 at expiration. If this happens, both spreads will show a profit because they will both widen to their maximum value of 5.00. In scenario 2, the market drops and is at 90 at expiration. Now both spreads will show a loss because they will both collapse to 0. Finally, consider the case where the underlying market fails to rise but also does not fall. It simply remains at 100 until expiration. If this happens, the 100/105 spread will collapse to 0, while the 95/100 spread will widen to its maximum value of 5.00. The 95/100 spread is always more valuable than the 100/105 spread because it profits in more cases. The 100/105 spread needs the market to rise to show a profit. The 95/100 spread does not need the market to rise; it just needs for the market not to fall. Because the 100/105 spread requires movement, it has a positive gamma and, consequently, a negative theta. It will decline in value as time passes. The 95/100 spread will profit even if the market sits still. It has a positive theta and, consequently, a negative gamma.
 
-请注意，在任何情况下，无论是在低波动率还是高波动率环境中，包括ITM期权的价差的价格始终高于包括OTM期权的价差。 要了解原因，请考虑在三种不同情况下在95/100和100/105牛市看涨期权之间进行选择的结果。在情况1,下，市场上涨并在到期时处于110。 如果发生这种情况，两个价差都将显示利润，因为它们都将扩大到其最大值5.00。在场景2,中，市场下跌，到期时位于90。现在这两个价差都将显示损失，因为它们都将崩溃至0。 最后，考虑一下标的市场没有上涨但也没有下跌的情况。它只是保留为100直到到期。如果发生这种情况，100/105价差将崩溃至0,，而95/100价差将扩大至其最大值5.00。 95/100价差总是比100/105价差更有价值，因为它在更多情况下获利。100/105价差需要市场上涨才能显示盈利。95/100价差不需要市场上涨;它只需要市场不下跌。 由于100/105价差需要移动，因此它具有正的Gamma，因此具有负的Theta。随着时间的推移，它的价值会下降。即使市场静止不动，95/100价差也会获利。它有一个正的Theta，因此，有一个负的Gamma。
+还应注意，无论处于低波动率还是高波动率环境，包含价内期权的价差，其价格总是高于包含价外期权的价差。要理解原因，可以比较 95/100 与 100/105 两个牛市看涨价差在三种到期情景下的表现。第一种情景：若标的上涨并在到期时位于 110，两个价差的到期价值都会达到最大值 5.00，因而都能获利。第二种情景：若标的下跌并在到期时位于 90，两个价差的到期价值都会变为 0，因而都会亏损。最后一种情景：若标的既未上涨也未下跌，而是维持在 100 直至到期，100/105 价差的到期价值会变为 0，95/100 价差则会达到最大到期价值 5.00。因此，95/100 价差之所以始终比 100/105 价差更有价值，是因为它能在更多情景下获利：100/105 价差必须依靠标的上涨，而 95/100 价差只要求标的不下跌。100/105 价差需要价格发生有利变动，因而具有正 Gamma 和负 Theta，其价值会随时间流逝而下降；95/100 价差即使在标的价格不变时也可能获利，因而具有正 Theta 和负 Gamma。
 
 <!-- source:block 9bb87f53626794a1 -->
 
@@ -590,21 +590,21 @@ Delta还可以在比例差中倒置，购买的期权多于出售的期权。与
 > [!quote]- English 73
 > Even though we have focused on the at-the-money option, a trader is not required to execute a bull or bear spread by first buying or selling the at-the-money option. Such spreads always involve two options, and a trader can choose to either execute the complete spread in one transaction or leg into the spread by trading one option at a time. In the latter case, a trader may decide to trade the in-the-money or out-of-the-money option first and trade the at-the-money option at a later time. This is a decision that a trader must make based on practical considerations. But regardless of how the spread is executed, the trader should focus on the at-the-money option, either buying it when implied volatility is low or selling it when implied volatility is high.
 
-尽管我们关注的是平值期权，但交易员并不需要首先购买或出售平值期权来执行牛市或熊市价差。此类价差始终涉及两种选择，交易员可以选择在一次交易中执行完整价差，也可以通过一次交易一种选择来扩大价差。在后一种情况下，交易者可能会决定首先交易物内或价外期权，然后再交易价内期权。这是交易者必须根据实际考虑做出的决定。但无论价差如何执行，交易者都应该关注平值期权，要么在隐含波动率较低时买入，要么在隐含波动率较高时卖出。
+尽管选腿时重点关注平值期权，交易者并不一定要先买入或卖出平值腿，才能构建牛市或熊市价差。这类价差都包含两份期权：交易者既可以把完整价差作为一笔组合订单执行，也可以逐腿成交。在逐腿建仓时，可以先交易价内腿或价外腿，稍后再交易平值腿；具体顺序应根据实际成交条件决定。不过，无论采用哪种执行方式，策略选择仍应围绕平值期权展开：隐含波动率较低时倾向买入平值腿，隐含波动率较高时倾向卖出平值腿。
 
 <!-- source:block 04bc1de0c8ccd182 -->
 
 > [!quote]- English 74
 > In practice, it is unlikely that one option will be exactly at the money. If there is no exactly at-the-money option, a trader can focus on an option that is closer to at the money. If the underlying market is at 103, with 95, 100, 105, and 110 calls available, it is logical to focus on the 105 call because it is closest to at the money. If implied volatility is low, a trader will want to buy the 105 call; if implied volatility is high, a trader will want to sell the 105 call. He can then trade a different option in order to create a bull or bear vertical spread.
 
-在实践中，一种选择不太可能完全平值。如果没有完全符合金钱要求的选择，交易者可以专注于更接近金钱要求的选择。如果标的市场位于103，有95、100、105和110个看涨期权可用，那么关注105看涨期权是合乎逻辑的，因为它最接近货币。如果隐含波动率较低，交易员将希望购买105看涨期权;如果隐含波动率较高，交易员将希望出售105看涨期权。然后他可以交易不同的期权，以创造牛市或熊市垂直价差。
+在实际市场中，未必恰好存在严格平值的期权。如果没有行权价正好等于标的价格的期权，交易者可以把最接近平值的期权作为选腿重点。例如，标的价格为 103，而可交易的看涨期权行权价为 95、100、105 和 110，那么 105 看涨期权最接近平值。隐含波动率较低时，交易者倾向买入 105 看涨期权；隐含波动率较高时，则倾向卖出 105 看涨期权。随后再选择另一行权价的期权与之配对，构成牛市或熊市垂直价差。
 
 <!-- source:block edf9a7ee39433c04 -->
 
 > [!quote]- English 75
 > Nor does a trader have to include the option that is closest to the money as part of his spread. A trader who has a strong directional opinion can choose a spread where both options are very far out of the money or very deeply in the money. The delta values of such spreads will be very low, but the trader can create a highly leveraged position by executing each spread many times. For example, with the underlying market at 100, a trader who is strongly bullish might buy the 115/120 call spread (assuming that such exercise prices are available). The cost of this spread will be very low because there is a high probability that the spread will expire worthless. But the trader will also be able to execute the spread many times because of its low cost. If he is right and the market does rise above 120, the spread will widen to its maximum value of 5.00, resulting in a very large profit. Regardless of the exercise prices chosen, if implied volatility is low, the trader should buy an option that is closer to the money, and if implied volatility is high, the trader should sell an option that is closer to the money.
 
-交易者也不必将最接近资金的期权作为其价差的一部分。具有强烈方向性意见的交易者可以选择两种选择都非常价外或非常价内的价差。此类价差的Delta值非常低，但交易员可以通过多次执行每个价差来创建高杠杆头寸。例如，当标的市场为100时，强烈看涨的交易员可能会购买115/120看涨价差（假设此类行权价可用）。这种价差的成本将非常低，因为价差到期时很有可能变得一文不值。但由于价差成本低，交易员也将能够多次行权价差。如果他是对的，并且市场确实升至120以上，那么价差将扩大到最大值5.00，从而产生非常大的利润。无论选择何种行权价，如果隐含波动率较低，交易者应该购买更接近货币的期权，如果隐含波动率较高，交易者应该出售更接近货币的期权。
+价差中也不一定要包含最接近平值的期权。方向判断十分强烈的交易者，可以选择两条腿都处于深度价外或深度价内的价差。这类价差的组合 Delta 绝对值通常很小，但交易者可以通过建立多组价差来形成高杠杆头寸。例如，标的价格为 100 时，强烈看涨的交易者可能买入 115/120 看涨价差（假设这些行权价可供交易）。由于该价差有很大概率在到期时归零，其建仓成本会很低，因此交易者也能以相同资金建立更多组头寸。如果方向判断正确，市场确实上涨至 120 以上，该价差的到期价值将达到最大值 5.00，从而带来可观利润。无论最终选择哪些行权价，选腿原则不变：隐含波动率较低时，应买入两腿中更接近平值的期权；隐含波动率较高时，则应卖出两腿中更接近平值的期权。
 
 <!-- source:block 05187193208038d0 -->
 

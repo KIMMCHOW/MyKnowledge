@@ -45,6 +45,9 @@ MARKER_RE = re.compile(r"<!-- source:block ([0-9a-f]{16}) -->")
 # removal, or an explicit cross-paragraph referent.  Hashing the translation
 # keeps the exception fail-closed: any later edit is audited again.
 REVIEWED_NUMERIC_TRANSLATIONS = {
+    # Chapter 13: the reviewed prose preserves every financial value while
+    # avoiding mechanical repetition of spread labels and writing zero in words.
+    "55e7961011852666": "ba22c75bd712812e",
     "d3aa40a79501fd41": "5a21c7ae8ab20242",
     "d30546e1a6b5ba7a": "fe1d15c083baf858",
     "e76202ea5b4cdca4": "6a4e52fcb7d8c2fc",

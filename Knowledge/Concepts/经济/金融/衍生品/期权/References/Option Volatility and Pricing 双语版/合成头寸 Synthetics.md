@@ -4,7 +4,7 @@ tags:
   - 期权
   - 双语阅读
 chapter: 14
-translation_status: 双语稿已生成，待人工复核
+translation_status: 翻译审计完毕
 created: 2026-08-03
 ---
 
@@ -12,8 +12,8 @@ created: 2026-08-03
 
 [[阅读导航|← 返回阅读导航]]
 
-> [!warning] 翻译状态
-> 本章双语稿已生成，尚待逐段人工复核。英文原文、数字、公式和图表保留用于核对。
+> [!success] 翻译状态
+> 本章翻译与风险审计已完成。英文原文、数字、公式和图表继续保留，便于后续核对。
 
 <!-- chapter-toc:start -->
 ## 本章目录 / Chapter Outline
@@ -141,7 +141,7 @@ $$
 > [!quote]- English 15
 > While not exactly identical (hence the use of an equivalent sign rather than an equal sign) a synthetic position acts very much like its real equivalent. For each point the underlying instrument rises, a synthetic long position will gain approximately one point in value and a synthetic short position will lose approximately one point in value. This leads us to conclude, correctly, that the delta of a synthetic underlying position must be approximately 100. If the delta of the June 100 call is 75, the delta of the June 100 put will be approximately –25. If the delta of the June 100 put is –60, the delta of the June 100 call will be approximately 40. The absolute value of a call and put delta will always add up to approximately 100. We will see later that the settlement procedure and interest rates, as well as the possibility of early exercise, can cause the delta of a synthetic underlying position to be slightly more or less than 100. But for most practical purposes this is a reasonable estimate.
 
-虽然并不完全相同（因此使用了等效符号而不是等效符号），但合成头寸的作用与其真实的等效头寸非常相似。对于标的工具每上涨一个点，合成多头头寸的价值将增加大约一个点，合成空头头寸的价值将损失大约一个点。这使我们正确地得出结论，合成标的头寸的Delta必须约为100。如果6 月到期、行权价为 100 的看涨期权的Delta为75，那么6 月到期、行权价为 100 的看跌期权的Delta将约为-25。如果6月100看跌期权的Delta为-60，那么6月100看涨期权的Delta将约为40。看涨和看跌Delta的绝对值总和总是大约为100。稍后我们将看到，结算程序和利率，以及提前行权的可能性，可能会导致合成标的头寸的Delta略高于或低于100。但就大多数实际目的而言，这是一个合理的估计。
+合成头寸与它所复制的实际头寸并非完全相同，所以这里使用“等价”符号而不是严格等号；但在价格暴露上，两者的表现非常接近。标的价格每上涨一个点，合成多头的价值约增加一个点，合成空头的价值则约减少一个点。因此，按本书采用的整数 Delta 口径，合成标的多头的 Delta 应接近 $+100$，合成标的空头则接近 $-100$。例如，若六月到期、行权价为 100 的看涨期权 Delta 为 $+75$，则同到期日、同行权价的看跌期权 Delta 约为 $-25$；若该看跌期权 Delta 为 $-60$，则对应的行权价为 100 的看涨期权 Delta 约为 $+40$。换言之，同到期日、同行权价的看涨与看跌期权，其 Delta 绝对值之和通常约为 100。不过，结算方式、利率以及提前行权的可能性，都可能使合成标的头寸的 Delta 略高或略低于 100。在大多数实务情景中，把它近似为 100 仍然是合理的。
 
 <!-- source:block 21067169c00a6ce1 -->
 
@@ -381,7 +381,7 @@ $$
 > [!quote]- English 45
 > In the synthetic equivalent the long and short underlying contracts cancel out leaving a bull put spread
 
-在合成相当于中，多头和空头标的合约抵消，留下牛市价差
+在合成中，多头和空头标的合约抵消，留下牛市价差
 
 <!-- source:block 325ba7d1add65221 -->
 
@@ -616,7 +616,7 @@ $$
 > [!quote]- English 74
 > The latter two methods are *synthetic long straddles*. The best way to buy a straddle will depend on the prices of the synthetics compared to their real equivalents. We shall address the question of pricing synthetics in the next chapter.
 
-后两种方法是合成多头跨式。购买跨式的最佳方式取决于合成材料与实际同等产品的价格。我们将在下一章中讨论合成材料的定价问题。
+后两种方法都属于合成多头跨式。究竟直接买入跨式，还是使用其中一种合成方式，应比较合成头寸与对应实际头寸的价格后再决定。下一章将进一步讨论合成头寸的定价。
 
 <!-- source:block 86f3e5ce645d2741 -->
 
@@ -634,21 +634,21 @@ $$
 > [!quote]- English 76
 > 1. +1 June 95 put / +1 June 105 call
 
-1. +1 6月95看跌/ +1月105看涨
+1. 买入 1 份六月到期、行权价为 95 的看跌期权；买入 1 份六月到期、行权价为 105 的看涨期权
 
 <!-- source:block d98a11b4f3e4ecf1 -->
 
 > [!quote]- English 77
 > 2. –1 June 100 call / –1 June 100 put
 
-2. -1六月100看涨/ -1六月100看跌
+2. 卖出 1 份六月到期、行权价为 100 的看涨期权；卖出 1 份六月到期、行权价为 100 的看跌期权
 
 <!-- source:block 7d35e4990d53099d -->
 
 > [!quote]- English 78
 > The first strategy is a long strangle; the second strategy is a short straddle. What will happen if we combine the two strategies? We can answer the question by rewriting the position using only calls or only puts. If we choose to express all contracts as calls we can rewrite each put as a synthetic:
 
-第一种策略是多头宽跨式;第二种策略是空头跨式。如果我们将这两种策略结合起来会发生什么？我们可以通过仅使用看涨或仅使用看跌来重写头寸来回答这个问题。如果我们选择将所有合约表示为看涨期权，我们可以将每个看跌期权重写为合成期权：
+第一组是多头宽跨式，第二组是空头跨式。把两组头寸合并后会得到什么？可以把全部期权统一改写为看涨期权，或者统一改写为看跌期权，再合并相互抵销的成分。若选择全部用看涨期权表示，就把每一条看跌期权腿替换为对应的合成看跌期权：
 
 <!-- source:block 0fecdc6e25a12fc1 -->
 
@@ -661,28 +661,28 @@ $$
 > [!quote]- English 79
 > Replacing the puts with their synthetic equivalents, and canceling out the long and short underlying contracts, we are left with a long butterfly
 
-用合成等值的看跌期权取代看跌期权，并抵消长期和空头标的合约，我们只剩下一只多头蝶式价差
+将两条看跌期权腿替换为各自的合成等价头寸后，合成过程中产生的一份多头标的合约与一份空头标的合约相互抵销，最终只剩一个多头看涨蝶式价差：
 
 <!-- source:block 54d31eb212fca41f -->
 
 > [!quote]- English 80
 > +1 June 95 call–2 June 100 calls +1 June 105 call
 
-95年6月1日-100年6月2日+105年6月1日
+买入 1 份六月到期、行权价为 95 的看涨期权；卖出 2 份六月到期、行权价为 100 的看涨期权；买入 1 份六月到期、行权价为 105 的看涨期权。
 
 <!-- source:block 7207332a5f6420c7 -->
 
 > [!quote]- English 81
 > If, instead of calls, we express all contracts as puts we will also end up with a long butterfly. This confirms the fact that a call and put butterfly are essentially the same. One is simply a synthetic version of the other.
 
-如果我们不是看涨，而是将所有合约表达为看跌期权，我们最终也会得到一只多头蝶式价差。这证实了这样一个事实：看涨蝴蝶和看跌蝴蝶本质上是相同的。一个只是另一个的合成版本。
+如果改为把全部合约统一表示为看跌期权，最终同样会得到一个多头看跌蝶式价差。这说明，在到期损益和核心风险暴露上，看涨蝶式与看跌蝶式本质上等价：其中一种可以视为另一种的合成形式。
 
 <!-- source:block cf9480a32a3d042c -->
 
 > [!quote]- English 82
 > An *iron butterfly* is a position which combines a strangle and straddle, with the straddle centered exactly in the middle of the strangle. It has the same characteristics as a traditional butterfly. But unlike a long butterfly (buy the outside exercise prices / sell the inside exercise price) which is done for a debit (hence the term long), the equivalent iron butterfly (buy the strangle / sell the straddle) is done for a credit. The straddle which we are selling is always more valuable than the strangle which we are buying. If we receive money when we put on the position then we are *short* the iron butterfly. Buying a traditional butterfly is equivalent to selling an iron butterfly.
 
-铁蝶式价差（iron butterfly）由一组宽跨式（strangle）和一组跨式（straddle）组合而成，跨式的行权价恰好位于宽跨式两个行权价的中点。它与传统蝶式价差具有相同的损益特征。传统多头蝶式价差（买入外侧行权价、卖出内侧行权价）以 `debit` 建仓，因而称为多头蝶式；与之等价的铁蝶式价差（买入宽跨式、卖出跨式）则以 `credit` 建仓。卖出的跨式总是比买入的宽跨式更有价值，因此建仓时会收到净权利金，这一头寸称为空头铁蝶式价差。买入传统蝶式价差等价于卖出铁蝶式价差。
+铁蝶式价差（iron butterfly）由一组宽跨式（strangle）与一组跨式（straddle）组合而成，其中跨式的共同行权价正好位于宽跨式两个行权价的中点。它的到期损益形状与传统蝶式价差相同。传统多头蝶式价差是买入两个外侧行权价的期权、卖出两份中间行权价的期权，通常以净支出（debit）建仓；与之等价的铁蝶式则是买入宽跨式、卖出跨式，通常以净收入（credit）建仓。由于卖出的平值跨式价值高于买入的价外宽跨式，建仓时会净收权利金，因此按照本书的命名，这一组合是空头铁蝶式价差。换言之，买入传统蝶式价差与卖出铁蝶式价差具有等价的到期损益。
 
 <!-- source:block 9328b0c141ab4a0d -->
 
@@ -737,7 +737,7 @@ $$
 > [!quote]- English 89
 > Replacing the puts with their synthetic equivalents, and canceling out the long and short underlying contracts, we are left with a long condor
 
-用合成的看跌期权取代看跌期权，并抵消长期和空头标的合约，我们只剩下一只多头秃鹰
+将两条看跌期权腿替换为各自的合成等价头寸后，产生的一份多头标的合约与一份空头标的合约相互抵销，最终只剩一个多头看涨鹰式价差：
 
 <!-- source:block 4628d00372c5c256 -->
 
@@ -751,42 +751,48 @@ $$
 > [!quote]- English 91
 > –1 June 95 call
 
--95年6 月到期、行权价为 1 的看涨期权
+卖出 1 份六月到期、行权价为 95 的看涨期权
 
 <!-- source:block e2260b98f8747f37 -->
 
 > [!quote]- English 92
 > –1 June 105 call
 
--1 6月105看涨期权
+卖出 1 份六月到期、行权价为 105 的看涨期权
 
 <!-- source:block be7a5bfc61450a1a -->
 
 > [!quote]- English 93
 > +1 June 110 call
 
-+1 6月110看涨期权
+买入 1 份六月到期、行权价为 110 的看涨期权
 
 <!-- source:block 8738416c3f7616b2 -->
 
 > [!quote]- English 94
 > If we instead express all contracts as puts we will also end up with a long condor. This confirms that a call and put condor are essentially the same. One is simply a synthetic version of the other.
 
-如果我们将所有合约表示为看跌，我们最终也会得到一只长鹰式价差。这证实了看涨期权和看跌期权 condor本质上是相同的。一个只是另一个的合成版本。
+如果改为把全部合约统一表示为看跌期权，最终同样会得到一个多头看跌鹰式价差。这说明，在到期损益和核心风险暴露上，看涨鹰式与看跌鹰式本质上等价：其中一种可以视为另一种的合成形式。
 
 <!-- source:block 9639e19da0eaf12c -->
 
 > [!quote]- English 95
 > An *iron condor* is a position which combines a long strangle with a short strangle, with one strangle centered in the middle of the other strangle. While a long condor (buy the outside exercise prices / sell the inside exercise price) is done for a debit, the iron condor equivalent (sell the outside strangle / buy the inside strangle) is done for a credit. The inside strangle which we are selling is always more valuable than the outside strangle which we are buying. If we receive money when we put on the position then we are *short* the iron condor. Buying a traditional condor is equivalent to selling an iron condor.
 
-铁鹰式价差由一组多头宽跨式与一组空头宽跨式组合而成，其中一组宽跨式位于另一组的两个行权价之间。传统多头鹰式价差（买入外侧行权价、卖出内侧行权价）以 `debit` 建仓；其等价的铁鹰式价差（卖出内侧宽跨式、买入外侧宽跨式）则以 `credit` 建仓。卖出的内侧宽跨式总是比买入的外侧宽跨式更有价值。若建仓时收到净权利金，该头寸就是空头铁鹰式价差。买入传统鹰式价差等价于卖出铁鹰式价差。
+铁鹰式价差（iron condor）由一组宽跨式多头和一组宽跨式空头组合而成，其中内侧宽跨式的两个行权价位于外侧宽跨式的两个行权价之间。传统多头鹰式价差是买入两个外侧行权价的期权、卖出两个内侧行权价的期权，通常以净支出（debit）建仓；与之等价的铁鹰式则买入外侧宽跨式、卖出内侧宽跨式，通常以净收入（credit）建仓。由于卖出的内侧宽跨式价值高于买入的外侧宽跨式，建仓时会净收权利金，因此按照本书的命名，这一组合是空头铁鹰式价差。换言之，买入传统鹰式价差与卖出铁鹰式价差具有等价的到期损益。
+
+> [!note] 译校说明
+> 英文括号中的 “sell the outside strangle / buy the inside strangle” 与本节给出的腿结构、下一句及净收入结论相反；此处按一致的结构校正为“买入外侧宽跨式、卖出内侧宽跨式”。
 
 <!-- source:block 801fbd4af2296e67 -->
 
 > [!quote]- English 96
 > At expiration the value of a condor and an iron condor must add up to the amount between the inside and outside exercise prices, in our example 5.00. Taking interest into consideration, the values must add up to the present value of this amount. If we assume that interest rates are zero, and the June 90 / 95 / 105 / 110 condor is trading for 3.75, the June 90 / 95 / 105 / 110 iron condor should be trading for 1.25. Whether we buy the condor for 3.75, or sell the iron butterfly for 1.25, we want the same thing to happen, the market to remain within the exercise prices of the inside strangle. Both spreads will have the same profit or loss potential.
 
-到期时，鹰式价差和铁鹰式价差的价值总和必须等于内部和外部行权价之间的金额，在我们的示例中为5.00。考虑到利息，这些价值加起来必须等于该金额的现值。如果我们假设利率为零，并且6月90 / 95 / 105 / 110鹰式价差的交易价为3.75，那么6月90 / 95 / 105 / 110铁鹰式价差的交易价应为1.25。无论我们以3.75的价格购买鹰式价差，还是以1.25的价格出售铁蝶式价差，我们都希望同样的事情发生，市场保持在内部宽跨式的行权价内。两种价差将具有相同的盈利或亏损潜力。
+到期时，传统鹰式价差与对应铁鹰式价差的价值之和，应等于单侧翼宽；本例的翼宽为 5.00。若考虑利息，两者当前价值之和应等于该翼宽的现值。假设利率为零，六月到期的 90／95／105／110 传统鹰式价差价格为 3.75，则六月到期的 90／95／105／110 铁鹰式价差价格应为 1.25。无论以 3.75 买入传统鹰式，还是以 1.25 卖出铁鹰式（英文原文误写为“铁蝶式”），我们表达的都是同一判断：希望到期时标的价格维持在内侧宽跨式的两个行权价之间。两种头寸具有相同的到期盈亏潜力。
+
+> [!note] 译校说明
+> 英文此处写作 “sell the iron butterfly”，结合本段始终讨论的 90／95／105／110 四腿结构，应为 “sell the iron condor”；中文据此校正为“卖出铁鹰式价差”。
 
 <!-- source:block eebb713584fe2e4b -->
 
