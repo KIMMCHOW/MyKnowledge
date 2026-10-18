@@ -9,7 +9,7 @@
 - `Knowledge/Concepts/经济/` — 微观、宏观、劳动、制度行为、国际政治经济、能源、产业与金融
 - `Knowledge/Concepts/经济/金融/衍生品/期权/` — 衍生品与期权的唯一专题入口，包含概念、Greeks、策略、练习和资料；通用数学概念统一归入 `Knowledge/Concepts/数学/`
 - `Knowledge/Notes/Finance/` — 金融与交易研究专题（如 `Knowledge/Notes/Finance/Market Making/` 做市研究），索引见 `Knowledge/Notes/Finance/Market Making/_索引_做市.md`
-- `Knowledge/Notes/Game Theory/博弈论基础（王彬）/` — 王彬公开课程的基础理论、细分推导及索引；既有 29 篇英文应用系列保持独立，不混入课程结构
+- `Knowledge/Notes/Game Theory/博弈论基础（王彬）/` — 王彬公开课程的基础理论、细分推导及索引；既有 29 篇英文应用系列统一置于 `Knowledge/Notes/Game Theory/应用系列/`，不混入课程结构
 - `Knowledge/Notes/Finance/Quant Research/` — 量化研发、数据工程、模型验证与执行真实性
 - `Knowledge/Notes/Political Economy/` — 政治经济学与国家资本主义的概念争议
 - `Knowledge/Notes/Golf/` — 高尔夫运动技术、TrackMan 与球场实践
