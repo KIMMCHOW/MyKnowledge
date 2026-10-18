@@ -9,7 +9,10 @@
 - `Knowledge/Concepts/经济/` — 微观、宏观、劳动、制度行为、国际政治经济、能源、产业与金融
 - `Knowledge/Concepts/经济/金融/衍生品/期权/` — 衍生品与期权的唯一专题入口，包含概念、Greeks、策略、练习和资料；通用数学概念统一归入 `Knowledge/Concepts/数学/`
 - `Knowledge/Notes/Finance/` — 金融与交易研究专题（如 `Knowledge/Notes/Finance/Market Making/` 做市研究），索引见 `Knowledge/Notes/Finance/Market Making/_索引_做市.md`
-- `Knowledge/Notes/Game Theory/` — 博弈论课程与应用笔记；不同来源的课程使用独立子专题和索引，禁止混入同一序列
+- `Knowledge/Notes/Game Theory/博弈论基础（王彬）/` — 王彬公开课程的基础理论、细分推导及索引；既有 29 篇英文应用系列保持独立，不混入课程结构
+- `Knowledge/Notes/Finance/Quant Research/` — 量化研发、数据工程、模型验证与执行真实性
+- `Knowledge/Notes/Political Economy/` — 政治经济学与国家资本主义的概念争议
+- `Knowledge/Notes/Golf/` — 高尔夫运动技术、TrackMan 与球场实践
 - `Knowledge/Notes/` — 课程/阅读笔记，按专题子文件夹分类（`Knowledge/Notes/<专题>/`），索引见 `Knowledge/Notes/_索引_笔记.md`
 - `Raw Materials/` — 原始素材，只读、禁止改动，不纳入 git 跟踪
 
