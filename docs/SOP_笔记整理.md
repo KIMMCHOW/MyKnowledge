@@ -11,8 +11,12 @@
 ```
 Knowledge/Notes/
 ├── Game Theory/
-│   ├── Game Theory 01 The Dating Game.md
-│   └── Game Theory 29 Final Examination.md
+│   ├── 应用系列/
+│   │   ├── _索引_博弈论应用系列.md
+│   │   ├── Game Theory 01 The Dating Game.md
+│   │   └── Game Theory 29 Final Examination.md
+│   └── 博弈论基础（王彬）/
+│       └── _索引_博弈论基础（王彬）.md
 ├── Finance/
 │   └── Market Making/
 │       ├── _索引_做市.md
@@ -65,7 +69,7 @@ Knowledge/Notes/
 移动、重命名或新增笔记后，按以下清单核对：
 
 1. `git status` 确认移动范围正确、无意外文件。
-2. 全局搜索旧路径残留：`rg "Knowledge/Notes/Game Theory 0"` 等（旧路径链接在新位置会失效）。
+2. 全局搜索旧路径残留：`rg 'Knowledge/Notes/Game Theory/Game Theory [0-9]{2}'` 等（旧路径链接在新位置会失效）。
 3. 核对总索引 `_索引_笔记.md` 与专题索引：新增/删除/移动的笔记均已同步。
 4. 核对引用本专题的跨区文档：`README.md` 目录结构、`Knowledge/Concepts/_说明_关系图谱颜色组.md` 路径、相关概念索引；若目录负责关系图颜色，还要同步根目录 `.obsidian/graph.json`。
 5. 确认 `Raw Materials/`、`AGENTS.md` 与 `.obsidian/` 本机状态文件未出现在改动中；唯一允许的 Obsidian 配置例外是根目录 `.obsidian/graph.json` 的共享颜色分组。
