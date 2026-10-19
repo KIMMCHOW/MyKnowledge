@@ -10,8 +10,13 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第13章
 created_at: 2026-08-23
-updated_at: 2026-08-23
-tags: [期权, Greeks, Gamma, Theta, 策略评估]
+updated_at: 2026-10-19
+tags:
+  - 期权
+  - Greeks
+  - Gamma
+  - Theta
+  - 策略评估
 domain: 经济
 subdomain: 金融
 product_domain: 衍生品
@@ -21,8 +26,13 @@ concept_group: 希腊字母
 
 # Gamma-Theta 效率比
 
-> [!definition] 它想衡量什么
-> Gamma-Theta 效率比用来比较：头寸为获得曲率收益或 Theta 收入，承担了多少相反方向的 Gamma/Theta 代价。它是一个**局部风险交换指标**，不是完整的风险收益率。
+## 定义
+
+Gamma-Theta 效率比用来比较：头寸为获得曲率收益或 Theta 收入，承担了多少相反方向的 Gamma/Theta 代价。它是一个**局部风险交换指标**，不是完整的风险收益率。
+
+## 核心解释
+
+Gamma-Theta 效率比用于比较头寸为获得凸性收益或 Theta 收入所承担的相反方向风险。它不是完整收益率，必须先判断 Gamma 和 Theta 哪一项是收益、哪一项是代价。
 
 ## 从局部损益展开出发
 
@@ -89,8 +99,8 @@ $$
 | $\Gamma<0,\Theta>0$ | 时间价值流入 | 大幅变动风险 | $(-\Gamma)/\Theta$ | 越小越好 |
 | $\Gamma<0,\Theta>0$ | 时间价值流入 | 大幅变动风险 | $\Theta/(-\Gamma)$ | 越大越好 |
 
-> [!warning] 原书表述的内在矛盾
-> 原书先说 $|\Gamma/\Theta|$ 越大越有效，随后在负 Gamma、正 Theta 的例子中却正确地选择了该比值最小的头寸。这两种方向不能用同一条“越大越好”的规则；必须先确认 Gamma 和 Theta 分别是收益还是代价。
+[!warning] 原书表述的内在矛盾
+原书先说 $|\Gamma/\Theta|$ 越大越有效，随后在负 Gamma、正 Theta 的例子中却正确地选择了该比值最小的头寸。这两种方向不能用同一条“越大越好”的规则；必须先确认 Gamma 和 Theta 分别是收益还是代价。
 
 ## Natenberg 的例子
 
@@ -146,10 +156,28 @@ $$
 4. 对标的价格、隐含波动率、时间和偏斜做联合压力测试。
 5. 最后再加入保证金、流动性、成交和提前指派风险，决定头寸规模。
 
-## 相关概念
+## 示例
+
+按 Natenberg 的三个负 Gamma、正 Theta 价差，Spread 3 的
+
+$$
+\left|\frac{\Gamma}{\Theta}\right|
+=\frac{370.0}{0.4000}
+=925,
+$$
+
+小于 Spread 1 的 $959$ 和 Spread 2 的 $1{,}212$。因为这里的 Gamma 是风险、Theta 是收入，应选择比值最小的 Spread 3，而不是数值最大的 Spread 2。
+
+## 关联概念
 
 - [[二阶/Gamma|Gamma]]
 - [[一阶/Theta|Theta]]
 - [[凸性|期权凸性]]
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/_索引_期权策略|期权策略]]
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/风险考量 Risk Considerations#效率 / Efficiency|Natenberg：效率]]
+
+## 相关问题
+
+- 为什么不能跨 Gamma/Theta 符号机械排名？
+- Gamma-Theta 比值的单位为何重要？
+- 如何用打平变动幅度补充比率？

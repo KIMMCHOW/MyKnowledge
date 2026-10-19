@@ -1,3 +1,16 @@
+---
+type: note
+domain: 数学
+subdomain: 博弈论
+topic: Game Theory 应用系列
+tags:
+  - 博弈论
+  - 应用案例
+  - 课程笔记
+---
+
+# Trump World Order
+
 > [!summary] 摘要
 > 本文从[[博弈论]]视角分析特朗普讲话中透露的美国对伊军事战略、[[经济]]宣传与地缘扩张计划，揭示其“胜利叙事”背后的真实博弈状况。
 

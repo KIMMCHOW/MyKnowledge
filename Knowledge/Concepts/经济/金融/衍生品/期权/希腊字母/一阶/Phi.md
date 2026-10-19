@@ -10,7 +10,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第7章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -25,8 +25,13 @@ concept_group: 希腊字母
 
 # Rho-f / Phi
 
-> [!definition] 定义
-> Rho-f（$\rho_f$）或 Phi（$\Phi$）衡量期权理论价值对外国利率变化的局部敏感度。
+## 定义
+
+Rho-f（$\rho_f$）或 Phi（$\Phi$）衡量期权理论价值对外国利率变化的局部敏感度。
+
+## 核心解释
+
+Phi（Rho-f）衡量外汇期权价值对外国利率的局部敏感度，与本国利率 Rho 共同构成双利率暴露。解释符号前必须明确报价币种、本国/外国货币和结算方式。
 
 ## 数学表示
 
@@ -90,11 +95,27 @@ $$
 =0.0001\frac{\partial V}{\partial r_f}.
 $$
 
+## 示例
+
+若外国利率上升 $1$ 个百分点，某外汇期权价值从 $5.00$ 升到 $5.03$，则按一个百分点计的 Phi 约为
+
+$$
+\frac{5.03-5.00}{1}=0.03.
+$$
+
+若本国利率同时上升，总价值变化应写成 $\rho_d\Delta r_d+\Phi\Delta r_f$，不能只看其中一个利率。
+
 ## 关联概念
 
 - [[Rho]]：本国利率或主要定价利率敏感度。
 - [[期权]]：Phi 是含外国利率输入的期权风险指标。
 - [[无风险利率]]：本国与外国利率共同决定外汇远期关系。
+
+## 相关问题
+
+- Phi 与股息率敏感度为何不能混为一谈？
+- 报价币种如何影响 Phi 的符号？
+- 双利率情景如何做联合压力测试？
 
 ## 来源
 

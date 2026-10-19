@@ -6,7 +6,7 @@ status: completed
 completion_status: completed
 created_from: finance-refactor
 created_at: 2026-08-09
-updated_at: 2026-08-09
+updated_at: 2026-10-19
 aliases:
   - AS model
   - Avellaneda–Stoikov Model
@@ -26,6 +26,22 @@ Avellaneda–Stoikov 模型是通过随机控制联合决定做市报价中心�
 
 ## 核心解释
 模型用库存调整后的保留价格平移报价中心，并用风险厌恶、价格波动率、剩余期限和成交强度决定报价宽度。它是理解库存型做市的基准框架，不是可直接上线的完整策略，因为原始模型没有充分描述 tick、队列、延迟、费用、部分成交、订单流毒性和多资产对冲。
+
+## 示例
+
+在有限期限近似中，保留价格相对中间价的平移可写为
+
+$$
+r(s,q,t)=s-q\gamma\sigma^2(T-t).
+$$
+
+取 $\gamma=0.1$、$\sigma=2$、$T-t=1$、库存 $q=10$，则平移量为
+
+$$
+-10\times0.1\times4\times1=-4.
+$$
+
+正库存时保留价格下移，做市商更愿意降价卖出以降低库存。报价总宽度还随 $\gamma\sigma^2(T-t)$ 和成交强度参数 $k$ 变化；上述数值只用于演示公式方向，不对应真实合约。
 
 ## 关联概念
 - [[做市]]：AS 模型是做市报价的经典形式化模型。

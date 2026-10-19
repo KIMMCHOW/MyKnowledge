@@ -1,3 +1,16 @@
+---
+type: note
+domain: 数学
+subdomain: 博弈论
+topic: Game Theory 应用系列
+tags:
+  - 博弈论
+  - 应用案例
+  - 课程笔记
+---
+
+# The WWIII Chessboard
+
 > [!summary] 摘要
 > 本文从[[博弈论]]视角分析，核心论点是第三次世界大战已以代理人战争形式在中东展开，主要[[玩家]]为 [[美国]] 与 [[俄罗斯]]。冲突不仅源于国家间博弈，更深层动力来自各国国内 [[精英过度生产]]（Elite Overproduction）引发的内部紧张。理解各方战略，就能预测其行为。
 

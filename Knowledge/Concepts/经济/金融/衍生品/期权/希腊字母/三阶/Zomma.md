@@ -8,7 +8,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -23,8 +23,13 @@ concept_group: 希腊字母
 
 # Zomma
 
-> [!definition] 定义
-> Zomma 衡量 Gamma 对波动率的敏感度。它是专有风险指标名称，不应译成普通的“波动率”。
+## 定义
+
+Zomma 衡量 Gamma 对波动率的敏感度。它是专有风险指标名称，不应译成普通的“波动率”。
+
+## 核心解释
+
+Zomma 衡量 Gamma 对波动率的局部变化率。波动率变化会改变 Gamma 集中度，从而改变 Delta 漂移和再对冲压力。
 
 ## 数学表示
 
@@ -71,6 +76,16 @@ $$
 
 对于临近到期的平值组合，隐含波动率下降可能快速放大 Gamma，进而增加 Delta 漂移和动态对冲压力。
 
+## 示例
+
+若波动率从 $20\%$ 降到 $19\%$ 时，Gamma 从 $0.05$ 升到 $0.054$，则按一个波动率百分点计的 Zomma 约为
+
+$$
+\frac{0.054-0.05}{-1}=-0.004.
+$$
+
+负 Zomma 表示波动率下降会提高 Gamma。临近到期的平值头寸对这类变化尤其敏感，不能只盯住当前 Gamma。
+
 ## 关联概念
 
 - [[Gamma]]：Zomma 是 Gamma 对波动率的敏感度。
@@ -78,6 +93,12 @@ $$
 - [[Speed]]：Gamma 对标的价格的敏感度。
 - [[Color]]：Gamma 对距到期时间的敏感度。
 - [[隐含波动率]]：波动率变化会通过 Zomma 改变 Gamma 风险。
+
+## 相关问题
+
+- Zomma 与 Volga 的区别是什么？
+- 为什么平值期权的 Zomma 通常为负？
+- 波动率下降如何放大 Gamma 风险？
 
 ## 来源
 
