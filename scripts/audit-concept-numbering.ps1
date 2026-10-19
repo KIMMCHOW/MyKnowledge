@@ -48,6 +48,10 @@ function Test-IdentityPrefix {
     }
 
     $candidate = $Value.Trim().Trim('"', "'")
+    # Option terminology such as "25 Delta" is a strike/risk metric, not a structural sequence number.
+    if ($candidate -match '(?i)^\d{1,3}\s*Delta\b') {
+        return
+    }
     if ($candidate -match $prefixPattern) {
         $issues.Add([pscustomobject]@{
             Path = $Path

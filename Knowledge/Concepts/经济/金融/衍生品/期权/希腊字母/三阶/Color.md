@@ -9,7 +9,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -24,8 +24,13 @@ concept_group: 希腊字母
 
 # Color
 
-> [!definition] 定义
-> Color 衡量当前时间 $t$ 向前推进时 Gamma 的局部变化率。它是专有风险指标名称，通常直接保留英文。
+## 定义
+
+Color 衡量当前时间 $t$ 向前推进时 Gamma 的局部变化率。它是专有风险指标名称，通常直接保留英文。
+
+## 核心解释
+
+Color 衡量 Gamma 随当前时间推进的局部变化率，也称 Gamma decay。它决定临近到期时 Gamma 集中度如何变化，从而影响再对冲需求。
 
 ## 数学表示
 
@@ -79,6 +84,16 @@ $$
 
 临近到期的平值头寸即使隔夜没有价格变化，也可能在下一交易日呈现显著不同的 Gamma 与再对冲需求。
 
+## 示例
+
+若今天 Gamma 为 $0.05$，其他条件不变、一天后为 $0.055$，则 Color 约为
+
+$$
+\frac{0.055-0.05}{1}=0.005\text{/日}.
+$$
+
+正 Color 表示时间推进使 Gamma 上升。临近到期的平值头寸尤其敏感，隔夜后即使标的不动，再对冲所需数量也可能明显变化。
+
 ## 关联概念
 
 - [[Gamma]]：Color 是 Gamma 的时间敏感度。
@@ -86,6 +101,12 @@ $$
 - [[Speed]]：Gamma 对标的价格的敏感度。
 - [[Zomma]]：Gamma 对波动率的敏感度。
 - [[Theta]]：本目录的命名时间 Greeks 都以当前时间 $t$ 为变量；对 $\tau$ 求导时符号相反。
+
+## 相关问题
+
+- Color 与 Charm 的区别是什么？
+- 为什么平值期权的 Color 通常为正？
+- 隔夜跳空如何放大 Color 风险？
 
 ## 来源
 

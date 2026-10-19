@@ -8,7 +8,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -22,8 +22,13 @@ concept_group: 希腊字母
 
 # Speed
 
-> [!definition] 定义
-> Speed 衡量 Gamma 对标的价格的敏感度。它是专有风险指标名称，通常直接保留英文。
+## 定义
+
+Speed 衡量 Gamma 对标的价格的敏感度。它是专有风险指标名称，通常直接保留英文。
+
+## 核心解释
+
+Speed 衡量 Gamma 对标的价格的局部变化率，是期权价值的三阶价格敏感度。标的大幅变动时，固定 Gamma 近似会失效。
 
 ## 数学表示
 
@@ -79,12 +84,28 @@ $$
 
 Speed 较大时，固定 Gamma 假设很快失效，应缩短重估区间或直接全重估。
 
+## 示例
+
+若标的价格从 $100$ 涨到 $101$ 时，Gamma 从 $0.05$ 降到 $0.04$，则 Speed 约为
+
+$$
+\frac{0.04-0.05}{1}=-0.01.
+$$
+
+若继续用 $0.05$ 的 Gamma 预测更大的价格变动，会高估后续 Delta 漂移。加入 $\frac12\mathrm{Speed}(\Delta S)^2$ 后，局部近似才包含 Gamma 自身的变化。
+
 ## 关联概念
 
 - [[Gamma]]：Speed 是 Gamma 对标的价格的敏感度。
 - [[Delta]]：Speed 影响 Delta 的非线性漂移。
 - [[Color]]：Gamma 对距到期时间的敏感度。
 - [[Zomma]]：Gamma 对波动率的敏感度。
+
+## 相关问题
+
+- Speed 在平值附近为何换号？
+- Speed 与 Gamma 对冲频率的关系是什么？
+- 大幅行情为何应直接全重估？
 
 ## 来源
 

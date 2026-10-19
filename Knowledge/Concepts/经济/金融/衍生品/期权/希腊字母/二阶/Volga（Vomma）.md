@@ -10,7 +10,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -24,8 +24,13 @@ concept_group: 希腊字母
 
 # Volga（Vomma）
 
-> [!definition] 定义
-> Volga（也称 Vomma）衡量 Vega 对波动率的敏感度，即期权价值相对于波动率的局部凸性。
+## 定义
+
+Volga（也称 Vomma）衡量 Vega 对波动率的敏感度，即期权价值相对于波动率的局部凸性。
+
+## 核心解释
+
+Volga（Vomma）衡量 Vega 对波动率的变化率，即期权价值相对波动率的局部凸性。波动率大幅变化时，单看 Vega 会低估或高估价值变化。
 
 ## 数学表示
 
@@ -69,6 +74,16 @@ $$
 
 比较不同系统前，应确认其 Volga 是对完整小数变化、一个波动率点，还是对 Vega 报价值再次求导。
 
+## 示例
+
+若波动率从 $20\%$ 升到 $21\%$ 时，Vega 从 $0.15$ 升到 $0.17$，则按一个波动率百分点计的 Volga 约为
+
+$$
+\frac{0.17-0.15}{1}=0.02.
+$$
+
+波动率再上升 $1$ 个百分点时，Vega 约增加 $0.02$；价值变化还需加入 $\frac12\mathrm{Volga}(\Delta\sigma)^2$ 的二阶项。不同系统对“一个波动率点”的定义可能不同，比较前必须统一单位。
+
 ## 关联概念
 
 - [[Vega]]：Volga 描述 Vega 随波动率的漂移。
@@ -77,6 +92,12 @@ $$
 - [[Vega Decay|Vega decay]]：Vega 随距到期时间的漂移。
 - [[凸性|期权凸性]]：Volga 是期权价值相对于波动率的局部二阶凸性。
 - [[波动率偏斜 Skew|波动率偏斜（Skew）]]：非平行曲面变化不能只用单一 Volga 概括。
+
+## 相关问题
+
+- 平值期权的 Volga 为什么接近零？
+- Volga 与偏斜风险有何区别？
+- 波动率大幅变化时为何要做全重估？
 
 ## 来源
 

@@ -1,3 +1,16 @@
+---
+type: note
+domain: 数学
+subdomain: 博弈论
+topic: Game Theory 应用系列
+tags:
+  - 博弈论
+  - 应用案例
+  - 课程笔记
+---
+
+# The AI Apocalypse
+
 ## 授课中的简化与严谨：对“AI 末世论”讨论的元反思
 
 > [!summary] 摘要

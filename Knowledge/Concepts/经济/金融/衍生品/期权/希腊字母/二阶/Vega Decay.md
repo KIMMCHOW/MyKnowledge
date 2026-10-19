@@ -10,7 +10,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -25,8 +25,13 @@ concept_group: 希腊字母
 
 # Vega Decay
 
-> [!definition] 定义
-> Vega decay（也称 DvegaDtime；部分资料称 Veta）衡量当前时间 $t$ 向前推进时 Vega 的局部变化率。
+## 定义
+
+Vega decay（也称 DvegaDtime；部分资料称 Veta）衡量当前时间 $t$ 向前推进时 Vega 的局部变化率。
+
+## 核心解释
+
+Vega Decay 衡量 Vega 随当前时间推进的局部变化率。当前 Vega 中性不代表未来仍中性，期限价差尤其需要观察这一项。
 
 ## 数学表示
 
@@ -71,12 +76,28 @@ $$
 
 期限价差尤其需要观察各到期月份的 Vega decay，而不能只加总当前 Vega。
 
+## 示例
+
+若今天 Vega 为 $0.15$，其他条件不变、一天后为 $0.149$，则 Vega Decay 约为
+
+$$
+\frac{0.149-0.15}{1}=-0.001\text{/日}.
+$$
+
+持有 $10$ 张、乘数 $100$ 时，一天后 Vega 约减少 $0.001\times10\times100=1$ 个“每波动率百分点”单位。短期期权的 Vega 通常衰减更快，期限价差不能用当前 Vega 加总后一劳永逸。
+
 ## 关联概念
 
 - [[Vega]]：Vega decay 描述 Vega 的时间漂移。
 - [[Theta]]：同一混合偏导也可写为 $\partial\Theta/\partial\sigma$。
 - [[Volga（Vomma）|Volga / Vomma]]：Vega 对波动率的敏感度。
 - [[Vanna]]：Vega 对标的价格的敏感度。
+
+## 相关问题
+
+- Vega Decay 与 Theta 的关系是什么？
+- 为什么短期期权的 Vega 衰减更快？
+- 期限价差如何管理 Vega Decay？
 
 ## 来源
 

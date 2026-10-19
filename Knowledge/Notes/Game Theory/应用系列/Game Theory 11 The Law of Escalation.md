@@ -1,3 +1,16 @@
+---
+type: note
+domain: 数学
+subdomain: 博弈论
+topic: Game Theory 应用系列
+tags:
+  - 博弈论
+  - 应用案例
+  - 课程笔记
+---
+
+# The Law of Escalation
+
 > [!summary] 摘要  
 > 本文以 [[Game Theory]] 中的 **升级定律 (Law of Escalation)** 为分析工具，梳理美伊冲突中的三个核心决策问题：  
 > - 美国是否发动 **地面入侵**（涉及 [[Mission Creep]] 与越战教训）  

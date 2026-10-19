@@ -9,7 +9,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -23,8 +23,13 @@ concept_group: 希腊字母
 
 # Vanna
 
-> [!definition] 定义
-> Vanna 衡量 Delta 对波动率的敏感度；在偏导可交换的光滑定价模型中，它也等于 Vega 对标的价格的敏感度。
+## 定义
+
+Vanna 衡量 Delta 对波动率的敏感度；在偏导可交换的光滑定价模型中，它也等于 Vega 对标的价格的敏感度。
+
+## 核心解释
+
+Vanna 衡量 Delta 对波动率的敏感度，在光滑模型中也是 Vega 对标的价格的敏感度。它描述价格与波动率之间的交叉风险。
 
 ## 数学表示
 
@@ -72,6 +77,16 @@ $$
 
 同理，标的价格变化会通过 Vanna 改变 Vega，因此波动率风险不能只在单一现货水平上观察。
 
+## 示例
+
+若隐含波动率上升 $1$ 个百分点时，Delta 从 $0.50$ 变为 $0.53$，则 Vanna 约为
+
+$$
+\frac{0.53-0.50}{1}=0.03
+$$
+
+（按一个波动率百分点计）。这意味着当前 Delta 中性头寸在波动率上升后可能重新获得方向暴露；若同时发生标的价格变化，还需加入交叉项 $\mathrm{Vanna}\,\Delta S\,\Delta\sigma$。
+
 ## 关联概念
 
 - [[Delta]]：Vanna 是 Delta 对波动率的敏感度。
@@ -79,6 +94,12 @@ $$
 - [[Zomma]]：Zomma 是 Vanna 对标的价格的敏感度。
 - [[隐含波动率]]：波动率曲面变化会通过 Vanna 改变方向风险。
 - [[波动率偏斜 Skew|波动率偏斜（Skew）]]：标的变化带动偏斜移动时，Vanna 会参与实际方向风险。
+
+## 相关问题
+
+- Vanna 为什么会有正负波瓣？
+- Vanna 与 Zomma 的区别是什么？
+- 偏斜移动如何改变实际 Vanna 暴露？
 
 ## 来源
 

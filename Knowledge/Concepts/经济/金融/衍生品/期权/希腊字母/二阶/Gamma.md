@@ -6,7 +6,7 @@ status: completed
 completion_status: completed
 created_from: user-material-refactor
 created_at: 2026-08-09
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -20,8 +20,13 @@ concept_group: 希腊字母
 
 # Gamma
 
-> [!definition] 定义
-> Gamma（$\Gamma$）衡量 Delta 对标的价格的敏感度，也就是期权理论价值对标的价格的局部曲率。
+## 定义
+
+Gamma（$\Gamma$）衡量 Delta 对标的价格的敏感度，也就是期权理论价值对标的价格的局部曲率。
+
+## 核心解释
+
+Gamma 衡量 Delta 对标的价格的变化率，是期权价值的局部二阶曲率。它决定 Delta 中性头寸的漂移速度和再对冲频率。
 
 ## 数学表示
 
@@ -89,6 +94,16 @@ $$
 \mathrm{Zomma}=\frac{\partial\Gamma}{\partial\sigma}.
 $$
 
+## 示例
+
+若标的价格从 $100$ 涨到 $101$ 时，Delta 从 $0.50$ 升到 $0.55$，则 Gamma 约为
+
+$$
+\frac{0.55-0.50}{1}=0.05.
+$$
+
+持有 $10$ 张、乘数 $100$ 时，头寸 Gamma 约为 $10\times100\times0.05=50$；标的每变动 $1$ 点，头寸 Delta 约变化 $50$ 股等价。平值、临近到期和低波动率时，Gamma 通常更集中。
+
 ## 关联概念
 
 - [[Delta]]：Gamma 决定 Delta 随标的价格变化的速度。
@@ -98,6 +113,12 @@ $$
 - [[Zomma]]：Gamma 对波动率的敏感度。
 - [[动态Delta对冲]]：Gamma 越高，维持 Delta 中性所需的调整通常越频繁。
 - [[凸性|期权凸性]]：Gamma 是期权价值相对于标的价格的局部二阶凸性。
+
+## 相关问题
+
+- 为什么平值临近到期的 Gamma 最大？
+- 正 Gamma 与负 Theta 如何权衡？
+- Gamma 对冲频率如何影响实际损益？
 
 ## 来源
 

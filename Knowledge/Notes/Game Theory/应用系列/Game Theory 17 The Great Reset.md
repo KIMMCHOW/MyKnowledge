@@ -1,3 +1,13 @@
+---
+type: note
+domain: 数学
+subdomain: 博弈论
+topic: Game Theory 应用系列
+tags:
+  - 博弈论
+  - 应用案例
+  - 课程笔记
+---
 # 经济崩溃是被设计的吗？
 
 >[!summary] 摘要

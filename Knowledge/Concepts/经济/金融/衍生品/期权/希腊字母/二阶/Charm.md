@@ -9,7 +9,7 @@ status: completed
 completion_status: completed
 created_from: Option Volatility and Pricing 第9章
 created_at: 2026-08-15
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -23,8 +23,13 @@ concept_group: 希腊字母
 
 # Charm
 
-> [!definition] 定义
-> Charm 又称 Delta decay，衡量当前时间 $t$ 向前推进时 Delta 的局部变化率。
+## 定义
+
+Charm 又称 Delta decay，衡量当前时间 $t$ 向前推进时 Delta 的局部变化率。
+
+## 核心解释
+
+Charm 衡量 Delta 随当前时间推进的局部变化率，也称 Delta decay。临近到期时，Delta 中性头寸可能仅因时间流逝而失去中性。
 
 ## 数学表示
 
@@ -68,12 +73,28 @@ $$
 
 临近到期时，应把 Charm 纳入次日开盘对冲量和周末风险估计，而不是假设 Delta 静止不变。
 
+## 示例
+
+若今天 Delta 为 $0.50$，其他条件不变、一天后为 $0.48$，则 Charm 约为
+
+$$
+\frac{0.48-0.50}{1}=-0.02\text{/日}.
+$$
+
+持有 $10$ 张、乘数 $100$ 时，一天后头寸 Delta 约减少 $0.02\times10\times100=20$ 股等价。周末和节假日应按实际时间口径调整，不能简单按一个自然日估算。
+
 ## 关联概念
 
 - [[Delta]]：Charm 描述 Delta 的时间漂移。
 - [[Theta]]：Charm 也可写为 $\partial\Theta/\partial S$。
 - [[Color]]：Color 是 Charm 对标的价格的敏感度。
 - [[动态Delta对冲]]：时间推移会改变下一次再平衡所需的标的数量。
+
+## 相关问题
+
+- Charm 的符号为何依赖时间变量口径？
+- 周末和节假日如何影响 Charm 估计？
+- Charm 与 Color 的关系是什么？
 
 ## 来源
 

@@ -6,7 +6,7 @@ status: completed
 completion_status: completed
 created_from: user-material-refactor
 created_at: 2026-08-09
-updated_at: 2026-08-15
+updated_at: 2026-10-19
 tags:
   - 期权
   - Greeks
@@ -20,8 +20,13 @@ concept_group: 希腊字母
 
 # Theta
 
-> [!definition] 定义
-> Theta（$\Theta$）衡量其他条件不变时，期权理论价值随当前时间 $t$ 推进的局部变化率。
+## 定义
+
+Theta（$\Theta$）衡量其他条件不变时，期权理论价值随当前时间 $t$ 推进的局部变化率。
+
+## 核心解释
+
+Theta 衡量当前时间推进对期权价值的局部影响。多头通常为负、空头通常为正，但它与 Gamma、波动率和路径风险共同决定实际损益。
 
 ## 数学表示
 
@@ -73,6 +78,16 @@ $$
 =\mathrm{VegaDecay}.
 $$
 
+## 示例
+
+若某期权今天的理论价值为 $5.00$，其他条件不变、一天后为 $4.90$，则按自然日计的 Theta 约为
+
+$$
+\frac{4.90-5.00}{1}=-0.10\text{/日}.
+$$
+
+若组合持有 $10$ 张、乘数 $100$，一天的时间衰减约为 $-0.10\times10\times100=-100$ 个报价单位。使用前必须确认自然日/交易日口径与符号约定。
+
 ## 关联概念
 
 - [[Gamma]]：正 Gamma 与负 Theta 常形成风险收益权衡。
@@ -80,6 +95,12 @@ $$
 - [[Vega Decay|Vega decay]]：Vega 随当前时间推进的变化。
 - [[Color]]：Gamma 随当前时间推进的变化。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/跨式 Straddle|跨式]]：跨式具有显著的时间衰减暴露。
+
+## 相关问题
+
+- 自然日与交易日 Theta 如何换算？
+- 为什么临近到期时 Theta 绝对值更大？
+- 正 Theta 策略的主要尾部风险是什么？
 
 ## 来源
 
