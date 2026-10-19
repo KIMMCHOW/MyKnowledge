@@ -114,6 +114,18 @@ $$
 - [[动态Delta对冲]]：Gamma 越高，维持 Delta 中性所需的调整通常越频繁。
 - [[凸性|期权凸性]]：Gamma 是期权价值相对于标的价格的局部二阶凸性。
 
+## 关系图
+
+```mermaid
+graph LR
+Gamma -->|因果| Delta
+Gamma -->|对比| Theta
+Gamma -->|因果| Speed
+Gamma -->|因果| Color
+Gamma -->|因果| Zomma
+Gamma -->|实例| 凸性
+```
+
 ## 相关问题
 
 - 为什么平值临近到期的 Gamma 最大？

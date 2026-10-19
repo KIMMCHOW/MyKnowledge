@@ -93,6 +93,16 @@ $$
 - [[Volga（Vomma）|Volga / Vomma]]：Vega 对波动率的敏感度。
 - [[Vanna]]：Vega 对标的价格的敏感度。
 
+## 关系图
+
+```mermaid
+graph LR
+VegaDecay["Vega Decay"] -->|因果| Vega
+VegaDecay -->|相关| Theta
+VegaDecay -->|相关| Volga["Volga / Vomma"]
+VegaDecay -->|相关| Vanna
+```
+
 ## 相关问题
 
 - Vega Decay 与 Theta 的关系是什么？

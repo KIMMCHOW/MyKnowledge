@@ -176,6 +176,16 @@ $$
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/_索引_期权策略|期权策略]]
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/风险考量 Risk Considerations#效率 / Efficiency|Natenberg：效率]]
 
+## 关系图
+
+```mermaid
+graph LR
+GTE["Gamma-Theta 效率比"] -->|包含| Gamma
+GTE -->|包含| Theta
+GTE -->|相关| 凸性
+GTE -->|相关| 期权策略
+```
+
 ## 相关问题
 
 - 为什么不能跨 Gamma/Theta 符号机械排名？

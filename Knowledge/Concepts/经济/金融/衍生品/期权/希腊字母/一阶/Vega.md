@@ -91,6 +91,18 @@ $$
 - [[波动率偏斜 Skew|波动率偏斜（Skew）]]：各腿 Vega 抵消不代表偏斜、曲率或期限风险为零。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/跨式 Straddle|跨式]]、[[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/宽跨式 Strangle|宽跨式]]：多头结构通常具有正 Vega。
 
+## 关系图
+
+```mermaid
+graph LR
+Vega -->|因果| 隐含波动率
+Vega -->|因果| Vanna
+Vega -->|因果| Volga["Volga / Vomma"]
+Vega -->|因果| VegaDecay["Vega Decay"]
+Vega -->|对比| Skew["波动率偏斜"]
+Vega -->|实例| 跨式["跨式 Straddle"]
+```
+
 ## 相关问题
 
 - Vega 与 Volga 的区别是什么？

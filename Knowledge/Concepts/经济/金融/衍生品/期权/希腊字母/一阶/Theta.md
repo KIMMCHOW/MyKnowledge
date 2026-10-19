@@ -96,6 +96,17 @@ $$
 - [[Color]]：Gamma 随当前时间推进的变化。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/期权策略/二腿/跨式 Straddle|跨式]]：跨式具有显著的时间衰减暴露。
 
+## 关系图
+
+```mermaid
+graph LR
+Theta -->|对比| Gamma
+Theta -->|因果| Charm
+Theta -->|因果| VegaDecay["Vega Decay"]
+Theta -->|因果| Color
+Theta -->|实例| 跨式["跨式 Straddle"]
+```
+
 ## 相关问题
 
 - 自然日与交易日 Theta 如何换算？

@@ -94,6 +94,17 @@ $$
 - [[Color]]：Gamma 对距到期时间的敏感度。
 - [[隐含波动率]]：波动率变化会通过 Zomma 改变 Gamma 风险。
 
+## 关系图
+
+```mermaid
+graph LR
+Zomma -->|因果| Gamma
+Zomma -->|相关| Vanna
+Zomma -->|对比| Speed
+Zomma -->|对比| Color
+Zomma -->|影响| 隐含波动率
+```
+
 ## 相关问题
 
 - Zomma 与 Volga 的区别是什么？

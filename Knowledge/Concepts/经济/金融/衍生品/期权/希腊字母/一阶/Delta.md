@@ -111,6 +111,17 @@ $$
 - [[Lambda（期权杠杆率）|Lambda]]：Delta 的百分比标准化形式，即期权的局部价格杠杆。
 - [[动态Delta对冲]]：通过交易标的持续控制组合净 Delta。
 
+## 关系图
+
+```mermaid
+graph LR
+Delta -->|因果| Gamma
+Delta -->|影响| Vanna
+Delta -->|影响| Charm
+Delta -->|相关| Lambda
+Delta -->|工具| 动态Delta对冲
+```
+
 ## 相关问题
 
 - Delta 中性为何仍需 Gamma 对冲？

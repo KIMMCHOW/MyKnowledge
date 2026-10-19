@@ -101,6 +101,16 @@ $$
 - [[Color]]：Gamma 对距到期时间的敏感度。
 - [[Zomma]]：Gamma 对波动率的敏感度。
 
+## 关系图
+
+```mermaid
+graph LR
+Speed -->|因果| Gamma
+Speed -->|影响| Delta
+Speed -->|对比| Color
+Speed -->|对比| Zomma
+```
+
 ## 相关问题
 
 - Speed 在平值附近为何换号？
