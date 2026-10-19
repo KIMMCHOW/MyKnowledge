@@ -182,6 +182,17 @@ $$
 - [[凸性|期权凸性]]：偏斜和曲面变化会改变 Gamma、Volga 等局部二阶风险。
 - [[保护性策略 Protective Strategy|保护性策略]]、[[备兑策略 Covered Strategy|备兑策略]]：股票市场偏斜的重要供需来源。
 
+## 关系图
+
+```mermaid
+graph LR
+Skew["波动率偏斜（Skew）"] -->|包含| 隐含波动率
+Skew -->|对比| Vega
+Skew -->|影响| Vanna
+Skew -->|对比| 凸性
+Skew -->|属于| 期权
+```
+
 ## 相关问题
 
 - Skew、Smile 与 Smirk 的区别是什么？

@@ -102,6 +102,17 @@ $$
 - [[Zomma]]：Gamma 对波动率的敏感度。
 - [[Theta]]：本目录的命名时间 Greeks 都以当前时间 $t$ 为变量；对 $\tau$ 求导时符号相反。
 
+## 关系图
+
+```mermaid
+graph LR
+Color -->|因果| Gamma
+Color -->|相关| Charm
+Color -->|对比| Speed
+Color -->|对比| Zomma
+Color -->|相关| Theta
+```
+
 ## 相关问题
 
 - Color 与 Charm 的区别是什么？

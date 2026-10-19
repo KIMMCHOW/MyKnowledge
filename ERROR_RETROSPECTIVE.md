@@ -42,6 +42,7 @@
 | E-015 | IStart-Note-AI 只用 `f.basename === concept` 判断概念存在，并把 Concepts 下的索引、教材和审计页一并当作已知概念；`C01-概念` 与 `概念` 因而被误判为不同页面。 | 当前磁盘上编号概念文件和编号 wikilink 均为 0，用户看到的是插件假阴性而非真实缺页；本机插件已加入序号规范化、`type: concept` 过滤、basename/name/aliases 唯一匹配与链接目标改写。 | 概念解析必须“精确优先、规范名唯一命中、歧义停止”，并覆盖 `C01-`、`01-`、`1.`、`1）` 与 `5G`/`3D打印` 等反例；`.obsidian` 不入库，插件升级或重装后必须复跑这些回归用例并向插件源码仓同步修复。 |
 | E-016 | README 仍要求给 `Knowledge/Concepts/**/References` 教材和辅助文件添加编号，与无序号概念/教材 SOP 及当前文件事实冲突，可能在后续整理中重新引入 `00-`、`NN-`、`第N章-`。 | `Knowledge/Concepts/` 内的概念、教材、知识图谱和辅助文件均使用无序号语义名与无序号结构标题；`Knowledge/Notes/` 可按笔记 SOP 使用两位系列编号，两者不得混淆。 | 已删除 README 的旧 Concepts 编号规则，并新增 `scripts/audit-concept-numbering.ps1`；脚本检查 Concepts 的文件名、身份与章节 frontmatter、所有 Markdown 标题、mermaid 与内部 wikilink，基线必须为 0，不误扫 Notes。 |
 | E-017 | 批量新增的量化研究与博弈论笔记以“单段备忘”形式写入，缺少摘要 callout、二级章节、关联问题和来源，造成同一专题内阅读层级与导航风格断裂。 | 已将 10 篇量化研究笔记、10 篇博弈论基础模块和 4 篇近期短笔记统一为“摘要 → 分节论证 → 关联 → 问题 → 来源”的笔记体；全库 Notes 的 H1、frontmatter、索引覆盖与双链检查通过。 | 新增笔记必须沿用 `docs/SOP_笔记整理.md` 的笔记体：摘要 callout、至少一个二级章节、关联入口和相关问题；批量导入后运行 H1/frontmatter、双链和索引覆盖检查，不以单段备忘直接入库。 |
+| E-018 | 用 PowerShell 双引号字符串拼接 Markdown 代码围栏时，三重反引号被当作转义序列，批量生成了单反引号代码块，Mermaid 无法渲染。 | 本次已把 38 个新增关系图统一修复为真正的 mermaid 围栏（三重反引号加 mermaid 标签）；构图页、边标签和代码围栏结构审计均为 0 异常。 | 生成 Markdown 围栏必须使用单引号 here-string 或显式字符构造，写盘后检查 mermaid 围栏标签、graph LR 与闭合围栏成对存在，不能只凭脚本成功返回判断。 |
 
 ## 检索清单
 

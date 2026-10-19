@@ -93,6 +93,18 @@ $$
 - [[凸性|期权凸性]]：Volga 是期权价值相对于波动率的局部二阶凸性。
 - [[波动率偏斜 Skew|波动率偏斜（Skew）]]：非平行曲面变化不能只用单一 Volga 概括。
 
+## 关系图
+
+```mermaid
+graph LR
+Volga["Volga / Vomma"] -->|因果| Vega
+Volga -->|相关| 隐含波动率
+Volga -->|对比| Vanna
+Volga -->|相关| VegaDecay["Vega Decay"]
+Volga -->|实例| 凸性
+Volga -->|对比| Skew["波动率偏斜"]
+```
+
 ## 相关问题
 
 - 平值期权的 Volga 为什么接近零？

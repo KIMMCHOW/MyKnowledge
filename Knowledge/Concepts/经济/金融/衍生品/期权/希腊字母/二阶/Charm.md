@@ -90,6 +90,16 @@ $$
 - [[Color]]：Color 是 Charm 对标的价格的敏感度。
 - [[动态Delta对冲]]：时间推移会改变下一次再平衡所需的标的数量。
 
+## 关系图
+
+```mermaid
+graph LR
+Charm -->|因果| Delta
+Charm -->|相关| Theta
+Charm -->|因果| Color
+Charm -->|影响| 动态Delta对冲
+```
+
 ## 相关问题
 
 - Charm 的符号为何依赖时间变量口径？

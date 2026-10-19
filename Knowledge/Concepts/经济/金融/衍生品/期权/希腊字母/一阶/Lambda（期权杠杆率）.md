@@ -99,6 +99,15 @@ $$
 - [[期权]]：Lambda 描述期权相对标的的百分比方向杠杆。
 - [[Knowledge/Concepts/经济/金融/衍生品/期权/References/Option Volatility and Pricing 双语版/知识图谱/Lambda|Natenberg 期权知识图谱：Lambda]]
 
+## 关系图
+
+```mermaid
+graph LR
+Lambda -->|工具| Delta
+Lambda -->|属于| 期权
+Lambda -->|实例| Natenberg["Natenberg Lambda"]
+```
+
 ## 相关问题
 
 - Lambda 与 Delta 的区别是什么？

@@ -95,6 +95,17 @@ $$
 - [[隐含波动率]]：波动率曲面变化会通过 Vanna 改变方向风险。
 - [[波动率偏斜 Skew|波动率偏斜（Skew）]]：标的变化带动偏斜移动时，Vanna 会参与实际方向风险。
 
+## 关系图
+
+```mermaid
+graph LR
+Vanna -->|因果| Delta
+Vanna -->|因果| Vega
+Vanna -->|因果| Zomma
+Vanna -->|影响| 隐含波动率
+Vanna -->|影响| Skew["波动率偏斜"]
+```
+
 ## 相关问题
 
 - Vanna 为什么会有正负波瓣？
